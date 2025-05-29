@@ -1,22 +1,65 @@
-# Lucky Shop – Frontend, 2025
-
-## Overview
+# Lucky Shop Frontend
 
 This is a frontend project for Lucky Shop, built with Vite, React, TypeScript, and Tailwind CSS.
 
-## How to start
+## 🚀 How to start
 
-1. Install dependencies: `npm install`
-2. Start development server: `npm run dev`
-3. Lint and format code: `npm run lint`
-4. Build for production: `npm run build`
+1. **Install dependencies**  
+   ```bash
+   npm install
+   ```
 
-## Useful info
+2. **Start development server**  
+   ```bash
+   npm run dev
+   ```
 
-- Minimal Node version: see [.nvmrc](./.nvmrc) (optional)
-- To use the correct Node.js version, you can use [nvm (Node Version Manager)](https://github.com/nvm-sh/nvm):
-  - Install nvm globally if you haven't yet.
-  - Run `nvm install` in the project root to install the Node version specified in `.nvmrc`.
-  - Run `nvm use` to switch to that Node version.
-- ESLint + Prettier are configured to run with `npm run lint`
-- License: [MIT](./LICENSE)
+3. **Lint and format code**  
+   Automatically handled before each commit with Husky hooks. You can also run manually:
+   ```bash
+   npm run lint
+   ```
+
+4. **Build for production**  
+   ```bash
+   npm run build
+   ```
+
+## 🧪 Git hooks with Husky
+
+We use [Husky](https://typicode.github.io/husky/#/) to enforce project conventions:
+
+### ✅ Pre-commit:
+- Runs `eslint --fix` and `prettier --write` on staged files.
+- Validates commit message format:
+  ```
+  type: description
+  ```
+  Allowed types: `init`, `feat`, `fix`, `refactor`, `docs`, `style`, `chore`  
+  Examples:
+  - `feat: add login form`
+  - `fix: adjust header spacing`
+  - `chore: configure husky hooks`
+
+### ✅ Pre-push:
+- Validates branch naming convention:
+  ```
+  feature/branch-name
+  bugfix/fix-description
+  hotfix/critical-fix
+  release/v1.0.0
+  test/test-feature
+  ```
+  Use lowercase and dash-separated words.
+
+## 📘 Node version
+
+Minimal required Node.js version is specified in `.nvmrc`.
+
+To ensure correct version:
+```bash
+nvm install
+nvm use
+```
+
+## 📄 License [MIT](./LICENSE)
