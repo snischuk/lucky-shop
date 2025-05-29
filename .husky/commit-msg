@@ -1,16 +1,15 @@
+commit_msg_file=$1
+commit_msg=$(cat "$commit_msg_file")
 
-commit_msg=$(cat "$1")
+allowed_types="init|feat|fix|refactor|docs|style|chore"
 
-pattern="^(init|feat|fix|refactor|docs|style|chore): (add|fix|implement|update|remove|rename|adjust|create|move|refactor|format) .+"
+pattern="^($allowed_types): .+"
 
 if ! echo "$commit_msg" | grep -Eq "$pattern"; then
   echo "❌ Invalid commit message: \"$commit_msg\""
-  echo "✅ Expected format: 'prefix: verb description'"
-  echo "🔧 Allowed prefixes: init, feat, fix, refactor, docs, style, chore"
-  echo "🧠 Start with a verb in present tense (imperative mood):"
-  echo "   add, fix, implement, update, remove, rename, adjust, create, move, refactor, format"
+  echo "✅ Expected format: 'type: description'"
+  echo "🛠 Allowed types: $allowed_types"
+  echo "ℹ Description can be any text (imperative mood not required)"
   echo "📘 Example: feat: add login form"
   exit 1
 fi
-
-echo "✅ Commit message is valid"
