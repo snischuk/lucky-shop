@@ -24,6 +24,7 @@ This is a frontend project for Lucky Shop, built with Vite, React, TypeScript, a
    ```
 
 4. **Build for production**
+
    ```bash
    npm run build
    ```
