@@ -1,0 +1,21 @@
+branch_name=$(git symbolic-ref --short HEAD)
+
+pattern="^(feature|fix|refactor|chore|docs|release|test)/[a-z0-9._-]+$"
+
+if ! echo "$branch_name" | grep -Eq "$pattern"; then
+  echo "❌ Invalid branch name: \"$branch_name\""
+  echo "✅ Expected format: feature/branch-name, bugfix/xyz, etc."
+  echo "🧠 Use lowercase letters, digits, dots, underscores or dashes"
+  echo "📘 Allowed prefixes and examples:"
+  echo "   feature/  - new feature (e.g. feature/login-form)"
+  echo "   fix/      - bug fix (e.g. bugfix/fix-button-hover)"
+  echo "   refactor/ - code refactoring (e.g. refactor/rename-vars)"
+  echo "   chore/    - technical task (e.g. chore/update-deps)"
+  echo "   docs/     - documentation (e.g. docs/update-readme)"
+  echo "   release/  - release prep (e.g. release/v1.0.0)"
+  echo "   test/     - tests (e.g. test/add-login-tests)"
+
+  exit 1
+fi
+
+echo "✅ Branch name is valid"
