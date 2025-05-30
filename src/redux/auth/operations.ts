@@ -17,30 +17,39 @@ const clearAuthHeader = () => {
   axios.defaults.headers.common.Authorization = '';
 };
 
-export const register = createAsyncThunk('auth/register', async (credentials, thunkAPI) => {
-  try {
-    const response = await axios.post('/users/signup', credentials);
-    setAuthHeader(response.data.token);
-    return response.data;
-  } catch (e: any) {
-    return thunkAPI.rejectWithValue(e.message);
-  }
-});
+export const register = createAsyncThunk(
+  'auth/register',
+  async (credentials, thunkAPI) => {
+    try {
+      const response = await axios.post('/users/signup', credentials);
+      setAuthHeader(response.data.token);
+      return response.data;
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    } catch (e: any) {
+      return thunkAPI.rejectWithValue(e.message);
+    }
+  },
+);
 
-export const logIn = createAsyncThunk('auth/login', async (credentials, thunkAPI) => {
-  try {
-    const response = await axios.post('/users/login', credentials);
-    setAuthHeader(response.data.token);
-    return response.data;
-  } catch (e: any) {
-    return thunkAPI.rejectWithValue(e.message);
-  }
-});
+export const logIn = createAsyncThunk(
+  'auth/login',
+  async (credentials, thunkAPI) => {
+    try {
+      const response = await axios.post('/users/login', credentials);
+      setAuthHeader(response.data.token);
+      return response.data;
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    } catch (e: any) {
+      return thunkAPI.rejectWithValue(e.message);
+    }
+  },
+);
 
 export const logOut = createAsyncThunk('auth/logout', async (_, thunkAPI) => {
   try {
     await axios.post('/users/logout');
     clearAuthHeader();
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
   } catch (e: any) {
     return thunkAPI.rejectWithValue(e.message);
   }
@@ -59,6 +68,7 @@ export const refreshUser = createAsyncThunk<
     setAuthHeader(savedToken);
     const response = await axios.get('/users/current');
     return response.data;
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
   } catch (e: any) {
     return thunkAPI.rejectWithValue(e.message);
   }
