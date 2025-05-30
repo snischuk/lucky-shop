@@ -3,7 +3,7 @@ const Button = ({
   ...props
 }: React.ButtonHTMLAttributes<HTMLButtonElement>) => (
   <button
-    className="bg-blue-600 text-white py-2 px-4 rounded hover:bg-blue-700 transition"
+    className="rounded bg-blue-600 px-4 py-2 text-white transition hover:bg-blue-700"
     {...props}
   >
     {children}
