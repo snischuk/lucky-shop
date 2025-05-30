@@ -10,7 +10,7 @@ import clsx from 'clsx';
 
 const Header: FC = () => {
   const { isOpen, open, close } = useToggle();
-  const [scrolled, setScrolled] = useState(false);
+  const [, setScrolled] = useState(false);
   const menuRef = useRef<HTMLDivElement>(null);
   const buttonRef = useRef<HTMLButtonElement>(null);
 
@@ -51,8 +51,8 @@ const Header: FC = () => {
   }, [isOpen, close]);
 
   return (
-    <header className="flex px-6 items-center justify-between relative">
-      <nav className="flex gap-8 items-center py-4">
+    <header className="relative flex items-center justify-between px-6">
+      <nav className="flex items-center gap-8 py-4">
         <NavLink to="/">
           <img src={logo} className="App-logo" alt="logo" width="223" />
         </NavLink>
@@ -69,13 +69,13 @@ const Header: FC = () => {
           <div
             ref={menuRef}
             className={clsx(
-              'absolute top-[100px] left-1/2 -translate-x-1/2 bg-white w-[1440px] py-[100px] transition-[max-height,opacity,transform] duration-500 ease-in-out overflow-hidden',
+              'absolute left-1/2 top-[100px] w-[1440px] -translate-x-1/2 overflow-hidden bg-white py-[100px] transition-[max-height,opacity,transform] duration-500 ease-in-out',
               isOpen
-                ? 'max-h-[400px] opacity-100 translate-y-0'
-                : 'max-h-0 opacity-0 -translate-y-5 pointer-events-none',
+                ? 'max-h-[400px] translate-y-0 opacity-100'
+                : 'pointer-events-none max-h-0 -translate-y-5 opacity-0',
             )}
           >
-            <ul className="flex gap-2.5 uppercase justify-center text-[32px] text-[#1E1E1E]">
+            <ul className="flex justify-center gap-2.5 text-[32px] uppercase text-[#1E1E1E]">
               <li>
                 <NavLink to="/" className="p-5" onClick={close}>
                   Головна
@@ -101,7 +101,7 @@ const Header: FC = () => {
         )}
       </nav>
 
-      <div className="flex uppercase text-[#7A7A7A] text-2xl border-b-[#7A7A7A] border-b border-solid">
+      <div className="flex border-b border-solid border-b-[#7A7A7A] text-2xl uppercase text-[#7A7A7A]">
         <NavLink to="/women" className={setActiveClass}>
           Жіноче
         </NavLink>
