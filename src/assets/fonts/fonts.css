@@ -80,8 +80,7 @@
 
 @font-face {
   font-family: 'Unbounded';
-  src: url('./Unbounded/Unbounded-ExtraLight.ttf')
-    format('truetype');
+  src: url('./Unbounded/Unbounded-ExtraLight.ttf') format('truetype');
   font-weight: 200;
   font-style: normal;
   font-display: swap;
@@ -113,8 +112,7 @@
 
 @font-face {
   font-family: 'Unbounded';
-  src: url('./Unbounded/Unbounded-SemiBold.ttf')
-    format('truetype');
+  src: url('./Unbounded/Unbounded-SemiBold.ttf') format('truetype');
   font-weight: 600;
   font-style: normal;
   font-display: swap;
@@ -130,8 +128,7 @@
 
 @font-face {
   font-family: 'Unbounded';
-  src: url('./Unbounded/Unbounded-ExtraBold.ttf')
-    format('truetype');
+  src: url('./Unbounded/Unbounded-ExtraBold.ttf') format('truetype');
   font-weight: 800;
   font-style: normal;
   font-display: swap;
