@@ -1,7 +1,9 @@
+import type { ButtonHTMLAttributes } from 'react';
+
 const Button = ({
   children,
   ...props
-}: React.ButtonHTMLAttributes<HTMLButtonElement>) => (
+}: ButtonHTMLAttributes<HTMLButtonElement>) => (
   <button
     className="rounded bg-blue-600 px-4 py-2 text-white transition hover:bg-blue-700"
     {...props}

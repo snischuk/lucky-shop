@@ -1,22 +1,21 @@
-import type { FC, ReactNode } from 'react';
 import { Header } from './Header';
 import AnnouncementBar from './AnnouncementBar';
+import { Outlet } from 'react-router-dom';
+import { Footer } from './Footer';
 
-interface LayoutProps {
-  children: ReactNode;
-}
-
-const Layout: FC<LayoutProps> = ({ children }) => {
+export const Layout = () => {
   return (
     <>
       <div className="fixed w-full backdrop-blur">
         <AnnouncementBar />
-        <div className="m-auto max-w-[1440px]">
-          <Header />
-        </div>
+        <Header />
       </div>
       <div className="m-auto flex max-w-[1440px] flex-col justify-center">
-        <main className="mt-[140px]">{children}</main>
+        <main className="mt-[140px] flex-1">
+          <Outlet />
+        </main>
+        {/* <SubscribeSection /> */}
+        <Footer />
       </div>
     </>
   );
