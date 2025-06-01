@@ -17,4 +17,4 @@ const ContactsSection: FC = () => (
   </section>
 );
 
-export default ContactsSection;
+export { ContactsSection };

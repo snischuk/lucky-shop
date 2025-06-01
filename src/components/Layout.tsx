@@ -3,7 +3,7 @@ import AnnouncementBar from './AnnouncementBar';
 import { Outlet } from 'react-router-dom';
 import { Footer } from './Footer';
 
-export const Layout = () => {
+const Layout = () => {
   return (
     <>
       <div className="fixed w-full backdrop-blur">
@@ -21,4 +21,4 @@ export const Layout = () => {
   );
 };
 
-export default Layout;
+export { Layout };

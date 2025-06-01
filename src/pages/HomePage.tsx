@@ -1,5 +1,5 @@
-import HeroSection from '../components/home/HeroSection';
-import ContactsSection from '../components/home/ContactsSection';
+import { HeroSection } from '../components/home/HeroSection';
+import { ContactsSection } from '../components/home/ContactsSection';
 
 const HomePage = () => (
   <>
@@ -8,4 +8,4 @@ const HomePage = () => (
   </>
 );
 
-export default HomePage;
+export { HomePage };

@@ -1,10 +1,10 @@
 import { Routes, Route } from 'react-router-dom';
 
 // Layout
-import Layout from '../components/Layout';
+import { Layout } from '../components/Layout';
 
 // Page Components
-import HomePage from '../pages/HomePage';
+import { HomePage } from '../pages/HomePage';
 // import ProductsPage from '../pages/ProductsPage';
 // Цей компонент оброблятиме /products/women та /products/men
 // import ProductCategoryPage from '../pages/ProductCategoryPage';
@@ -17,7 +17,7 @@ import HomePage from '../pages/HomePage';
 // import LoginPage from '../pages/LoginPage';
 // import AdminPage from '../pages/AdminPage';
 // import AdminProductsPage from '../pages/AdminProductsPage';
-// import NotFoundPage from '../pages/NotFoundPage';
+import { NotFoundPage } from '../pages/NotFoundPage';
 
 // Сторінки для відновлення пароля
 // import WrongPasswordPage from '../pages/WrongPasswordPage';
@@ -29,7 +29,7 @@ import HomePage from '../pages/HomePage';
 // import AuthGuard from '../components/AuthGuard';
 // import AdminGuard from '../components/AdminGuard';
 
-function AppRouter() {
+const AppRouter = () => {
   return (
     <Routes>
       <Route path="/" element={<Layout />}>
@@ -71,10 +71,10 @@ function AppRouter() {
           </Route> */}
 
         {/* Маршрут 404 */}
-        {/* <Route path="*" element={<NotFoundPage />} /> */}
+        <Route path="*" element={<NotFoundPage />} />
       </Route>
     </Routes>
   );
-}
+};
 
-export default AppRouter;
+export { AppRouter };
