@@ -13,4 +13,4 @@ const RegisterPage = () => (
   </div>
 );
 
-export default RegisterPage;
+export { RegisterPage };

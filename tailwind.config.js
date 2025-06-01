@@ -4,21 +4,24 @@ export default {
   theme: {
     extend: {
       fontFamily: {
-        heading: ['Unbounded', 'sans-serif'],
-        body: ['Raleway', 'sans-serif'],
+        'family-primary': ['Unbounded', 'sans-serif'],
+        'family-secondary': ['Raleway', 'sans-serif'],
+      },
+      maxWidth: {
+        'custom-1440': '1440px',
       },
       colors: {
         white: '#FFFFFF',
+        main: '#F9F9F9',
+        header: '#F0F0F0',
+        'light-grey': '#DADADA',
+        'medium-grey': '#C0C0C0',
+        grey: '#7A7A7A',
+        'light-black': '#1E1E1E',
         black: '#111111',
-        'main-bg': '#F8F8F8',
-        'header-bg': '#F4F4F4',
-        'light-gray': '#DADADA',
-        gray: '#B7B7B7',
-        'medium-gray': '#C6C6C6',
-        'dark-gray': '#9C9C9C',
-        orange: '#E29756',
-        peach: '#CA5D31',
-        banana: '#F8F1B0',
+        lemon: '#F6F3B9',
+        orange: '#E4572E',
+        red: '#CA2E00',
       },
       fontSize: {
         h1: ['48px', { lineHeight: '1.2' }],
