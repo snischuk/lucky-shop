@@ -6,12 +6,13 @@ import { Footer } from './Footer';
 const Layout = () => {
   return (
     <>
-      <div className="fixed w-full backdrop-blur">
+      <div className="fixed flex w-full flex-col backdrop-blur">
         <AnnouncementBar />
         <Header />
       </div>
-      <div className="m-auto flex max-w-[1440px] flex-col justify-center">
-        <main className="mt-[140px] flex-1">
+
+      <div className="mx-auto flex min-h-screen max-w-custom-1440 flex-col pt-[140px]">
+        <main className="grow">
           <Outlet />
         </main>
         {/* <SubscribeSection /> */}
