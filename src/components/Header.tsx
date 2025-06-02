@@ -1,12 +1,15 @@
 import { useEffect, useRef, useState, type FC } from 'react';
 import { NavLink } from 'react-router-dom';
-import { CiSearch, CiHeart, CiUser } from 'react-icons/ci';
-import { PiBagLight } from 'react-icons/pi';
-import logo from '../assets/images/lucky_logo.png';
-import { CiMenuBurger } from 'react-icons/ci';
-import { useToggle } from '../hooks/useToggle';
-import { IoCloseOutline } from 'react-icons/io5';
 import clsx from 'clsx';
+
+import Logo from '../assets/images/lucky_logo.svg?react';
+import Vector from '../assets/images/Vector.svg?react';
+import Heart from '../assets/images/Heart.svg?react';
+import Profile from '../assets/images/Profile.svg?react';
+import SearchImg from '../assets/images/Search.svg?react';
+import Bag from '../assets/images/bag.svg?react';
+import Close from '../assets/images/Close.svg?react';
+import { useToggle } from '../hooks/useToggle';
 
 const Header: FC = () => {
   const { isOpen, open, close } = useToggle();
@@ -54,15 +57,11 @@ const Header: FC = () => {
     <header className="relative flex items-center justify-between px-6">
       <nav className="flex items-center gap-8 py-4">
         <NavLink to="/">
-          <img src={logo} className="App-logo" alt="logo" width="223" />
+          <Logo width="223" />
         </NavLink>
         <div>
           <button ref={buttonRef} onClick={isOpen ? close : open}>
-            {isOpen ? (
-              <IoCloseOutline size="30px" />
-            ) : (
-              <CiMenuBurger size="30px" />
-            )}
+            {isOpen ? <Close /> : <Vector />}
           </button>
         </div>
         {isOpen && (
@@ -111,15 +110,15 @@ const Header: FC = () => {
       </div>
 
       <div className="flex gap-8">
-        <CiSearch size={30} />
+        <SearchImg />
         <NavLink to="/">
-          <CiHeart size={30} />
+          <Heart />
         </NavLink>
         <NavLink to="/">
-          <PiBagLight size={30} />
+          <Bag />
         </NavLink>
         <NavLink to="/">
-          <CiUser size="30px" />
+          <Profile />
         </NavLink>
       </div>
     </header>
