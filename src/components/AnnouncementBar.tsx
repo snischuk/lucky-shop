@@ -1,9 +1,18 @@
 import Delivery from '../assets/images/Delivery.svg?react';
+import Close from '../assets/images/Close_white.svg?react';
 
-const AnnouncementBar = () => {
+type Props = {
+  onClose: () => void;
+};
+const AnnouncementBar = ({ onClose }: Props) => {
   return (
-    <div className="flex items-center justify-center gap-4 bg-black p-2 text-[#F9F9F9]">
-      <Delivery /> Безкоштовна доставка від 1000 грн.
+    <div className="bg-black p-2 text-[#F9F9F9]">
+      <div className="relative mx-auto flex w-full max-w-[1440px] items-center justify-center gap-4">
+        <Delivery /> Безкоштовна доставка від 1000 грн.
+        <button onClick={onClose} className="absolute right-6">
+          <Close color="#F9F9F9" width={16} />
+        </button>
+      </div>
     </div>
   );
 };
