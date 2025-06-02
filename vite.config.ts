@@ -8,6 +8,6 @@ export default defineConfig(({ mode }) => {
 
   return {
     plugins: [react(), svgr()],
-    base: isGitHubPages ? '/lucky-shop-frontend/' : '/',
+    base: isGitHubPages ? '/lucky-shop/' : '/',
   };
 });
