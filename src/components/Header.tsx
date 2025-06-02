@@ -54,7 +54,7 @@ const Header: FC = () => {
   }, [isOpen, close]);
 
   return (
-    <header className="relative flex items-center justify-between px-6">
+    <header className="relative mx-auto flex w-full max-w-[1440px] items-center justify-between px-6">
       <nav className="flex items-center gap-8 py-4">
         <NavLink to="/">
           <Logo width="223" />
