@@ -6,7 +6,7 @@ import { Footer } from './Footer';
 const Layout = () => {
   return (
     <>
-      <div className="fixed z-10 flex w-full max-w-custom-1440 flex-col backdrop-blur">
+      <div className="fixed z-10 mx-auto flex w-full max-w-custom-1440 flex-col backdrop-blur">
         <AnnouncementBar />
         <Header />
       </div>
