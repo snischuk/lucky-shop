@@ -1,14 +1,14 @@
-import { useEffect, useRef, useState, type FC } from 'react';
-import { NavLink } from 'react-router-dom';
 import clsx from 'clsx';
+import { type FC, useEffect, useRef, useState } from 'react';
+import { NavLink } from 'react-router-dom';
 
-import Logo from '../assets/images/lucky_logo.svg?react';
-import Vector from '../assets/images/Vector.svg?react';
-import Heart from '../assets/images/Heart.svg?react';
-import Profile from '../assets/images/Profile.svg?react';
-import SearchImg from '../assets/images/Search.svg?react';
 import Bag from '../assets/images/bag.svg?react';
 import Close from '../assets/images/Close.svg?react';
+import Heart from '../assets/images/Heart.svg?react';
+import Logo from '../assets/images/lucky_logo.svg?react';
+import Profile from '../assets/images/Profile.svg?react';
+import SearchImg from '../assets/images/Search.svg?react';
+import Vector from '../assets/images/Vector.svg?react';
 import { useToggle } from '../hooks/useToggle';
 
 const Header: FC = () => {

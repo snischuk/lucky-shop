@@ -1,8 +1,9 @@
-import { Header } from './Header';
-import AnnouncementBar from './AnnouncementBar';
-import { Outlet } from 'react-router-dom';
-import { Footer } from './Footer';
 import { useState } from 'react';
+import { Outlet } from 'react-router-dom';
+
+import AnnouncementBar from './AnnouncementBar';
+import { Footer } from './Footer';
+import { Header } from './Header';
 
 const Layout = () => {
   const [showBanner, setShowBanner] = useState(true);
