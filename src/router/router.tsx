@@ -1,8 +1,7 @@
-import { Routes, Route } from 'react-router-dom';
+import { Route, Routes } from 'react-router-dom';
 
 // Layout
 import { Layout } from '../components/Layout';
-
 // Page Components
 import { HomePage } from '../pages/HomePage';
 // import ProductsPage from '../pages/ProductsPage';

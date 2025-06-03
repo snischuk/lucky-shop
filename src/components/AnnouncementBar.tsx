@@ -1,5 +1,5 @@
-import Delivery from '../assets/images/Delivery.svg?react';
 import Close from '../assets/images/Close_white.svg?react';
+import Delivery from '../assets/images/Delivery.svg?react';
 
 type Props = {
   onClose: () => void;
