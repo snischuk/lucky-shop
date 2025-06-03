@@ -17,4 +17,4 @@ const AnnouncementBar = ({ onClose }: Props) => {
   );
 };
 
-export default AnnouncementBar;
+export { AnnouncementBar };
