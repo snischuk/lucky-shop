@@ -1,62 +1,77 @@
-import ImageHero from '../../assets/images/hero-1.png';
+import type { FC } from 'react';
 import { Link } from 'react-router-dom';
 import { Swiper, SwiperSlide } from 'swiper/react';
-import { Pagination, A11y, Autoplay } from 'swiper/modules';
+import {
+  Pagination,
+  Keyboard,
+  A11y,
+  Autoplay,
+  EffectFade,
+} from 'swiper/modules';
 
 import 'swiper/css';
+import 'swiper/css/a11y';
 import 'swiper/css/pagination';
+import 'swiper/css/effect-fade';
+import 'swiper/css/keyboard';
+import 'swiper/css/autoplay';
 
-const HeroSection = () => (
-  <Swiper
-    className="hero-swiper relative w-full"
-    modules={[Pagination, A11y, Autoplay]}
-    autoplay={{ delay: 6000 }}
-    slidesPerView={1}
-    pagination={{
-      clickable: true,
-    }}
-  >
-    {[...Array(3)].map((_, i) => (
-      <SwiperSlide key={i}>
-        <div className="grid h-[600px] w-full">
-          <div className="col-start-1 col-end-2 row-start-1 row-end-2 h-[600px]">
+import type { HeroSlide } from '../../types/hero';
+
+interface HeroSectionProps {
+  slides: HeroSlide[];
+}
+
+const HeroSection: FC<HeroSectionProps> = ({ slides }) => (
+  <div className="grid items-end justify-items-end">
+    <Swiper
+      className="hero-swiper relative col-start-1 col-end-2 row-start-1 row-end-2 h-[600px] w-full"
+      modules={[Pagination, Keyboard, A11y, Autoplay, EffectFade]}
+      effect={'fade'}
+      autoplay={{ delay: 6000 }}
+      speed={600}
+      slidesPerView={1}
+      pagination={{ clickable: true }}
+      keyboard={{ enabled: true }}
+    >
+      {slides.map(({ url, alt, textBig, textSmall }, index) => (
+        <SwiperSlide key={url}>
+          <div className={`grid ${index === 2 ? 'items-start' : 'items-end'}`}>
             <img
-              className="h-full w-full object-cover"
-              src={ImageHero}
-              alt="Літня колекція 2025"
+              className="col-start-1 col-end-2 row-start-1 row-end-2 h-[600px] w-full object-cover"
+              src={url}
+              alt={alt}
               height={600}
             />
-          </div>
 
-          <div className="col-start-1 col-end-2 row-start-1 row-end-2 flex h-full w-full items-end justify-between gap-10 px-6 py-20">
-            <div className="bg-red-950">
+            <div className="col-start-1 col-end-2 row-start-1 row-end-2 px-6 py-20">
               <span className="block text-nowrap font-family-primary text-4xl text-black">
-                Літня колекція
+                {textSmall}
               </span>
-              <span className="block font-family-primary text-8xl text-black">
-                2025
+              <span className="block font-family-primary text-8xl uppercase text-black">
+                {textBig}
               </span>
-            </div>
-
-            <div className="mr-24 flex flex-col gap-4">
-              <Link
-                to="/"
-                className="w-[330px] border border-solid border-light-black bg-transparent px-6 py-5 text-center font-family-secondary font-medium uppercase leading-none text-light-black transition-colors duration-300 hover:border-orange hover:text-orange"
-              >
-                Жіноча колекція
-              </Link>
-              <Link
-                to="/"
-                className="w-[330px] border border-solid border-light-black bg-transparent px-6 py-5 text-center font-family-secondary font-medium uppercase leading-none text-light-black transition-colors duration-300 hover:border-orange hover:text-orange"
-              >
-                Чоловіча колекція
-              </Link>
             </div>
           </div>
-        </div>
-      </SwiperSlide>
-    ))}
-  </Swiper>
+        </SwiperSlide>
+      ))}
+    </Swiper>
+
+    <div className="z-10 col-start-1 col-end-2 row-start-1 row-end-2 flex flex-col gap-4 px-28 py-20">
+      <Link
+        to="/man"
+        className="w-[330px] border border-solid border-light-black bg-transparent px-6 py-5 text-center font-family-secondary font-medium uppercase leading-none text-light-black transition-colors duration-300 hover:border-orange hover:text-orange"
+      >
+        Жіноча колекція
+      </Link>
+      <Link
+        to="/woman"
+        className="w-[330px] border border-solid border-light-black bg-transparent px-6 py-5 text-center font-family-secondary font-medium uppercase leading-none text-light-black transition-colors duration-300 hover:border-orange hover:text-orange"
+      >
+        Чоловіча колекція
+      </Link>
+    </div>
+  </div>
 );
 
 export { HeroSection };
