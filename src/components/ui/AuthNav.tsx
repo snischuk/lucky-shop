@@ -14,4 +14,4 @@ const AuthNav = () => {
   );
 };
 
-export default AuthNav;
+export { AuthNav };

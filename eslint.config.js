@@ -5,6 +5,7 @@ import reactRefresh from 'eslint-plugin-react-refresh';
 import tseslint from 'typescript-eslint';
 import prettier from 'eslint-plugin-prettier';
 import simpleImportSort from 'eslint-plugin-simple-import-sort';
+import importPlugin from 'eslint-plugin-import';
 
 export default tseslint.config(
   {
@@ -13,6 +14,7 @@ export default tseslint.config(
       'package.json',
       'package-lock.json',
       'tsconfig.node.json',
+      'vite.config.ts',
     ],
   },
   {
@@ -23,6 +25,7 @@ export default tseslint.config(
       globals: globals.browser,
     },
     plugins: {
+      import: importPlugin,
       'react-hooks': reactHooks,
       'react-refresh': reactRefresh,
       prettier,
@@ -37,6 +40,7 @@ export default tseslint.config(
       'prettier/prettier': 'warn',
       'simple-import-sort/imports': 'warn',
       'simple-import-sort/exports': 'warn',
+      'import/no-default-export': 'error',
     },
   },
 );
