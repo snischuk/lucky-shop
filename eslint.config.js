@@ -42,6 +42,17 @@ export default tseslint.config(
       'simple-import-sort/exports': 'warn',
       'import/no-default-export': 'error',
       'func-style': ['error', 'expression', { allowArrowFunctions: true }],
+      'react-hooks/rules-of-hooks': 'error',
+      'react-hooks/exhaustive-deps': 'warn',
+      'prefer-const': 'warn',
+      'no-useless-return': 'warn',
+      '@typescript-eslint/explicit-function-return-type': [
+        'warn',
+        {
+          allowExpressions: true,
+          allowTypedFunctionExpressions: true,
+        },
+      ],
     },
   },
 );

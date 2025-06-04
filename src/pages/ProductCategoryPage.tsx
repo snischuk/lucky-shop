@@ -1,6 +1,7 @@
+import type { FC } from 'react';
 import { useParams } from 'react-router-dom';
 
-const ProductCategoryPage = () => {
+const ProductCategoryPage: FC = () => {
   const { category } = useParams();
   return (
     <div>

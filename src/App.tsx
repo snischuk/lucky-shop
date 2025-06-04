@@ -1,6 +1,8 @@
+import type { FC } from 'react';
+
 import { AppRouter } from './router/router';
 
-const App = () => {
+const App: FC = () => {
   return <AppRouter />;
 };
 

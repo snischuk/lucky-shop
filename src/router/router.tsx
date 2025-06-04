@@ -1,3 +1,4 @@
+import type { FC } from 'react';
 import { Route, Routes } from 'react-router-dom';
 
 // Layout
@@ -28,7 +29,7 @@ import { NotFoundPage } from '../pages/NotFoundPage';
 // import AuthGuard from '../components/AuthGuard';
 // import AdminGuard from '../components/AdminGuard';
 
-const AppRouter = () => {
+const AppRouter: FC = () => {
   return (
     <Routes>
       <Route path="/" element={<Layout />}>
