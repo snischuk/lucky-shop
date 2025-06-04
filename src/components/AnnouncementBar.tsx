@@ -1,6 +1,6 @@
-import Delivery from '../assets/images/Delivery.svg?react';
-import Close from '../assets/images/Close_white.svg?react';
 import type { FC } from 'react';
+import Close from '../assets/images/Close_white.svg?react';
+import Delivery from '../assets/images/Delivery.svg?react';
 
 type Props = {
   onClose: () => void;
@@ -19,4 +19,4 @@ const AnnouncementBar: FC<Props> = ({ onClose }) => {
   );
 };
 
-export default AnnouncementBar;
+export { AnnouncementBar };

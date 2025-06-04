@@ -1,6 +1,7 @@
+import type { FC } from 'react';
 import { NavLink } from 'react-router-dom';
 
-const AuthNav = () => {
+const AuthNav: FC = () => {
   return (
     <div>
       <h1>Насолоджуйтесь найкращим шопінгом разом з Lucky</h1>
@@ -14,4 +15,4 @@ const AuthNav = () => {
   );
 };
 
-export default AuthNav;
+export { AuthNav };

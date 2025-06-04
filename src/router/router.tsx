@@ -1,8 +1,8 @@
-import { Routes, Route } from 'react-router-dom';
+import type { FC } from 'react';
+import { Route, Routes } from 'react-router-dom';
 
 // Layout
 import { Layout } from '../components/Layout';
-
 // Page Components
 import { HomePage } from '../pages/HomePage';
 // import ProductsPage from '../pages/ProductsPage';
@@ -29,7 +29,7 @@ import { NotFoundPage } from '../pages/NotFoundPage';
 // import AuthGuard from '../components/AuthGuard';
 // import AdminGuard from '../components/AdminGuard';
 
-const AppRouter = () => {
+const AppRouter: FC = () => {
   return (
     <Routes>
       <Route path="/" element={<Layout />}>

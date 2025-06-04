@@ -1,8 +1,11 @@
-import { HeroSection } from '../components/home/HeroSection';
+import type { FC } from 'react';
 
-const HomePage = () => (
+import { HeroSection } from '../components/home/HeroSection';
+import { HERO_SLIDES } from '../constants/hero';
+
+const HomePage: FC = () => (
   <>
-    <HeroSection />
+    <HeroSection slides={HERO_SLIDES} />
   </>
 );
 

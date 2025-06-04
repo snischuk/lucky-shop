@@ -1,14 +1,14 @@
-import { useEffect, useRef, useState, type FC } from 'react';
-import { NavLink } from 'react-router-dom';
 import clsx from 'clsx';
+import { type FC, useEffect, useRef, useState } from 'react';
+import { NavLink } from 'react-router-dom';
 
-import Logo from '../assets/images/lucky_logo.svg?react';
-import Vector from '../assets/images/Vector.svg?react';
-import Heart from '../assets/images/Heart.svg?react';
-import Profile from '../assets/images/Profile.svg?react';
-import SearchImg from '../assets/images/Search.svg?react';
 import Bag from '../assets/images/bag.svg?react';
 import Close from '../assets/images/Close.svg?react';
+import Heart from '../assets/images/Heart.svg?react';
+import Logo from '../assets/images/lucky_logo.svg?react';
+import Profile from '../assets/images/Profile.svg?react';
+import SearchImg from '../assets/images/Search.svg?react';
+import Vector from '../assets/images/Vector.svg?react';
 import { useToggle } from '../hooks/useToggle';
 
 const Header: FC = () => {
@@ -21,12 +21,12 @@ const Header: FC = () => {
     'w-[152px] py-2 border-b-[2px] border-grey transition-all duration-300 flex justify-center hover:border-light-black focus:border-light-black';
   const activeLinkClasses = 'text-black border-light-black font-semibold';
 
-  const setActiveClass = ({ isActive }: { isActive: boolean }) => {
+  const setActiveClass = ({ isActive }: { isActive: boolean }): string => {
     return clsx(baseLinkClasses, isActive && activeLinkClasses);
   };
 
   useEffect(() => {
-    const handleScroll = () => {
+    const handleScroll = (): void => {
       setScrolled(window.scrollY > 20);
     };
     window.addEventListener('scroll', handleScroll);
@@ -34,7 +34,7 @@ const Header: FC = () => {
   }, []);
 
   useEffect(() => {
-    function handleClickOutside(event: MouseEvent) {
+    const handleClickOutside = (event: MouseEvent): void => {
       const target = event.target as Node;
       if (
         isOpen &&
@@ -45,7 +45,7 @@ const Header: FC = () => {
       ) {
         close();
       }
-    }
+    };
 
     document.addEventListener('mousedown', handleClickOutside);
     return () => {
