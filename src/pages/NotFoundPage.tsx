@@ -1,4 +1,6 @@
-const NotFoundPage = () => {
+import type { FC } from 'react';
+
+const NotFoundPage: FC = () => {
   return (
     <div className="m-auto flex flex-col items-center justify-center">
       <h1>404 - Сторінка не знайдена</h1>

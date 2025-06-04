@@ -1,10 +1,12 @@
-import { Header } from './Header';
-import AnnouncementBar from './AnnouncementBar';
-import { Outlet } from 'react-router-dom';
-import { Footer } from './Footer';
+import type { FC } from 'react';
 import { useState } from 'react';
+import { Outlet } from 'react-router-dom';
 
-const Layout = () => {
+import { AnnouncementBar } from './AnnouncementBar';
+import { Footer } from './Footer';
+import { Header } from './Header';
+
+const Layout: FC = () => {
   const [showBanner, setShowBanner] = useState(true);
 
   return (

@@ -1,9 +1,9 @@
-import type { ButtonHTMLAttributes } from 'react';
+import type { ButtonHTMLAttributes, FC } from 'react';
 
-const Button = ({
+const Button: FC<ButtonHTMLAttributes<HTMLButtonElement>> = ({
   children,
   ...props
-}: ButtonHTMLAttributes<HTMLButtonElement>) => (
+}) => (
   <button
     className="rounded bg-blue-600 px-4 py-2 text-white transition hover:bg-blue-700"
     {...props}
@@ -12,4 +12,4 @@ const Button = ({
   </button>
 );
 
-export default Button;
+export { Button };

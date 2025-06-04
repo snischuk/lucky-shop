@@ -1,3 +1,5 @@
-const Footer = () => <footer></footer>;
+import type { FC } from 'react';
+
+const Footer: FC = () => <footer></footer>;
 
 export { Footer };
