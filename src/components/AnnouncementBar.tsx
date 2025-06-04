@@ -1,10 +1,12 @@
+import type { FC } from 'react';
+
 import Close from '../assets/images/Close_white.svg?react';
 import Delivery from '../assets/images/Delivery.svg?react';
 
 type Props = {
   onClose: () => void;
 };
-const AnnouncementBar = ({ onClose }: Props) => {
+const AnnouncementBar: FC<Props> = ({ onClose }) => {
   return (
     <div className="bg-black p-2 text-[#F9F9F9]">
       <div className="relative mx-auto flex w-full max-w-[1440px] items-center justify-center gap-4">

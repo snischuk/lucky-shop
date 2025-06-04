@@ -21,12 +21,12 @@ const Header: FC = () => {
   const activeLinkClasses =
     'text-black border-b border-[#1E1E1E] font-semibold';
 
-  const setActiveClass = ({ isActive }: { isActive: boolean }) => {
+  const setActiveClass = ({ isActive }: { isActive: boolean }): string => {
     return clsx(baseLinkClasses, isActive && activeLinkClasses);
   };
 
   useEffect(() => {
-    const handleScroll = () => {
+    const handleScroll = (): void => {
       setScrolled(window.scrollY > 20);
     };
     window.addEventListener('scroll', handleScroll);
@@ -34,7 +34,7 @@ const Header: FC = () => {
   }, []);
 
   useEffect(() => {
-    const handleClickOutside = (event: MouseEvent) => {
+    const handleClickOutside = (event: MouseEvent): void => {
       const target = event.target as Node;
       if (
         isOpen &&

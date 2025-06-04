@@ -1,4 +1,6 @@
-const ProductsPage = () => {
+import type { FC } from 'react';
+
+const ProductsPage: FC = () => {
   return (
     <div>
       <h1>Усі продукти</h1>

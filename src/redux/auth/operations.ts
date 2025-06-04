@@ -9,11 +9,11 @@ export interface User {
 //заглушка
 axios.defaults.baseURL = 'https://connections-api.goit.global/';
 
-const setAuthHeader = (token: string) => {
+const setAuthHeader = (token: string): void => {
   axios.defaults.headers.common.Authorization = `Bearer ${token}`;
 };
 
-const clearAuthHeader = () => {
+const clearAuthHeader = (): void => {
   axios.defaults.headers.common.Authorization = '';
 };
 
