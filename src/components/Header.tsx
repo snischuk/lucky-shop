@@ -17,9 +17,9 @@ const Header: FC = () => {
   const menuRef = useRef<HTMLDivElement>(null);
   const buttonRef = useRef<HTMLButtonElement>(null);
 
-  const baseLinkClasses = 'w-[152px] py-2 flex justify-center';
-  const activeLinkClasses =
-    'text-black border-b border-[#1E1E1E] font-semibold';
+  const baseLinkClasses =
+    'w-[152px] py-2 border-b-[2px] border-grey transition-all duration-300 flex justify-center hover:border-light-black focus:border-light-black';
+  const activeLinkClasses = 'text-black border-light-black font-semibold';
 
   const setActiveClass = ({ isActive }: { isActive: boolean }) => {
     return clsx(baseLinkClasses, isActive && activeLinkClasses);
@@ -54,13 +54,17 @@ const Header: FC = () => {
   }, [isOpen, close]);
 
   return (
-    <header className="relative mx-auto flex w-full max-w-[1440px] items-center justify-between px-6">
+    <header className="relative mx-auto flex w-full max-w-custom-1440 items-center justify-between px-6 font-family-secondary">
       <nav className="flex items-center gap-8 py-4">
         <NavLink to="/">
           <Logo width="223" />
         </NavLink>
-        <div>
-          <button ref={buttonRef} onClick={isOpen ? close : open}>
+        <div className="mx-auto flex w-[42px] justify-center">
+          <button
+            ref={buttonRef}
+            onClick={isOpen ? close : open}
+            className="duration-300"
+          >
             {isOpen ? <Close /> : <Vector />}
           </button>
         </div>
@@ -68,13 +72,13 @@ const Header: FC = () => {
           <div
             ref={menuRef}
             className={clsx(
-              'absolute left-1/2 top-[100px] w-[1440px] -translate-x-1/2 overflow-hidden bg-white py-[100px] transition-[max-height,opacity,transform] duration-500 ease-in-out',
+              'absolute left-1/2 top-[100px] w-[1442px] -translate-x-1/2 overflow-hidden bg-white py-[100px] transition-all duration-300 ease-in-out',
               isOpen
-                ? 'max-h-[400px] translate-y-0 opacity-100'
-                : 'pointer-events-none max-h-0 -translate-y-5 opacity-0',
+                ? 'max-h-[400px] translate-y-0 py-[100px] opacity-100'
+                : 'pointer-events-none max-h-0 -translate-y-5 py-0 opacity-0',
             )}
           >
-            <ul className="flex justify-center gap-2.5 text-[32px] uppercase text-[#1E1E1E]">
+            <ul className="flex justify-center gap-2.5 text-h3 uppercase text-light-black">
               <li>
                 <NavLink to="/" className="p-5" onClick={close}>
                   Головна
@@ -100,7 +104,7 @@ const Header: FC = () => {
         )}
       </nav>
 
-      <div className="flex border-b border-solid border-b-[#7A7A7A] text-2xl uppercase text-[#7A7A7A]">
+      <div className="flex text-2xl uppercase text-grey">
         <NavLink to="/women" className={setActiveClass}>
           Жіноче
         </NavLink>
