@@ -17,7 +17,7 @@ const Layout: FC = () => {
       </div>
 
       <div
-        className={`mx-auto flex min-h-screen max-w-custom-1440 flex-col ${showBanner ? 'pt-[140px]' : 'pt-[100px]'}`}
+        className={`mx-auto flex min-h-screen max-w-custom-1440 flex-col duration-300 ease-in-out ${showBanner ? 'pt-[140px]' : 'pt-[100px]'}`}
       >
         <main className="grow">
           <Outlet />
