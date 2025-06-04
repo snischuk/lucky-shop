@@ -41,6 +41,7 @@ export default tseslint.config(
       'simple-import-sort/imports': 'warn',
       'simple-import-sort/exports': 'warn',
       'import/no-default-export': 'error',
+      'func-style': ['error', 'expression', { allowArrowFunctions: true }],
     },
   },
 );

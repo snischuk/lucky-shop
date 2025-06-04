@@ -34,7 +34,7 @@ const Header: FC = () => {
   }, []);
 
   useEffect(() => {
-    function handleClickOutside(event: MouseEvent) {
+    const handleClickOutside = (event: MouseEvent) => {
       const target = event.target as Node;
       if (
         isOpen &&
@@ -45,7 +45,7 @@ const Header: FC = () => {
       ) {
         close();
       }
-    }
+    };
 
     document.addEventListener('mousedown', handleClickOutside);
     return () => {
