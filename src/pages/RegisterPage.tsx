@@ -1,5 +1,5 @@
-import Button from '../components/ui/Button';
-import Input from '../components/ui/Input';
+import { Button } from '../components/ui/Button';
+import { Input } from '../components/ui/Input';
 
 const RegisterPage = () => (
   <div className="flex min-h-screen items-center justify-center bg-gray-100">
