@@ -1,6 +1,6 @@
 import type { FC } from 'react';
 
-import FindYoursSection from '../components/home/FindYoursSection';
+import { FindYoursSection } from '../components/home/FindYoursSection';
 import { HeroSection } from '../components/home/HeroSection';
 import { HERO_SLIDES } from '../constants/hero';
 
