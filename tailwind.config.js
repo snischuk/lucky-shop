@@ -10,6 +10,9 @@ export default {
       maxWidth: {
         'custom-1440': '1440px',
       },
+      transitionDuration: {
+        default: '300ms',
+      },
       colors: {
         white: '#FFFFFF',
         main: '#F9F9F9',
