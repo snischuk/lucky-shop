@@ -2,6 +2,7 @@ import type { FC } from 'react';
 import { useState } from 'react';
 import { Outlet } from 'react-router-dom';
 
+import { navigationLinks } from '../constants/navigationLinks';
 import { AnnouncementBar } from './AnnouncementBar';
 import { Footer } from './Footer';
 import { Header } from './Header';
@@ -17,13 +18,13 @@ const Layout: FC = () => {
       </div>
 
       <div
-        className={`mx-auto flex min-h-screen max-w-custom-1440 flex-col duration-300 ease-in-out ${showBanner ? 'pt-[140px]' : 'pt-[100px]'}`}
+        className={`mx-auto flex min-h-screen flex-col duration-300 ease-in-out ${showBanner ? 'pt-[140px]' : 'pt-[100px]'}`}
       >
         <main className="grow">
           <Outlet />
         </main>
         {/* <SubscribeSection /> */}
-        <Footer />
+        <Footer navigationLinks={navigationLinks} />
       </div>
     </>
   );
