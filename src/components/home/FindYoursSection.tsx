@@ -5,7 +5,7 @@ import women2x from '../../assets/images/home/find-yours/women@2x.jpg';
 
 const FindYoursSection = () => {
   return (
-    <section className="pb-[70px] pt-[140px]">
+    <section className="mx-auto max-w-custom-1440 pb-[70px] pt-[140px]">
       <h2 className="mb-[80px] text-center font-family-primary text-h3 uppercase">
         Знайди своє
       </h2>
