@@ -23,7 +23,7 @@ interface HeroSectionProps {
 }
 
 const HeroSection: FC<HeroSectionProps> = ({ slides }) => (
-  <div className="grid items-end justify-items-end">
+  <div className="mx-auto grid max-w-custom-1440 items-end justify-items-end">
     <Swiper
       className="hero-swiper relative col-start-1 col-end-2 row-start-1 row-end-2 h-[600px] w-full"
       modules={[Pagination, Keyboard, A11y, Autoplay, EffectFade]}
