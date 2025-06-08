@@ -35,6 +35,7 @@ export default {
         'body-l': ['32px', { lineHeight: '1.4' }],
         'body-m': ['24px', { lineHeight: '1.4' }],
         'body-s': ['18px', { lineHeight: '1.4' }],
+        'body-xs': ['14px', { lineHeight: '1' }],
 
         button: ['16px', { lineHeight: '1.3' }],
         preload: ['20px', { lineHeight: '1.3' }],

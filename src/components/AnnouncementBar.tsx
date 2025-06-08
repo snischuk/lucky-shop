@@ -1,4 +1,5 @@
 import type { FC } from 'react';
+
 import Close from '../assets/images/Close_white.svg?react';
 import Delivery from '../assets/images/Delivery.svg?react';
 
