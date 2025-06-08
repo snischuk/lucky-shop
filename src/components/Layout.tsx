@@ -6,6 +6,7 @@ import { navigationLinks } from '../constants/navigationLinks';
 import { AnnouncementBar } from './AnnouncementBar';
 import { Footer } from './Footer';
 import { Header } from './Header';
+import { SubscribeSection } from './SubscribeSection';
 
 const Layout: FC = () => {
   const [showBanner, setShowBanner] = useState(true);
@@ -23,7 +24,7 @@ const Layout: FC = () => {
         <main className="grow">
           <Outlet />
         </main>
-        {/* <SubscribeSection /> */}
+        <SubscribeSection />
         <Footer navigationLinks={navigationLinks} />
       </div>
     </>
