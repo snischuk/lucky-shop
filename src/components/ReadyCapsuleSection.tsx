@@ -1,0 +1,57 @@
+import type { FC } from 'react';
+
+import man from '../assets/images/home/ready-capsule/man.jpg';
+import man2x from '../assets/images/home/ready-capsule/man@2x.jpg';
+import woman from '../assets/images/home/ready-capsule/woman.jpg';
+import woman2x from '../assets/images/home/ready-capsule/women@2x.jpg';
+import DotTag from '../assets/images/icons/dot-tag.svg?react';
+import LinePantsFemale from '../assets/images/icons/line-pants-female.svg?react';
+import LinePantsMale from '../assets/images/icons/line-pants-male.svg?react';
+import LineShirtMale from '../assets/images/icons/line-shirt-male.svg?react';
+import LineTopFemale from '../assets/images/icons/line-top-female.svg?react';
+import LineTshirtMale from '../assets/images/icons/line-tshirt-male.svg?react';
+
+const ReadyCapsuleSection: FC = () => {
+  return (
+    <section className="mx-auto max-w-custom-1440 px-[70] pt-[140px]">
+      <h2 className="mb-[80px] text-center font-family-primary text-h3 uppercase">
+        Твоя готова капсула
+      </h2>
+      <div className="grid grid-cols-1 gap-[32] md:grid-cols-2">
+        <div className="relative">
+          <img src={woman} srcSet={`${woman2x} 2x`} alt="woman" />
+          <div className="absolute left-[137px] top-[52px] flex h-[32px] w-[68px] items-center justify-center border border-[#1E1E1E] px-[20px] py-[10px] text-[#1E1E1E]">
+            Топ
+          </div>
+          <LineTopFemale className="absolute left-[205px] top-[68px] h-[59px] w-[46px]" />
+          <DotTag className="absolute left-[245px] top-[125px] h-[26px] w-[26px]" />
+          <div className="absolute left-[551px] top-[313px] flex h-[32px] w-[92px] items-center justify-center border border-[#1E1E1E] px-[20px] py-[10px] text-[#1E1E1E]">
+            Штани
+          </div>
+          <LinePantsFemale className="absolute left-[507px] top-[329px] h-[42.5px] w-[43.5px]" />
+          <DotTag className="absolute left-[488px] top-[369.5px] h-[26px] w-[26px]" />
+        </div>
+        <div className="relative">
+          <img src={man} srcSet={`${man2x} 2x`} alt="man" />
+          <div className="absolute left-[406px] top-[72px] flex h-[32px] w-[117px] items-center justify-center border border-[#1E1E1E] px-[20px] py-[10px] text-[#1E1E1E]">
+            Футболка
+          </div>
+          <LineTshirtMale className="absolute left-[296px] top-[88px] h-[143px] w-[110px]" />
+          <DotTag className="absolute left-[275px] top-[228px] h-[26px] w-[26px]" />
+          <div className="absolute left-[490px] top-[151px] flex h-[32px] w-[108px] items-center justify-center border border-[#1E1E1E] px-[20px] py-[10px] text-[#1E1E1E]">
+            Сорочка
+          </div>
+          <LineShirtMale className="absolute left-[447px] top-[167px] h-[42.5px] w-[43.5px]" />
+          <DotTag className="absolute left-[426px] top-[206px] h-[26px] w-[26px]" />
+          <div className="absolute left-[198px] top-[543px] flex h-[32px] w-[92px] items-center justify-center border border-[#1E1E1E] px-[20px] py-[10px] text-[#1E1E1E]">
+            Штани
+          </div>
+          <LinePantsMale className="absolute left-[290px] top-[516px] h-[42.5px] w-[43.5px]" />
+          <DotTag className="absolute left-[320px] top-[490px] h-[26px] w-[26px]" />
+        </div>
+      </div>
+    </section>
+  );
+};
+
+export { ReadyCapsuleSection };
