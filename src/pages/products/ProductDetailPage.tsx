@@ -2,11 +2,13 @@ import type { FC } from 'react';
 import { useParams } from 'react-router-dom';
 
 const ProductDetailPage: FC = () => {
-  const { category, productId } = useParams();
+  const { productId } = useParams();
+
   return (
     <div>
       <h1>Деталі продукту: {productId}</h1>
-      <p>Категорія: {category}</p>
+      {/* {<ProductDetail/>} */}
+      {/* {<ProductsRecommendations/>} */}
     </div>
   );
 };
