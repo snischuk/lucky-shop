@@ -17,7 +17,7 @@ const ReadyCapsuleSection: FC = () => {
       <h2 className="mb-[80px] text-center font-family-primary text-h3 uppercase">
         Твоя готова капсула
       </h2>
-      <div className="grid grid-cols-1 gap-8 md:grid-cols-2">
+      <div className="grid grid-cols-1 md:grid-cols-2">
         <div className="relative">
           <img src={woman} srcSet={`${woman2x} 2x`} alt="woman" />
           <div className="absolute left-[137px] top-[52px] flex h-8 w-[68px] items-center justify-center border border-light-black px-5 py-2.5 text-light-black">
