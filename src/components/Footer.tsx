@@ -5,7 +5,7 @@ import { Link, NavLink } from 'react-router-dom';
 import IconFacebook from '../assets/images/icons/icon-facebook.svg?react';
 import IconInstagram from '../assets/images/icons/icon-instagram.svg?react';
 import IconYoutube from '../assets/images/icons/icon-youtube.svg?react';
-import Logo from '../assets/images/lucky_logo.svg?react';
+import Logo from '../assets/images/logo-lucky.svg?react';
 import type { NavigationLink } from '../types/NavigationLink';
 
 interface FooterProps {

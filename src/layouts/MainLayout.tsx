@@ -2,13 +2,13 @@ import type { FC } from 'react';
 import { useState } from 'react';
 import { Outlet } from 'react-router-dom';
 
+import { AnnouncementBar } from '../components/AnnouncementBar';
+import { Footer } from '../components/Footer';
+import { Header } from '../components/Header';
+import { SubscribeSection } from '../components/SubscribeSection';
 import { navigationLinks } from '../constants/navigationLinks';
-import { AnnouncementBar } from './AnnouncementBar';
-import { Footer } from './Footer';
-import { Header } from './Header';
-import { SubscribeSection } from './SubscribeSection';
 
-const Layout: FC = () => {
+const MainLayout: FC = () => {
   const [showBanner, setShowBanner] = useState(true);
 
   return (
@@ -31,4 +31,4 @@ const Layout: FC = () => {
   );
 };
 
-export { Layout };
+export { MainLayout };

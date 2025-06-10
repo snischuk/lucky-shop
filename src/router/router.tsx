@@ -1,77 +1,57 @@
 import type { FC } from 'react';
 import { Route, Routes } from 'react-router-dom';
 
-// Layout
-import { Layout } from '../components/Layout';
-// Page Components
-import { HomePage } from '../pages/HomePage';
-// import ProductsPage from '../pages/ProductsPage';
-// Цей компонент оброблятиме /products/women та /products/men
-// import ProductCategoryPage from '../pages/ProductCategoryPage';
-// import ProductDetailPage from '../pages/ProductDetailPage';
-// import CartPage from '../pages/CartPage';
-// import CheckoutPage from '../pages/CheckoutPage';
-// import AccountProfilePage from '../pages/AccountProfilePage';
-// import AccountOrdersPage from '../pages/AccountOrdersPage';
-// import AccountSettingsPage from '../pages/AccountSettingsPage';
-// import LoginPage from '../pages/LoginPage';
-// import AdminPage from '../pages/AdminPage';
-// import AdminProductsPage from '../pages/AdminProductsPage';
+import { PATH_PAGES } from '../constants/pathPages';
+import { AuthLayout } from '../layouts/AuthLayout';
+import { MainLayout } from '../layouts/MainLayout';
+import { ProductsLayout } from '../layouts/ProductsLayout';
+import { AuthChoisePage } from '../pages/auth/AuthChoisePage';
+import { CreateNewPasswordPage } from '../pages/auth/CreateNewPasswordPage';
+import { ForgotPasswordPage } from '../pages/auth/ForgotPasswordPage';
+import { LoginPage } from '../pages/auth/LoginPage';
+import { RegisterPage } from '../pages/auth/RegisterPage';
+import { ResendPasswordPage } from '../pages/auth/ResendPasswordPage';
+import { GenderHomePage } from '../pages/GenderHomePage';
+import { MainHomePage } from '../pages/MainHomePage';
 import { NotFoundPage } from '../pages/NotFoundPage';
-
-// Сторінки для відновлення пароля
-// import WrongPasswordPage from '../pages/WrongPasswordPage';
-// import ForgotPasswordPage from '../pages/ForgotPasswordPage';
-// import ResendPasswordEmailPage from '../pages/ResendPasswordEmailPage';
-// import CreateNewPasswordPage from '../pages/CreateNewPasswordPage';
-
-// Guards (для захисту маршрутів)
-// import AuthGuard from '../components/AuthGuard';
-// import AdminGuard from '../components/AdminGuard';
+import { ProductDetailPage } from '../pages/products/ProductDetailPage';
+import { ProductsPage } from '../pages/products/ProductsPage';
 
 const AppRouter: FC = () => {
   return (
     <Routes>
-      <Route path="/" element={<Layout />}>
-        <Route index element={<HomePage />} />
+      <Route path={PATH_PAGES.MAIN} element={<MainLayout />}>
+        <Route index element={<MainHomePage />} />
 
-        {/* Маршрути продуктів */}
-        {/* <Route path="products" element={<ProductsPage />} /> */}
-        {/* Цей маршрут вже обробляє /products/women та /products/men */}
-        {/* <Route path="products/:category" element={<ProductCategoryPage />} />
-          <Route path="products/:category/:productId" element={<ProductDetailPage />} /> */}
+        <Route path={PATH_PAGES.GENDER_PARAM} element={<GenderHomePage />} />
 
-        {/* Корзина */}
-        {/* <Route path="cart" element={<CartPage />} /> */}
+        <Route path={PATH_PAGES.GENDER_PRODUCTS} element={<ProductsLayout />}>
+          <Route index element={<ProductsPage />} />
+          <Route
+            path={PATH_PAGES.GENDER_PRODUCT_ID_PARAM}
+            element={<ProductDetailPage />}
+          />
+        </Route>
 
-        {/* Захищений маршрут Checkout (тільки для авторизованих) */}
-        {/* <Route element={<AuthGuard />}>
-            <Route path="checkout" element={<CheckoutPage />} />
-          </Route> */}
+        <Route path={PATH_PAGES.NOT_FOUND} element={<NotFoundPage />} />
+      </Route>
 
-        {/* Маршрути аккаунта (вложенные) */}
-        {/* <Route path="account">
-            <Route path="profile" element={<AccountProfilePage />} />
-            <Route path="orders" element={<AccountOrdersPage />} />
-            <Route path="settings" element={<AccountSettingsPage />} />
-          </Route> */}
-
-        {/* Маршрути аутентифікації та відновлення пароля */}
-        {/* <Route path="login" element={<LoginPage />} />
-          <Route path="wrong-password" element={<WrongPasswordPage />} />
-          <Route path="forgot-password" element={<ForgotPasswordPage />} />
-          <Route path="resend-password-email" element={<ResendPasswordEmailPage />} />
-          <Route path="create-new-password" element={<CreateNewPasswordPage />} /> */}
-
-        {/* Захищений маршрут адмін-панелі (тільки для адмінів) */}
-        {/* <Route element={<AdminGuard />}>
-            <Route path="admin" element={<AdminPage />}>
-              <Route path="products" element={<AdminProductsPage />} />
-            </Route>
-          </Route> */}
-
-        {/* Маршрут 404 */}
-        <Route path="*" element={<NotFoundPage />} />
+      <Route path={PATH_PAGES.AUTH} element={<AuthLayout />}>
+        <Route index element={<AuthChoisePage />} />
+        <Route path={PATH_PAGES.REGISTER} element={<RegisterPage />} />
+        <Route path={PATH_PAGES.LOGIN} element={<LoginPage />} />
+        <Route
+          path={PATH_PAGES.FORGOT_PASSWORD}
+          element={<ForgotPasswordPage />}
+        />
+        <Route
+          path={PATH_PAGES.RESEND_PASSWORD}
+          element={<ResendPasswordPage />}
+        />
+        <Route
+          path={PATH_PAGES.CREATE_NEW_PASSWORD}
+          element={<CreateNewPasswordPage />}
+        />
       </Route>
     </Routes>
   );

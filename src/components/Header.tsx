@@ -2,13 +2,14 @@ import clsx from 'clsx';
 import { type FC, useEffect, useRef, useState } from 'react';
 import { NavLink } from 'react-router-dom';
 
-import Bag from '../assets/images/bag.svg?react';
-import Close from '../assets/images/Close.svg?react';
-import Heart from '../assets/images/Heart.svg?react';
-import Logo from '../assets/images/lucky_logo.svg?react';
-import Profile from '../assets/images/Profile.svg?react';
-import SearchImg from '../assets/images/Search.svg?react';
-import Vector from '../assets/images/Vector.svg?react';
+import IconBag from '../assets/images/icons/icon-bag.svg?react';
+import IconClose from '../assets/images/icons/icon-close.svg?react';
+import IconHeart from '../assets/images/icons/icon-heart.svg?react';
+import IconProfile from '../assets/images/icons/icon-profile.svg?react';
+import IconSearch from '../assets/images/icons/icon-search.svg?react';
+import IconVector from '../assets/images/icons/icon-vector.svg?react';
+import Logo from '../assets/images/logo-lucky.svg?react';
+import { PATH_PAGES } from '../constants/pathPages';
 import { useToggle } from '../hooks/useToggle';
 
 const Header: FC = () => {
@@ -65,7 +66,7 @@ const Header: FC = () => {
             onClick={isOpen ? close : open}
             className="duration-300"
           >
-            {isOpen ? <Close /> : <Vector />}
+            {isOpen ? <IconClose /> : <IconVector />}
           </button>
         </div>
         {isOpen && (
@@ -105,24 +106,24 @@ const Header: FC = () => {
       </nav>
 
       <div className="flex text-2xl uppercase text-grey">
-        <NavLink to="/women" className={setActiveClass}>
+        <NavLink to={PATH_PAGES.WOMEN} className={setActiveClass}>
           Жіноче
         </NavLink>
-        <NavLink to="/men" className={setActiveClass}>
+        <NavLink to={PATH_PAGES.MEN} className={setActiveClass}>
           Чоловіче
         </NavLink>
       </div>
 
       <div className="flex gap-8">
-        <SearchImg />
+        <IconSearch />
         <NavLink to="/">
-          <Heart />
+          <IconHeart />
         </NavLink>
         <NavLink to="/">
-          <Bag />
+          <IconBag />
         </NavLink>
         <NavLink to="/">
-          <Profile />
+          <IconProfile />
         </NavLink>
       </div>
     </header>
