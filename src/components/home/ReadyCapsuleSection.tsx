@@ -4,12 +4,12 @@ import man from '../../assets/images/home/ready-capsule/man.jpg';
 import man2x from '../../assets/images/home/ready-capsule/man@2x.jpg';
 import woman from '../../assets/images/home/ready-capsule/woman.jpg';
 import woman2x from '../../assets/images/home/ready-capsule/women@2x.jpg';
-import IconDotTag from '../../assets/images/icons/dot-tag.svg?react';
-import IconLinePantsFemale from '../../assets/images/icons/line-pants-female.svg?react';
-import IconLinePantsMale from '../../assets/images/icons/line-pants-male.svg?react';
-import IconLineShirtMale from '../../assets/images/icons/line-shirt-male.svg?react';
-import IconLineTopFemale from '../../assets/images/icons/line-top-female.svg?react';
-import IconLineTshirtMale from '../../assets/images/icons/line-tshirt-male.svg?react';
+import IconDotTag from '../../assets/images/icons/icon-dot-tag.svg?react';
+import IconLinePantsFemale from '../../assets/images/icons/icon-line-pants-female.svg?react';
+import IconLinePantsMale from '../../assets/images/icons/icon-line-pants-male.svg?react';
+import IconLineShirtMale from '../../assets/images/icons/icon-line-shirt-male.svg?react';
+import IconLineTopFemale from '../../assets/images/icons/icon-line-top-female.svg?react';
+import IconLineTshirtMale from '../../assets/images/icons/icon-line-tshirt-male.svg?react';
 
 const ReadyCapsuleSection: FC = () => {
   return (
