@@ -1,15 +1,15 @@
 import type { FC } from 'react';
 
-import man from '../assets/images/home/ready-capsule/man.jpg';
-import man2x from '../assets/images/home/ready-capsule/man@2x.jpg';
-import woman from '../assets/images/home/ready-capsule/woman.jpg';
-import woman2x from '../assets/images/home/ready-capsule/women@2x.jpg';
-import IconDotTag from '../assets/images/icons/dot-tag.svg?react';
-import IconLinePantsFemale from '../assets/images/icons/line-pants-female.svg?react';
-import IconLinePantsMale from '../assets/images/icons/line-pants-male.svg?react';
-import IconLineShirtMale from '../assets/images/icons/line-shirt-male.svg?react';
-import IconLineTopFemale from '../assets/images/icons/line-top-female.svg?react';
-import IconLineTshirtMale from '../assets/images/icons/line-tshirt-male.svg?react';
+import man from '../../assets/images/home/ready-capsule/man.jpg';
+import man2x from '../../assets/images/home/ready-capsule/man@2x.jpg';
+import woman from '../../assets/images/home/ready-capsule/woman.jpg';
+import woman2x from '../../assets/images/home/ready-capsule/women@2x.jpg';
+import IconDotTag from '../../assets/images/icons/icon-dot-tag.svg?react';
+import IconLinePantsFemale from '../../assets/images/icons/icon-line-pants-female.svg?react';
+import IconLinePantsMale from '../../assets/images/icons/icon-line-pants-male.svg?react';
+import IconLineShirtMale from '../../assets/images/icons/icon-line-shirt-male.svg?react';
+import IconLineTopFemale from '../../assets/images/icons/icon-line-top-female.svg?react';
+import IconLineTshirtMale from '../../assets/images/icons/icon-line-tshirt-male.svg?react';
 
 const ReadyCapsuleSection: FC = () => {
   return (
@@ -17,7 +17,7 @@ const ReadyCapsuleSection: FC = () => {
       <h2 className="mb-[80px] text-center font-family-primary text-h3 uppercase">
         Твоя готова капсула
       </h2>
-      <div className="grid grid-cols-1 gap-8 md:grid-cols-2">
+      <div className="grid grid-cols-1 md:grid-cols-2">
         <div className="relative">
           <img src={woman} srcSet={`${woman2x} 2x`} alt="woman" />
           <div className="absolute left-[137px] top-[52px] flex h-8 w-[68px] items-center justify-center border border-light-black px-5 py-2.5 text-light-black">

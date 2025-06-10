@@ -1,9 +1,9 @@
 import heroImage1 from '../assets/images/home/hero/hero-1.png';
 import heroImage2 from '../assets/images/home/hero/hero-2.png';
 import heroImage3 from '../assets/images/home/hero/hero-3.png';
-import type { HeroSlide } from '../types/hero';
+import type { HomeHeroSlide } from '../types/HomeHeroSlide';
 
-export const HERO_SLIDES: HeroSlide[] = [
+export const HOME_HERO_SLIDES: HomeHeroSlide[] = [
   {
     url: heroImage1,
     alt: 'Банер "Літня колекція 2025"',

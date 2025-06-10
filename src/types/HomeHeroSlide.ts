@@ -1,4 +1,4 @@
-export interface HeroSlide {
+export interface HomeHeroSlide {
   url: string;
   alt: string;
   textBig?: string;
