@@ -20,12 +20,12 @@ const ReadyCapsuleSection: FC = () => {
       <div className="grid grid-cols-1 gap-8 md:grid-cols-2">
         <div className="relative">
           <img src={woman} srcSet={`${woman2x} 2x`} alt="woman" />
-          <div className="absolute left-[137px] top-[52px] flex h-8 w-[68px] items-center justify-center border border-[#1E1E1E] px-5 py-2.5 text-[#1E1E1E]">
+          <div className="absolute left-[137px] top-[52px] flex h-8 w-[68px] items-center justify-center border border-light-black px-5 py-2.5 text-light-black">
             Топ
           </div>
           <LineTopFemale className="absolute left-[205px] top-[68px] h-[59px] w-[46px]" />
           <IconDotTag className="absolute left-[245px] top-[125px] h-[26px] w-[26px]" />
-          <div className="absolute left-[551px] top-[313px] flex h-8 w-[92px] items-center justify-center border border-[#1E1E1E] px-5 py-2.5 text-[#1E1E1E]">
+          <div className="absolute left-[551px] top-[313px] flex h-8 w-[92px] items-center justify-center border border-light-black px-5 py-2.5 text-light-black">
             Штани
           </div>
           <LinePantsFemale className="absolute left-[507px] top-[329px] h-[42px] w-[43px]" />
@@ -33,17 +33,17 @@ const ReadyCapsuleSection: FC = () => {
         </div>
         <div className="relative">
           <img src={man} srcSet={`${man2x} 2x`} alt="man" />
-          <div className="absolute left-[406px] top-[72px] flex h-8 w-[117px] items-center justify-center border border-[#1E1E1E] px-5 py-2.5 text-[#1E1E1E]">
+          <div className="absolute left-[406px] top-[72px] flex h-8 w-[117px] items-center justify-center border border-light-black px-5 py-2.5 text-light-black">
             Футболка
           </div>
           <LineTshirtMale className="absolute left-[296px] top-[88px] h-[143px] w-[110px]" />
           <IconDotTag className="absolute left-[275px] top-[228px] h-[26px] w-[26px]" />
-          <div className="absolute left-[490px] top-[151px] flex h-8 w-[108px] items-center justify-center border border-[#1E1E1E] px-5 py-2.5 text-[#1E1E1E]">
+          <div className="absolute left-[490px] top-[151px] flex h-8 w-[108px] items-center justify-center border border-light-black px-5 py-2.5 text-light-black">
             Сорочка
           </div>
           <LineShirtMale className="absolute left-[447px] top-[167px] h-[42px] w-[43px]" />
           <IconDotTag className="absolute left-[426px] top-[206px] h-[26px] w-[26px]" />
-          <div className="absolute left-[198px] top-[543px] flex h-8 w-[92px] items-center justify-center border border-[#1E1E1E] px-5 py-2.5 text-[#1E1E1E]">
+          <div className="absolute left-[198px] top-[543px] flex h-8 w-[92px] items-center justify-center border border-light-black px-5 py-2.5 text-light-black">
             Штани
           </div>
           <LinePantsMale className="absolute left-[290px] top-[516px] h-[42px] w-[43px]" />
