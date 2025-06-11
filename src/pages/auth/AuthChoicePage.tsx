@@ -1,6 +1,6 @@
 import type { FC } from 'react';
 
-const AuthChoisePage: FC = () => {
+const AuthChoicePage: FC = () => {
   return (
     <div className="m-auto flex flex-col items-center justify-center">
       <h1>НАСОЛОДЖУЙТЕСЬ НАЙКРАЩИМ ШОПІНГОМ разом з Lucky</h1>
@@ -16,4 +16,4 @@ const AuthChoisePage: FC = () => {
   );
 };
 
-export { AuthChoisePage };
+export { AuthChoicePage };
