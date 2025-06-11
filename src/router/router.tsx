@@ -1,25 +1,15 @@
-import { type FC, lazy, Suspense } from 'react';
-import { Route, Routes } from 'react-router-dom';
+import type { FC } from 'react';
+import { lazy, Suspense } from 'react';
+import { Navigate, Route, Routes } from 'react-router-dom';
 
 import { PATH_PAGES } from '../constants/pathPages';
 import { AuthLayout } from '../layouts/AuthLayout';
 import { MainLayout } from '../layouts/MainLayout';
 import { ProductsLayout } from '../layouts/ProductsLayout';
-// import { AuthChoisePage } from '../pages/auth/AuthChoisePage';
-// import { CreateNewPasswordPage } from '../pages/auth/CreateNewPasswordPage';
-// import { ForgotPasswordPage } from '../pages/auth/ForgotPasswordPage';
-// import { LoginPage } from '../pages/auth/LoginPage';
-// import { RegisterPage } from '../pages/auth/RegisterPage';
-// import { ResendPasswordPage } from '../pages/auth/ResendPasswordPage';
-// import { GenderHomePage } from '../pages/GenderHomePage';
-// import { MainHomePage } from '../pages/MainHomePage';
-// import { NotFoundPage } from '../pages/NotFoundPage';
-// import { ProductDetailPage } from '../pages/products/ProductDetailPage';
-// import { ProductsPage } from '../pages/products/ProductsPage';
 
 const AuthChoisePage = lazy(() =>
-  import('../pages/auth/AuthChoisePage').then((module) => ({
-    default: module.AuthChoisePage,
+  import('../pages/auth/AuthChoicePage').then((module) => ({
+    default: module.AuthChoicePage,
   })),
 );
 const CreateNewPasswordPage = lazy(() =>
@@ -91,6 +81,10 @@ const AppRouter: FC = () => {
           </Route>
 
           <Route path={PATH_PAGES.NOT_FOUND} element={<NotFoundPage />} />
+          <Route
+            path="*"
+            element={<Navigate to={PATH_PAGES.NOT_FOUND} replace />}
+          />
         </Route>
 
         <Route path={PATH_PAGES.AUTH} element={<AuthLayout />}>
