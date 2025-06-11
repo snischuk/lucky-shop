@@ -1,0 +1,1 @@
+import{j as e}from"./index-Brb90X-r.js";const t=()=>e.jsx("div",{className:"flex min-h-screen items-center justify-center",children:e.jsx("h1",{className:"text-2xl font-bold",children:"Login Page"})});export{t as LoginPage};

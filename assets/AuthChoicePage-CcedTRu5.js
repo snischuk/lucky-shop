@@ -1,0 +1,1 @@
+import{j as e}from"./index-Brb90X-r.js";const t=()=>e.jsxs("div",{className:"m-auto flex flex-col items-center justify-center",children:[e.jsx("h1",{children:"НАСОЛОДЖУЙТЕСЬ НАЙКРАЩИМ ШОПІНГОМ разом з Lucky"}),e.jsx("p",{children:"Увійдіть або зареєструйтесь, щоб насолодитися персоналізованим шопінгом і доступом до всіх наших послуг"})]});export{t as AuthChoicePage};

@@ -1,0 +1,1 @@
+import{j as e}from"./index-Brb90X-r.js";const t=()=>e.jsxs("div",{className:"m-auto flex flex-col items-center justify-center",children:[e.jsx("h1",{children:"404 - Сторінка не знайдена"}),e.jsx("p",{children:"Вибачте, запитана сторінка не існує."})]});export{t as NotFoundPage};
