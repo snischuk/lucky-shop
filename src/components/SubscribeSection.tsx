@@ -1,19 +1,18 @@
+import { yupResolver } from '@hookform/resolvers/yup';
 import type { FC } from 'react';
 import { useForm } from 'react-hook-form';
 
 import IconEmail from '../assets/images/icons/icon-email.svg?react';
+import { subscribeSchema } from '../schemas/validationSchemas';
 import { useSubscribeMutation } from '../services/notificationApi';
-import { validateEmail } from '../utils/validation';
-
-type SubscribeApiError = {
-  data: {
-    message: string;
-  };
-  status: number;
-};
 
 type FormData = {
   email: string;
+};
+
+type SubscribeApiError = {
+  data: { message: string };
+  status: number;
 };
 
 const SubscribeSection: FC = () => {
@@ -24,19 +23,12 @@ const SubscribeSection: FC = () => {
     handleSubmit,
     reset,
     setError,
-    clearErrors,
     formState: { errors, isSubmitting },
-  } = useForm<FormData>();
+  } = useForm<FormData>({
+    resolver: yupResolver(subscribeSchema),
+  });
 
   const onSubmit = async (data: FormData): Promise<void> => {
-    const validationError = validateEmail(data.email);
-    if (validationError) {
-      setError('email', { type: 'manual', message: validationError });
-      return;
-    }
-
-    clearErrors('email');
-
     try {
       await subscribe({ email: data.email }).unwrap();
       reset();
@@ -69,7 +61,7 @@ const SubscribeSection: FC = () => {
               className="text-l w-full py-5 pl-12 pr-6 font-family-secondary leading-normal text-light-black placeholder:text-grey"
               type="text"
               placeholder="Введіть свою email адресу"
-              aria-invalid={errors.email ? 'true' : 'false'}
+              aria-invalid={!!errors.email}
             />
             {errors.email && (
               <p role="alert" className="text-red-500 mt-1 text-sm">
