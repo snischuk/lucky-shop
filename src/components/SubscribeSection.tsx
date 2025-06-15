@@ -1,10 +1,8 @@
 import { type FC, type FormEvent, useEffect, useRef, useState } from 'react';
 
 import IconEmail from '../assets/images/icons/icon-email.svg?react';
-import {
-  type SubscribeResponse,
-  useSubscribeMutation,
-} from '../services/notificationApi';
+import { useSubscribeMutation } from '../services/notificationApi';
+import { validateEmail } from '../utils/validation';
 
 const SubscribeSection: FC = () => {
   const [error, setError] = useState<string | null>(null);
@@ -23,25 +21,9 @@ const SubscribeSection: FC = () => {
     const formData = new FormData(event.currentTarget);
     const email = (formData.get('email') || '').toString().trim();
 
-    if (!email) {
-      setError('Email є обов’язковим');
-      return;
-    }
-
-    if (email.length < 14) {
-      setError('Email повинен містити щонайменше 14 символів');
-      return;
-    }
-
-    if (email.length > 72) {
-      setError('Email не повинен перевищувати 72 символи');
-      return;
-    }
-
-    const emailRegex = /^[a-zA-Z0-9+_.-]+@[a-zA-Z0-9-]+\.(com)$/;
-
-    if (!emailRegex.test(email)) {
-      setError('Неправильний формат email. Приклад: name@domain.com');
+    const validationError = validateEmail(email);
+    if (validationError) {
+      setError(validationError);
       return;
     }
 
@@ -71,7 +53,6 @@ const SubscribeSection: FC = () => {
               type="text"
               name="email"
               placeholder="Введіть свою email адресу"
-              required
             />
             {error && <p className="text-red-500 mt-1 text-sm">{error}</p>}
           </div>
@@ -84,14 +65,14 @@ const SubscribeSection: FC = () => {
             {result.status === 'pending' ? 'Відправка...' : 'Підписатися'}
           </button>
 
-          {result.isSuccess && (
+          {/* {result.isSuccess && (
             <p className="mt-2 text-green-500">
               {(result.data as SubscribeResponse).message}
             </p>
           )}
           {result.isError && 'data' in result.error && (
             <p className="text-red-500 mt-2">{result.error.data as string}</p>
-          )}
+          )} */}
         </form>
       </div>
     </section>
