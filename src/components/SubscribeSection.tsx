@@ -1,36 +1,52 @@
-import { type FC, type FormEvent, useEffect, useRef, useState } from 'react';
+import type { FC } from 'react';
+import { useForm } from 'react-hook-form';
 
 import IconEmail from '../assets/images/icons/icon-email.svg?react';
 import { useSubscribeMutation } from '../services/notificationApi';
 import { validateEmail } from '../utils/validation';
 
+type SubscribeApiError = {
+  data: {
+    message: string;
+  };
+  status: number;
+};
+
+type FormData = {
+  email: string;
+};
+
 const SubscribeSection: FC = () => {
-  const [error, setError] = useState<string | null>(null);
-
   const [subscribe, result] = useSubscribeMutation();
-  const formRef = useRef<HTMLFormElement>(null);
 
-  useEffect(() => {
-    if (result.isSuccess) {
-      formRef.current?.reset();
-    }
-  }, [result.isSuccess]);
+  const {
+    register,
+    handleSubmit,
+    reset,
+    setError,
+    clearErrors,
+    formState: { errors, isSubmitting },
+  } = useForm<FormData>();
 
-  const handleSubmit = (event: FormEvent<HTMLFormElement>) => {
-    event.preventDefault();
-    const formData = new FormData(event.currentTarget);
-    const email = (formData.get('email') || '').toString().trim();
-
-    const validationError = validateEmail(email);
+  const onSubmit = async (data: FormData): Promise<void> => {
+    const validationError = validateEmail(data.email);
     if (validationError) {
-      setError(validationError);
+      setError('email', { type: 'manual', message: validationError });
       return;
     }
 
-    setError(null);
-    subscribe({ email });
+    clearErrors('email');
+
+    try {
+      await subscribe({ email: data.email }).unwrap();
+      reset();
+    } catch (error) {
+      const message =
+        (error as SubscribeApiError)?.data?.message || 'Помилка підписки';
+      setError('email', { type: 'manual', message });
+    }
   };
-  console.log('resultttt', result);
+
   return (
     <section className="bg-light-black py-10">
       <div className="mx-auto flex max-w-custom-1440 flex-wrap items-center justify-between gap-4 px-[114px]">
@@ -39,9 +55,9 @@ const SubscribeSection: FC = () => {
         </span>
 
         <form
-          ref={formRef}
           className="flex w-full max-w-[379px] flex-col gap-[14px]"
-          onSubmit={handleSubmit}
+          onSubmit={handleSubmit(onSubmit)}
+          noValidate
         >
           <div className="relative w-full transition-colors duration-default focus-within:text-grey">
             <IconEmail
@@ -49,30 +65,28 @@ const SubscribeSection: FC = () => {
               width={20}
             />
             <input
+              {...register('email')}
               className="text-l w-full py-5 pl-12 pr-6 font-family-secondary leading-normal text-light-black placeholder:text-grey"
               type="text"
-              name="email"
               placeholder="Введіть свою email адресу"
+              aria-invalid={errors.email ? 'true' : 'false'}
             />
-            {error && <p className="text-red-500 mt-1 text-sm">{error}</p>}
+            {errors.email && (
+              <p role="alert" className="text-red-500 mt-1 text-sm">
+                {errors.email.message}
+              </p>
+            )}
           </div>
 
           <button
-            className="border border-main px-6 py-5 font-family-secondary text-[20px] leading-none text-main transition-colors duration-default hover:border-orange hover:text-orange"
+            className="border border-main px-6 py-5 font-family-secondary text-[20px] leading-none text-main transition-colors duration-default hover:border-orange hover:text-orange disabled:pointer-events-none disabled:opacity-50"
             type="submit"
-            disabled={result.status === 'pending'}
+            disabled={isSubmitting || result.status === 'pending'}
           >
-            {result.status === 'pending' ? 'Відправка...' : 'Підписатися'}
+            {isSubmitting || result.status === 'pending'
+              ? 'Відправка...'
+              : 'Підписатися'}
           </button>
-
-          {/* {result.isSuccess && (
-            <p className="mt-2 text-green-500">
-              {(result.data as SubscribeResponse).message}
-            </p>
-          )}
-          {result.isError && 'data' in result.error && (
-            <p className="text-red-500 mt-2">{result.error.data as string}</p>
-          )} */}
         </form>
       </div>
     </section>
