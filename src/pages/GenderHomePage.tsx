@@ -1,6 +1,7 @@
 import type { FC } from 'react';
 import { Navigate } from 'react-router-dom';
 
+import { NewCollectionSection } from '../components/gender/NewCollectionSection';
 import { GenderHeroSection } from '../components/GenderHeroSection';
 import { ProductsCategories } from '../components/products/ProductsCategories';
 import { PATH_PAGES } from '../constants/pathPages';
@@ -17,6 +18,7 @@ const GenderHomePage: FC = () => {
     <>
       <GenderHeroSection gender={gender} />
       <ProductsCategories gender={gender} categories={categories} />
+      <NewCollectionSection />
       <h1 className="text-2xl font-bold">
         Gender HomePage <strong>{gender}</strong>
       </h1>

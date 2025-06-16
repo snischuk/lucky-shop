@@ -14,7 +14,7 @@ const MainLayout: FC = () => {
 
   return (
     <>
-      <div className="fixed left-1/2 z-[1] w-full -translate-x-1/2 flex-col backdrop-blur">
+      <div className="fixed left-1/2 z-50 z-[1] w-full -translate-x-1/2 flex-col backdrop-blur">
         {showBanner && <AnnouncementBar onClose={() => setShowBanner(false)} />}
         <Header />
       </div>
