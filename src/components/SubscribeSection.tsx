@@ -9,6 +9,7 @@ import { PATH_PAGES } from '../constants/pathPages';
 import { subscribeSchema } from '../schemas/validationSchemas';
 import { useSubscribeMutation } from '../services/notificationApi';
 import { SubscribeModal } from './SubscribeModal';
+import { Loader } from './ui/Loader';
 
 type FormData = {
   email: string;
@@ -100,11 +101,18 @@ const SubscribeSection: FC = () => {
             </div>
 
             <button
-              className="border border-main px-6 py-5 font-family-secondary text-[20px] leading-none text-main transition-colors duration-default hover:border-orange hover:text-orange disabled:pointer-events-none disabled:opacity-50"
+              className="flex items-center justify-center gap-2 border border-main px-6 py-5 font-family-secondary text-[20px] leading-none text-main transition-colors duration-default hover:border-orange hover:text-orange disabled:pointer-events-none disabled:opacity-50"
               type="submit"
               disabled={isSubmitting}
             >
-              {isSubmitting ? 'Відправка...' : 'Підписатися'}
+              {isSubmitting ? (
+                <>
+                  <Loader color="border-t-main" />
+                  Підписуємося...
+                </>
+              ) : (
+                'Підписатися'
+              )}
             </button>
           </form>
         </div>

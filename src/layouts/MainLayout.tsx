@@ -1,11 +1,12 @@
 import type { FC } from 'react';
-import { useState } from 'react';
+import { Suspense, useState } from 'react';
 import { Outlet } from 'react-router-dom';
 
 import { AnnouncementBar } from '../components/AnnouncementBar';
 import { Footer } from '../components/Footer';
 import { Header } from '../components/Header';
 import { SubscribeSection } from '../components/SubscribeSection';
+import { Loader } from '../components/ui/Loader';
 import { NAVIGATION_LINKS } from '../constants/navigationLinks';
 
 const MainLayout: FC = () => {
@@ -22,7 +23,9 @@ const MainLayout: FC = () => {
         className={`mx-auto flex min-h-screen flex-col duration-300 ease-in-out ${showBanner ? 'pt-[140px]' : 'pt-[100px]'}`}
       >
         <main className="flex grow flex-col">
-          <Outlet />
+          <Suspense fallback={<Loader size={80} mode="centered" />}>
+            <Outlet />
+          </Suspense>
         </main>
         <SubscribeSection />
         <Footer navigationLinks={NAVIGATION_LINKS} />

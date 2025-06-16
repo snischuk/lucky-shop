@@ -1,7 +1,9 @@
 import type { FC } from 'react';
+import { Suspense } from 'react';
 import { Navigate, Outlet } from 'react-router-dom';
 
 import { ProductsCategories } from '../components/products/ProductsCategories';
+import { Loader } from '../components/ui/Loader';
 import { PATH_PAGES } from '../constants/pathPages';
 import { useGenderCategories } from '../hooks/useGenderCategories';
 
@@ -15,7 +17,9 @@ const ProductsLayout: FC = () => {
   return (
     <>
       <ProductsCategories categories={categories} gender={gender} />
-      <Outlet />
+      <Suspense fallback={<Loader size={80} mode="centered" />}>
+        <Outlet />
+      </Suspense>
     </>
   );
 };

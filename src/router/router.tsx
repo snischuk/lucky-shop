@@ -2,6 +2,7 @@ import type { FC } from 'react';
 import { lazy, Suspense } from 'react';
 import { Navigate, Route, Routes } from 'react-router-dom';
 
+import { Loader } from '../components/ui/Loader';
 import { PATH_PAGES } from '../constants/pathPages';
 import { AuthLayout } from '../layouts/AuthLayout';
 import { MainLayout } from '../layouts/MainLayout';
@@ -65,7 +66,7 @@ const ProductsPage = lazy(() =>
 
 const AppRouter: FC = () => {
   return (
-    <Suspense fallback={<div>Loading...</div>}>
+    <Suspense fallback={<Loader mode="fullscreen" size={80} />}>
       <Routes>
         <Route path={PATH_PAGES.MAIN} element={<MainLayout />}>
           <Route index element={<MainHomePage />} />
