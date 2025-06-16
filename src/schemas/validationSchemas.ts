@@ -13,11 +13,11 @@ import {
 
 const emailSchema = yup
   .string()
-  .required('Email обов’язковий')
-  .matches(EMAIL_REGEX, 'Невірний формат email')
+  .required('Email є обов’язковим')
+  .matches(EMAIL_REGEX, 'Неправильний формат email (Приклад: name@domain.com).')
   .min(
     EMAIL_MIN_LENGTH,
-    `Email має містити щонайменше ${EMAIL_MIN_LENGTH} символів`,
+    `Email повинен містити щонайменше ${EMAIL_MIN_LENGTH} символів`,
   )
   .max(
     EMAIL_MAX_LENGTH,
@@ -26,7 +26,7 @@ const emailSchema = yup
 
 const passwordSchema = yup
   .string()
-  .required('Пароль обов’язковий')
+  .required('Пароль є обов’язковим')
   .matches(
     PASSWORD_REGEX,
     'Пароль має містити одну велику літеру, цифру і спецсимвол',
