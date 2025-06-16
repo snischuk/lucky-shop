@@ -23,7 +23,7 @@ const Loader: FC<LoaderProps> = ({
   return (
     <div
       className={clsx(
-        mode !== 'inline' && 'flex items-center justify-center',
+        mode !== 'inline' && 'flex grow items-center justify-center',
         mode === 'fullscreen' && 'h-screen',
       )}
     >
