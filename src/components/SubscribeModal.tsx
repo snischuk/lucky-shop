@@ -1,4 +1,5 @@
 import * as Dialog from '@radix-ui/react-dialog';
+import { VisuallyHidden } from '@radix-ui/react-visually-hidden';
 import type { FC } from 'react';
 
 import IconClose from '../assets/images/icons/icon-close.svg?react';
@@ -20,7 +21,7 @@ export const SubscribeModal: FC<SubscribeModalProps> = ({
 }) => (
   <Dialog.Root open={open} onOpenChange={onOpenChange}>
     <Dialog.Portal>
-      <Dialog.Overlay className="fixed inset-0 bg-black/50 p-2" />
+      <Dialog.Overlay className="fixed inset-0 bg-black/50" />
       <Dialog.Content className="fixed left-1/2 top-1/2 z-[1] flex w-full max-w-[944px] -translate-x-1/2 -translate-y-1/2 flex-col items-center gap-[50px] bg-light-black p-10">
         <Dialog.Close asChild>
           <button
@@ -30,6 +31,10 @@ export const SubscribeModal: FC<SubscribeModalProps> = ({
             <IconClose width={30} />
           </button>
         </Dialog.Close>
+
+        <Dialog.Title>
+          <VisuallyHidden>Підписка</VisuallyHidden>
+        </Dialog.Title>
 
         <Dialog.Description className="mb-2 whitespace-pre-line text-center font-family-primary text-[32px] uppercase leading-loose text-white">
           {isError
