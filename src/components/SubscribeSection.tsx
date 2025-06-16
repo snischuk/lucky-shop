@@ -59,7 +59,7 @@ const SubscribeSection: FC = () => {
     }
   };
 
-  const onError = (formErrors: typeof errors) => {
+  const onError = (formErrors: typeof errors): void => {
     const firstErrorMessage =
       Object.values(formErrors)[0]?.message || 'Помилка валідації';
     setModalMessage(firstErrorMessage as string);
@@ -67,7 +67,7 @@ const SubscribeSection: FC = () => {
     setIsModalOpen(true);
   };
 
-  const goHome = () => {
+  const goHome = (): void => {
     setIsModalOpen(false);
     navigate(PATH_PAGES.MAIN);
   };
