@@ -17,7 +17,7 @@ const NewCollectionSection = () => {
   const [isEnd, setIsEnd] = useState(false);
 
   return (
-    <div className="relative mx-auto w-full max-w-custom-1440 pt-[140px]">
+    <div className="relative z-[0] mx-auto w-full max-w-custom-1440 pt-[140px]">
       <SubtitleSection title="Нова колекція" />
       <div className="absolute right-0 top-[166px] mb-20 flex justify-end">
         <SlidePrevButton swiperRef={swiperRef} disabled={isBeginning} />
