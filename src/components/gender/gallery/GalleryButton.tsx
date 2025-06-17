@@ -1,14 +1,12 @@
-import type { FC } from 'react';
+import type { ButtonHTMLAttributes, FC } from 'react';
 
-interface ButtonProps {
-  onClick?: () => void;
-}
-
-const GalleryButton: FC<ButtonProps> = ({ onClick }) => {
+const GalleryButton: FC<ButtonHTMLAttributes<HTMLButtonElement>> = ({
+  ...props
+}) => {
   return (
     <button
-      onClick={onClick}
-      className="bg-light-black p-[14px] font-family-secondary text-body-m uppercase text-main"
+      {...props}
+      className="bg-light-black px-[14px] py-[11px] font-family-secondary text-body-m font-medium uppercase text-main transition duration-300 hover:text-orange"
     >
       Купити зараз
     </button>
