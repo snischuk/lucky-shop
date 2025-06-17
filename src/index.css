@@ -19,3 +19,7 @@
 .swiper.hero-swiper .swiper-pagination-bullet-active {
   @apply bg-grey opacity-100 transition-colors duration-300;
 }
+
+.custom-scrollbar-hide::-webkit-scrollbar {
+  display: none;
+}

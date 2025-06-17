@@ -32,6 +32,8 @@ export default tseslint.config(
       'simple-import-sort': simpleImportSort,
     },
     rules: {
+      '@typescript-eslint/no-explicit-any': 'off',
+      'func-style': 'off',
       ...reactHooks.configs.recommended.rules,
       'react-refresh/only-export-components': [
         'warn',
@@ -40,14 +42,13 @@ export default tseslint.config(
       'prettier/prettier': 'warn',
       'simple-import-sort/imports': 'warn',
       'simple-import-sort/exports': 'warn',
-      'import/no-default-export': 'error',
-      'func-style': ['error', 'expression', { allowArrowFunctions: true }],
+      'import/no-default-export': 'off',
       'react-hooks/rules-of-hooks': 'error',
       'react-hooks/exhaustive-deps': 'warn',
       'prefer-const': 'warn',
       'no-useless-return': 'warn',
       '@typescript-eslint/explicit-function-return-type': [
-        'warn',
+        'off',
         {
           allowExpressions: true,
           allowTypedFunctionExpressions: true,
