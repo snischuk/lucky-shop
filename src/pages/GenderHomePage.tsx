@@ -19,7 +19,7 @@ const GenderHomePage: FC = () => {
     <>
       <GenderHeroSection gender={gender} />
       <ProductsCategories gender={gender} categories={categories} />
-      <NewCollectionSection />
+      <NewCollectionSection gender={gender} />
       <GallerySection gender={gender} />
       {/* possibly need to .map() this: */}
       {/* {<NewCollectionSection/>}

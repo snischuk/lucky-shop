@@ -1,23 +1,31 @@
 import 'swiper/css';
 import 'swiper/css/pagination';
 
-import { useRef, useState } from 'react';
+import { type FC, useRef, useState } from 'react';
 import type { Swiper as SwiperType } from 'swiper';
 import { A11y, Autoplay, Keyboard, Pagination } from 'swiper/modules';
 import { Swiper, SwiperSlide } from 'swiper/react';
 
+import { GENDERS } from '../../constants/genders';
+import { PATH_PAGES } from '../../constants/pathPages';
+import type { Gender } from '../../types/Gender';
 import { SlideNextButton } from '../ui/SlideNextButton';
 import { SlidePrevButton } from '../ui/SlidePrevButton';
 import { SubtitleSection } from '../ui/SubtitleSection';
+import { ViewAllLink } from './ViewAllLink';
 
-const NewCollectionSection = () => {
+interface NewCollectionSectionProps {
+  gender: Gender;
+}
+
+const NewCollectionSection: FC<NewCollectionSectionProps> = ({ gender }) => {
   const swiperRef = useRef<SwiperType | null>(null);
 
   const [isBeginning, setIsBeginning] = useState(true);
   const [isEnd, setIsEnd] = useState(false);
 
   return (
-    <div className="relative z-[0] mx-auto w-full max-w-custom-1440 pt-[140px]">
+    <div className="relative z-[0] mx-auto w-full max-w-custom-1440 pb-[70px] pt-[140px]">
       <SubtitleSection title="Нова колекція" />
       <div className="absolute right-0 top-[166px] mb-20 flex justify-end">
         <SlidePrevButton swiperRef={swiperRef} disabled={isBeginning} />
@@ -38,7 +46,7 @@ const NewCollectionSection = () => {
             setIsEnd(swiper.isEnd);
           });
         }}
-        className="h-[744px]"
+        className="mb-[32px] h-[744px]"
       >
         {[1, 2, 3, 4, 5, 6, 7, 8, 9].map((n) => (
           <SwiperSlide
@@ -51,6 +59,10 @@ const NewCollectionSection = () => {
           </SwiperSlide>
         ))}
       </Swiper>
+      <div className="flex justify-center">
+        {gender === GENDERS.WOMEN && <ViewAllLink link={PATH_PAGES.WOMEN} />}
+        {gender === GENDERS.MEN && <ViewAllLink link={PATH_PAGES.MEN} />}
+      </div>
     </div>
   );
 };
