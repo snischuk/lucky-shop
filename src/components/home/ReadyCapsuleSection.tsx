@@ -20,7 +20,6 @@ const ReadyCapsuleSection: FC = () => {
         title="Твоя готова капсула"
         className="mb-[80px] text-center"
       />
-
       <div className="grid grid-cols-1 md:grid-cols-2">
         <div className="relative">
           <img src={woman} srcSet={`${woman2x} 2x`} alt="woman" />
