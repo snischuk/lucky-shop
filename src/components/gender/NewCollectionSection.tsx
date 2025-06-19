@@ -26,7 +26,10 @@ const NewCollectionSection: FC<NewCollectionSectionProps> = ({ gender }) => {
 
   return (
     <div className="relative z-[0] mx-auto w-full max-w-custom-1440 pb-[70px] pt-[140px]">
-      <UiTitle as="h2" title="Нова колекція" className="text-center" />
+      <div className="mb-[80px]">
+        <UiTitle as="h2" title="Нова колекція" className="text-center" />
+      </div>
+
       <div className="absolute right-0 top-[166px] mb-20 flex justify-end">
         <SlidePrevButton swiperRef={swiperRef} disabled={isBeginning} />
         <SlideNextButton swiperRef={swiperRef} disabled={isEnd} />

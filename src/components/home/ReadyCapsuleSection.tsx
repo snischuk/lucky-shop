@@ -10,13 +10,14 @@ import IconLinePantsMale from '../../assets/images/icons/icon-line-pants-male.sv
 import IconLineShirtMale from '../../assets/images/icons/icon-line-shirt-male.svg?react';
 import IconLineTopFemale from '../../assets/images/icons/icon-line-top-female.svg?react';
 import IconLineTshirtMale from '../../assets/images/icons/icon-line-tshirt-male.svg?react';
+import { UiTitle } from '../ui/UiTitle';
 
 const ReadyCapsuleSection: FC = () => {
   return (
-    <section className="mx-auto max-w-custom-1440 px-[70] pt-[140px]">
-      <h2 className="mb-[80px] text-center font-family-primary text-h3 uppercase">
-        Твоя готова капсула
-      </h2>
+    <section className="mx-auto max-w-custom-1440 px-[70] py-[70px]">
+      <div className="mb-[80px]">
+        <UiTitle as="h2" title="Твоя готова капсула" className="text-center" />
+      </div>
       <div className="grid grid-cols-1 md:grid-cols-2">
         <div className="relative">
           <img src={woman} srcSet={`${woman2x} 2x`} alt="woman" />

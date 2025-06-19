@@ -4,13 +4,14 @@ import men from '../../assets/images/home/find-yours/men.jpg';
 import men2x from '../../assets/images/home/find-yours/men@2x.jpg';
 import women from '../../assets/images/home/find-yours/women.jpg';
 import women2x from '../../assets/images/home/find-yours/women@2x.jpg';
+import { UiTitle } from '../ui/UiTitle';
 
 const FindYoursSection: FC = () => {
   return (
     <section className="mx-auto max-w-custom-1440 pb-[70px] pt-[140px]">
-      <h2 className="mb-[80px] text-center font-family-primary text-h3 uppercase">
-        Знайди своє
-      </h2>
+      <div className="mb-[80px]">
+        <UiTitle as="h2" title="Знайди своє" className="text-center" />
+      </div>
       <div className="grid grid-cols-2">
         <div>
           <img src={women} srcSet={`${women2x} 2x`} alt="women"></img>
