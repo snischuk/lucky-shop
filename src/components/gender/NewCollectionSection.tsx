@@ -11,7 +11,7 @@ import { PATH_PAGES } from '../../constants/pathPages';
 import type { Gender } from '../../types/Gender';
 import { SlideNextButton } from '../ui/SlideNextButton';
 import { SlidePrevButton } from '../ui/SlidePrevButton';
-import { SubtitleSection } from '../ui/SubtitleSection';
+import { UiTitle } from '../ui/UiTitle';
 import { ViewAllLink } from './ViewAllLink';
 
 interface NewCollectionSectionProps {
@@ -26,7 +26,7 @@ const NewCollectionSection: FC<NewCollectionSectionProps> = ({ gender }) => {
 
   return (
     <div className="relative z-[0] mx-auto w-full max-w-custom-1440 pb-[70px] pt-[140px]">
-      <SubtitleSection title="Нова колекція" />
+      <UiTitle as="h2" title="Нова колекція" className="text-center" />
       <div className="absolute right-0 top-[166px] mb-20 flex justify-end">
         <SlidePrevButton swiperRef={swiperRef} disabled={isBeginning} />
         <SlideNextButton swiperRef={swiperRef} disabled={isEnd} />
