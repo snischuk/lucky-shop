@@ -6,7 +6,7 @@ import { AnnouncementBar } from '../components/AnnouncementBar';
 import { Footer } from '../components/Footer';
 import { Header } from '../components/Header';
 import { SubscribeSection } from '../components/SubscribeSection';
-import { Loader } from '../components/ui/Loader';
+import { Loader } from '../components/ui/UiLoader';
 import { NAVIGATION_LINKS } from '../constants/navigationLinks';
 
 const MainLayout: FC = () => {

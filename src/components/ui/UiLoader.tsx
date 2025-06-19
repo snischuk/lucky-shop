@@ -1,7 +1,7 @@
 import clsx from 'clsx';
 import type { FC, HTMLAttributes } from 'react';
 
-type LoaderProps = HTMLAttributes<HTMLDivElement> & {
+type UiLoaderProps = HTMLAttributes<HTMLDivElement> & {
   size?: number;
   color?: string;
   mode?: 'inline' | 'centered' | 'fullscreen';
@@ -10,11 +10,11 @@ type LoaderProps = HTMLAttributes<HTMLDivElement> & {
 const isValidSize = (value: unknown): value is number =>
   typeof value === 'number' && isFinite(value) && value > 0;
 
-const Loader: FC<LoaderProps> = ({
+const UiLoader: FC<UiLoaderProps> = ({
+  className,
   size = 20,
   color = 'border-t-grey',
   mode = 'inline',
-  className,
   ...rest
 }) => {
   const safeSize = isValidSize(size) ? size : 48;
@@ -42,4 +42,4 @@ const Loader: FC<LoaderProps> = ({
   );
 };
 
-export { Loader };
+export { UiLoader };

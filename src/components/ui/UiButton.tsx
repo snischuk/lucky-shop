@@ -6,9 +6,9 @@ interface UiButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
 }
 
 export const UiButton: FC<UiButtonProps> = ({
-  variant = 'contained',
   className,
   children,
+  variant = 'contained',
   ...props
 }) => {
   const baseClasses =
