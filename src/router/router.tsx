@@ -8,7 +8,7 @@ import { AuthLayout } from '../layouts/AuthLayout';
 import { MainLayout } from '../layouts/MainLayout';
 import { ProductsLayout } from '../layouts/ProductsLayout';
 
-const AuthChoisePage = lazy(() =>
+const AuthChoicePage = lazy(() =>
   import('../pages/auth/AuthChoicePage').then((module) => ({
     default: module.AuthChoicePage,
   })),
@@ -89,7 +89,7 @@ const AppRouter: FC = () => {
         </Route>
 
         <Route path={PATH_PAGES.AUTH} element={<AuthLayout />}>
-          <Route index element={<AuthChoisePage />} />
+          <Route index element={<AuthChoicePage />} />
           <Route path={PATH_PAGES.REGISTER} element={<RegisterPage />} />
           <Route path={PATH_PAGES.LOGIN} element={<LoginPage />} />
           <Route
