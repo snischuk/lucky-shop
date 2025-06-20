@@ -9,7 +9,9 @@ import { UiTitle } from '../ui/UiTitle';
 const FindYoursSection: FC = () => {
   return (
     <section className="mx-auto max-w-custom-1440 pb-[70px] pt-[140px]">
-      <UiTitle as="h2" title="Знайди своє" className="mb-[80px] text-center" />
+      <UiTitle className="mb-[80px] text-center" as="h2">
+        Знайди своє
+      </UiTitle>
       <div className="grid grid-cols-2">
         <div>
           <img src={women} srcSet={`${women2x} 2x`} alt="women"></img>

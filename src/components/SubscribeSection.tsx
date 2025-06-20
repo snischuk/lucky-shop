@@ -9,7 +9,8 @@ import { PATH_PAGES } from '../constants/pathPages';
 import { subscribeSchema } from '../schemas/validationSchemas';
 import { useSubscribeMutation } from '../services/notificationApi';
 import { SubscribeModal } from './SubscribeModal';
-import { Loader } from './ui/Loader';
+import { UiLoader } from './ui/UiLoader';
+import { UiTitle } from './ui/UiTitle';
 
 type FormData = {
   email: string;
@@ -77,10 +78,9 @@ const SubscribeSection: FC = () => {
     <>
       <section className="bg-light-black py-10">
         <div className="mx-auto flex max-w-custom-1440 flex-wrap items-center justify-between gap-4 px-[114px]">
-          <span className="max-w-[587px] font-family-primary text-[32px] uppercase leading-none text-main">
+          <UiTitle className="max-w-[587px] text-main" as="h2">
             Залишайся з нами, щоб першим отримувати пропозиції
-          </span>
-
+          </UiTitle>
           <form
             className="flex w-full max-w-[379px] flex-col gap-[14px]"
             onSubmit={handleSubmit(onSubmit, onError)}
@@ -107,7 +107,7 @@ const SubscribeSection: FC = () => {
             >
               {isSubmitting ? (
                 <>
-                  <Loader color="border-t-main" />
+                  <UiLoader color="border-t-main" />
                   Підписуємося...
                 </>
               ) : (

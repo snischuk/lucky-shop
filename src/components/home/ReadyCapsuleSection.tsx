@@ -15,12 +15,9 @@ import { UiTitle } from '../ui/UiTitle';
 const ReadyCapsuleSection: FC = () => {
   return (
     <section className="mx-auto max-w-custom-1440 px-[70] py-[70px]">
-      <UiTitle
-        as="h2"
-        title="Твоя готова капсула"
-        className="mb-[80px] text-center"
-      />
-
+      <UiTitle className="mb-[80px] text-center" as="h2">
+        Твоя готова капсула
+      </UiTitle>
       <div className="grid grid-cols-1 md:grid-cols-2">
         <div className="relative">
           <img src={woman} srcSet={`${woman2x} 2x`} alt="woman" />

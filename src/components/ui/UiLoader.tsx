@@ -1,7 +1,7 @@
 import clsx from 'clsx';
 import type { FC, HTMLAttributes } from 'react';
 
-type LoaderProps = HTMLAttributes<HTMLDivElement> & {
+type UiLoaderProps = HTMLAttributes<HTMLDivElement> & {
   size?: number;
   color?: string;
   mode?: 'inline' | 'centered' | 'fullscreen';
@@ -10,12 +10,12 @@ type LoaderProps = HTMLAttributes<HTMLDivElement> & {
 const isValidSize = (value: unknown): value is number =>
   typeof value === 'number' && isFinite(value) && value > 0;
 
-const Loader: FC<LoaderProps> = ({
+const UiLoader: FC<UiLoaderProps> = ({
+  className,
   size = 20,
   color = 'border-t-grey',
   mode = 'inline',
-  className,
-  ...rest
+  ...props
 }) => {
   const safeSize = isValidSize(size) ? size : 48;
   const sizeRem = safeSize / 16;
@@ -28,7 +28,6 @@ const Loader: FC<LoaderProps> = ({
       )}
     >
       <div
-        {...rest}
         className={clsx(
           'animate-spin rounded-full border-4 border-solid border-gray-300',
           color,
@@ -37,9 +36,10 @@ const Loader: FC<LoaderProps> = ({
         style={{ width: `${sizeRem}rem`, height: `${sizeRem}rem` }}
         aria-label="loading"
         role="status"
+        {...props}
       />
     </div>
   );
 };
 
-export { Loader };
+export { UiLoader };
