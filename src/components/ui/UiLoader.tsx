@@ -15,7 +15,7 @@ const UiLoader: FC<UiLoaderProps> = ({
   size = 20,
   color = 'border-t-grey',
   mode = 'inline',
-  ...rest
+  ...props
 }) => {
   const safeSize = isValidSize(size) ? size : 48;
   const sizeRem = safeSize / 16;
@@ -28,7 +28,6 @@ const UiLoader: FC<UiLoaderProps> = ({
       )}
     >
       <div
-        {...rest}
         className={clsx(
           'animate-spin rounded-full border-4 border-solid border-gray-300',
           color,
@@ -37,6 +36,7 @@ const UiLoader: FC<UiLoaderProps> = ({
         style={{ width: `${sizeRem}rem`, height: `${sizeRem}rem` }}
         aria-label="loading"
         role="status"
+        {...props}
       />
     </div>
   );
