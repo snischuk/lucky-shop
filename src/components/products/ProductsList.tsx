@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom';
 import { mockProducts } from '../../data/mockProducts';
 
 interface ProductsListProps {
-  gender: 'men' | 'women';
+  gender: 'man' | 'woman';
 }
 
 const ProductsList: FC<ProductsListProps> = ({ gender }) => {

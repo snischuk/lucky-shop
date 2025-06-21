@@ -1,6 +1,6 @@
 import type { FC } from 'react';
 interface ProductsFiltersProps {
-  gender: 'men' | 'women';
+  gender: 'man' | 'woman';
 }
 
 const ProductsFilters: FC<ProductsFiltersProps> = ({ gender }) => {

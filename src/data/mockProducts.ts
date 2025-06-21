@@ -4,7 +4,7 @@ export const mockProducts: Product[] = [
   {
     id: '1',
     name: 'Сукня жіноча Lemon',
-    gender: 'women',
+    gender: 'woman',
     category: 'dresses',
     price: 1200,
     oldPrice: 1200,
@@ -17,7 +17,7 @@ export const mockProducts: Product[] = [
   {
     id: '2',
     name: 'Блуза жіноча summer',
-    gender: 'women',
+    gender: 'woman',
     category: 'shirts',
     price: 1100,
     oldPrice: 1100,
@@ -30,7 +30,7 @@ export const mockProducts: Product[] = [
   {
     id: '3',
     name: 'Блуза жіноча Lucky',
-    gender: 'women',
+    gender: 'woman',
     category: 'shirts',
     price: 1050,
     oldPrice: 1050,
@@ -43,7 +43,7 @@ export const mockProducts: Product[] = [
   {
     id: '4',
     name: 'Сірі штани',
-    gender: 'men',
+    gender: 'man',
     category: 'pants',
     price: 899,
     oldPrice: null,
@@ -56,7 +56,7 @@ export const mockProducts: Product[] = [
   {
     id: '5',
     name: 'Рожева сорочка',
-    gender: 'women',
+    gender: 'woman',
     category: 'shirts',
     price: 649,
     oldPrice: 799,
@@ -69,7 +69,7 @@ export const mockProducts: Product[] = [
   {
     id: '6',
     name: 'Коричнева куртка',
-    gender: 'men',
+    gender: 'man',
     category: 'outerwear',
     price: 1399,
     oldPrice: 1599,
@@ -82,7 +82,7 @@ export const mockProducts: Product[] = [
   {
     id: '7',
     name: 'Жовта літня сукня',
-    gender: 'women',
+    gender: 'woman',
     category: 'summer',
     price: 699,
     oldPrice: 899,
@@ -95,7 +95,7 @@ export const mockProducts: Product[] = [
   {
     id: '8',
     name: 'Синій світшот',
-    gender: 'men',
+    gender: 'man',
     category: 'sweatshirts',
     price: 799,
     oldPrice: null,
@@ -108,7 +108,7 @@ export const mockProducts: Product[] = [
   {
     id: '9',
     name: 'Фіолетова сукня',
-    gender: 'women',
+    gender: 'woman',
     category: 'dresses',
     price: 1049,
     oldPrice: null,
@@ -121,7 +121,7 @@ export const mockProducts: Product[] = [
   {
     id: '10',
     name: 'Принтований світшот',
-    gender: 'men',
+    gender: 'man',
     category: 'sweatshirts',
     price: 899,
     oldPrice: 1099,
@@ -134,7 +134,7 @@ export const mockProducts: Product[] = [
   {
     id: '11',
     name: 'Помаранчева сорочка',
-    gender: 'women',
+    gender: 'woman',
     category: 'shirts',
     price: 749,
     oldPrice: null,
@@ -147,7 +147,7 @@ export const mockProducts: Product[] = [
   {
     id: '12',
     name: 'Зелений літній костюм',
-    gender: 'men',
+    gender: 'man',
     category: 'summer',
     price: 1199,
     oldPrice: 1399,
@@ -160,7 +160,7 @@ export const mockProducts: Product[] = [
   {
     id: '13',
     name: 'Бежева сукня',
-    gender: 'women',
+    gender: 'woman',
     category: 'dresses',
     price: 899,
     oldPrice: 1099,
@@ -173,7 +173,7 @@ export const mockProducts: Product[] = [
   {
     id: '14',
     name: 'Чорна сорочка',
-    gender: 'men',
+    gender: 'man',
     category: 'shirts',
     price: 749,
     oldPrice: null,
@@ -186,7 +186,7 @@ export const mockProducts: Product[] = [
   {
     id: '15',
     name: 'Блакитна сукня',
-    gender: 'women',
+    gender: 'woman',
     category: 'dresses',
     price: 799,
     oldPrice: 999,

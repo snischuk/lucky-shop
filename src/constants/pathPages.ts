@@ -1,7 +1,7 @@
 export const PATH_PAGES = {
   MAIN: '/',
-  MEN: '/men',
-  WOMEN: '/women',
+  MEN: '/man',
+  WOMEN: '/woman',
   NOT_FOUND: '/404',
   GENDER_PARAM: '/:gender',
   GENDER_PRODUCTS: '/:gender/products',
