@@ -2,12 +2,13 @@ import type { FC } from 'react';
 import { lazy, Suspense } from 'react';
 import { Navigate, Route, Routes } from 'react-router-dom';
 
+import { UiLoader } from '../components/ui/UiLoader';
 import { PATH_PAGES } from '../constants/pathPages';
 import { AuthLayout } from '../layouts/AuthLayout';
 import { MainLayout } from '../layouts/MainLayout';
 import { ProductsLayout } from '../layouts/ProductsLayout';
 
-const AuthChoisePage = lazy(() =>
+const AuthChoicePage = lazy(() =>
   import('../pages/auth/AuthChoicePage').then((module) => ({
     default: module.AuthChoicePage,
   })),
@@ -65,7 +66,7 @@ const ProductsPage = lazy(() =>
 
 const AppRouter: FC = () => {
   return (
-    <Suspense fallback={<div>Loading...</div>}>
+    <Suspense fallback={<UiLoader mode="fullscreen" size={80} />}>
       <Routes>
         <Route path={PATH_PAGES.MAIN} element={<MainLayout />}>
           <Route index element={<MainHomePage />} />
@@ -88,7 +89,7 @@ const AppRouter: FC = () => {
         </Route>
 
         <Route path={PATH_PAGES.AUTH} element={<AuthLayout />}>
-          <Route index element={<AuthChoisePage />} />
+          <Route index element={<AuthChoicePage />} />
           <Route path={PATH_PAGES.REGISTER} element={<RegisterPage />} />
           <Route path={PATH_PAGES.LOGIN} element={<LoginPage />} />
           <Route

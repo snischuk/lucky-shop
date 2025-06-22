@@ -2,6 +2,7 @@ import type { Gender } from './Gender';
 
 export interface Product {
   id: string;
+  sku: string;
   name: string;
   gender: Gender;
   category:
@@ -18,4 +19,6 @@ export interface Product {
   sizes: string[];
   color: string;
   season: 'spring_summer' | 'autumn_winter';
+  description: string;
+  material: string;
 }
