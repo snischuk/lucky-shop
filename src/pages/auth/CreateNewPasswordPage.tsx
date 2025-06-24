@@ -73,7 +73,7 @@ const CreateNewPasswordPage: FC = () => {
               <button
                 type="button"
                 onClick={handleToggleNewPassword}
-                className="absolute right-6 top-1/2 -translate-y-1/2"
+                className="absolute right-6 top-1/2 -translate-y-1/2 text-medium-grey transition-colors duration-default hover:text-grey"
               >
                 {isShowNewPassword ? <IconEyeOpened /> : <IconEyeClosed />}
               </button>
@@ -108,7 +108,7 @@ const CreateNewPasswordPage: FC = () => {
               <button
                 type="button"
                 onClick={handleToggleConfirmPassword}
-                className="absolute right-6 top-1/2 -translate-y-1/2"
+                className="absolute right-6 top-1/2 -translate-y-1/2 text-medium-grey transition-colors duration-default hover:text-grey"
               >
                 {isShowConfirmPassword ? <IconEyeOpened /> : <IconEyeClosed />}
               </button>

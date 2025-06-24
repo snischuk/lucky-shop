@@ -99,9 +99,9 @@ const LoginPage: FC = () => {
               <button
                 type="button"
                 onClick={togglePasswordVisibility}
-                className="absolute right-6 top-1/2 -translate-y-1/2"
+                className="absolute right-6 top-1/2 -translate-y-1/2 text-medium-grey transition-colors duration-default hover:text-grey"
               >
-                {isShowPassword ? <IconEyeClosed /> : <IconEyeOpened />}
+                {isShowPassword ? <IconEyeOpened /> : <IconEyeClosed />}
               </button>
             </div>
             <div className="mt-[2px] flex flex-wrap gap-1 font-family-secondary text-[14px] leading-[1.17]">

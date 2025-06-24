@@ -160,9 +160,9 @@ const RegisterPage: FC = () => {
               <button
                 type="button"
                 onClick={handleTogglepassword}
-                className="absolute right-6 top-1/2 -translate-y-1/2"
+                className="absolute right-6 top-1/2 -translate-y-1/2 text-medium-grey transition-colors duration-default hover:text-grey"
               >
-                {isShowPassword ? <IconEyeClosed /> : <IconEyeOpened />}
+                {isShowPassword ? <IconEyeOpened /> : <IconEyeClosed />}
               </button>
             </div>
             {errors.password && (
@@ -195,9 +195,9 @@ const RegisterPage: FC = () => {
               <button
                 type="button"
                 onClick={handleToggleConfirmPassword}
-                className="absolute right-6 top-1/2 -translate-y-1/2"
+                className="absolute right-6 top-1/2 -translate-y-1/2 text-medium-grey transition-colors duration-default hover:text-grey"
               >
-                {isShowConfirmPassword ? <IconEyeClosed /> : <IconEyeOpened />}
+                {isShowConfirmPassword ? <IconEyeOpened /> : <IconEyeClosed />}
               </button>
             </div>
             {errors.confirmPassword && (
