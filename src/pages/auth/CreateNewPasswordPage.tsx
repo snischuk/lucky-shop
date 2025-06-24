@@ -1,14 +1,31 @@
-import { type FC, useState } from 'react';
+import { yupResolver } from '@hookform/resolvers/yup';
+import type { FC } from 'react';
+import { useState } from 'react';
+import { useForm } from 'react-hook-form';
+import type { InferType } from 'yup';
 
 import createNewPassword from '../../assets/images/auth/create-new-password.jpg';
 import IconEyeClosed from '../../assets/images/icons/icon-eye-closed.svg?react';
 import IconEyeOpened from '../../assets/images/icons/icon-eye-opened.svg?react';
 import { UiButton } from '../../components/ui/UiButton';
 import { UiTitle } from '../../components/ui/UiTitle';
+import { newPasswordSchema } from '../../schemas/validationSchemas';
+
+type NewPasswordFormData = InferType<typeof newPasswordSchema>;
 
 const CreateNewPasswordPage: FC = () => {
   const [isShowNewPassword, setIsShowNewPassword] = useState(false);
   const [isShowConfirmPassword, setIsShowConfirmPassword] = useState(false);
+
+  const {
+    register,
+    handleSubmit,
+    formState: { errors, isSubmitting },
+  } = useForm({
+    resolver: yupResolver(newPasswordSchema),
+    mode: 'onChange',
+    reValidateMode: 'onChange',
+  });
 
   const handleToggleNewPassword = (): void => {
     setIsShowNewPassword((prev) => !prev);
@@ -18,17 +35,22 @@ const CreateNewPasswordPage: FC = () => {
     setIsShowConfirmPassword((prev) => !prev);
   };
 
+  const onSubmit = (data: NewPasswordFormData): void => {
+    console.log('New password data:', data);
+    // TODO: логіка оновлення пароля
+  };
+
   return (
     <div className="flex w-full">
       <div className="align-center flex w-7/12 flex-shrink-0 flex-col items-center gap-6 px-7 py-16">
         <UiTitle>Створити новий пароль</UiTitle>
 
         <form
+          noValidate
+          onSubmit={handleSubmit(onSubmit)}
           className="flex w-full max-w-[424px] flex-col items-center"
-          action=""
-          method="post"
         >
-          <div className="flex w-full flex-col transition-colors duration-default focus-within:text-grey">
+          <div className="flex h-[106px] w-full flex-col">
             <label
               htmlFor="newPassword"
               className="font-family-secondary text-[18px] leading-[1.17] text-light-black"
@@ -40,7 +62,13 @@ const CreateNewPasswordPage: FC = () => {
                 id="newPassword"
                 type={isShowNewPassword ? 'text' : 'password'}
                 placeholder="Уведіть свій пароль"
-                className="w-full border border-medium-grey py-[14px] pl-6 pr-[72px] font-family-secondary leading-normal text-light-black placeholder:text-grey"
+                {...register('newPassword')}
+                className={`w-full border py-[14px] pl-6 pr-[72px] font-family-secondary leading-normal placeholder:text-grey ${
+                  errors.newPassword
+                    ? 'border-dark-red text-dark-red placeholder:text-dark-red'
+                    : 'border-medium-grey text-light-black'
+                }`}
+                aria-invalid={!!errors.newPassword}
               />
               <button
                 type="button"
@@ -50,12 +78,14 @@ const CreateNewPasswordPage: FC = () => {
                 {isShowNewPassword ? <IconEyeOpened /> : <IconEyeClosed />}
               </button>
             </div>
-            <span className="mt-[2px] font-family-secondary text-[14px] leading-[1.17] text-dark-red">
-              Не вірний пароль.
-            </span>
+            {errors.newPassword && (
+              <span className="mt-[2px] font-family-secondary text-[14px] leading-[1.17] text-dark-red">
+                {errors.newPassword.message}
+              </span>
+            )}
           </div>
 
-          <div className="mt-[10px] flex w-full flex-col transition-colors duration-default focus-within:text-grey">
+          <div className="mt-[10px] flex h-[106px] w-full flex-col">
             <label
               htmlFor="confirmPassword"
               className="font-family-secondary text-[18px] leading-[1.17] text-light-black"
@@ -67,7 +97,13 @@ const CreateNewPasswordPage: FC = () => {
                 id="confirmPassword"
                 type={isShowConfirmPassword ? 'text' : 'password'}
                 placeholder="Підтвердіть новий пароль"
-                className="w-full border border-medium-grey py-[14px] pl-6 pr-[72px] font-family-secondary leading-normal text-light-black placeholder:text-grey"
+                {...register('confirmPassword')}
+                className={`w-full border py-[14px] pl-6 pr-[72px] font-family-secondary leading-normal placeholder:text-grey ${
+                  errors.confirmPassword
+                    ? 'border-dark-red text-dark-red placeholder:text-dark-red'
+                    : 'border-medium-grey text-light-black'
+                }`}
+                aria-invalid={!!errors.confirmPassword}
               />
               <button
                 type="button"
@@ -77,9 +113,11 @@ const CreateNewPasswordPage: FC = () => {
                 {isShowConfirmPassword ? <IconEyeOpened /> : <IconEyeClosed />}
               </button>
             </div>
-            <span className="mt-[2px] font-family-secondary text-[14px] leading-[1.17] text-dark-red">
-              Не вірний пароль.
-            </span>
+            {errors.confirmPassword && (
+              <span className="mt-[2px] font-family-secondary text-[14px] leading-[1.17] text-dark-red">
+                {errors.confirmPassword.message}
+              </span>
+            )}
           </div>
 
           <UiButton
@@ -87,8 +125,9 @@ const CreateNewPasswordPage: FC = () => {
             variant="contained"
             as="button"
             type="submit"
+            disabled={isSubmitting}
           >
-            Зберегти новий пароль
+            {isSubmitting ? 'Зберігаємо...' : 'Зберегти новий пароль'}
           </UiButton>
         </form>
       </div>

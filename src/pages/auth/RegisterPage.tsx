@@ -1,31 +1,65 @@
+import { yupResolver } from '@hookform/resolvers/yup';
+import * as Checkbox from '@radix-ui/react-checkbox';
 import type { FC } from 'react';
 import { useState } from 'react';
+import { Controller, useForm } from 'react-hook-form';
+import type { InferType } from 'yup';
 
-import register from '../../assets/images/auth/register.jpg';
+import registerImg from '../../assets/images/auth/register.jpg';
+import IconCheckbox from '../../assets/images/icons/icon-checkbox.svg?react';
 import IconEyeClosed from '../../assets/images/icons/icon-eye-closed.svg?react';
 import IconEyeOpened from '../../assets/images/icons/icon-eye-opened.svg?react';
 import IconGoogle from '../../assets/images/icons/icon-google.svg?react';
 import { UiButton } from '../../components/ui/UiButton';
 import { UiTitle } from '../../components/ui/UiTitle';
+import { PATH_PAGES } from '../../constants/pathPages';
+import { registerSchema } from '../../schemas/validationSchemas';
+
+type RegisterFormData = InferType<typeof registerSchema>;
 
 const RegisterPage: FC = () => {
   const [isShowPassword, setIsShowPassword] = useState(false);
   const [isShowConfirmPassword, setIsShowConfirmPassword] = useState(false);
 
-  const handleToggleNewPassword = (): void => {
+  const {
+    register,
+    handleSubmit,
+    formState: { errors, isSubmitting },
+    control,
+  } = useForm({
+    resolver: yupResolver(registerSchema),
+    mode: 'onChange',
+    reValidateMode: 'onChange',
+    defaultValues: {
+      policyConsent: false,
+      marketingConsent: false,
+    },
+  });
+
+  const onSubmit = (data: RegisterFormData): void => {
+    console.log('Register data:', data);
+    // TODO: Виклик API реєстрації
+  };
+
+  const handleTogglepassword = (): void => {
     setIsShowPassword((prev) => !prev);
   };
 
   const handleToggleConfirmPassword = (): void => {
     setIsShowConfirmPassword((prev) => !prev);
   };
+
   return (
     <div className="flex w-full">
       <div className="flex w-7/12 flex-shrink-0 flex-col items-center gap-6 px-7 py-16">
         <UiTitle>Зареєструйтеся</UiTitle>
 
-        <form action="" className="flex w-full max-w-[424px] flex-col">
-          <div className="flex flex-col transition-colors duration-default focus-within:text-grey">
+        <form
+          noValidate
+          onSubmit={handleSubmit(onSubmit)}
+          className="flex w-full max-w-[424px] flex-col items-center"
+        >
+          <div className="mt-[10px] flex h-[106px] w-full max-w-[424px] flex-col transition-colors duration-default focus-within:text-grey">
             <label
               className="font-family-secondary text-[18px] leading-[1.17] text-light-black"
               htmlFor="firstName"
@@ -34,18 +68,24 @@ const RegisterPage: FC = () => {
             </label>
             <input
               id="firstName"
-              // {...register('email')}
-              className="mt-3 w-full border border-medium-grey px-6 py-[14px] font-family-secondary leading-normal text-light-black placeholder:text-grey"
               type="text"
               placeholder="Ваше імʼя"
-              // aria-invalid={!!errors.email}
+              {...register('firstName')}
+              className={`mt-3 w-full border px-6 py-[14px] font-family-secondary leading-normal placeholder:text-grey ${
+                errors.firstName
+                  ? 'border-dark-red text-dark-red placeholder:text-dark-red'
+                  : 'border-medium-grey text-light-black'
+              }`}
+              aria-invalid={!!errors.firstName}
             />
-            {/* <span className="text-dark-red mt-[2px] font-family-secondary text-[14px] leading-[1.17]">
-            Введіть коректне імʼя
-          </span> */}
+            {errors.firstName && (
+              <span className="mt-[2px] font-family-secondary text-[14px] leading-[1.17] text-dark-red">
+                {errors.firstName.message}
+              </span>
+            )}
           </div>
 
-          <div className="mt-[10px] flex flex-col transition-colors duration-default focus-within:text-grey">
+          <div className="mt-[10px] flex h-[106px] w-full max-w-[424px] flex-col transition-colors duration-default focus-within:text-grey">
             <label
               className="font-family-secondary text-[18px] leading-[1.17] text-light-black"
               htmlFor="lastName"
@@ -54,18 +94,24 @@ const RegisterPage: FC = () => {
             </label>
             <input
               id="lastName"
-              // {...register('email')}
-              className="mt-3 w-full border border-medium-grey px-6 py-[14px] font-family-secondary leading-normal text-light-black placeholder:text-grey"
               type="text"
               placeholder="Ваше прізвище"
-              // aria-invalid={!!errors.email}
+              {...register('lastName')}
+              className={`mt-3 w-full border px-6 py-[14px] font-family-secondary leading-normal placeholder:text-grey ${
+                errors.lastName
+                  ? 'border-dark-red text-dark-red placeholder:text-dark-red'
+                  : 'border-medium-grey text-light-black'
+              }`}
+              aria-invalid={!!errors.lastName}
             />
-            {/* <span className="text-dark-red mt-[2px] font-family-secondary text-[14px] leading-[1.17]">
-            Введіть коректне прізвище
-          </span> */}
+            {errors.lastName && (
+              <span className="mt-[2px] font-family-secondary text-[14px] leading-[1.17] text-dark-red">
+                {errors.lastName.message}
+              </span>
+            )}
           </div>
 
-          <div className="mt-[10px] flex flex-col transition-colors duration-default focus-within:text-grey">
+          <div className="mt-[10px] flex h-[106px] w-full max-w-[424px] flex-col transition-colors duration-default focus-within:text-grey">
             <label
               className="font-family-secondary text-[18px] leading-[1.17] text-light-black"
               htmlFor="email"
@@ -74,45 +120,59 @@ const RegisterPage: FC = () => {
             </label>
             <input
               id="email"
-              // {...register('email')}
-              className="mt-3 w-full border border-medium-grey px-6 py-[14px] font-family-secondary leading-normal text-light-black placeholder:text-grey"
               type="text"
               placeholder="Адреса Ел. пошти"
-              // aria-invalid={!!errors.email}
+              {...register('email')}
+              className={`mt-3 w-full border px-6 py-[14px] font-family-secondary leading-normal placeholder:text-grey ${
+                errors.email
+                  ? 'border-dark-red text-dark-red placeholder:text-dark-red'
+                  : 'border-medium-grey text-light-black'
+              }`}
+              aria-invalid={!!errors.email}
             />
-            {/* <span className="text-dark-red mt-[2px] font-family-secondary text-[14px] leading-[1.17]">
-            Введіть дійсну електронну адресу
-          </span> */}
+            {errors.email && (
+              <span className="mt-[2px] font-family-secondary text-[14px] leading-[1.17] text-dark-red">
+                {errors.email.message}
+              </span>
+            )}
           </div>
 
-          <div className="mt-[10px] flex w-full flex-col transition-colors duration-default focus-within:text-grey">
+          <div className="mt-[10px] flex h-[106px] w-full flex-col">
             <label
-              htmlFor="newPassword"
+              htmlFor="password"
               className="font-family-secondary text-[18px] leading-[1.17] text-light-black"
             >
               Пароль
             </label>
             <div className="relative mt-3">
               <input
-                id="newPassword"
+                id="password"
                 type={isShowPassword ? 'text' : 'password'}
                 placeholder="Уведіть свій пароль"
-                className="w-full border border-medium-grey py-[14px] pl-6 pr-[72px] font-family-secondary leading-normal text-light-black placeholder:text-grey"
+                {...register('password')}
+                className={`w-full border py-[14px] pl-6 pr-[72px] font-family-secondary leading-normal placeholder:text-grey ${
+                  errors.password
+                    ? 'border-dark-red text-dark-red placeholder:text-dark-red'
+                    : 'border-medium-grey text-light-black'
+                }`}
+                aria-invalid={!!errors.password}
               />
               <button
                 type="button"
-                onClick={handleToggleNewPassword}
+                onClick={handleTogglepassword}
                 className="absolute right-6 top-1/2 -translate-y-1/2"
               >
-                {isShowPassword ? <IconEyeOpened /> : <IconEyeClosed />}
+                {isShowPassword ? <IconEyeClosed /> : <IconEyeOpened />}
               </button>
             </div>
-            <span className="mt-[2px] font-family-secondary text-[14px] leading-[1.17] text-dark-red">
-              Не вірний пароль.
-            </span>
+            {errors.password && (
+              <span className="mt-[2px] font-family-secondary text-[14px] leading-[1.17] text-dark-red">
+                {errors.password.message}
+              </span>
+            )}
           </div>
 
-          <div className="mt-[10px] flex w-full flex-col transition-colors duration-default focus-within:text-grey">
+          <div className="mt-[10px] flex h-[106px] w-full flex-col">
             <label
               htmlFor="confirmPassword"
               className="font-family-secondary text-[18px] leading-[1.17] text-light-black"
@@ -123,70 +183,124 @@ const RegisterPage: FC = () => {
               <input
                 id="confirmPassword"
                 type={isShowConfirmPassword ? 'text' : 'password'}
-                placeholder="Підтвердіть пароль"
-                className="w-full border border-medium-grey py-[14px] pl-6 pr-[72px] font-family-secondary leading-normal text-light-black placeholder:text-grey"
+                placeholder="Підтвердіть новий пароль"
+                {...register('confirmPassword')}
+                className={`w-full border py-[14px] pl-6 pr-[72px] font-family-secondary leading-normal placeholder:text-grey ${
+                  errors.confirmPassword
+                    ? 'border-dark-red text-dark-red placeholder:text-dark-red'
+                    : 'border-medium-grey text-light-black'
+                }`}
+                aria-invalid={!!errors.confirmPassword}
               />
               <button
                 type="button"
                 onClick={handleToggleConfirmPassword}
                 className="absolute right-6 top-1/2 -translate-y-1/2"
               >
-                {isShowConfirmPassword ? <IconEyeOpened /> : <IconEyeClosed />}
+                {isShowConfirmPassword ? <IconEyeClosed /> : <IconEyeOpened />}
               </button>
             </div>
-            <span className="mt-[2px] font-family-secondary text-[14px] leading-[1.17] text-dark-red">
-              Не вірний пароль.
-            </span>
+            {errors.confirmPassword && (
+              <span className="mt-[2px] font-family-secondary text-[14px] leading-[1.17] text-dark-red">
+                {errors.confirmPassword.message}
+              </span>
+            )}
           </div>
 
-          <div className="mt-6 flex items-baseline gap-2">
-            <input
-              type="checkbox"
-              name="marketingConsent"
-              id="marketingConsent"
-            />
-            <label
-              htmlFor="marketingConsent"
-              className="font-family-secondary text-[14px] leading-[1.17] text-black"
-            >
-              Я хочу отримувати персоналізовані повідомлення комерційного
-              характеру від <span className="font-semibold">Lucky</span>{' '}
-              електронною поштою
-            </label>
-          </div>
+          <Controller
+            name="marketingConsent"
+            control={control}
+            render={({ field }) => (
+              <div className="mt-6 flex items-center gap-2">
+                <Checkbox.Root
+                  id="marketingConsent"
+                  checked={field.value !== null ? field.value : false}
+                  onCheckedChange={field.onChange}
+                  className="flex h-[22px] w-[22px] flex-shrink-0 items-center justify-center rounded border border-medium-grey outline-none transition-colors duration-default hover:border-light-grey focus-visible:outline focus-visible:outline-[1px] focus-visible:outline-[webkit-focus-ring-color] data-[state=checked]:border-grey"
+                >
+                  <span className="relative h-full w-full">
+                    <Checkbox.Indicator
+                      forceMount
+                      className="absolute inset-0 flex scale-95 items-center justify-center text-grey opacity-0 transition-all duration-default data-[state=checked]:scale-100 data-[state=checked]:opacity-100"
+                    >
+                      <IconCheckbox />
+                    </Checkbox.Indicator>
+                  </span>
+                </Checkbox.Root>
 
-          <div className="mt-6 flex items-baseline gap-2">
-            <input
-              type="checkbox"
-              name="privacyConsent"
-              id="privacyConsent"
-              className="h-4 w-4"
-            />
-            <label
-              htmlFor="privacyConsent"
-              className="font-family-secondary text-[14px] leading-[1.17] text-black"
-            >
-              Я прочитав(-ла) і розумію
-              <a href="#" className="underline">
-                Політику конфіденційності та використання файлів cookie
-              </a>
-            </label>
-          </div>
+                <label
+                  htmlFor="marketingConsent"
+                  className="font-family-secondary text-[14px] leading-[1.17] text-black"
+                >
+                  Я хочу отримувати персоналізовані повідомлення комерційного
+                  характеру від
+                  <span className="mx-1 font-semibold">Lucky</span>
+                  електронною поштою
+                </label>
+              </div>
+            )}
+          />
+
+          <Controller
+            name="policyConsent"
+            control={control}
+            render={({ field }) => (
+              <div className="mt-6">
+                <div className="flex items-center gap-2">
+                  <Checkbox.Root
+                    id="policyConsent"
+                    checked={field.value}
+                    onCheckedChange={field.onChange}
+                    className="flex h-[22px] w-[22px] flex-shrink-0 items-center justify-center rounded border border-medium-grey outline-none transition-colors duration-default hover:border-light-grey focus-visible:outline focus-visible:outline-[1px] focus-visible:outline-[webkit-focus-ring-color] data-[state=checked]:border-grey"
+                  >
+                    <span className="relative h-full w-full">
+                      <Checkbox.Indicator
+                        forceMount
+                        className="absolute inset-0 flex scale-95 items-center justify-center text-grey opacity-0 transition-all duration-default data-[state=checked]:scale-100 data-[state=checked]:opacity-100"
+                      >
+                        <IconCheckbox />
+                      </Checkbox.Indicator>
+                    </span>
+                  </Checkbox.Root>
+
+                  <label
+                    htmlFor="policyConsent"
+                    className="font-family-secondary text-[14px] leading-[1.17] text-black"
+                  >
+                    Я прочитав(-ла) і розумію
+                    <a
+                      href={PATH_PAGES.PRIVACY_POLICY}
+                      className="ml-1 underline"
+                    >
+                      Політику конфіденційності та використання файлів cookie
+                    </a>
+                  </label>
+                </div>
+
+                {errors.policyConsent && (
+                  <span className="mt-[2px] font-family-secondary text-[14px] leading-[1.17] text-dark-red">
+                    {errors.policyConsent.message}
+                  </span>
+                )}
+              </div>
+            )}
+          />
 
           <UiButton
             className="mt-6"
             variant="contained"
             as="button"
             type="submit"
+            disabled={isSubmitting}
           >
-            Зареєструватися
+            {isSubmitting ? 'Реєстрація...' : 'Зареєструватися'}
           </UiButton>
 
           <UiButton
             className="relative mt-3"
             variant="outlined"
             as="button"
-            type="submit"
+            type="button"
           >
             <IconGoogle className="absolute left-6 top-1/2 -translate-y-1/2" />
             Зареєструватися через Google
@@ -196,7 +310,7 @@ const RegisterPage: FC = () => {
 
       <img
         className="w-5/12 max-w-[590px] flex-shrink"
-        src={register}
+        src={registerImg}
         alt="Auth register"
         width="590"
       />
