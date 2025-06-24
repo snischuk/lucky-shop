@@ -24,6 +24,8 @@ export const PATH_PAGES = {
   FORGOT_PASSWORD: '/auth/forgot-password',
   RESEND_PASSWORD: '/auth/resend-password',
   CREATE_NEW_PASSWORD: '/auth/create-new-password',
+
+  PRIVACY_POLICY: '/privacy-policy',
 } as const;
 
 export type PathPages = (typeof PATH_PAGES)[keyof typeof PATH_PAGES];
