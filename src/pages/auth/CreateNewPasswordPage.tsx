@@ -42,7 +42,7 @@ const CreateNewPasswordPage: FC = () => {
 
   return (
     <div className="flex w-full">
-      <div className="align-center flex w-7/12 flex-shrink-0 flex-col items-center gap-6 px-7 py-16">
+      <div className="align-center flex w-7/12 flex-shrink-0 flex-col items-center gap-7 px-7 py-16">
         <UiTitle>Створити новий пароль</UiTitle>
 
         <form
@@ -50,7 +50,7 @@ const CreateNewPasswordPage: FC = () => {
           onSubmit={handleSubmit(onSubmit)}
           className="flex w-full max-w-[424px] flex-col items-center"
         >
-          <div className="flex h-[106px] w-full flex-col">
+          <div className="flex h-[110px] w-full flex-col">
             <label
               htmlFor="newPassword"
               className="font-family-secondary text-[18px] leading-[1.17] text-light-black"
@@ -73,7 +73,7 @@ const CreateNewPasswordPage: FC = () => {
               <button
                 type="button"
                 onClick={handleToggleNewPassword}
-                className="absolute right-6 top-1/2 -translate-y-1/2"
+                className="absolute right-6 top-1/2 -translate-y-1/2 text-medium-grey transition-colors duration-default hover:text-grey"
               >
                 {isShowNewPassword ? <IconEyeOpened /> : <IconEyeClosed />}
               </button>
@@ -85,7 +85,7 @@ const CreateNewPasswordPage: FC = () => {
             )}
           </div>
 
-          <div className="mt-[10px] flex h-[106px] w-full flex-col">
+          <div className="mt-[10px] flex h-[110px] w-full flex-col">
             <label
               htmlFor="confirmPassword"
               className="font-family-secondary text-[18px] leading-[1.17] text-light-black"
@@ -108,7 +108,7 @@ const CreateNewPasswordPage: FC = () => {
               <button
                 type="button"
                 onClick={handleToggleConfirmPassword}
-                className="absolute right-6 top-1/2 -translate-y-1/2"
+                className="absolute right-6 top-1/2 -translate-y-1/2 text-medium-grey transition-colors duration-default hover:text-grey"
               >
                 {isShowConfirmPassword ? <IconEyeOpened /> : <IconEyeClosed />}
               </button>

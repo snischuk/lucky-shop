@@ -40,7 +40,7 @@ const LoginPage: FC = () => {
 
   return (
     <div className="flex w-full">
-      <div className="align-center flex w-7/12 flex-shrink-0 flex-col items-center gap-6 px-7 py-16">
+      <div className="align-center flex w-7/12 flex-shrink-0 flex-col items-center gap-7 px-7 py-16">
         <UiTitle>Вхід</UiTitle>
 
         <form
@@ -48,7 +48,7 @@ const LoginPage: FC = () => {
           onSubmit={handleSubmit(onSubmit)}
           className="flex w-full max-w-[424px] flex-col items-center"
         >
-          <div className="flex h-[106px] w-full flex-col">
+          <div className="flex h-[90px] w-full flex-col">
             <label
               htmlFor="email"
               className="font-family-secondary text-[18px] leading-[1.17] text-light-black"
@@ -75,7 +75,7 @@ const LoginPage: FC = () => {
             )}
           </div>
 
-          <div className="mt-[10px] flex h-[126px] w-full flex-col">
+          <div className="mt-[34px] flex h-[110px] w-full flex-col">
             <label
               htmlFor="password"
               className="font-family-secondary text-[18px] leading-[1.17] text-light-black"
@@ -99,9 +99,9 @@ const LoginPage: FC = () => {
               <button
                 type="button"
                 onClick={togglePasswordVisibility}
-                className="absolute right-6 top-1/2 -translate-y-1/2"
+                className="absolute right-6 top-1/2 -translate-y-1/2 text-medium-grey transition-colors duration-default hover:text-grey"
               >
-                {isShowPassword ? <IconEyeClosed /> : <IconEyeOpened />}
+                {isShowPassword ? <IconEyeOpened /> : <IconEyeClosed />}
               </button>
             </div>
             <div className="mt-[2px] flex flex-wrap gap-1 font-family-secondary text-[14px] leading-[1.17]">

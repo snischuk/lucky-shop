@@ -43,7 +43,7 @@ export const UiButton: FC<UiButtonProps> = ({
   ...props
 }) => {
   const baseClasses =
-    'w-full px-6 py-5 flex items-center justify-center font-family-secondary text-[20px] leading-[1.175] transition-colors duration-default';
+    'w-full px-6 py-4 flex items-center justify-center font-family-secondary text-[20px] leading-[1.27] transition-colors duration-default';
 
   const variantClasses = variants[variant] || '';
 
