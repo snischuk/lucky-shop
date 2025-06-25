@@ -51,7 +51,7 @@ const RegisterPage: FC = () => {
 
   return (
     <div className="flex w-full">
-      <div className="flex w-7/12 flex-shrink-0 flex-col items-center gap-6 px-7 py-16">
+      <div className="flex w-7/12 flex-shrink-0 flex-col items-center gap-4 px-7 py-16">
         <UiTitle>Зареєструйтеся</UiTitle>
 
         <form
@@ -59,9 +59,9 @@ const RegisterPage: FC = () => {
           onSubmit={handleSubmit(onSubmit)}
           className="flex w-full max-w-[424px] flex-col items-center"
         >
-          <div className="mt-[10px] flex h-[106px] w-full max-w-[424px] flex-col transition-colors duration-default focus-within:text-grey">
+          <div className="mt-[12px] flex h-[106px] w-full max-w-[424px] flex-col transition-colors duration-default focus-within:text-grey">
             <label
-              className="font-family-secondary text-[18px] leading-[1.17] text-light-black"
+              className="font-family-secondary text-[18px] leading-[1.27] text-light-black"
               htmlFor="firstName"
             >
               Імʼя
@@ -85,9 +85,9 @@ const RegisterPage: FC = () => {
             )}
           </div>
 
-          <div className="mt-[10px] flex h-[106px] w-full max-w-[424px] flex-col transition-colors duration-default focus-within:text-grey">
+          <div className="mt-[12px] flex h-[106px] w-full max-w-[424px] flex-col transition-colors duration-default focus-within:text-grey">
             <label
-              className="font-family-secondary text-[18px] leading-[1.17] text-light-black"
+              className="font-family-secondary text-[18px] leading-[1.27] text-light-black"
               htmlFor="lastName"
             >
               Прізвище
@@ -111,9 +111,9 @@ const RegisterPage: FC = () => {
             )}
           </div>
 
-          <div className="mt-[10px] flex h-[106px] w-full max-w-[424px] flex-col transition-colors duration-default focus-within:text-grey">
+          <div className="mt-[12px] flex h-[106px] w-full max-w-[424px] flex-col transition-colors duration-default focus-within:text-grey">
             <label
-              className="font-family-secondary text-[18px] leading-[1.17] text-light-black"
+              className="font-family-secondary text-[18px] leading-[1.27] text-light-black"
               htmlFor="email"
             >
               Адреса Ел. пошти
@@ -137,10 +137,10 @@ const RegisterPage: FC = () => {
             )}
           </div>
 
-          <div className="mt-[10px] flex h-[106px] w-full flex-col">
+          <div className="mt-[12px] flex h-[110px] w-full flex-col">
             <label
               htmlFor="password"
-              className="font-family-secondary text-[18px] leading-[1.17] text-light-black"
+              className="font-family-secondary text-[18px] leading-[1.27] text-light-black"
             >
               Пароль
             </label>
@@ -172,10 +172,10 @@ const RegisterPage: FC = () => {
             )}
           </div>
 
-          <div className="mt-[10px] flex h-[106px] w-full flex-col">
+          <div className="mt-[12px] flex h-[110px] w-full flex-col">
             <label
               htmlFor="confirmPassword"
-              className="font-family-secondary text-[18px] leading-[1.17] text-light-black"
+              className="font-family-secondary text-[18px] leading-[1.27] text-light-black"
             >
               Підтвердити пароль
             </label>
@@ -211,7 +211,7 @@ const RegisterPage: FC = () => {
             name="marketingConsent"
             control={control}
             render={({ field }) => (
-              <div className="mt-6 flex items-center gap-2">
+              <div className="mt-[12px] flex items-center gap-2">
                 <Checkbox.Root
                   id="marketingConsent"
                   checked={field.value !== null ? field.value : false}
@@ -245,7 +245,7 @@ const RegisterPage: FC = () => {
             name="policyConsent"
             control={control}
             render={({ field }) => (
-              <div className="mt-6">
+              <div className="mt-[12px] h-[62px]">
                 <div className="flex items-center gap-2">
                   <Checkbox.Root
                     id="policyConsent"
@@ -287,7 +287,7 @@ const RegisterPage: FC = () => {
           />
 
           <UiButton
-            className="mt-6"
+            className="mt-[10px]"
             variant="contained"
             as="button"
             type="submit"
