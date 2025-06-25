@@ -60,10 +60,10 @@ const Footer: FC<FooterProps> = ({ navigationLinks }) => (
         </span>
 
         <a
-          className="border border-grey px-6 py-4 font-family-secondary uppercase text-light-black transition-colors duration-default hover:border-orange hover:text-orange"
-          href="mailto:info@Lucky.ua"
+          className="w-[190px] border border-grey px-6 py-4 text-center font-family-secondary text-light-black transition-colors duration-default hover:border-orange hover:text-orange"
+          href="mailto:info@lucky.ua"
         >
-          info@Lucky.ua
+          info@lucky.ua
         </a>
       </div>
 
