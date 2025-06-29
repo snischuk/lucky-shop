@@ -26,6 +26,10 @@ export const PATH_PAGES = {
   CREATE_NEW_PASSWORD: '/auth/create-new-password',
 
   PRIVACY_POLICY: '/privacy-policy',
+
+  UNSUBSCRIPTION_CONFIRM: '/unsubscribe',
+  UNSUBSCRIPTION_CANCEL: '/unsubscribe/cancel',
+  UNSUBSCRIPTION_SUCCESS: '/unsubscribe/success',
 } as const;
 
 export type PathPages = (typeof PATH_PAGES)[keyof typeof PATH_PAGES];
