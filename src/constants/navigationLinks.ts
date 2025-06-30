@@ -6,4 +6,5 @@ export const NAVIGATION_LINKS: NavigationLink[] = [
   { id: 'catalog', to: '/catalog', label: 'Каталог' },
   { id: 'discounts', to: '/discounts', label: 'Знижки' },
   { id: 'delivery', to: '/delivery-and-payment', label: 'Оплата та доставка' },
+  { id: 'cart', to: '/cart', label: 'Кошик' },
 ];

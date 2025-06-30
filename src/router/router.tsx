@@ -81,6 +81,11 @@ const ProductsPage = lazy(() =>
     default: module.ProductsPage,
   })),
 );
+const CartPage = lazy(() =>
+  import('../pages/CartPage').then((module) => ({
+    default: module.CartPage,
+  })),
+);
 
 const AppRouter: FC = () => {
   return (
@@ -90,6 +95,7 @@ const AppRouter: FC = () => {
           <Route index element={<MainHomePage />} />
 
           <Route path={PATH_PAGES.GENDER_PARAM} element={<GenderHomePage />} />
+          <Route path={PATH_PAGES.CART} element={<CartPage />} />
 
           <Route path={PATH_PAGES.GENDER_PRODUCTS} element={<ProductsLayout />}>
             <Route index element={<ProductsPage />} />

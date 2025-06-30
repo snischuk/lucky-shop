@@ -119,7 +119,7 @@ const Header: FC = () => {
         <NavLink to="/">
           <IconHeart />
         </NavLink>
-        <NavLink to="/">
+        <NavLink to={PATH_PAGES.CART}>
           <IconBag />
         </NavLink>
         <NavLink to={PATH_PAGES.AUTH}>
