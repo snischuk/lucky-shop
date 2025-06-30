@@ -1,9 +1,9 @@
 import type { FC } from 'react';
 
-import men from '../../assets/images/home/find-yours/men.jpg';
-import men2x from '../../assets/images/home/find-yours/men@2x.jpg';
-import women from '../../assets/images/home/find-yours/women.jpg';
-import women2x from '../../assets/images/home/find-yours/women@2x.jpg';
+import man from '../../assets/images/home/find-yours/men.jpg';
+import man2x from '../../assets/images/home/find-yours/men@2x.jpg';
+import woman from '../../assets/images/home/find-yours/women.jpg';
+import woman2x from '../../assets/images/home/find-yours/women@2x.jpg';
 import { UiTitle } from '../ui/UiTitle';
 
 const FindYoursSection: FC = () => {
@@ -14,7 +14,7 @@ const FindYoursSection: FC = () => {
       </UiTitle>
       <div className="grid grid-cols-2">
         <div>
-          <img src={women} srcSet={`${women2x} 2x`} alt="women"></img>
+          <img src={woman} srcSet={`${woman2x} 2x`} alt="women"></img>
         </div>
         <div className="flex flex-col justify-between px-6 pb-[60px] pt-20 font-family-secondary">
           <h3 className="text-[64px] font-semibold uppercase">Жіноче</h3>
@@ -91,7 +91,7 @@ const FindYoursSection: FC = () => {
           </div>
         </div>
         <div>
-          <img src={men} srcSet={`${men2x} 2x`} alt="men"></img>
+          <img src={man} srcSet={`${man2x} 2x`} alt="men"></img>
         </div>
       </div>
     </section>

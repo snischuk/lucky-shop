@@ -13,7 +13,7 @@ interface GenderHeroSectionProps {
 const GenderHeroSection: FC<GenderHeroSectionProps> = ({ gender }) => {
   return (
     <section className="relative mx-auto flex max-w-custom-1440">
-      {gender === GENDERS.WOMEN ? (
+      {gender === GENDERS.WOMAN ? (
         <img src={woman} srcSet={`${woman2x} 2x`} alt="woman"></img>
       ) : (
         <img src={man} srcSet={`${man2x} 2x`} alt="man"></img>
