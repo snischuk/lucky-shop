@@ -17,7 +17,7 @@ export interface CategoryInfo {
 }
 
 export const CATEGORY_MAP: Record<Gender, Record<string, CategoryInfo>> = {
-  women: {
+  woman: {
     dresses: {
       title: 'Сукні',
       image: dressesW,
@@ -43,7 +43,7 @@ export const CATEGORY_MAP: Record<Gender, Record<string, CategoryInfo>> = {
       image: sweatshirtsW,
     },
   },
-  men: {
+  man: {
     shirts: {
       title: 'Сорочки',
       image: shirtsM,

@@ -4,6 +4,7 @@ import man from '../assets/images/man/hero.jpg';
 import man2x from '../assets/images/man/hero@2x.jpg';
 import woman from '../assets/images/woman/hero.jpg';
 import woman2x from '../assets/images/woman/hero@2x.jpg';
+import { GENDERS } from '../constants/genders';
 import type { Gender } from '../types/Gender';
 
 interface GenderHeroSectionProps {
@@ -12,7 +13,7 @@ interface GenderHeroSectionProps {
 const GenderHeroSection: FC<GenderHeroSectionProps> = ({ gender }) => {
   return (
     <section className="relative mx-auto flex max-w-custom-1440">
-      {gender === 'women' ? (
+      {gender === GENDERS.WOMEN ? (
         <img src={woman} srcSet={`${woman2x} 2x`} alt="woman"></img>
       ) : (
         <img src={man} srcSet={`${man2x} 2x`} alt="man"></img>
