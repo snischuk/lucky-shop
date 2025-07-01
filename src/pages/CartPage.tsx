@@ -1,17 +1,16 @@
 import { useEffect } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
 
 import { CartList } from '../components/cart/CartList';
 import { EmptyCart } from '../components/cart/EmptyCart';
 import { UiTitle } from '../components/ui/UiTitle';
 import { mockProducts } from '../data/mockProducts';
+import { useTypedDispatch, useTypedSelector } from '../hooks/useRedux';
 import { selectCartItems } from '../redux/cart/selectors';
 import { addToCart } from '../redux/cart/slice';
-import type { AppDispatch } from '../redux/store';
 
 const CartPage = () => {
-  const dispatch = useDispatch<AppDispatch>();
-  const cart = useSelector(selectCartItems);
+  const dispatch = useTypedDispatch();
+  const cart = useTypedSelector(selectCartItems);
 
   useEffect(() => {
     const firstThreeProducts = mockProducts.slice(0, 3); // тимчасово, поки немає API

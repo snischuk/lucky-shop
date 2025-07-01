@@ -1,4 +1,4 @@
 export const GENDERS = {
-  WOMEN: 'woman',
-  MEN: 'man',
+  WOMAN: 'woman',
+  MAN: 'man',
 } as const;

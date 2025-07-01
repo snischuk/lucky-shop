@@ -9,11 +9,11 @@ interface CartListProps {
 
 const CartList: FC<CartListProps> = ({ items }) => {
   return (
-    <ul className="space-y-5">
+    <div className="space-y-5">
       {items.map((item) => (
-        <CartItemCard item={item} />
+        <CartItemCard key={item.sku} item={item} />
       ))}
-    </ul>
+    </div>
   );
 };
 

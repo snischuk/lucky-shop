@@ -63,8 +63,8 @@ const NewCollectionSection: FC<NewCollectionSectionProps> = ({ gender }) => {
         ))}
       </Swiper>
       <div className="flex justify-center">
-        {gender === GENDERS.WOMEN && <ViewAllLink link={PATH_PAGES.WOMEN} />}
-        {gender === GENDERS.MEN && <ViewAllLink link={PATH_PAGES.MEN} />}
+        {gender === GENDERS.WOMAN && <ViewAllLink link={PATH_PAGES.WOMAN} />}
+        {gender === GENDERS.MAN && <ViewAllLink link={PATH_PAGES.MAN} />}
       </div>
     </div>
   );

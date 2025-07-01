@@ -12,8 +12,8 @@ interface GallerySectionProps {
 const GallerySection: FC<GallerySectionProps> = ({ gender }) => {
   return (
     <section>
-      {gender === GENDERS.WOMEN && <WomanBlock />}
-      {gender === GENDERS.MEN && <ManBlock />}
+      {gender === GENDERS.WOMAN && <WomanBlock />}
+      {gender === GENDERS.MAN && <ManBlock />}
     </section>
   );
 };
