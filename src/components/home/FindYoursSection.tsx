@@ -53,7 +53,7 @@ const FindYoursSection: FC = () => {
             </a>
           </div>
         </div>
-        <div className="flex flex-col justify-between px-6 pb-[60px] pt-20 font-family-secondary">
+        <div className="flex flex-col justify-between px-6 pb-[60px] pt-20 text-right font-family-secondary">
           <h3 className="text-[64px] font-semibold uppercase">Чоловіче</h3>
           <ul className="flex flex-col gap-4 text-[24px] uppercase leading-[normal] text-light-black">
             <li>
@@ -81,7 +81,7 @@ const FindYoursSection: FC = () => {
               </a>
             </li>
           </ul>
-          <div className="flex justify-end text-light-black">
+          <div className="flex justify-start text-light-black">
             <a
               href="man"
               className="border border-light-black px-9 py-3 text-[24px] text-h4 font-medium uppercase leading-[normal] transition-all duration-default hover:border-orange hover:text-orange"
