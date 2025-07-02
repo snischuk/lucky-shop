@@ -1,12 +1,12 @@
 export const PATH_PAGES = {
   MAIN: '/',
-  MEN: '/men',
-  WOMEN: '/women',
+  MAN: '/man',
+  WOMAN: '/woman',
   NOT_FOUND: '/404',
   GENDER_PARAM: '/:gender',
   GENDER_PRODUCTS: '/:gender/products',
   GENDER_PRODUCT_ID_PARAM: '/:gender/products/:productId',
-  // CART: '/cart',
+  CART: '/cart',
   // CHECKOUT: '/checkout',
   // ACCOUNT: '/account',
   // ACCOUNT_PROFILE: '/account/profile',
@@ -24,6 +24,12 @@ export const PATH_PAGES = {
   FORGOT_PASSWORD: '/auth/forgot-password',
   RESEND_PASSWORD: '/auth/resend-password',
   CREATE_NEW_PASSWORD: '/auth/create-new-password',
+
+  PRIVACY_POLICY: '/privacy-policy',
+
+  UNSUBSCRIPTION_CONFIRM: '/unsubscribe',
+  UNSUBSCRIPTION_CANCEL: '/unsubscribe/cancel',
+  UNSUBSCRIPTION_SUCCESS: '/unsubscribe/success',
 } as const;
 
 export type PathPages = (typeof PATH_PAGES)[keyof typeof PATH_PAGES];

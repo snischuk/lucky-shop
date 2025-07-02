@@ -2,7 +2,7 @@ import { mockProducts } from '../data/mockProducts';
 import { useValidatedGender } from './useValidatedGender';
 
 export const useGenderCategories = (): {
-  gender: 'men' | 'women' | null;
+  gender: 'man' | 'woman' | null;
   categories: string[];
 } => {
   const gender = useValidatedGender();

@@ -14,6 +14,8 @@ import storage from 'redux-persist/lib/storage';
 import { authApi } from '../services/authApi';
 import { notificationApi } from '../services/notificationApi';
 import { authReducer } from './auth/slice';
+import { cartReducer } from './cart/slice';
+import { productReducer } from './products/slice';
 
 const authPersistConfig = {
   key: 'auth',
@@ -28,6 +30,8 @@ export const store = configureStore({
     auth: persistedAuthReducer,
     [authApi.reducerPath]: authApi.reducer,
     [notificationApi.reducerPath]: notificationApi.reducer,
+    cart: cartReducer,
+    products: productReducer,
   },
   middleware: (getDefaultMiddleware) =>
     getDefaultMiddleware({

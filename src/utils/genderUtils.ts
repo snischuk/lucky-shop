@@ -1,4 +1,4 @@
-export const allowedGenders = ['men', 'women'] as const;
+export const allowedGenders = ['man', 'woman'] as const;
 export type Gender = (typeof allowedGenders)[number];
 
 export const isValidGender = (gender: unknown): gender is Gender => {

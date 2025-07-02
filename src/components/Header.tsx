@@ -106,10 +106,10 @@ const Header: FC = () => {
       </nav>
 
       <div className="flex text-2xl uppercase text-grey">
-        <NavLink to={PATH_PAGES.WOMEN} className={setActiveClass}>
+        <NavLink to={PATH_PAGES.WOMAN} className={setActiveClass}>
           Жіноче
         </NavLink>
-        <NavLink to={PATH_PAGES.MEN} className={setActiveClass}>
+        <NavLink to={PATH_PAGES.MAN} className={setActiveClass}>
           Чоловіче
         </NavLink>
       </div>
@@ -119,10 +119,10 @@ const Header: FC = () => {
         <NavLink to="/">
           <IconHeart />
         </NavLink>
-        <NavLink to="/">
+        <NavLink to={PATH_PAGES.CART}>
           <IconBag />
         </NavLink>
-        <NavLink to="/">
+        <NavLink to={PATH_PAGES.AUTH}>
           <IconProfile />
         </NavLink>
       </div>

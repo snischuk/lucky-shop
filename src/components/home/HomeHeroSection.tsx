@@ -60,13 +60,13 @@ const HomeHeroSection: FC<HeroSectionProps> = ({ slides }) => (
 
     <div className="z-10 col-start-1 col-end-2 row-start-1 row-end-2 flex flex-col gap-4 px-28 py-20">
       <Link
-        to={PATH_PAGES.WOMEN}
+        to={PATH_PAGES.WOMAN}
         className="w-[330px] border border-solid border-light-black bg-transparent px-6 py-5 text-center font-family-secondary font-medium uppercase leading-none text-light-black transition-colors duration-300 hover:border-orange hover:text-orange"
       >
         Жіноча колекція
       </Link>
       <Link
-        to={PATH_PAGES.MEN}
+        to={PATH_PAGES.MAN}
         className="w-[330px] border border-solid border-light-black bg-transparent px-6 py-5 text-center font-family-secondary font-medium uppercase leading-none text-light-black transition-colors duration-300 hover:border-orange hover:text-orange"
       >
         Чоловіча колекція

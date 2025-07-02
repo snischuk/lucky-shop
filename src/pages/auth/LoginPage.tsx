@@ -1,9 +1,156 @@
+import { yupResolver } from '@hookform/resolvers/yup';
 import type { FC } from 'react';
+import { useState } from 'react';
+import { useForm } from 'react-hook-form';
+import { Link } from 'react-router-dom';
+import type { InferType } from 'yup';
+
+import login from '../../assets/images/auth/login.jpg';
+import IconEyeClosed from '../../assets/images/icons/icon-eye-closed.svg?react';
+import IconEyeOpened from '../../assets/images/icons/icon-eye-opened.svg?react';
+import IconGoogle from '../../assets/images/icons/icon-google.svg?react';
+import { UiButton } from '../../components/ui/UiButton';
+import { UiTitle } from '../../components/ui/UiTitle';
+import { PATH_PAGES } from '../../constants/pathPages';
+import { loginSchema } from '../../schemas/validationSchemas';
+
+type LoginFormData = InferType<typeof loginSchema>;
 
 const LoginPage: FC = () => {
+  const [isShowPassword, setIsShowPassword] = useState(false);
+
+  const {
+    register,
+    handleSubmit,
+    formState: { errors, isSubmitting },
+  } = useForm({
+    resolver: yupResolver(loginSchema),
+    mode: 'onChange',
+    reValidateMode: 'onChange',
+  });
+
+  const togglePasswordVisibility = (): void => {
+    setIsShowPassword((prev) => !prev);
+  };
+
+  const onSubmit = (data: LoginFormData): void => {
+    console.log('Login data:', data);
+    // TODO: логіка входу
+  };
+
   return (
-    <div className="flex min-h-screen items-center justify-center">
-      <h1 className="text-2xl font-bold">Login Page</h1>
+    <div className="flex w-full">
+      <div className="align-center flex w-7/12 flex-shrink-0 flex-col items-center gap-7 px-7 py-16">
+        <UiTitle>Вхід</UiTitle>
+
+        <form
+          noValidate
+          onSubmit={handleSubmit(onSubmit)}
+          className="flex w-full max-w-[424px] flex-col items-center"
+        >
+          <div className="flex h-[90px] w-full flex-col">
+            <label
+              htmlFor="email"
+              className="font-family-secondary text-[18px] leading-[1.17] text-light-black"
+            >
+              Адреса Ел. пошти
+            </label>
+            <input
+              id="email"
+              type="text"
+              placeholder="Адреса Ел. пошти"
+              {...register('email')}
+              className={`mt-3 w-full border px-6 py-[14px] font-family-secondary leading-normal placeholder:text-grey ${
+                errors.email
+                  ? 'border-dark-red text-dark-red placeholder:text-dark-red'
+                  : 'border-medium-grey text-light-black'
+              }`}
+              aria-invalid={!!errors.email}
+            />
+
+            {errors.email && (
+              <span className="mt-[2px] font-family-secondary text-[14px] leading-[1.17] text-dark-red">
+                {errors.email.message}
+              </span>
+            )}
+          </div>
+
+          <div className="mt-[34px] flex h-[110px] w-full flex-col">
+            <label
+              htmlFor="password"
+              className="font-family-secondary text-[18px] leading-[1.17] text-light-black"
+            >
+              Пароль
+            </label>
+            <div className="relative mt-3">
+              <input
+                id="password"
+                type={isShowPassword ? 'text' : 'password'}
+                placeholder="Уведіть свій пароль"
+                {...register('password')}
+                className={`w-full border py-[14px] pl-6 pr-[72px] font-family-secondary leading-normal placeholder:text-grey ${
+                  errors.password
+                    ? 'border-dark-red text-dark-red placeholder:text-dark-red'
+                    : 'border-medium-grey text-light-black'
+                }`}
+                aria-invalid={!!errors.password}
+              />
+
+              <button
+                type="button"
+                onClick={togglePasswordVisibility}
+                className="absolute right-6 top-1/2 -translate-y-1/2 text-medium-grey transition-colors duration-default hover:text-grey"
+              >
+                {isShowPassword ? <IconEyeOpened /> : <IconEyeClosed />}
+              </button>
+            </div>
+            <div className="mt-[2px] flex flex-wrap gap-1 font-family-secondary text-[14px] leading-[1.17]">
+              {errors.password && (
+                <span className="flex-shrink-0 text-dark-red">
+                  {errors.password.message}
+                </span>
+              )}
+              <Link
+                to={PATH_PAGES.FORGOT_PASSWORD}
+                className={
+                  errors.password
+                    ? 'font-semibold text-dark-red'
+                    : 'text-light-black'
+                }
+              >
+                Забули пароль?
+              </Link>
+            </div>
+          </div>
+
+          <UiButton
+            className="mt-6"
+            variant="contained"
+            as="button"
+            type="submit"
+            disabled={isSubmitting}
+          >
+            {isSubmitting ? 'Входимо...' : 'Увійти'}
+          </UiButton>
+
+          <UiButton
+            className="relative mt-3"
+            variant="outlined"
+            as="button"
+            type="button"
+          >
+            <IconGoogle className="absolute left-6 top-1/2 -translate-y-1/2" />
+            Увійти через Google
+          </UiButton>
+        </form>
+      </div>
+
+      <img
+        className="w-5/12 max-w-[590px] flex-shrink"
+        src={login}
+        alt="Auth login"
+        width="590"
+      />
     </div>
   );
 };

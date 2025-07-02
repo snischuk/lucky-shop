@@ -2,12 +2,31 @@ import type { FC } from 'react';
 import { lazy, Suspense } from 'react';
 import { Navigate, Route, Routes } from 'react-router-dom';
 
+import { UiLoader } from '../components/ui/UiLoader';
 import { PATH_PAGES } from '../constants/pathPages';
-import { AuthLayout } from '../layouts/AuthLayout';
 import { MainLayout } from '../layouts/MainLayout';
 import { ProductsLayout } from '../layouts/ProductsLayout';
+import { SecondaryLayout } from '../layouts/SecondaryLayout';
 
-const AuthChoisePage = lazy(() =>
+const UnsubscribeConfirmPage = lazy(() =>
+  import('../pages/unsubscribe/UnsubscribeConfirmPage').then((module) => ({
+    default: module.UnsubscribeConfirmPage,
+  })),
+);
+
+const UnsubscribeCancelPage = lazy(() =>
+  import('../pages/unsubscribe/UnsubscribeCancelPage').then((module) => ({
+    default: module.UnsubscribeCancelPage,
+  })),
+);
+
+const UnsubscribeSuccessPage = lazy(() =>
+  import('../pages/unsubscribe/UnsubscribeSuccessPage').then((module) => ({
+    default: module.UnsubscribeSuccessPage,
+  })),
+);
+
+const AuthChoicePage = lazy(() =>
   import('../pages/auth/AuthChoicePage').then((module) => ({
     default: module.AuthChoicePage,
   })),
@@ -62,15 +81,21 @@ const ProductsPage = lazy(() =>
     default: module.ProductsPage,
   })),
 );
+const CartPage = lazy(() =>
+  import('../pages/CartPage').then((module) => ({
+    default: module.CartPage,
+  })),
+);
 
 const AppRouter: FC = () => {
   return (
-    <Suspense fallback={<div>Loading...</div>}>
+    <Suspense fallback={<UiLoader mode="fullscreen" size={80} />}>
       <Routes>
         <Route path={PATH_PAGES.MAIN} element={<MainLayout />}>
           <Route index element={<MainHomePage />} />
 
           <Route path={PATH_PAGES.GENDER_PARAM} element={<GenderHomePage />} />
+          <Route path={PATH_PAGES.CART} element={<CartPage />} />
 
           <Route path={PATH_PAGES.GENDER_PRODUCTS} element={<ProductsLayout />}>
             <Route index element={<ProductsPage />} />
@@ -87,8 +112,8 @@ const AppRouter: FC = () => {
           />
         </Route>
 
-        <Route path={PATH_PAGES.AUTH} element={<AuthLayout />}>
-          <Route index element={<AuthChoisePage />} />
+        <Route path={PATH_PAGES.AUTH} element={<SecondaryLayout />}>
+          <Route index element={<AuthChoicePage />} />
           <Route path={PATH_PAGES.REGISTER} element={<RegisterPage />} />
           <Route path={PATH_PAGES.LOGIN} element={<LoginPage />} />
           <Route
@@ -102,6 +127,21 @@ const AppRouter: FC = () => {
           <Route
             path={PATH_PAGES.CREATE_NEW_PASSWORD}
             element={<CreateNewPasswordPage />}
+          />
+        </Route>
+
+        <Route
+          path={PATH_PAGES.UNSUBSCRIPTION_CONFIRM}
+          element={<SecondaryLayout />}
+        >
+          <Route index element={<UnsubscribeConfirmPage />} />
+          <Route
+            path={PATH_PAGES.UNSUBSCRIPTION_CANCEL}
+            element={<UnsubscribeCancelPage />}
+          />
+          <Route
+            path={PATH_PAGES.UNSUBSCRIPTION_SUCCESS}
+            element={<UnsubscribeSuccessPage />}
           />
         </Route>
       </Routes>

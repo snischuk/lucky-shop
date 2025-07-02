@@ -5,7 +5,7 @@ import { Outlet } from 'react-router-dom';
 import { AnnouncementBar } from '../components/AnnouncementBar';
 import { Header } from '../components/Header';
 
-const AuthLayout: FC = () => {
+const SecondaryLayout: FC = () => {
   const [showBanner, setShowBanner] = useState(true);
 
   return (
@@ -24,4 +24,4 @@ const AuthLayout: FC = () => {
   );
 };
 
-export { AuthLayout };
+export { SecondaryLayout };
