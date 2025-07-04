@@ -14,7 +14,7 @@ const AnnouncementBar: FC<AnnouncementBarProps> = ({ onClose }) => {
         <IconDelivery /> Безкоштовна доставка від 1000 грн.
         <button
           onClick={onClose}
-          className="absolute right-6 text-main transition-colors duration-default hover:text-light-grey"
+          className="absolute right-6 text-white transition-colors duration-default hover:text-light-grey"
         >
           <IconClose width={16} />
         </button>
