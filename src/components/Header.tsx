@@ -1,6 +1,6 @@
 import clsx from 'clsx';
 import { type FC, useEffect, useRef, useState } from 'react';
-import { NavLink } from 'react-router-dom';
+import { href, NavLink } from 'react-router-dom';
 
 import IconBag from '../assets/images/icons/icon-bag.svg?react';
 import IconClose from '../assets/images/icons/icon-close.svg?react';
@@ -9,6 +9,7 @@ import IconProfile from '../assets/images/icons/icon-profile.svg?react';
 import IconSearch from '../assets/images/icons/icon-search.svg?react';
 import IconVector from '../assets/images/icons/icon-vector.svg?react';
 import Logo from '../assets/images/logo-lucky.svg?react';
+import { GENDERS } from '../constants/genders';
 import { PATH_PAGES } from '../constants/pathPages';
 import { useToggle } from '../hooks/useToggle';
 
@@ -106,10 +107,16 @@ const Header: FC = () => {
       </nav>
 
       <div className="flex text-2xl uppercase text-grey">
-        <NavLink to={PATH_PAGES.WOMAN} className={setActiveClass}>
+        <NavLink
+          to={href(PATH_PAGES.GENDER_PARAM, { gender: GENDERS.WOMAN })}
+          className={setActiveClass}
+        >
           Жіноче
         </NavLink>
-        <NavLink to={PATH_PAGES.MAN} className={setActiveClass}>
+        <NavLink
+          to={href(PATH_PAGES.GENDER_PARAM, { gender: GENDERS.MAN })}
+          className={setActiveClass}
+        >
           Чоловіче
         </NavLink>
       </div>
