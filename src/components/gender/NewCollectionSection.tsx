@@ -2,6 +2,7 @@ import 'swiper/css';
 import 'swiper/css/pagination';
 
 import { type FC, useRef, useState } from 'react';
+import { href } from 'react-router-dom';
 import type { Swiper as SwiperType } from 'swiper';
 import { A11y, Autoplay, Keyboard, Pagination } from 'swiper/modules';
 import { Swiper, SwiperSlide } from 'swiper/react';
@@ -63,8 +64,16 @@ const NewCollectionSection: FC<NewCollectionSectionProps> = ({ gender }) => {
         ))}
       </Swiper>
       <div className="flex justify-center">
-        {gender === GENDERS.WOMAN && <ViewAllLink link={PATH_PAGES.WOMAN} />}
-        {gender === GENDERS.MAN && <ViewAllLink link={PATH_PAGES.MAN} />}
+        {gender === GENDERS.WOMAN && (
+          <ViewAllLink
+            link={href(PATH_PAGES.GENDER_PARAM, { gender: GENDERS.WOMAN })}
+          />
+        )}
+        {gender === GENDERS.MAN && (
+          <ViewAllLink
+            link={href(PATH_PAGES.GENDER_PARAM, { gender: GENDERS.MAN })}
+          />
+        )}
       </div>
     </div>
   );
