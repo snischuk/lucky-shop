@@ -65,9 +65,9 @@ const Header: FC = () => {
           <button
             ref={buttonRef}
             onClick={isOpen ? close : open}
-            className="duration-300"
+            className="text-light-black transition-colors duration-default hover:text-grey"
           >
-            {isOpen ? <IconClose /> : <IconVector />}
+            {isOpen ? <IconClose width={42} /> : <IconVector />}
           </button>
         </div>
         {isOpen && (

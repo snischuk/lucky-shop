@@ -1,6 +1,6 @@
 import type { FC } from 'react';
 
-import IconClose from '../assets/images/icons/icon-close-white.svg?react';
+import IconClose from '../assets/images/icons/icon-close.svg?react';
 import IconDelivery from '../assets/images/icons/icon-delivery.svg?react';
 
 interface AnnouncementBarProps {
