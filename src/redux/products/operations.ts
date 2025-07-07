@@ -7,3 +7,11 @@ export const fetchProduct = createAsyncThunk('product/all', async () => {
   const response = await axios.get(`${BASE_URL}/product/all`);
   return response.data;
 });
+
+export const fetchProductBySku = createAsyncThunk(
+  'product/fetchBySku',
+  async (sku: string) => {
+    const response = await axios.get(`${BASE_URL}/product/${sku}`);
+    return response.data;
+  },
+);
