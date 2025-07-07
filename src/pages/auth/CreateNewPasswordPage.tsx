@@ -41,7 +41,7 @@ const CreateNewPasswordPage: FC = () => {
   };
 
   return (
-    <div className="flex w-full">
+    <div className="flex w-full justify-between">
       <div className="align-center flex w-7/12 flex-shrink-0 flex-col items-center gap-7 px-7 py-16">
         <UiTitle>Створити новий пароль</UiTitle>
 

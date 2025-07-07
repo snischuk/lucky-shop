@@ -8,7 +8,7 @@ import { PATH_PAGES } from '../../constants/pathPages';
 
 const UnsubscribeCancelPage: FC = () => {
   return (
-    <div className="flex w-full">
+    <div className="flex w-full justify-between">
       <div className="flex w-7/12 flex-shrink-0 flex-col gap-6 px-7 py-16">
         <UiTitle>Дякуємо, що залишаєтесь з Lucky!</UiTitle>
 

@@ -16,9 +16,11 @@ const SecondaryLayout: FC = () => {
       </div>
 
       <main
-        className={`mx-auto flex min-h-screen max-w-custom-1440 flex-col transition-[padding-top] duration-[1000ms] ease-in-out ${showBanner ? 'pt-[140px]' : 'pt-[100px]'}`}
+        className={`flex min-h-screen flex-col bg-main transition-[padding-top] duration-default ease-in-out ${showBanner ? 'pt-[140px]' : 'pt-[100px]'}`}
       >
-        <Outlet />
+        <div className="mx-auto w-full max-w-custom-1440">
+          <Outlet />
+        </div>
       </main>
     </>
   );
