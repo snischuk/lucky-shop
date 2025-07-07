@@ -20,7 +20,7 @@ const MainLayout: FC = () => {
       </div>
 
       <div
-        className={`mx-auto flex min-h-screen flex-col transition-all duration-default ease-in-out ${showBanner ? 'pt-[140px]' : 'pt-[100px]'}`}
+        className={`mx-auto flex min-h-screen flex-col transition-[padding-top] duration-default ease-in-out ${showBanner ? 'pt-[140px]' : 'pt-[100px]'}`}
       >
         <main className="flex grow flex-col bg-main">
           <Suspense
