@@ -31,56 +31,73 @@ const AuthChoicePage = lazy(() =>
     default: module.AuthChoicePage,
   })),
 );
+
 const CreateNewPasswordPage = lazy(() =>
   import('../pages/auth/CreateNewPasswordPage').then((module) => ({
     default: module.CreateNewPasswordPage,
   })),
 );
+
 const ForgotPasswordPage = lazy(() =>
   import('../pages/auth/ForgotPasswordPage').then((module) => ({
     default: module.ForgotPasswordPage,
   })),
 );
+
 const LoginPage = lazy(() =>
   import('../pages/auth/LoginPage').then((module) => ({
     default: module.LoginPage,
   })),
 );
+
 const RegisterPage = lazy(() =>
   import('../pages/auth/RegisterPage').then((module) => ({
     default: module.RegisterPage,
   })),
 );
+
 const ResendPasswordPage = lazy(() =>
   import('../pages/auth/ResendPasswordPage').then((module) => ({
     default: module.ResendPasswordPage,
   })),
 );
+
 const GenderHomePage = lazy(() =>
   import('../pages/GenderHomePage').then((module) => ({
     default: module.GenderHomePage,
   })),
 );
+
 const MainHomePage = lazy(() =>
   import('../pages/MainHomePage').then((module) => ({
     default: module.MainHomePage,
   })),
 );
+
+const ServerErrorPage = lazy(() =>
+  import('../pages/errors/ServerErrorPage').then((module) => ({
+    default: module.ServerErrorPage,
+  })),
+);
+
 const NotFoundPage = lazy(() =>
-  import('../pages/NotFoundPage').then((module) => ({
+  import('../pages/errors/NotFoundPage').then((module) => ({
     default: module.NotFoundPage,
   })),
 );
+
 const ProductDetailPage = lazy(() =>
   import('../pages/products/ProductDetailPage').then((module) => ({
     default: module.ProductDetailPage,
   })),
 );
+
 const ProductsPage = lazy(() =>
   import('../pages/products/ProductsPage').then((module) => ({
     default: module.ProductsPage,
   })),
 );
+
 const CartPage = lazy(() =>
   import('../pages/CartPage').then((module) => ({
     default: module.CartPage,
@@ -104,6 +121,8 @@ const AppRouter: FC = () => {
               element={<ProductDetailPage />}
             />
           </Route>
+
+          <Route path={PATH_PAGES.SERVER_ERROR} element={<ServerErrorPage />} />
 
           <Route path={PATH_PAGES.NOT_FOUND} element={<NotFoundPage />} />
           <Route
