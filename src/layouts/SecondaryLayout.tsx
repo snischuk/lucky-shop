@@ -10,7 +10,7 @@ const SecondaryLayout: FC = () => {
 
   return (
     <>
-      <div className="fixed left-1/2 z-10 flex w-full -translate-x-1/2 flex-col backdrop-blur">
+      <div className="fixed left-1/2 z-10 flex w-full -translate-x-1/2 flex-col">
         {showBanner && <AnnouncementBar onClose={() => setShowBanner(false)} />}
         <Header />
       </div>
