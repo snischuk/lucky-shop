@@ -1,9 +1,15 @@
 export const PATH_PAGES = {
   MAIN: '/',
+
+  // UNAUTHORIZED: '/401',
+  // FORBIDDEN: '/403',
   NOT_FOUND: '/404',
+  SERVER_ERROR: '/500',
+
   GENDER_PARAM: '/:gender',
   GENDER_PRODUCTS: '/:gender/products',
   GENDER_PRODUCT_ID_PARAM: '/:gender/products/:productId',
+
   CART: '/cart',
   // CHECKOUT: '/checkout',
   // ACCOUNT: '/account',
@@ -24,6 +30,7 @@ export const PATH_PAGES = {
   CREATE_NEW_PASSWORD: '/auth/create-new-password',
 
   PRIVACY_POLICY: '/privacy-policy',
+  TERMS_OF_SERVICE: '/terms-of-service',
 
   UNSUBSCRIPTION_CONFIRM: '/unsubscribe',
   UNSUBSCRIPTION_CANCEL: '/unsubscribe/cancel',

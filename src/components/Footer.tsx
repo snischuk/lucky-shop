@@ -6,6 +6,7 @@ import IconFacebook from '../assets/images/icons/icon-facebook.svg?react';
 import IconInstagram from '../assets/images/icons/icon-instagram.svg?react';
 import IconYoutube from '../assets/images/icons/icon-youtube.svg?react';
 import Logo from '../assets/images/logo-lucky.svg?react';
+import { PATH_PAGES } from '../constants/pathPages';
 import type { FooterNavigationLink } from '../types/FooterNavigationLink';
 
 interface FooterProps {
@@ -102,7 +103,7 @@ const Footer: FC<FooterProps> = ({ navigationLinks }) => (
         <ul className="flex justify-end gap-5">
           <li>
             <Link
-              to="/terms-of-service"
+              to={PATH_PAGES.TERMS_OF_SERVICE}
               className="border-b border-transparent transition-colors duration-default hover:border-black hover:text-black"
             >
               Terms of Service
@@ -110,7 +111,7 @@ const Footer: FC<FooterProps> = ({ navigationLinks }) => (
           </li>
           <li>
             <Link
-              to="/privacy-policy"
+              to={PATH_PAGES.PRIVACY_POLICY}
               className="border-b border-transparent transition-colors duration-default hover:border-black hover:text-black"
             >
               Privacy Policy
