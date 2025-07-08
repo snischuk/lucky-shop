@@ -7,7 +7,7 @@ import { Footer } from '../components/Footer';
 import { Header } from '../components/Header';
 import { SubscribeSection } from '../components/SubscribeSection';
 import { UiLoader } from '../components/ui/UiLoader';
-import { NAVIGATION_LINKS } from '../constants/navigationLinks';
+import { FOOTER_NAVIGATION_LINKS } from '../constants/footerNavigationLinks';
 
 const MainLayout: FC = () => {
   const [showBanner, setShowBanner] = useState(true);
@@ -30,7 +30,7 @@ const MainLayout: FC = () => {
           </Suspense>
         </main>
         <SubscribeSection />
-        <Footer navigationLinks={NAVIGATION_LINKS} />
+        <Footer navigationLinks={FOOTER_NAVIGATION_LINKS} />
       </div>
     </>
   );

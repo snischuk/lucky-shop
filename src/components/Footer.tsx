@@ -6,10 +6,10 @@ import IconFacebook from '../assets/images/icons/icon-facebook.svg?react';
 import IconInstagram from '../assets/images/icons/icon-instagram.svg?react';
 import IconYoutube from '../assets/images/icons/icon-youtube.svg?react';
 import Logo from '../assets/images/logo-lucky.svg?react';
-import type { NavigationLink } from '../types/NavigationLink';
+import type { FooterNavigationLink } from '../types/FooterNavigationLink';
 
 interface FooterProps {
-  navigationLinks: NavigationLink[];
+  navigationLinks: FooterNavigationLink[];
 }
 
 const Footer: FC<FooterProps> = ({ navigationLinks }) => (
@@ -25,7 +25,7 @@ const Footer: FC<FooterProps> = ({ navigationLinks }) => (
             <li>
               <a
                 className="text-grey transition-colors duration-default hover:text-light-grey"
-                href="#"
+                href="https://www.facebook.com/"
                 target="_blank"
                 rel="noopener noreferrer"
               >
@@ -35,7 +35,7 @@ const Footer: FC<FooterProps> = ({ navigationLinks }) => (
             <li>
               <a
                 className="text-grey transition-colors duration-default hover:text-light-grey"
-                href="#"
+                href="https://www.instagram.com/"
                 target="_blank"
                 rel="noopener noreferrer"
               >
@@ -45,7 +45,7 @@ const Footer: FC<FooterProps> = ({ navigationLinks }) => (
             <li>
               <a
                 className="text-grey transition-colors duration-default hover:text-light-grey"
-                href="#"
+                href="https://www.youtube.com/"
                 target="_blank"
                 rel="noopener noreferrer"
               >
@@ -76,9 +76,10 @@ const Footer: FC<FooterProps> = ({ navigationLinks }) => (
                   to={to}
                   className={({ isActive }) =>
                     clsx(
-                      'transition-colors duration-default hover:text-black',
+                      'border-b border-transparent transition-colors duration-default hover:border-black hover:text-black',
                       {
-                        'text-orange': isActive,
+                        'pointer-events-none border-orange text-orange':
+                          isActive,
                       },
                     )
                   }
@@ -102,7 +103,7 @@ const Footer: FC<FooterProps> = ({ navigationLinks }) => (
           <li>
             <Link
               to="/terms-of-service"
-              className="transition-colors duration-default hover:text-black"
+              className="border-b border-transparent transition-colors duration-default hover:border-black hover:text-black"
             >
               Terms of Service
             </Link>
@@ -110,7 +111,7 @@ const Footer: FC<FooterProps> = ({ navigationLinks }) => (
           <li>
             <Link
               to="/privacy-policy"
-              className="transition-colors duration-default hover:text-black"
+              className="border-b border-transparent transition-colors duration-default hover:border-black hover:text-black"
             >
               Privacy Policy
             </Link>
