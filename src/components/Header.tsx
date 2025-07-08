@@ -56,7 +56,7 @@ const Header: FC = () => {
   }, [isOpen, close]);
 
   return (
-    <header className="relative mx-auto flex w-full max-w-custom-1440 items-center justify-between px-6 font-family-secondary">
+    <header className="relative mx-auto flex w-full max-w-custom-1440 items-center justify-between bg-[rgba(240,240,240,0.6)] px-6 font-family-secondary backdrop-blur-[5px]">
       <nav className="flex items-center gap-8 py-4">
         <NavLink to="/">
           <Logo width="223" />
