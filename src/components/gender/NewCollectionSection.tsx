@@ -1,7 +1,8 @@
 import 'swiper/css';
 import 'swiper/css/pagination';
 
-import { type FC, useRef, useState } from 'react';
+import { type FC, useEffect, useRef, useState } from 'react';
+import { useSelector } from 'react-redux';
 import { href } from 'react-router-dom';
 import type { Swiper as SwiperType } from 'swiper';
 import { A11y, Autoplay, Keyboard, Pagination } from 'swiper/modules';
@@ -9,7 +10,11 @@ import { Swiper, SwiperSlide } from 'swiper/react';
 
 import { GENDERS } from '../../constants/genders';
 import { PATH_PAGES } from '../../constants/pathPages';
+import { useTypedDispatch } from '../../hooks/useRedux';
+import { fetchProduct } from '../../redux/products/operations';
+import { selectProducts } from '../../redux/products/selectors';
 import type { Gender } from '../../types/Gender';
+import { ProductCard } from '../products/ProductCard';
 import { SlideNextButton } from '../ui/SlideNextButton';
 import { SlidePrevButton } from '../ui/SlidePrevButton';
 import { UiTitle } from '../ui/UiTitle';
@@ -24,6 +29,12 @@ const NewCollectionSection: FC<NewCollectionSectionProps> = ({ gender }) => {
 
   const [isBeginning, setIsBeginning] = useState(true);
   const [isEnd, setIsEnd] = useState(false);
+
+  const products = useSelector(selectProducts);
+  const dispatch = useTypedDispatch();
+  useEffect(() => {
+    dispatch(fetchProduct());
+  }, [dispatch]);
 
   return (
     <div className="relative z-[0] mx-auto w-full max-w-custom-1440 pb-[70px] pt-[140px]">
@@ -52,14 +63,12 @@ const NewCollectionSection: FC<NewCollectionSectionProps> = ({ gender }) => {
         }}
         className="mb-[32px] h-[744px]"
       >
-        {[1, 2, 3, 4, 5, 6, 7, 8, 9].map((n) => (
+        {products.map((product) => (
           <SwiperSlide
-            key={n}
+            key={product.sku}
             className="flex flex-row items-center justify-center"
           >
-            <div className="flex h-[744px] w-[448px] items-center justify-center bg-yellow-400">
-              Slide {n}
-            </div>
+            <ProductCard item={product} />
           </SwiperSlide>
         ))}
       </Swiper>
