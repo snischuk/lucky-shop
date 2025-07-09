@@ -3,6 +3,8 @@ import { Navigate } from 'react-router-dom';
 
 import { GallerySection } from '../components/gender/GallerySection';
 import { NewCollectionSection } from '../components/gender/NewCollectionSection';
+import { SalesSection } from '../components/gender/SalesSection';
+import { TopSalesSection } from '../components/gender/TopSalesSection';
 import { GenderHeroSection } from '../components/GenderHeroSection';
 import { ProductsCategories } from '../components/products/ProductsCategories';
 import { PATH_PAGES } from '../constants/pathPages';
@@ -20,11 +22,9 @@ const GenderHomePage: FC = () => {
       <GenderHeroSection gender={gender} />
       <ProductsCategories gender={gender} categories={categories} />
       <NewCollectionSection gender={gender} />
+      <TopSalesSection gender={gender} />
+      <SalesSection gender={gender} />
       <GallerySection gender={gender} />
-      {/* possibly need to .map() this: */}
-      {/* {<NewCollectionSection/>}
-      {<BestSellersSection/>}
-      {<SalesSection/>} */}
     </>
   );
 };
