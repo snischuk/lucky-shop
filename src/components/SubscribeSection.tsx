@@ -76,8 +76,8 @@ const SubscribeSection: FC = () => {
 
   return (
     <>
-      <section className="bg-light-black py-10">
-        <div className="mx-auto flex max-w-custom-1440 flex-wrap items-center justify-between gap-4 px-[114px]">
+      <section>
+        <div className="mx-auto flex max-w-custom-1440 flex-wrap items-center justify-between gap-4 bg-light-black px-[114px] py-10">
           <UiTitle className="max-w-[587px] text-main" as="h2">
             Залишайся з нами, щоб першим отримувати пропозиції
           </UiTitle>

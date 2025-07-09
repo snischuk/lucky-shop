@@ -20,11 +20,11 @@ import { SlidePrevButton } from '../ui/SlidePrevButton';
 import { UiTitle } from '../ui/UiTitle';
 import { ViewAllLink } from './ViewAllLink';
 
-interface NewCollectionSectionProps {
+interface TopSalesSectionProps {
   gender: Gender;
 }
 
-const NewCollectionSection: FC<NewCollectionSectionProps> = ({ gender }) => {
+const TopSalesSection: FC<TopSalesSectionProps> = ({ gender }) => {
   const swiperRef = useRef<SwiperType | null>(null);
 
   const [isBeginning, setIsBeginning] = useState(true);
@@ -41,12 +41,12 @@ const NewCollectionSection: FC<NewCollectionSectionProps> = ({ gender }) => {
   );
 
   return (
-    <div className="relative z-[0] mx-auto w-full max-w-custom-1440 px-6 pb-[70px] pt-[140px]">
+    <div className="relative z-[0] mx-auto w-full max-w-custom-1440 px-6 py-[70px]">
       <UiTitle className="mb-[80px] text-center" as="h2">
-        Нова колекція
+        Топ продажів
       </UiTitle>
 
-      <div className="absolute right-4 top-[166px] mb-20 flex justify-end">
+      <div className="absolute right-4 top-[96px] mb-20 flex justify-end">
         <SlidePrevButton swiperRef={swiperRef} disabled={isBeginning} />
         <SlideNextButton swiperRef={swiperRef} disabled={isEnd} />
       </div>
@@ -81,12 +81,12 @@ const NewCollectionSection: FC<NewCollectionSectionProps> = ({ gender }) => {
       <div className="flex justify-center">
         {gender === GENDERS.WOMAN && (
           <ViewAllLink
-            link={href(PATH_PAGES.GENDER_NEW, { gender: GENDERS.WOMAN })}
+            link={href(PATH_PAGES.GENDER_TOP, { gender: GENDERS.WOMAN })}
           />
         )}
         {gender === GENDERS.MAN && (
           <ViewAllLink
-            link={href(PATH_PAGES.GENDER_NEW, { gender: GENDERS.MAN })}
+            link={href(PATH_PAGES.GENDER_TOP, { gender: GENDERS.MAN })}
           />
         )}
       </div>
@@ -94,4 +94,4 @@ const NewCollectionSection: FC<NewCollectionSectionProps> = ({ gender }) => {
   );
 };
 
-export { NewCollectionSection };
+export { TopSalesSection };
