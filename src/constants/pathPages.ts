@@ -1,6 +1,5 @@
 export const PATH_PAGES = {
   MAIN: '/',
-
   // UNAUTHORIZED: '/401',
   // FORBIDDEN: '/403',
   NOT_FOUND: '/404',
@@ -9,19 +8,14 @@ export const PATH_PAGES = {
   GENDER_PARAM: '/:gender',
   GENDER_PRODUCTS: '/:gender/products',
   GENDER_PRODUCT_ID_PARAM: '/:gender/products/:productId',
+  GENDER_NEW: '/:gender/new',
+  GENDER_TOP: '/:gender/top',
+  GENDER_SALE: '/:gender/sale',
 
+  // WISH_LIST: '/wishlist',
   CART: '/cart',
-  // CHECKOUT: '/checkout',
-  // ACCOUNT: '/account',
-  // ACCOUNT_PROFILE: '/account/profile',
-  // ACCOUNT_ORDERS: '/account/orders',
-  // ACCOUNT_SETTINGS: '/account/settings',
-  // ADMIN: '/admin',
-  // ADMIN_PRODUCTS: '/admin/products',
-  // ADMIN_PRODUCTS_ID: '/admin/products/:productId',
-  // ADMIN_ORDERS: '/admin/orders',
-  // ADMIN_USERS: '/admin/users',
-  // ADMIN_USERS_ID: '/admin/users/:userId',
+  CABINET: '/cabinet',
+
   AUTH: '/auth',
   REGISTER: '/auth/register',
   LOGIN: '/auth/login',

@@ -1,23 +1,47 @@
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
 
+export interface LoginRequest {
+  email: string;
+  password: string;
+}
+
+export interface LoginResponse {
+  token: string;
+  role: string;
+  message?: string;
+}
+
+export interface RegisterRequest {
+  email: string;
+  password: string;
+  firstName?: string;
+  lastName?: string;
+}
+
+export interface RegisterResponse {
+  token: string;
+  role: string;
+  message?: string;
+}
 export const authApi = createApi({
   reducerPath: 'authApi',
-  baseQuery: fetchBaseQuery({ baseUrl: 'https://api.example.com/' }),
+  baseQuery: fetchBaseQuery({ baseUrl: 'https://gw-retail.duckdns.org/' }),
   endpoints: (builder) => ({
-    login: builder.mutation<
-      { token: string; user: { name: string; email: string } },
-      { email: string; password: string }
-    >({
-      query: (credentials) => ({
-        url: 'login',
+    login: builder.mutation<LoginResponse, LoginRequest>({
+      query: ({ email, password }) => ({
+        url: 'auth/login',
         method: 'POST',
-        body: credentials,
+        body: { email, password },
       }),
     }),
-    getCurrentUser: builder.query<{ name: string; email: string }, void>({
-      query: () => 'current-user',
+    register: builder.mutation<RegisterResponse, RegisterRequest>({
+      query: ({ email, password }) => ({
+        url: 'auth/register',
+        method: 'POST',
+        body: { email, password },
+      }),
     }),
   }),
 });
 
-export const { useLoginMutation, useGetCurrentUserQuery } = authApi;
+export const { useLoginMutation, useRegisterMutation } = authApi;
