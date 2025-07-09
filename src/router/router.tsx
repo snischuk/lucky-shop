@@ -7,6 +7,7 @@ import { PATH_PAGES } from '../constants/pathPages';
 import { MainLayout } from '../layouts/MainLayout';
 import { ProductsLayout } from '../layouts/ProductsLayout';
 import { SecondaryLayout } from '../layouts/SecondaryLayout';
+import { ProtectedRoute } from './ProtectedRoute';
 
 const UnsubscribeConfirmPage = lazy(() =>
   import('../pages/unsubscribe/UnsubscribeConfirmPage').then((module) => ({
@@ -104,6 +105,12 @@ const CartPage = lazy(() =>
   })),
 );
 
+const CabinetPage = lazy(() =>
+  import('../pages/CabinetPage').then((module) => ({
+    default: module.CabinetPage,
+  })),
+);
+
 const AppRouter: FC = () => {
   return (
     <Suspense fallback={<UiLoader mode="fullscreen" size={80} />}>
@@ -112,8 +119,6 @@ const AppRouter: FC = () => {
           <Route index element={<MainHomePage />} />
 
           <Route path={PATH_PAGES.GENDER_PARAM} element={<GenderHomePage />} />
-          <Route path={PATH_PAGES.CART} element={<CartPage />} />
-
           <Route path={PATH_PAGES.GENDER_PRODUCTS} element={<ProductsLayout />}>
             <Route index element={<ProductsPage />} />
             <Route
@@ -122,8 +127,13 @@ const AppRouter: FC = () => {
             />
           </Route>
 
-          <Route path={PATH_PAGES.SERVER_ERROR} element={<ServerErrorPage />} />
+          {/* <Route path={PATH_PAGES.WISH_LIST} element={<WishListPage />} /> */}
+          <Route path={PATH_PAGES.CART} element={<CartPage />} />
+          <Route element={<ProtectedRoute />}>
+            <Route path={PATH_PAGES.CABINET} element={<CabinetPage />} />
+          </Route>
 
+          <Route path={PATH_PAGES.SERVER_ERROR} element={<ServerErrorPage />} />
           <Route path={PATH_PAGES.NOT_FOUND} element={<NotFoundPage />} />
           <Route
             path="*"

@@ -13,14 +13,14 @@ import storage from 'redux-persist/lib/storage';
 
 import { authApi } from '../services/authApi';
 import { notificationApi } from '../services/notificationApi';
-import { authReducer } from './auth/slice';
+import { authReducer } from './authSlice';
 import { cartReducer } from './cart/slice';
 import { productReducer } from './products/slice';
 
 const authPersistConfig = {
   key: 'auth',
   storage,
-  whitelist: ['token', 'user', 'isLoggedIn'],
+  whitelist: ['token', 'role'],
 };
 
 const persistedAuthReducer = persistReducer(authPersistConfig, authReducer);
