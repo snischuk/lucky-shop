@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom';
 import IconHeart from '../../assets/images/icons/icon-heart.svg?react';
 import IconHeartActive from '../../assets/images/icons/icon-heart-active.svg?react';
 import type { Product } from '../../types/Product';
-import { UiButton } from '../ui/UiButton';
+import { UiLink } from '../ui/UiLink';
 
 type ProductCardProps = {
   item: Product;
@@ -37,14 +37,14 @@ const ProductCard: FC<ProductCardProps> = ({ item }) => {
           )}
         </div>
 
-        <UiButton
+        <UiLink
           as={Link}
           to={`${item.gender}/products/${item.sku}`}
           variant="filled"
           className="mx-auto w-[260px]"
         >
           Перейти
-        </UiButton>
+        </UiLink>
       </div>
 
       <button

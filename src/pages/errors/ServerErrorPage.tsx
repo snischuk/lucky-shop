@@ -2,7 +2,7 @@ import type { FC } from 'react';
 import { Link } from 'react-router-dom';
 
 import img500 from '../../assets/images/error-page/500.png';
-import { UiButton } from '../../components/ui/UiButton';
+import { UiLink } from '../../components/ui/UiLink';
 import { PATH_PAGES } from '../../constants/pathPages';
 
 const ServerErrorPage: FC = () => {
@@ -28,13 +28,14 @@ const ServerErrorPage: FC = () => {
         </div>
       </div>
 
-      <UiButton
+      <UiLink
         className="mt-[34px] text-[24px] uppercase leading-[1.175]"
         as={Link}
         to={PATH_PAGES.MAIN}
+        variant="filled"
       >
         Повернутися на головну сторінку
-      </UiButton>
+      </UiLink>
     </div>
   );
 };
