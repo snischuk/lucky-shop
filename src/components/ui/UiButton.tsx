@@ -1,11 +1,20 @@
 import clsx from 'clsx';
-import type { AnchorHTMLAttributes, ButtonHTMLAttributes, FC } from 'react';
-import type { LinkProps } from 'react-router-dom';
-import { Link } from 'react-router-dom';
+import type {
+  AnchorHTMLAttributes,
+  ButtonHTMLAttributes,
+  FC,
+  ReactNode,
+} from 'react';
+import type { LinkProps, NavLinkProps } from 'react-router-dom';
+import { Link, NavLink } from 'react-router-dom';
 
+type Variant = 'default' | 'bordered' | 'filled' | 'iconOnly';
+type IconPosition = 'before' | 'after';
 interface BaseProps {
   className?: string;
-  variant?: 'contained' | 'outlined';
+  icon?: ReactNode;
+  iconPosition?: IconPosition;
+  variant?: Variant;
 }
 
 interface UiButtonButtonProps
@@ -24,53 +33,103 @@ interface UiButtonRouterLinkProps extends BaseProps, LinkProps {
   as: typeof Link;
 }
 
+interface UiButtonNavLinkProps
+  extends Omit<BaseProps, 'className'>,
+    NavLinkProps {
+  as: typeof NavLink;
+  className?: string | ((props: { isActive: boolean }) => string);
+}
+
 type UiButtonProps =
   | UiButtonButtonProps
   | UiButtonAnchorProps
-  | UiButtonRouterLinkProps;
+  | UiButtonRouterLinkProps
+  | UiButtonNavLinkProps;
 
-const variants = {
-  contained: 'bg-light-black text-white hover:text-orange',
-  outlined:
-    'bg-transparent text-black border border-light-black hover:text-orange hover:border-orange',
+const variantClasses = {
+  default:
+    'text-light-black border-b border-transparent hover:border-black hover:text-black',
+  bordered:
+    'px-6 py-3 text-light-black border border-black text-black hover:border-orange hover:text-orange',
+  filled: 'px-6 py-3 text-light-black bg-black text-white hover:text-orange',
+  iconOnly: 'text-grey hover:text-light-black',
 };
 
 export const UiButton: FC<UiButtonProps> = ({
   children,
   className,
   as,
-  variant = 'contained',
+  icon,
+  iconPosition,
+  variant = 'default',
   ...props
 }) => {
-  const baseClasses =
-    'w-full px-6 py-[14px] flex items-center justify-center font-family-secondary text-[20px] leading-[1.27] transition-colors duration-default';
+  const content = (
+    <>
+      {icon && !children && icon}
+      {icon && children && iconPosition === 'before' && icon}
+      {children}
+      {icon && children && iconPosition === 'after' && icon}
+    </>
+  );
 
-  const variantClasses = variants[variant] || '';
-
-  const classes = clsx(baseClasses, variantClasses, className);
+  const baseClass = clsx(
+    'inline-flex items-center justify-center gap-1 font-family-secondary transition-colors duration-default',
+    variantClasses[variant],
+    className,
+  );
 
   if (as === 'a') {
-    const anchorProps = props as AnchorHTMLAttributes<HTMLAnchorElement>;
     return (
-      <a className={classes} {...anchorProps}>
-        {children}
+      <a
+        className={baseClass}
+        {...(props as AnchorHTMLAttributes<HTMLAnchorElement>)}
+      >
+        {content}
       </a>
     );
   }
 
   if (as === Link) {
-    const linkProps = props as LinkProps;
     return (
-      <Link className={classes} {...linkProps}>
-        {children}
+      <Link className={baseClass} {...(props as LinkProps)}>
+        {content}
       </Link>
     );
   }
 
-  const buttonProps = props as ButtonHTMLAttributes<HTMLButtonElement>;
+  if (as === NavLink) {
+    const navLinkProps = props as NavLinkProps;
+    return (
+      <NavLink
+        {...navLinkProps}
+        className={({ isActive }) =>
+          clsx(
+            baseClass,
+            variant === 'iconOnly' &&
+              isActive &&
+              'pointer-events-none text-red',
+            variant !== 'iconOnly' &&
+              isActive &&
+              'pointer-events-none border-orange text-orange',
+
+            typeof className === 'function'
+              ? className({ isActive })
+              : className,
+          )
+        }
+      >
+        {content}
+      </NavLink>
+    );
+  }
+
   return (
-    <button className={classes} {...buttonProps}>
-      {children}
+    <button
+      className={baseClass}
+      {...(props as ButtonHTMLAttributes<HTMLButtonElement>)}
+    >
+      {content}
     </button>
   );
 };
