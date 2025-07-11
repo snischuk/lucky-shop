@@ -1,50 +1,15 @@
 import clsx from 'clsx';
-import type {
-  AnchorHTMLAttributes,
-  ButtonHTMLAttributes,
-  FC,
-  ReactNode,
-} from 'react';
-import type { LinkProps, NavLinkProps } from 'react-router-dom';
-import { Link, NavLink } from 'react-router-dom';
+import type { ButtonHTMLAttributes, FC, ReactNode } from 'react';
 
 type Variant = 'default' | 'bordered' | 'filled' | 'iconOnly';
 type IconPosition = 'before' | 'after';
-interface BaseProps {
+
+interface UiButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
   className?: string;
   icon?: ReactNode;
   iconPosition?: IconPosition;
   variant?: Variant;
 }
-
-interface UiButtonButtonProps
-  extends BaseProps,
-    ButtonHTMLAttributes<HTMLButtonElement> {
-  as: 'button';
-}
-
-interface UiButtonAnchorProps
-  extends BaseProps,
-    AnchorHTMLAttributes<HTMLAnchorElement> {
-  as: 'a';
-}
-
-interface UiButtonRouterLinkProps extends BaseProps, LinkProps {
-  as: typeof Link;
-}
-
-interface UiButtonNavLinkProps
-  extends Omit<BaseProps, 'className'>,
-    NavLinkProps {
-  as: typeof NavLink;
-  className?: string | ((props: { isActive: boolean }) => string);
-}
-
-type UiButtonProps =
-  | UiButtonButtonProps
-  | UiButtonAnchorProps
-  | UiButtonRouterLinkProps
-  | UiButtonNavLinkProps;
 
 const variantClasses = {
   default:
@@ -58,7 +23,6 @@ const variantClasses = {
 export const UiButton: FC<UiButtonProps> = ({
   children,
   className,
-  as,
   icon,
   iconPosition,
   variant = 'default',
@@ -79,56 +43,8 @@ export const UiButton: FC<UiButtonProps> = ({
     className,
   );
 
-  if (as === 'a') {
-    return (
-      <a
-        className={baseClass}
-        {...(props as AnchorHTMLAttributes<HTMLAnchorElement>)}
-      >
-        {content}
-      </a>
-    );
-  }
-
-  if (as === Link) {
-    return (
-      <Link className={baseClass} {...(props as LinkProps)}>
-        {content}
-      </Link>
-    );
-  }
-
-  if (as === NavLink) {
-    const navLinkProps = props as NavLinkProps;
-    return (
-      <NavLink
-        {...navLinkProps}
-        className={({ isActive }) =>
-          clsx(
-            baseClass,
-            variant === 'iconOnly' &&
-              isActive &&
-              'pointer-events-none text-red',
-            variant !== 'iconOnly' &&
-              isActive &&
-              'pointer-events-none border-orange text-orange',
-
-            typeof className === 'function'
-              ? className({ isActive })
-              : className,
-          )
-        }
-      >
-        {content}
-      </NavLink>
-    );
-  }
-
   return (
-    <button
-      className={baseClass}
-      {...(props as ButtonHTMLAttributes<HTMLButtonElement>)}
-    >
+    <button className={baseClass} {...props}>
       {content}
     </button>
   );
