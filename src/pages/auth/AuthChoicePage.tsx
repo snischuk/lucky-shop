@@ -2,7 +2,7 @@ import type { FC } from 'react';
 import { Link } from 'react-router-dom';
 
 import choice from '../../assets/images/auth/choice.jpg';
-import { UiButton } from '../../components/ui/UiButton';
+import { UiLink } from '../../components/ui/UiLink';
 import { UiTitle } from '../../components/ui/UiTitle';
 import { PATH_PAGES } from '../../constants/pathPages';
 
@@ -17,23 +17,23 @@ const AuthChoicePage: FC = () => {
           шопінгом і доступом до всіх наших послуг
         </p>
 
-        <UiButton
+        <UiLink
           className="max-w-[330px]"
           variant="filled"
           as={Link}
           to={PATH_PAGES.LOGIN}
         >
           Увійти
-        </UiButton>
+        </UiLink>
 
-        <UiButton
+        <UiLink
           className="max-w-[330px]"
           variant="bordered"
           as={Link}
           to={PATH_PAGES.REGISTER}
         >
           Зареєструватися
-        </UiButton>
+        </UiLink>
       </div>
 
       <img

@@ -287,9 +287,8 @@ const RegisterPage: FC = () => {
           />
 
           <UiButton
-            className="mt-[10px]"
+            className="mt-[10px] w-full"
             variant="filled"
-            as="button"
             type="submit"
             disabled={isSubmitting}
           >
@@ -297,12 +296,12 @@ const RegisterPage: FC = () => {
           </UiButton>
 
           <UiButton
-            className="relative mt-3"
+            className="mt-3 w-full gap-5"
             variant="bordered"
-            as="button"
             type="button"
+            icon={<IconGoogle />}
+            iconPosition="before"
           >
-            <IconGoogle className="absolute left-6 top-1/2 -translate-y-1/2" />
             Зареєструватися через Google
           </UiButton>
         </form>

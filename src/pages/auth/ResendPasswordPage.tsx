@@ -75,7 +75,6 @@ const ResendPasswordPage: FC = () => {
           <UiButton
             className="max-w-[424px]"
             variant="filled"
-            as="button"
             type="submit"
             disabled={isSubmitting}
           >

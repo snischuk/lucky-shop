@@ -6,6 +6,7 @@ import type { InferType } from 'yup';
 
 import forgotPassword from '../../assets/images/auth/forgot-password.jpg';
 import { UiButton } from '../../components/ui/UiButton';
+import { UiLink } from '../../components/ui/UiLink';
 import { UiTitle } from '../../components/ui/UiTitle';
 import { PATH_PAGES } from '../../constants/pathPages';
 import { forgotPasswordSchema } from '../../schemas/validationSchemas';
@@ -72,7 +73,6 @@ const ForgotPasswordPage: FC = () => {
           <UiButton
             className="mt-6 max-w-[424px]"
             variant="filled"
-            as="button"
             type="submit"
             disabled={isSubmitting}
           >
@@ -80,14 +80,14 @@ const ForgotPasswordPage: FC = () => {
           </UiButton>
         </form>
 
-        <UiButton
+        <UiLink
           className="mt-3 max-w-[424px]"
           variant="bordered"
           as={Link}
           to={PATH_PAGES.RESEND_PASSWORD}
         >
           Не отримали лист?
-        </UiButton>
+        </UiLink>
       </div>
 
       <img

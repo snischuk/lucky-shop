@@ -2,7 +2,7 @@ import type { FC } from 'react';
 import { Link } from 'react-router-dom';
 
 import unsubscribeConfirm from '../../assets/images/unsubscribe/unsubscribe-confirm.jpg';
-import { UiButton } from '../../components/ui/UiButton';
+import { UiLink } from '../../components/ui/UiLink';
 import { UiTitle } from '../../components/ui/UiTitle';
 import { PATH_PAGES } from '../../constants/pathPages';
 
@@ -17,16 +17,16 @@ const UnsubscribeConfirmPage: FC = () => {
           колекції, знижки та ексклюзивні пропозиції від Lucky
         </p>
 
-        <UiButton
+        <UiLink
           className="max-w-[330px]"
           variant="filled"
           as={Link}
           to={PATH_PAGES.UNSUBSCRIPTION_CANCEL}
         >
           Залишитися з нами
-        </UiButton>
+        </UiLink>
 
-        <UiButton
+        <UiLink
           className="max-w-[330px]"
           variant="bordered"
           // as='button'
@@ -35,7 +35,7 @@ const UnsubscribeConfirmPage: FC = () => {
           to={PATH_PAGES.UNSUBSCRIPTION_SUCCESS}
         >
           Відписатися
-        </UiButton>
+        </UiLink>
       </div>
 
       <img

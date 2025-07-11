@@ -123,7 +123,6 @@ const CreateNewPasswordPage: FC = () => {
           <UiButton
             className="mt-6"
             variant="filled"
-            as="button"
             type="submit"
             disabled={isSubmitting}
           >
