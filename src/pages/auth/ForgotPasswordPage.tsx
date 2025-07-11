@@ -71,7 +71,7 @@ const ForgotPasswordPage: FC = () => {
 
           <UiButton
             className="mt-6 max-w-[424px]"
-            variant="contained"
+            variant="filled"
             as="button"
             type="submit"
             disabled={isSubmitting}
@@ -82,7 +82,7 @@ const ForgotPasswordPage: FC = () => {
 
         <UiButton
           className="mt-3 max-w-[424px]"
-          variant="outlined"
+          variant="bordered"
           as={Link}
           to={PATH_PAGES.RESEND_PASSWORD}
         >

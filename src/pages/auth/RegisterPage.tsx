@@ -288,7 +288,7 @@ const RegisterPage: FC = () => {
 
           <UiButton
             className="mt-[10px]"
-            variant="contained"
+            variant="filled"
             as="button"
             type="submit"
             disabled={isSubmitting}
@@ -298,7 +298,7 @@ const RegisterPage: FC = () => {
 
           <UiButton
             className="relative mt-3"
-            variant="outlined"
+            variant="bordered"
             as="button"
             type="button"
           >

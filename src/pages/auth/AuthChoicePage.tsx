@@ -19,7 +19,7 @@ const AuthChoicePage: FC = () => {
 
         <UiButton
           className="max-w-[330px]"
-          variant="contained"
+          variant="filled"
           as={Link}
           to={PATH_PAGES.LOGIN}
         >
@@ -28,7 +28,7 @@ const AuthChoicePage: FC = () => {
 
         <UiButton
           className="max-w-[330px]"
-          variant="outlined"
+          variant="bordered"
           as={Link}
           to={PATH_PAGES.REGISTER}
         >

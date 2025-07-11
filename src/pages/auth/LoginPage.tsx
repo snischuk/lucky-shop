@@ -125,7 +125,7 @@ const LoginPage: FC = () => {
 
           <UiButton
             className="mt-6"
-            variant="contained"
+            variant="filled"
             as="button"
             type="submit"
             disabled={isSubmitting}
@@ -135,7 +135,7 @@ const LoginPage: FC = () => {
 
           <UiButton
             className="relative mt-3"
-            variant="outlined"
+            variant="bordered"
             as="button"
             type="button"
           >

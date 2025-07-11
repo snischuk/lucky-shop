@@ -12,7 +12,7 @@ const EmptyCart = () => {
         as={Link}
         to="/"
         className="mx-auto w-[352px] text-[24px] uppercase"
-        variant="contained"
+        variant="filled"
       >
         До каталогу
       </UiButton>

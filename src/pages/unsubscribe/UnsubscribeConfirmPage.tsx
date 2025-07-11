@@ -19,7 +19,7 @@ const UnsubscribeConfirmPage: FC = () => {
 
         <UiButton
           className="max-w-[330px]"
-          variant="contained"
+          variant="filled"
           as={Link}
           to={PATH_PAGES.UNSUBSCRIPTION_CANCEL}
         >
@@ -28,7 +28,7 @@ const UnsubscribeConfirmPage: FC = () => {
 
         <UiButton
           className="max-w-[330px]"
-          variant="outlined"
+          variant="bordered"
           // as='button'
           // onClick={() => console.log('unsubscribe')}
           as={Link}

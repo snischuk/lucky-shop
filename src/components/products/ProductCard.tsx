@@ -40,7 +40,7 @@ const ProductCard: FC<ProductCardProps> = ({ item }) => {
         <UiButton
           as={Link}
           to={`${item.gender}/products/${item.sku}`}
-          variant="contained"
+          variant="filled"
           className="mx-auto w-[260px]"
         >
           Перейти
