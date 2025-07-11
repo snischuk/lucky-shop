@@ -19,6 +19,7 @@ import { Swiper, SwiperSlide } from 'swiper/react';
 import { GENDERS } from '../../constants/genders';
 import { PATH_PAGES } from '../../constants/pathPages';
 import type { HomeHeroSlide } from '../../types/HomeHeroSlide';
+import { UiLink } from '../ui/UiLink';
 
 interface HeroSectionProps {
   slides: HomeHeroSlide[];
@@ -60,18 +61,22 @@ const HomeHeroSection: FC<HeroSectionProps> = ({ slides }) => (
     </Swiper>
 
     <div className="z-10 col-start-1 col-end-2 row-start-1 row-end-2 flex flex-col gap-4 px-28 py-20">
-      <Link
+      <UiLink
+        as={Link}
+        variant="bordered"
         to={href(PATH_PAGES.GENDER_PARAM, { gender: GENDERS.WOMAN })}
-        className="w-[330px] border border-solid border-light-black bg-transparent px-6 py-5 text-center font-family-secondary font-medium uppercase leading-none text-light-black transition-colors duration-300 hover:border-orange hover:text-orange"
+        className="w-[330px] px-6 py-5 font-medium uppercase leading-none"
       >
         Жіноча колекція
-      </Link>
-      <Link
+      </UiLink>
+      <UiLink
+        as={Link}
+        variant="bordered"
         to={href(PATH_PAGES.GENDER_PARAM, { gender: GENDERS.MAN })}
-        className="w-[330px] border border-solid border-light-black bg-transparent px-6 py-5 text-center font-family-secondary font-medium uppercase leading-none text-light-black transition-colors duration-300 hover:border-orange hover:text-orange"
+        className="w-[330px] px-6 py-5 font-medium uppercase leading-none"
       >
         Чоловіча колекція
-      </Link>
+      </UiLink>
     </div>
   </div>
 );

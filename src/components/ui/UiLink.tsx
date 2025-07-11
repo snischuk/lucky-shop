@@ -66,6 +66,8 @@ const UiLink: FC<UiLinkProps> = ({
     return (
       <a
         className={clsx(baseClass, className)}
+        target="_blank"
+        rel="noopener noreferrer"
         {...(props as AnchorHTMLAttributes<HTMLAnchorElement>)}
       >
         {content}

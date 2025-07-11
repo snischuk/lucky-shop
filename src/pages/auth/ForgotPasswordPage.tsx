@@ -71,7 +71,7 @@ const ForgotPasswordPage: FC = () => {
           </div>
 
           <UiButton
-            className="mt-6 max-w-[424px]"
+            className="mt-6 w-full max-w-[424px]"
             variant="filled"
             type="submit"
             disabled={isSubmitting}

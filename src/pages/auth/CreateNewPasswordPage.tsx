@@ -121,7 +121,7 @@ const CreateNewPasswordPage: FC = () => {
           </div>
 
           <UiButton
-            className="mt-6"
+            className="mt-6 w-full"
             variant="filled"
             type="submit"
             disabled={isSubmitting}
