@@ -1,76 +1,51 @@
 import clsx from 'clsx';
-import type { AnchorHTMLAttributes, ButtonHTMLAttributes, FC } from 'react';
-import type { LinkProps } from 'react-router-dom';
-import { Link } from 'react-router-dom';
+import type { ButtonHTMLAttributes, FC, ReactNode } from 'react';
 
-interface BaseProps {
+type Variant = 'default' | 'bordered' | 'filled' | 'iconOnly';
+type IconPosition = 'before' | 'after';
+
+interface UiButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
   className?: string;
-  variant?: 'contained' | 'outlined';
+  icon?: ReactNode;
+  iconPosition?: IconPosition;
+  variant?: Variant;
 }
 
-interface UiButtonButtonProps
-  extends BaseProps,
-    ButtonHTMLAttributes<HTMLButtonElement> {
-  as: 'button';
-}
-
-interface UiButtonAnchorProps
-  extends BaseProps,
-    AnchorHTMLAttributes<HTMLAnchorElement> {
-  as: 'a';
-}
-
-interface UiButtonRouterLinkProps extends BaseProps, LinkProps {
-  as: typeof Link;
-}
-
-type UiButtonProps =
-  | UiButtonButtonProps
-  | UiButtonAnchorProps
-  | UiButtonRouterLinkProps;
-
-const variants = {
-  contained: 'bg-light-black text-white hover:text-orange',
-  outlined:
-    'bg-transparent text-black border border-light-black hover:text-orange hover:border-orange',
+const variantClasses = {
+  default:
+    'text-light-black border-b border-transparent hover:border-black hover:text-black',
+  bordered:
+    'px-6 py-3 text-light-black border border-black text-black hover:border-orange hover:text-orange',
+  filled: 'px-6 py-3 text-light-black bg-black text-white hover:text-orange',
+  iconOnly: 'text-grey hover:text-light-black',
 };
 
 export const UiButton: FC<UiButtonProps> = ({
   children,
   className,
-  as,
-  variant = 'contained',
+  icon,
+  iconPosition,
+  variant = 'default',
   ...props
 }) => {
-  const baseClasses =
-    'w-full px-6 py-[14px] flex items-center justify-center font-family-secondary text-[20px] leading-[1.27] transition-colors duration-default';
-
-  const variantClasses = variants[variant] || '';
-
-  const classes = clsx(baseClasses, variantClasses, className);
-
-  if (as === 'a') {
-    const anchorProps = props as AnchorHTMLAttributes<HTMLAnchorElement>;
-    return (
-      <a className={classes} {...anchorProps}>
-        {children}
-      </a>
-    );
-  }
-
-  if (as === Link) {
-    const linkProps = props as LinkProps;
-    return (
-      <Link className={classes} {...linkProps}>
-        {children}
-      </Link>
-    );
-  }
-
-  const buttonProps = props as ButtonHTMLAttributes<HTMLButtonElement>;
-  return (
-    <button className={classes} {...buttonProps}>
+  const content = (
+    <>
+      {icon && !children && icon}
+      {icon && children && iconPosition === 'before' && icon}
       {children}
+      {icon && children && iconPosition === 'after' && icon}
+    </>
+  );
+
+  const baseClass = clsx(
+    'inline-flex items-center justify-center gap-1 font-family-secondary transition-colors duration-default',
+    variantClasses[variant],
+    className,
+  );
+
+  return (
+    <button className={baseClass} {...props}>
+      {content}
     </button>
   );
 };

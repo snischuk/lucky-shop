@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 
 import unsubscribeSuccess from '../../assets/images/unsubscribe/unsubscribe-success.jpg';
 import { UiButton } from '../../components/ui/UiButton';
+import { UiLink } from '../../components/ui/UiLink';
 import { UiTitle } from '../../components/ui/UiTitle';
 import { PATH_PAGES } from '../../constants/pathPages';
 
@@ -19,23 +20,22 @@ const UnsubscribeSuccessPage: FC = () => {
 
         <UiButton
           className="max-w-[330px]"
-          variant="contained"
+          variant="filled"
           // as={Link}
           // to={PATH_PAGES.LOGIN}
-          as="button"
           onClick={() => console.log('subscribed again')}
         >
           Підписатися знову
         </UiButton>
 
-        <UiButton
+        <UiLink
           className="max-w-[330px]"
-          variant="outlined"
+          variant="bordered"
           as={Link}
           to={PATH_PAGES.MAIN}
         >
           Перейти до каталогу
-        </UiButton>
+        </UiLink>
       </div>
 
       <img
