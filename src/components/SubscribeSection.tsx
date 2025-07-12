@@ -11,7 +11,6 @@ import { subscribeSchema } from '../schemas/validationSchemas';
 import { useSubscribeMutation } from '../services/notificationApi';
 import { SubscribeModal } from './SubscribeModal';
 import { UiButton } from './ui/UiButton';
-import { UiLoader } from './ui/UiLoader';
 import { UiTitle } from './ui/UiTitle';
 
 type FormData = {
@@ -105,18 +104,10 @@ const SubscribeSection: FC = () => {
             <UiButton
               variant="bordered"
               className="border-main px-6 py-5 text-[20px] leading-[1.17] text-main"
-              // className="flex items-center justify-center gap-2 border border-main px-6 py-5 font-family-secondary text-[20px] leading-none text-main transition-colors duration-default hover:border-orange hover:text-orange disabled:pointer-events-none disabled:opacity-50"
               type="submit"
               disabled={isSubmitting}
             >
-              {isSubmitting ? (
-                <>
-                  <UiLoader color="border-t-main" />
-                  Підписуємося...
-                </>
-              ) : (
-                'Підписатися'
-              )}
+              Підписатися
             </UiButton>
           </form>
         </div>

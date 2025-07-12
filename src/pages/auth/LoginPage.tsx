@@ -140,7 +140,7 @@ const LoginPage: FC = () => {
             type="submit"
             disabled={isSubmitting}
           >
-            {isSubmitting ? 'Входимо...' : 'Увійти'}
+            Увійти
           </UiButton>
 
           <UiButton

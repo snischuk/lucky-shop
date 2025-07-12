@@ -24,6 +24,7 @@ const UnsubscribeSuccessPage: FC = () => {
           // as={Link}
           // to={PATH_PAGES.LOGIN}
           onClick={() => console.log('subscribed again')}
+          disabled={false}
         >
           Підписатися знову
         </UiButton>

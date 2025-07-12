@@ -126,7 +126,7 @@ const CreateNewPasswordPage: FC = () => {
             type="submit"
             disabled={isSubmitting}
           >
-            {isSubmitting ? 'Зберігаємо...' : 'Зберегти новий пароль'}
+            Зберегти новий пароль
           </UiButton>
         </form>
       </div>

@@ -78,7 +78,7 @@ const ResendPasswordPage: FC = () => {
             type="submit"
             disabled={isSubmitting}
           >
-            {isSubmitting ? 'Надсилаємо...' : 'Надіслати повторно'}
+            Надіслати повторно
           </UiButton>
         </form>
       </div>

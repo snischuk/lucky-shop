@@ -292,7 +292,7 @@ const RegisterPage: FC = () => {
             type="submit"
             disabled={isSubmitting}
           >
-            {isSubmitting ? 'Реєстрація...' : 'Зареєструватися'}
+            Зареєструватися
           </UiButton>
 
           <UiButton
@@ -301,6 +301,7 @@ const RegisterPage: FC = () => {
             type="button"
             icon={<IconGoogle />}
             iconPosition="before"
+            disabled={true}
           >
             Зареєструватися через Google
           </UiButton>

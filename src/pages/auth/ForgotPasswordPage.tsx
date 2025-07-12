@@ -76,7 +76,7 @@ const ForgotPasswordPage: FC = () => {
             type="submit"
             disabled={isSubmitting}
           >
-            {isSubmitting ? 'Надсилаємо...' : 'Надіслати'}
+            Надіслати
           </UiButton>
         </form>
 
