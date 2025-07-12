@@ -1,6 +1,7 @@
 import { yupResolver } from '@hookform/resolvers/yup';
 import type { FC } from 'react';
 import { useState } from 'react';
+import type { FieldErrors } from 'react-hook-form';
 import { useForm } from 'react-hook-form';
 import { useNavigate } from 'react-router-dom';
 
@@ -54,7 +55,7 @@ const SubscribeSection: FC = () => {
       if (message === 'Цей email вже підписано.') {
         message = 'Ви вже підписані';
       }
-
+      console.dir(error);
       setError('email', { type: 'manual', message });
       setModalMessage(message);
       setIsError(true);
@@ -62,7 +63,7 @@ const SubscribeSection: FC = () => {
     }
   };
 
-  const onError = (formErrors: typeof errors): void => {
+  const onError = (formErrors: FieldErrors<FormData>): void => {
     const firstErrorMessage =
       Object.values(formErrors)[0]?.message || 'Помилка валідації';
     setModalMessage(firstErrorMessage as string);
