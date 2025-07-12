@@ -3,6 +3,7 @@ import { VisuallyHidden } from '@radix-ui/react-visually-hidden';
 import type { FC } from 'react';
 
 import IconClose from '../assets/images/icons/icon-close.svg?react';
+import { UiButton } from './ui/UiButton';
 
 interface SubscribeModalProps {
   open: boolean;
@@ -24,12 +25,11 @@ export const SubscribeModal: FC<SubscribeModalProps> = ({
       <Dialog.Overlay className="fixed inset-0 bg-black/50" />
       <Dialog.Content className="fixed left-1/2 top-1/2 z-[1] flex w-full max-w-[944px] -translate-x-1/2 -translate-y-1/2 flex-col items-center gap-[50px] bg-light-black p-10">
         <Dialog.Close asChild>
-          <button
-            aria-label="Закрити"
-            className="absolute right-6 top-6 text-main transition-colors duration-default hover:text-light-grey"
-          >
-            <IconClose width={30} />
-          </button>
+          <UiButton
+            variant="iconOnly"
+            icon={<IconClose width={30} />}
+            className="absolute right-6 top-6 text-main enabled:hover:text-grey"
+          />
         </Dialog.Close>
 
         <Dialog.Title>
@@ -43,12 +43,13 @@ export const SubscribeModal: FC<SubscribeModalProps> = ({
                Ви успішно оформили підписку.`}
         </Dialog.Description>
 
-        <button
+        <UiButton
+          variant="filled"
           onClick={onConfirm}
-          className="w-full max-w-[379px] border border-main px-6 py-5 text-center font-family-secondary text-[20px] leading-none text-main transition-colors duration-default hover:border-orange hover:text-orange"
+          className="w-full max-w-[379px] border border-main bg-transparent px-6 py-5 text-[20px] leading-[1.175] enabled:hover:border-orange"
         >
           На головну
-        </button>
+        </UiButton>
       </Dialog.Content>
     </Dialog.Portal>
   </Dialog.Root>
