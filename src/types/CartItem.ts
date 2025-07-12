@@ -7,3 +7,17 @@ export interface CartItem
   > {
   quantity: number;
 }
+export interface CartItemFull extends CartItem {
+  oldPrice: number | null;
+  hasdiscount: boolean;
+}
+
+export interface CartSummaryItem {
+  total: number;
+  discount: number;
+  grandTotal: number;
+  promoCode?: string;
+  discountFromOldPrice: number;
+  discountFromPromo: number;
+  promoValidationMsg?: string | null;
+}

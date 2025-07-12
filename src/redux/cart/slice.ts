@@ -7,12 +7,16 @@ interface CartState {
   cart: CartItem[];
   isLoading: boolean;
   error: string | null;
+  promoCode: string | null; //  нове поле
+  usedPromoCodes: string[]; // Список промокодів, які вже використані
 }
 
 const initialState: CartState = {
   cart: [],
   isLoading: false,
   error: null,
+  promoCode: null, //  початкове значення
+  usedPromoCodes: [], // Порожній масив використаних промокодів
 };
 
 const cartSlice = createSlice({
@@ -35,6 +39,9 @@ const cartSlice = createSlice({
     clearCart(state) {
       state.cart = [];
     },
+    applyPromoCode(state, action: PayloadAction<string | null>) {
+      state.promoCode = action.payload; //  реалізація нового поля
+    },
   },
   extraReducers: (builder) => {
     builder
@@ -56,6 +63,13 @@ const cartSlice = createSlice({
   },
 });
 
-export const { addToCart, removeFromCart, clearCart } = cartSlice.actions;
+export const {
+  addToCart,
+  removeFromCart,
+  clearCart,
+  applyPromoCode,
+  // markPromoCodeUsed,
+  // removeUsedPromoCode,
+} = cartSlice.actions;
 
 export const cartReducer = cartSlice.reducer;

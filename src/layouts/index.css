@@ -1,0 +1,25 @@
+@import './assets/fonts/fonts.css';
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+.swiper.hero-swiper .swiper-pagination {
+  @apply absolute bottom-8 flex justify-center gap-2;
+}
+
+.swiper.hero-swiper .swiper-pagination-bullet {
+  @apply h-[10px] w-[60px] rounded-[100px] border border-transparent bg-main opacity-90 backdrop-blur-[2px] transition-colors duration-300;
+}
+
+.swiper.hero-swiper .swiper-pagination-bullet:hover {
+  @apply bg-grey opacity-75;
+}
+
+.swiper.hero-swiper .swiper-pagination-bullet-active {
+  @apply bg-grey opacity-100 transition-colors duration-300;
+}
+
+.swiper.reviews-swiper .swiper-slide {
+  @apply opacity-100 transition-all duration-300;
+}

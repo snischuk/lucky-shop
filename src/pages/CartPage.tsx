@@ -7,6 +7,8 @@ import { mockProducts } from '../data/mockProducts';
 import { useTypedDispatch, useTypedSelector } from '../hooks/useRedux';
 import { selectCartItems } from '../redux/cart/selectors';
 import { addToCart } from '../redux/cart/slice';
+import { PromoCode } from '../components/cart/PromoCode';
+import { CartSummary } from '../components/cart/CartSummary';
 
 const CartPage = () => {
   const dispatch = useTypedDispatch();
@@ -44,10 +46,8 @@ const CartPage = () => {
           <CartList items={cart} />
         </div>
         <div className="w-[395px]">
-          {/* <PromoCode /> */}
-          {/* <CartSummary /> */}
-          <p>Введіть промокод</p>
-          <p>Сума</p>
+          <PromoCode />
+          <CartSummary />
         </div>
       </div>
     </div>
