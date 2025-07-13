@@ -55,8 +55,8 @@ const ProductDetail: FC<ProductDetailProps> = ({ product }) => {
         <p className="font-family-secondary text-body-m uppercase underline decoration-1 underline-offset-4">
           Розміри
         </p>
-        <UiButton as={'button'}>Додати в кошик</UiButton>
-        <UiButton as={'button'}>Додати в збережене</UiButton>
+        <UiButton>Додати в кошик</UiButton>
+        <UiButton>Додати в збережене</UiButton>
 
         {/* Склад, опис, характеристики... */}
       </div>
