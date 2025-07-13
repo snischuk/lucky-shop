@@ -20,7 +20,11 @@ const ProductCard: FC<ProductCardProps> = ({ item }) => {
 
   return (
     <article className="relative h-[744px] w-[448px] bg-[white]">
-      <img src={item.image[0]} alt={item.name} className="h-[520px]" />
+      <img
+        src={item.image[0]}
+        alt={item.name}
+        className="h-[520px] w-[448px] object-cover object-top"
+      />
       <div className="flex flex-col gap-[14px] p-6 text-center font-family-secondary">
         <h3 className="text-body-m font-medium uppercase">{item.name}</h3>
         <p className="text-body-s text-grey">
@@ -39,7 +43,7 @@ const ProductCard: FC<ProductCardProps> = ({ item }) => {
 
         <UiButton
           as={Link}
-          to={`${item.gender}/products/${item.sku}`}
+          to={`/${item.gender}/products/${item.sku}`}
           variant="contained"
           className="mx-auto w-[260px]"
         >

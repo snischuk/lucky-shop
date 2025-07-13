@@ -7,10 +7,12 @@ interface ProductsState {
   items: Product[];
   isLoading: boolean;
   error: string | null;
+  productBySku: Product | null;
 }
 
 const initialState: ProductsState = {
   items: [],
+  productBySku: null,
   isLoading: false,
   error: null,
 };
@@ -40,7 +42,7 @@ const productsSlice = createSlice({
       })
       .addCase(fetchProductBySku.fulfilled, (state, action) => {
         state.isLoading = false;
-        state.items = action.payload;
+        state.productBySku = action.payload;
       })
       .addCase(fetchProductBySku.rejected, (state, action) => {
         state.isLoading = false;
