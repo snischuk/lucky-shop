@@ -1,8 +1,8 @@
 import type { FC } from 'react';
 
-import IconArrowRight from '../../assets/images/icons/icon-arrow-right.svg?react';
-import type { ButtonSlideProps } from '../../types/SwiperButton';
-import { UiButton } from './UiButton';
+import IconArrowRight from '../assets/images/icons/icon-arrow-right.svg?react';
+import type { ButtonSlideProps } from '../types/SwiperButton';
+import { UiButton } from './ui/UiButton';
 
 const ButtonNextSlide: FC<ButtonSlideProps> = ({ swiperRef, isDisabled }) => {
   const handleClick = () => {

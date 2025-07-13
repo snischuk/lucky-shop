@@ -6,8 +6,8 @@ import { Swiper, SwiperSlide } from 'swiper/react';
 import IconStars from '../../assets/images/icons/icon-stars.svg?react';
 import IconVerified from '../../assets/images/icons/icon-verified.svg?react';
 import { reviewsData } from '../../data/reviewsData';
-import { ButtonNextSlide } from '../ui/ButtonNextSlide';
-import { ButtonPreviousSlide } from '../ui/ButtonPreviousSlide';
+import { ButtonNextSlide } from '../ButtonNextSlide';
+import { ButtonPreviousSlide } from '../ButtonPreviousSlide';
 import { UiTitle } from '../ui/UiTitle';
 
 const ReviewsSection: FC = () => {

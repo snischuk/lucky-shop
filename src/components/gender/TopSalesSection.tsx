@@ -14,9 +14,9 @@ import { useTypedDispatch } from '../../hooks/useRedux';
 import { fetchProduct } from '../../redux/products/operations';
 import { selectProducts } from '../../redux/products/selectors';
 import type { Gender } from '../../types/Gender';
+import { ButtonNextSlide } from '../ButtonNextSlide';
+import { ButtonPreviousSlide } from '../ButtonPreviousSlide';
 import { ProductCard } from '../products/ProductCard';
-import { ButtonNextSlide } from '../ui/ButtonNextSlide';
-import { ButtonPreviousSlide } from '../ui/ButtonPreviousSlide';
 import { UiTitle } from '../ui/UiTitle';
 import { ViewAllLink } from './ViewAllLink';
 
