@@ -1,6 +1,7 @@
 import { yupResolver } from '@hookform/resolvers/yup';
 import type { FC } from 'react';
 import { useState } from 'react';
+import type { FieldErrors } from 'react-hook-form';
 import { useForm } from 'react-hook-form';
 import { useNavigate } from 'react-router-dom';
 
@@ -9,7 +10,7 @@ import { PATH_PAGES } from '../constants/pathPages';
 import { subscribeSchema } from '../schemas/validationSchemas';
 import { useSubscribeMutation } from '../services/notificationApi';
 import { SubscribeModal } from './SubscribeModal';
-import { UiLoader } from './ui/UiLoader';
+import { UiButton } from './ui/UiButton';
 import { UiTitle } from './ui/UiTitle';
 
 type FormData = {
@@ -53,7 +54,7 @@ const SubscribeSection: FC = () => {
       if (message === 'Цей email вже підписано.') {
         message = 'Ви вже підписані';
       }
-
+      console.dir(error);
       setError('email', { type: 'manual', message });
       setModalMessage(message);
       setIsError(true);
@@ -61,7 +62,7 @@ const SubscribeSection: FC = () => {
     }
   };
 
-  const onError = (formErrors: typeof errors): void => {
+  const onError = (formErrors: FieldErrors<FormData>): void => {
     const firstErrorMessage =
       Object.values(formErrors)[0]?.message || 'Помилка валідації';
     setModalMessage(firstErrorMessage as string);
@@ -100,20 +101,14 @@ const SubscribeSection: FC = () => {
               />
             </div>
 
-            <button
-              className="flex items-center justify-center gap-2 border border-main px-6 py-5 font-family-secondary text-[20px] leading-none text-main transition-colors duration-default hover:border-orange hover:text-orange disabled:pointer-events-none disabled:opacity-50"
+            <UiButton
+              variant="bordered"
+              className="border-main px-6 py-5 text-[20px] leading-[1.17] text-main"
               type="submit"
               disabled={isSubmitting}
             >
-              {isSubmitting ? (
-                <>
-                  <UiLoader color="border-t-main" />
-                  Підписуємося...
-                </>
-              ) : (
-                'Підписатися'
-              )}
-            </button>
+              Підписатися
+            </UiButton>
           </form>
         </div>
       </section>

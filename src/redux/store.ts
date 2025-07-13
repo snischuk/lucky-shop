@@ -1,4 +1,5 @@
 import { configureStore } from '@reduxjs/toolkit';
+import { setupListeners } from '@reduxjs/toolkit/query';
 import {
   FLUSH,
   PAUSE,
@@ -40,6 +41,8 @@ export const store = configureStore({
       },
     }).concat(authApi.middleware, notificationApi.middleware),
 });
+
+setupListeners(store.dispatch);
 
 export const persistor = persistStore(store);
 

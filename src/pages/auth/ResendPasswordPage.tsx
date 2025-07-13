@@ -74,12 +74,11 @@ const ResendPasswordPage: FC = () => {
 
           <UiButton
             className="max-w-[424px]"
-            variant="contained"
-            as="button"
+            variant="filled"
             type="submit"
             disabled={isSubmitting}
           >
-            {isSubmitting ? 'Надсилаємо...' : 'Надіслати повторно'}
+            Надіслати повторно
           </UiButton>
         </form>
       </div>

@@ -41,11 +41,11 @@ const RegisterPage: FC = () => {
     // TODO: Виклик API реєстрації
   };
 
-  const handleTogglepassword = (): void => {
+  const handlePasswordVisibility = (): void => {
     setIsShowPassword((prev) => !prev);
   };
 
-  const handleToggleConfirmPassword = (): void => {
+  const handleConfirmPasswordVisibility = (): void => {
     setIsShowConfirmPassword((prev) => !prev);
   };
 
@@ -157,13 +157,13 @@ const RegisterPage: FC = () => {
                 }`}
                 aria-invalid={!!errors.password}
               />
-              <button
+              <UiButton
                 type="button"
-                onClick={handleTogglepassword}
-                className="absolute right-6 top-1/2 -translate-y-1/2 text-medium-grey transition-colors duration-default hover:text-grey"
-              >
-                {isShowPassword ? <IconEyeOpened /> : <IconEyeClosed />}
-              </button>
+                onClick={handlePasswordVisibility}
+                className="absolute right-6 top-1/2 -translate-y-1/2"
+                variant="iconOnly"
+                icon={isShowPassword ? <IconEyeOpened /> : <IconEyeClosed />}
+              />
             </div>
             {errors.password && (
               <span className="mt-[2px] font-family-secondary text-[14px] leading-[1.17] text-dark-red">
@@ -192,13 +192,15 @@ const RegisterPage: FC = () => {
                 }`}
                 aria-invalid={!!errors.confirmPassword}
               />
-              <button
+              <UiButton
                 type="button"
-                onClick={handleToggleConfirmPassword}
-                className="absolute right-6 top-1/2 -translate-y-1/2 text-medium-grey transition-colors duration-default hover:text-grey"
-              >
-                {isShowConfirmPassword ? <IconEyeOpened /> : <IconEyeClosed />}
-              </button>
+                onClick={handleConfirmPasswordVisibility}
+                className="absolute right-6 top-1/2 -translate-y-1/2"
+                variant="iconOnly"
+                icon={
+                  isShowConfirmPassword ? <IconEyeOpened /> : <IconEyeClosed />
+                }
+              />
             </div>
             {errors.confirmPassword && (
               <span className="mt-[2px] font-family-secondary text-[14px] leading-[1.17] text-dark-red">
@@ -287,22 +289,22 @@ const RegisterPage: FC = () => {
           />
 
           <UiButton
-            className="mt-[10px]"
-            variant="contained"
-            as="button"
+            className="mt-[10px] w-full"
+            variant="filled"
             type="submit"
             disabled={isSubmitting}
           >
-            {isSubmitting ? 'Реєстрація...' : 'Зареєструватися'}
+            Зареєструватися
           </UiButton>
 
           <UiButton
-            className="relative mt-3"
-            variant="outlined"
-            as="button"
+            className="mt-3 w-full gap-5"
+            variant="bordered"
             type="button"
+            icon={<IconGoogle />}
+            iconPosition="before"
+            disabled={true}
           >
-            <IconGoogle className="absolute left-6 top-1/2 -translate-y-1/2" />
             Зареєструватися через Google
           </UiButton>
         </form>

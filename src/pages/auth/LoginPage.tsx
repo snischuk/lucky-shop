@@ -5,7 +5,7 @@ import { useForm } from 'react-hook-form';
 import { Link, useNavigate } from 'react-router-dom';
 import type { InferType } from 'yup';
 
-import loginImg from '../../assets/images/auth/login.jpg';
+import loginImage from '../../assets/images/auth/login.jpg';
 import IconEyeClosed from '../../assets/images/icons/icon-eye-closed.svg?react';
 import IconEyeOpened from '../../assets/images/icons/icon-eye-opened.svg?react';
 import IconGoogle from '../../assets/images/icons/icon-google.svg?react';
@@ -35,7 +35,7 @@ const LoginPage: FC = () => {
     reValidateMode: 'onChange',
   });
 
-  const togglePasswordVisibility = (): void => {
+  const handlePasswordVisibility = (): void => {
     setIsShowPassword((prev) => !prev);
   };
 
@@ -107,13 +107,13 @@ const LoginPage: FC = () => {
                 aria-invalid={!!errors.password}
               />
 
-              <button
+              <UiButton
                 type="button"
-                onClick={togglePasswordVisibility}
-                className="absolute right-6 top-1/2 -translate-y-1/2 text-medium-grey transition-colors duration-default hover:text-grey"
-              >
-                {isShowPassword ? <IconEyeOpened /> : <IconEyeClosed />}
-              </button>
+                onClick={handlePasswordVisibility}
+                className="absolute right-6 top-1/2 -translate-y-1/2"
+                variant="iconOnly"
+                icon={isShowPassword ? <IconEyeOpened /> : <IconEyeClosed />}
+              />
             </div>
             <div className="mt-[2px] flex flex-wrap gap-1 font-family-secondary text-[14px] leading-[1.17]">
               {errors.password && (
@@ -135,22 +135,21 @@ const LoginPage: FC = () => {
           </div>
 
           <UiButton
-            className="mt-6"
-            variant="contained"
-            as="button"
+            className="mt-6 w-full"
+            variant="filled"
             type="submit"
             disabled={isSubmitting}
           >
-            {isSubmitting ? 'Входимо...' : 'Увійти'}
+            Увійти
           </UiButton>
 
           <UiButton
-            className="relative mt-3"
-            variant="outlined"
-            as="button"
+            className="mt-3 w-full gap-5"
+            variant="bordered"
             type="button"
+            icon={<IconGoogle />}
+            iconPosition="before"
           >
-            <IconGoogle className="absolute left-6 top-1/2 -translate-y-1/2" />
             Увійти через Google
           </UiButton>
         </form>
@@ -158,7 +157,7 @@ const LoginPage: FC = () => {
 
       <img
         className="w-5/12 max-w-[590px] flex-shrink"
-        src={loginImg}
+        src={loginImage}
         alt="Auth login"
         width="590"
       />

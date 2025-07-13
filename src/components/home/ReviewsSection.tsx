@@ -6,8 +6,8 @@ import { Swiper, SwiperSlide } from 'swiper/react';
 import IconStars from '../../assets/images/icons/icon-stars.svg?react';
 import IconVerified from '../../assets/images/icons/icon-verified.svg?react';
 import { reviewsData } from '../../data/reviewsData';
-import { SlideNextButton } from '../ui/SlideNextButton';
-import { SlidePrevButton } from '../ui/SlidePrevButton';
+import { ButtonNextSlide } from '../ButtonNextSlide';
+import { ButtonPreviousSlide } from '../ButtonPreviousSlide';
 import { UiTitle } from '../ui/UiTitle';
 
 const ReviewsSection: FC = () => {
@@ -21,9 +21,9 @@ const ReviewsSection: FC = () => {
       <UiTitle className="mb-[80px] text-center" as="h2">
         Наші клієнти говорять
       </UiTitle>
-      <div className="absolute right-0 top-[96px] flex justify-end">
-        <SlidePrevButton swiperRef={swiperRef} disabled={isBeginning} />
-        <SlideNextButton swiperRef={swiperRef} disabled={isEnd} />
+      <div className="absolute right-0 top-[96px] flex justify-end gap-5">
+        <ButtonPreviousSlide swiperRef={swiperRef} isDisabled={isBeginning} />
+        <ButtonNextSlide swiperRef={swiperRef} isDisabled={isEnd} />
       </div>
       <div className="relative w-full px-[20px]">
         <Swiper
@@ -44,7 +44,7 @@ const ReviewsSection: FC = () => {
         >
           {reviewsData.map((review, idx) => (
             <SwiperSlide key={idx}>
-              <div className="flex h-[255px] w-[400px] w-full flex-col rounded-md border border-[#0000001A] px-[32px] py-[28px]">
+              <div className="flex h-[255px] w-full flex-col rounded-md border border-[#0000001A] px-[32px] py-[28px]">
                 <p className="mb-[15px] text-yellow-600">
                   <IconStars />
                 </p>

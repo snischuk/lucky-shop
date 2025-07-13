@@ -2,7 +2,7 @@ import type { FC } from 'react';
 import { Link } from 'react-router-dom';
 
 import unsubscribeCancel from '../../assets/images/unsubscribe/unsubscribe-cancel.jpg';
-import { UiButton } from '../../components/ui/UiButton';
+import { UiLink } from '../../components/ui/UiLink';
 import { UiTitle } from '../../components/ui/UiTitle';
 import { PATH_PAGES } from '../../constants/pathPages';
 
@@ -17,14 +17,14 @@ const UnsubscribeCancelPage: FC = () => {
           сезонні підбірки та вигідні пропозиції - тільки найкраще, без зайвого!
         </p>
 
-        <UiButton
+        <UiLink
           className="max-w-[330px]"
-          variant="contained"
+          variant="filled"
           as={Link}
           to={PATH_PAGES.MAIN}
         >
           Перейти до каталогу
-        </UiButton>
+        </UiLink>
       </div>
 
       <img

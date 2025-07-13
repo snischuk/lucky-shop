@@ -8,7 +8,7 @@ const ProtectedRoute: FC = () => {
   const token = useTypedSelector((state) => state.auth.token);
 
   if (!token) {
-    return <Navigate to={PATH_PAGES.LOGIN} replace />;
+    return <Navigate to={PATH_PAGES.AUTH} replace />;
   }
 
   return <Outlet />;
