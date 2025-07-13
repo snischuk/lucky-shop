@@ -35,7 +35,7 @@ const LoginPage: FC = () => {
     reValidateMode: 'onChange',
   });
 
-  const togglePasswordVisibility = (): void => {
+  const handlePasswordVisibility = (): void => {
     setIsShowPassword((prev) => !prev);
   };
 
@@ -107,13 +107,13 @@ const LoginPage: FC = () => {
                 aria-invalid={!!errors.password}
               />
 
-              <button
+              <UiButton
                 type="button"
-                onClick={togglePasswordVisibility}
-                className="absolute right-6 top-1/2 -translate-y-1/2 text-medium-grey transition-colors duration-default hover:text-grey"
-              >
-                {isShowPassword ? <IconEyeOpened /> : <IconEyeClosed />}
-              </button>
+                onClick={handlePasswordVisibility}
+                className="absolute right-6 top-1/2 -translate-y-1/2"
+                variant="iconOnly"
+                icon={isShowPassword ? <IconEyeOpened /> : <IconEyeClosed />}
+              />
             </div>
             <div className="mt-[2px] flex flex-wrap gap-1 font-family-secondary text-[14px] leading-[1.17]">
               {errors.password && (
@@ -140,7 +140,7 @@ const LoginPage: FC = () => {
             type="submit"
             disabled={isSubmitting}
           >
-            {isSubmitting ? 'Входимо...' : 'Увійти'}
+            Увійти
           </UiButton>
 
           <UiButton

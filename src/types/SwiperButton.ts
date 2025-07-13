@@ -1,6 +1,5 @@
 import type { Swiper as SwiperType } from 'swiper';
-
-export interface SlideButtonProps {
+export interface ButtonSlideProps {
   swiperRef: React.RefObject<SwiperType | null>;
-  disabled?: boolean;
+  isDisabled?: boolean;
 }

@@ -27,11 +27,11 @@ const CreateNewPasswordPage: FC = () => {
     reValidateMode: 'onChange',
   });
 
-  const handleToggleNewPassword = (): void => {
+  const handleNewPasswordVisibility = (): void => {
     setIsShowNewPassword((prev) => !prev);
   };
 
-  const handleToggleConfirmPassword = (): void => {
+  const handleConfirmPasswordVisibility = (): void => {
     setIsShowConfirmPassword((prev) => !prev);
   };
 
@@ -70,13 +70,13 @@ const CreateNewPasswordPage: FC = () => {
                 }`}
                 aria-invalid={!!errors.newPassword}
               />
-              <button
+              <UiButton
                 type="button"
-                onClick={handleToggleNewPassword}
-                className="absolute right-6 top-1/2 -translate-y-1/2 text-medium-grey transition-colors duration-default hover:text-grey"
-              >
-                {isShowNewPassword ? <IconEyeOpened /> : <IconEyeClosed />}
-              </button>
+                onClick={handleNewPasswordVisibility}
+                className="absolute right-6 top-1/2 -translate-y-1/2"
+                variant="iconOnly"
+                icon={isShowNewPassword ? <IconEyeOpened /> : <IconEyeClosed />}
+              />
             </div>
             {errors.newPassword && (
               <span className="mt-[2px] font-family-secondary text-[14px] leading-[1.17] text-dark-red">
@@ -105,13 +105,15 @@ const CreateNewPasswordPage: FC = () => {
                 }`}
                 aria-invalid={!!errors.confirmPassword}
               />
-              <button
+              <UiButton
                 type="button"
-                onClick={handleToggleConfirmPassword}
-                className="absolute right-6 top-1/2 -translate-y-1/2 text-medium-grey transition-colors duration-default hover:text-grey"
-              >
-                {isShowConfirmPassword ? <IconEyeOpened /> : <IconEyeClosed />}
-              </button>
+                onClick={handleConfirmPasswordVisibility}
+                className="absolute right-6 top-1/2 -translate-y-1/2"
+                variant="iconOnly"
+                icon={
+                  isShowConfirmPassword ? <IconEyeOpened /> : <IconEyeClosed />
+                }
+              />
             </div>
             {errors.confirmPassword && (
               <span className="mt-[2px] font-family-secondary text-[14px] leading-[1.17] text-dark-red">
@@ -126,7 +128,7 @@ const CreateNewPasswordPage: FC = () => {
             type="submit"
             disabled={isSubmitting}
           >
-            {isSubmitting ? 'Зберігаємо...' : 'Зберегти новий пароль'}
+            Зберегти новий пароль
           </UiButton>
         </form>
       </div>

@@ -14,9 +14,9 @@ import { useTypedDispatch } from '../../hooks/useRedux';
 import { fetchProduct } from '../../redux/products/operations';
 import { selectProducts } from '../../redux/products/selectors';
 import type { Gender } from '../../types/Gender';
+import { ButtonNextSlide } from '../ButtonNextSlide';
+import { ButtonPreviousSlide } from '../ButtonPreviousSlide';
 import { ProductCard } from '../products/ProductCard';
-import { SlideNextButton } from '../ui/SlideNextButton';
-import { SlidePrevButton } from '../ui/SlidePrevButton';
 import { UiTitle } from '../ui/UiTitle';
 import { ViewAllLink } from './ViewAllLink';
 
@@ -46,9 +46,9 @@ const TopSalesSection: FC<TopSalesSectionProps> = ({ gender }) => {
         Топ продажів
       </UiTitle>
 
-      <div className="absolute right-4 top-[96px] mb-20 flex justify-end">
-        <SlidePrevButton swiperRef={swiperRef} disabled={isBeginning} />
-        <SlideNextButton swiperRef={swiperRef} disabled={isEnd} />
+      <div className="absolute right-4 top-[96px] mb-20 flex justify-end gap-5">
+        <ButtonPreviousSlide swiperRef={swiperRef} isDisabled={isBeginning} />
+        <ButtonNextSlide swiperRef={swiperRef} isDisabled={isEnd} />
       </div>
       {filteredProducts.length > 0 && (
         <Swiper

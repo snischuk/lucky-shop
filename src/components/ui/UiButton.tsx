@@ -13,11 +13,12 @@ interface UiButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
 
 const variantClasses = {
   default:
-    'text-light-black border-b border-transparent hover:border-black hover:text-black',
+    'text-light-black border-b border-transparent enabled:hover:border-black enabled:hover:text-black',
   bordered:
-    'px-6 py-3 text-light-black border border-black text-black hover:border-orange hover:text-orange',
-  filled: 'px-6 py-3 text-light-black bg-black text-white hover:text-orange',
-  iconOnly: 'text-grey hover:text-light-black',
+    'px-6 py-3 text-light-black border border-black text-black enabled:hover:border-orange enabled:hover:text-orange',
+  filled:
+    'px-6 py-3 text-light-black bg-black text-white enabled:hover:text-orange',
+  iconOnly: 'text-grey enabled:hover:text-light-black',
 };
 
 export const UiButton: FC<UiButtonProps> = ({
@@ -38,7 +39,7 @@ export const UiButton: FC<UiButtonProps> = ({
   );
 
   const baseClass = clsx(
-    'inline-flex items-center justify-center gap-1 font-family-secondary transition-colors duration-default',
+    'inline-flex items-center justify-center gap-1 font-family-secondary transition-colors duration-default disabled:cursor-not-allowed disabled:opacity-50',
     variantClasses[variant],
     className,
   );
