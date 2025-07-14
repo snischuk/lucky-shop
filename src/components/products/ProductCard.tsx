@@ -1,8 +1,8 @@
+import clsx from 'clsx';
 import { type FC, useState } from 'react';
 import { Link } from 'react-router-dom';
 
 import IconHeart from '../../assets/images/icons/icon-heart.svg?react';
-import IconHeartActive from '../../assets/images/icons/icon-heart-active.svg?react';
 import type { Product } from '../../types/Product';
 import { UiLink } from '../ui/UiLink';
 
@@ -58,7 +58,14 @@ const ProductCard: FC<ProductCardProps> = ({ item }) => {
         type="button"
       >
         <div className="flex h-[33px] w-[33px] items-center justify-center">
-          {isFavorite ? <IconHeartActive /> : <IconHeart />}
+          <IconHeart
+            className={clsx(
+              'h-6 w-6 transition-colors duration-200',
+              isFavorite
+                ? 'fill-orange stroke-orange'
+                : 'fill-transparent stroke-light-black hover:stroke-orange',
+            )}
+          />
         </div>
       </button>
     </article>
