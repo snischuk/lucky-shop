@@ -10,6 +10,7 @@ import IconCheckbox from '../../assets/images/icons/icon-checkbox.svg?react';
 import IconEyeClosed from '../../assets/images/icons/icon-eye-closed.svg?react';
 import IconEyeOpened from '../../assets/images/icons/icon-eye-opened.svg?react';
 import IconGoogle from '../../assets/images/icons/icon-google.svg?react';
+import { ButtonPreviousPage } from '../../components/ButtonPreviousPage';
 import { UiButton } from '../../components/ui/UiButton';
 import { UiTitle } from '../../components/ui/UiTitle';
 import { PATH_PAGES } from '../../constants/pathPages';
@@ -51,7 +52,9 @@ const RegisterPage: FC = () => {
 
   return (
     <div className="flex w-full justify-between">
-      <div className="flex w-7/12 flex-shrink-0 flex-col items-center gap-4 px-7 py-16">
+      <div className="flex w-7/12 flex-shrink-0 flex-col items-center gap-5 px-7 py-6">
+        <ButtonPreviousPage className="self-start" />
+
         <UiTitle>Зареєструйтеся</UiTitle>
 
         <form
@@ -71,7 +74,7 @@ const RegisterPage: FC = () => {
               type="text"
               placeholder="Ваше імʼя"
               {...register('firstName')}
-              className={`mt-3 w-full border px-6 py-[14px] font-family-secondary leading-normal placeholder:text-grey ${
+              className={`mt-3 w-full border px-6 py-[14px] font-family-secondary placeholder:text-grey ${
                 errors.firstName
                   ? 'border-dark-red text-dark-red placeholder:text-dark-red'
                   : 'border-medium-grey text-light-black'
@@ -97,7 +100,7 @@ const RegisterPage: FC = () => {
               type="text"
               placeholder="Ваше прізвище"
               {...register('lastName')}
-              className={`mt-3 w-full border px-6 py-[14px] font-family-secondary leading-normal placeholder:text-grey ${
+              className={`mt-3 w-full border px-6 py-[14px] font-family-secondary placeholder:text-grey ${
                 errors.lastName
                   ? 'border-dark-red text-dark-red placeholder:text-dark-red'
                   : 'border-medium-grey text-light-black'
@@ -123,7 +126,7 @@ const RegisterPage: FC = () => {
               type="text"
               placeholder="Адреса Ел. пошти"
               {...register('email')}
-              className={`mt-3 w-full border px-6 py-[14px] font-family-secondary leading-normal placeholder:text-grey ${
+              className={`mt-3 w-full border px-6 py-[14px] font-family-secondary placeholder:text-grey ${
                 errors.email
                   ? 'border-dark-red text-dark-red placeholder:text-dark-red'
                   : 'border-medium-grey text-light-black'
@@ -150,7 +153,7 @@ const RegisterPage: FC = () => {
                 type={isShowPassword ? 'text' : 'password'}
                 placeholder="Уведіть свій пароль"
                 {...register('password')}
-                className={`w-full border py-[14px] pl-6 pr-[72px] font-family-secondary leading-normal placeholder:text-grey ${
+                className={`w-full border py-[14px] pl-6 pr-[72px] font-family-secondary placeholder:text-grey ${
                   errors.password
                     ? 'border-dark-red text-dark-red placeholder:text-dark-red'
                     : 'border-medium-grey text-light-black'
@@ -185,7 +188,7 @@ const RegisterPage: FC = () => {
                 type={isShowConfirmPassword ? 'text' : 'password'}
                 placeholder="Підтвердіть новий пароль"
                 {...register('confirmPassword')}
-                className={`w-full border py-[14px] pl-6 pr-[72px] font-family-secondary leading-normal placeholder:text-grey ${
+                className={`w-full border py-[14px] pl-6 pr-[72px] font-family-secondary placeholder:text-grey ${
                   errors.confirmPassword
                     ? 'border-dark-red text-dark-red placeholder:text-dark-red'
                     : 'border-medium-grey text-light-black'
@@ -289,7 +292,7 @@ const RegisterPage: FC = () => {
           />
 
           <UiButton
-            className="mt-[10px] w-full"
+            className="mt-[10px] w-full text-[20px] leading-[1.175]"
             variant="filled"
             type="submit"
             disabled={isSubmitting}
@@ -298,7 +301,7 @@ const RegisterPage: FC = () => {
           </UiButton>
 
           <UiButton
-            className="mt-3 w-full gap-5"
+            className="mt-3 w-full gap-5 text-[20px] leading-[1.175]"
             variant="bordered"
             type="button"
             icon={<IconGoogle />}

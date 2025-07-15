@@ -5,6 +5,7 @@ import { Link } from 'react-router-dom';
 import type { InferType } from 'yup';
 
 import forgotPassword from '../../assets/images/auth/forgot-password.jpg';
+import { ButtonPreviousPage } from '../../components/ButtonPreviousPage';
 import { UiButton } from '../../components/ui/UiButton';
 import { UiLink } from '../../components/ui/UiLink';
 import { UiTitle } from '../../components/ui/UiTitle';
@@ -31,10 +32,12 @@ const ForgotPasswordPage: FC = () => {
 
   return (
     <div className="flex w-full justify-between">
-      <div className="flex w-7/12 flex-shrink-0 flex-col px-7 py-16">
-        <UiTitle>Отримати пароль</UiTitle>
+      <div className="flex w-7/12 flex-shrink-0 flex-col px-7 py-6">
+        <ButtonPreviousPage className="self-start" />
 
-        <p className="mt-6 max-w-[609px] font-family-secondary text-[24px] uppercase leading-[1.175] text-black">
+        <UiTitle className="mt-[26px]">Отримати пароль</UiTitle>
+
+        <p className="mt-6 max-w-[634px] font-family-secondary text-[24px] uppercase leading-[1.175] text-black">
           Ми надішлемо вам електронне повідомлення з інструкціями для його
           відновлення
         </p>
@@ -56,7 +59,7 @@ const ForgotPasswordPage: FC = () => {
               type="text"
               placeholder="Адреса Ел. пошти"
               {...register('email')}
-              className={`mt-3 w-full border px-6 py-[14px] font-family-secondary leading-normal placeholder:text-grey ${
+              className={`mt-3 w-full border px-6 py-[14px] font-family-secondary text-[18px] leading-[1.17] placeholder:text-grey ${
                 errors.email
                   ? 'border-dark-red text-dark-red placeholder:text-dark-red'
                   : 'border-medium-grey text-light-black'
@@ -71,7 +74,7 @@ const ForgotPasswordPage: FC = () => {
           </div>
 
           <UiButton
-            className="mt-6 w-full max-w-[424px]"
+            className="mt-3 w-full max-w-[424px] text-[20px] leading-[1.175]"
             variant="filled"
             type="submit"
             disabled={isSubmitting}
@@ -81,7 +84,7 @@ const ForgotPasswordPage: FC = () => {
         </form>
 
         <UiLink
-          className="mt-3 max-w-[424px]"
+          className="mt-3 max-w-[424px] text-[20px] leading-[1.175]"
           variant="bordered"
           as={Link}
           to={PATH_PAGES.RESEND_PASSWORD}
