@@ -7,6 +7,7 @@ import { useNavigate } from 'react-router-dom';
 
 import IconEmail from '../assets/images/icons/icon-email.svg?react';
 import { PATH_PAGES } from '../constants/pathPages';
+import { getFriendlySubscriptionMessage } from '../helpers/getFriendlySubscriptionMessage';
 import { useHandleApiError } from '../hooks/useHandleApiError';
 import { subscribeSchema } from '../schemas/validationSchemas';
 import { useSubscribeMutation } from '../services/notificationApi';
@@ -48,13 +49,10 @@ const SubscribeSection: FC = () => {
       const { message, isRedirected } = handleApiError(error);
       if (isRedirected) return;
 
-      if (message === 'Цей email вже підписано.') {
-        setError('email', { type: 'manual', message: 'Ви вже підписані' });
-      } else {
-        setError('email', { type: 'manual', message });
-      }
+      const friendlyMessage = getFriendlySubscriptionMessage(message);
+      setError('email', { type: 'manual', message: friendlyMessage });
 
-      setModalMessage(message);
+      setModalMessage(friendlyMessage);
       setIsError(true);
       setIsModalOpen(true);
     }
