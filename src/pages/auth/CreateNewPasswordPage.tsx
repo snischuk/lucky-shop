@@ -63,7 +63,7 @@ const CreateNewPasswordPage: FC = () => {
                 type={isShowNewPassword ? 'text' : 'password'}
                 placeholder="Уведіть свій пароль"
                 {...register('newPassword')}
-                className={`w-full border py-[14px] pl-6 pr-[72px] font-family-secondary leading-normal placeholder:text-grey ${
+                className={`w-full border py-[14px] pl-6 pr-[72px] font-family-secondary text-[18px] leading-[1.17] placeholder:text-grey ${
                   errors.newPassword
                     ? 'border-dark-red text-dark-red placeholder:text-dark-red'
                     : 'border-medium-grey text-light-black'
@@ -98,7 +98,7 @@ const CreateNewPasswordPage: FC = () => {
                 type={isShowConfirmPassword ? 'text' : 'password'}
                 placeholder="Підтвердіть новий пароль"
                 {...register('confirmPassword')}
-                className={`w-full border py-[14px] pl-6 pr-[72px] font-family-secondary leading-normal placeholder:text-grey ${
+                className={`w-full border py-[14px] pl-6 pr-[72px] font-family-secondary text-[18px] leading-[1.17] placeholder:text-grey ${
                   errors.confirmPassword
                     ? 'border-dark-red text-dark-red placeholder:text-dark-red'
                     : 'border-medium-grey text-light-black'
@@ -123,7 +123,7 @@ const CreateNewPasswordPage: FC = () => {
           </div>
 
           <UiButton
-            className="mt-6 w-full"
+            className="mt-6 w-full text-[20px] leading-[1.175]"
             variant="filled"
             type="submit"
             disabled={isSubmitting}

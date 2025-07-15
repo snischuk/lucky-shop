@@ -58,7 +58,7 @@ const ResendPasswordPage: FC = () => {
               type="text"
               placeholder="Адреса Ел. пошти"
               {...register('email')}
-              className={`mt-3 w-full border px-6 py-[14px] font-family-secondary leading-normal placeholder:text-grey ${
+              className={`mt-3 w-full border px-6 py-[14px] font-family-secondary text-[18px] leading-[1.17] placeholder:text-grey ${
                 errors.email
                   ? 'border-dark-red text-dark-red placeholder:text-dark-red'
                   : 'border-medium-grey text-light-black'
@@ -73,7 +73,7 @@ const ResendPasswordPage: FC = () => {
           </div>
 
           <UiButton
-            className="max-w-[424px]"
+            className="max-w-[424px] text-[20px] leading-[1.175]"
             variant="filled"
             type="submit"
             disabled={isSubmitting}
