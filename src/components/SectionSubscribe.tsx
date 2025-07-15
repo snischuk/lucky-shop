@@ -1,16 +1,15 @@
 import { yupResolver } from '@hookform/resolvers/yup';
 import type { FC } from 'react';
-import { useState } from 'react';
 import type { FieldErrors } from 'react-hook-form';
 import { useForm } from 'react-hook-form';
-import { useNavigate } from 'react-router-dom';
 
 import IconEmail from '../assets/images/icons/icon-email.svg?react';
-import { PATH_PAGES } from '../constants/pathPages';
+import { getFriendlySubscriptionMessage } from '../helpers/getFriendlySubscriptionMessage';
+import { useHandleApiError } from '../hooks/useHandleApiError';
+import { useModalSubscribe } from '../hooks/useModalSubscribe'; // припустимо, тут хук
 import { subscribeSchema } from '../schemas/validationSchemas';
 import { useSubscribeMutation } from '../services/notificationApi';
-import { handleApiError } from '../utils/parseApiError';
-import { SubscribeModal } from './SubscribeModal';
+import { ModalSubscribe } from './ModalSubscribe';
 import { UiButton } from './ui/UiButton';
 import { UiTitle } from './ui/UiTitle';
 
@@ -18,13 +17,17 @@ type FormData = {
   email: string;
 };
 
-const SubscribeSection: FC = () => {
+const SectionSubscribe: FC = () => {
   const [subscribe] = useSubscribeMutation();
-  const navigate = useNavigate();
+  const handleApiError = useHandleApiError();
 
-  const [isModalOpen, setIsModalOpen] = useState(false);
-  const [modalMessage, setModalMessage] = useState('');
-  const [isError, setIsError] = useState(false);
+  const {
+    isModalOpen,
+    modalMessage,
+    isError,
+    openModal,
+    closeModalAndRedirect,
+  } = useModalSubscribe();
 
   const {
     register,
@@ -38,38 +41,23 @@ const SubscribeSection: FC = () => {
 
   const onSubmit = async (data: FormData): Promise<void> => {
     try {
-      await subscribe({ email: data.email }).unwrap();
+      const { message } = await subscribe({ email: data.email }).unwrap();
       reset();
-      setModalMessage('');
-      setIsError(false);
-      setIsModalOpen(true);
+      const friendlyMessage = getFriendlySubscriptionMessage(message);
+      openModal(friendlyMessage, false);
     } catch (error: unknown) {
-      const message = handleApiError(error, navigate);
-      if (!message) return;
-
-      if (message === 'Цей email вже підписано.') {
-        setError('email', { type: 'manual', message: 'Ви вже підписані' });
-      } else {
-        setError('email', { type: 'manual', message });
-      }
-
-      setModalMessage(message);
-      setIsError(true);
-      setIsModalOpen(true);
+      const { message, isRedirected } = handleApiError(error);
+      if (isRedirected) return;
+      const friendlyMessage = getFriendlySubscriptionMessage(message);
+      setError('email', { type: 'manual', message: friendlyMessage });
+      openModal(friendlyMessage, true);
     }
   };
 
   const onError = (formErrors: FieldErrors<FormData>): void => {
     const firstErrorMessage =
       Object.values(formErrors)[0]?.message || 'Помилка валідації';
-    setModalMessage(firstErrorMessage as string);
-    setIsError(true);
-    setIsModalOpen(true);
-  };
-
-  const goHome = (): void => {
-    setIsModalOpen(false);
-    navigate(PATH_PAGES.MAIN);
+    openModal(firstErrorMessage as string, true);
   };
 
   return (
@@ -110,15 +98,17 @@ const SubscribeSection: FC = () => {
         </div>
       </section>
 
-      <SubscribeModal
+      <ModalSubscribe
         open={isModalOpen}
-        onOpenChange={setIsModalOpen}
+        onOpenChange={(open) => {
+          if (!open) closeModalAndRedirect();
+        }}
         isError={isError}
         message={modalMessage}
-        onConfirm={goHome}
+        onConfirm={closeModalAndRedirect}
       />
     </>
   );
 };
 
-export { SubscribeSection };
+export { SectionSubscribe };

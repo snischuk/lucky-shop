@@ -5,7 +5,7 @@ import type { FC } from 'react';
 import IconClose from '../assets/images/icons/icon-close.svg?react';
 import { UiButton } from './ui/UiButton';
 
-interface SubscribeModalProps {
+interface ModalSubscribeProps {
   open: boolean;
   onOpenChange: (open: boolean) => void;
   isError: boolean;
@@ -13,10 +13,9 @@ interface SubscribeModalProps {
   onConfirm: () => void;
 }
 
-export const SubscribeModal: FC<SubscribeModalProps> = ({
+export const ModalSubscribe: FC<ModalSubscribeProps> = ({
   open,
   onOpenChange,
-  isError,
   message,
   onConfirm,
 }) => (
@@ -37,10 +36,7 @@ export const SubscribeModal: FC<SubscribeModalProps> = ({
         </Dialog.Title>
 
         <Dialog.Description className="mb-2 whitespace-pre-line text-center font-family-primary text-[32px] uppercase leading-loose text-white">
-          {isError
-            ? message
-            : `Дякуємо!
-               Ви успішно оформили підписку.`}
+          {message}
         </Dialog.Description>
 
         <UiButton
