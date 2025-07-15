@@ -9,17 +9,13 @@ import IconEmail from '../assets/images/icons/icon-email.svg?react';
 import { PATH_PAGES } from '../constants/pathPages';
 import { subscribeSchema } from '../schemas/validationSchemas';
 import { useSubscribeMutation } from '../services/notificationApi';
+import { handleApiError } from '../utils/parseApiError';
 import { SubscribeModal } from './SubscribeModal';
 import { UiButton } from './ui/UiButton';
 import { UiTitle } from './ui/UiTitle';
 
 type FormData = {
   email: string;
-};
-
-type SubscribeApiError = {
-  data: { message: string };
-  status: number;
 };
 
 const SubscribeSection: FC = () => {
@@ -48,14 +44,15 @@ const SubscribeSection: FC = () => {
       setIsError(false);
       setIsModalOpen(true);
     } catch (error) {
-      let message =
-        (error as SubscribeApiError)?.data?.message || 'Помилка підписки';
+      const message = handleApiError(error, navigate);
+      if (!message) return;
 
       if (message === 'Цей email вже підписано.') {
-        message = 'Ви вже підписані';
+        setError('email', { type: 'manual', message: 'Ви вже підписані' });
+      } else {
+        setError('email', { type: 'manual', message });
       }
-      console.dir(error);
-      setError('email', { type: 'manual', message });
+
       setModalMessage(message);
       setIsError(true);
       setIsModalOpen(true);
