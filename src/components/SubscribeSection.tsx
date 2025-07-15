@@ -43,7 +43,7 @@ const SubscribeSection: FC = () => {
       setModalMessage('');
       setIsError(false);
       setIsModalOpen(true);
-    } catch (error) {
+    } catch (error: unknown) {
       const message = handleApiError(error, navigate);
       if (!message) return;
 
