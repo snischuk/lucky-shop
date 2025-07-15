@@ -7,9 +7,9 @@ import { useNavigate } from 'react-router-dom';
 
 import IconEmail from '../assets/images/icons/icon-email.svg?react';
 import { PATH_PAGES } from '../constants/pathPages';
+import { useHandleApiError } from '../hooks/useHandleApiError';
 import { subscribeSchema } from '../schemas/validationSchemas';
 import { useSubscribeMutation } from '../services/notificationApi';
-import { handleApiError } from '../utils/parseApiError';
 import { SubscribeModal } from './SubscribeModal';
 import { UiButton } from './ui/UiButton';
 import { UiTitle } from './ui/UiTitle';
@@ -20,8 +20,9 @@ type FormData = {
 
 const SubscribeSection: FC = () => {
   const [subscribe] = useSubscribeMutation();
-  const navigate = useNavigate();
+  const handleApiError = useHandleApiError();
 
+  const navigate = useNavigate();
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [modalMessage, setModalMessage] = useState('');
   const [isError, setIsError] = useState(false);
@@ -44,8 +45,8 @@ const SubscribeSection: FC = () => {
       setIsError(false);
       setIsModalOpen(true);
     } catch (error: unknown) {
-      const message = handleApiError(error, navigate);
-      if (!message) return;
+      const { message, isRedirected } = handleApiError(error);
+      if (isRedirected) return;
 
       if (message === 'Цей email вже підписано.') {
         setError('email', { type: 'manual', message: 'Ви вже підписані' });
