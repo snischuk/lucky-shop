@@ -11,7 +11,7 @@ const UnsubscribeSuccessPage: FC = () => {
   return (
     <div className="flex w-full justify-between">
       <div className="flex w-7/12 flex-shrink-0 flex-col gap-6 px-7 py-16">
-        <UiTitle>Ви успішно відписалися!</UiTitle>
+        <UiTitle as="h1">Ви успішно відписалися!</UiTitle>
 
         <p className="max-w-[609px] font-family-secondary text-[24px] uppercase leading-[1.175] text-black">
           Дякуємо, що були з нами! Якщо передумаєте - завжди можна повернутись і

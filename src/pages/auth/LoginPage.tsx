@@ -58,7 +58,7 @@ const LoginPage: FC = () => {
       <div className="align-center flex w-7/12 flex-shrink-0 flex-col items-center gap-7 px-7 py-6">
         <ButtonPreviousPage className="self-start" />
 
-        <UiTitle>Вхід</UiTitle>
+        <UiTitle as="h1">Вхід</UiTitle>
 
         <form
           noValidate

@@ -10,7 +10,7 @@ const UnsubscribeCancelPage: FC = () => {
   return (
     <div className="flex w-full justify-between">
       <div className="flex w-7/12 flex-shrink-0 flex-col gap-6 px-7 py-16">
-        <UiTitle>Дякуємо, що залишаєтесь з Lucky!</UiTitle>
+        <UiTitle as="h1">Дякуємо, що залишаєтесь з Lucky!</UiTitle>
 
         <p className="max-w-[609px] font-family-secondary text-[24px] uppercase leading-[1.175] text-black">
           Дякуємо, що залишаєтесь. Ми й далі надсилатимемо вам стильні новинки,
