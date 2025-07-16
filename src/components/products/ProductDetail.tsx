@@ -1,9 +1,11 @@
 import type { FC } from 'react';
 
 import IconHeart from '../../assets/images/icons/icon-heart.svg?react';
+import IconPlus from '../../assets/images/icons/icon-plus.svg?react';
 import IconSizes from '../../assets/images/icons/icon-sizes.svg?react';
 import type { Product } from '../../types/Product';
 import { UiButton } from '../ui/UiButton';
+import { ProductDetailImages } from './ProductDetailImages';
 
 interface ProductDetailProps {
   product: Product;
@@ -16,32 +18,7 @@ const ProductDetail: FC<ProductDetailProps> = ({ product }) => {
   return (
     <div className="grid grid-cols-[802px_556px] gap-6 font-family-primary text-light-black">
       {/* Ліва частина — зображення товару */}
-      <div className="grid grid-cols-[212px_1fr] gap-6">
-        <div className="col-span-1 flex flex-col gap-6">
-          <img
-            src={image[1]}
-            alt={name}
-            className="h-[212px] w-[212px] object-cover object-top"
-          />
-          <img
-            src={product.image[2]}
-            alt={product.name}
-            className="h-[212px] w-[212px] object-cover object-top"
-          />
-          <img
-            src={product.image[3]}
-            alt={product.name}
-            className="h-[212px] w-[212px] object-cover object-top"
-          />
-        </div>
-        <div className="h-[684px] w-[566px]">
-          <img
-            src={product.image[0]}
-            alt={product.name}
-            className="h-[684px] w-[566px] object-cover object-top"
-          />
-        </div>
-      </div>
+      <ProductDetailImages image={image} name={name} />
 
       {/* Права частина — опис товару */}
       <div className="flex w-[566px] flex-col gap-6">
@@ -79,20 +56,19 @@ const ProductDetail: FC<ProductDetailProps> = ({ product }) => {
         <div className="flex-start flex flex-col gap-3 text-[20px]">
           <UiButton className="justify-between">
             <span className="font-family-primary">Склад і догляд</span>
-            <p className="font-family-primary">+</p>
-            {/* <IconPlus /> */}
+            <IconPlus className="h-7 w-7" />
           </UiButton>
           <UiButton className="justify-between">
             <span className="font-family-primary">Опис</span>
-            <p className="font-family-primary">+</p>
+            <IconPlus className="h-7 w-7" />
           </UiButton>
           <UiButton className="justify-between">
             <span className="font-family-primary">Характеристики</span>
-            <p className="font-family-primary">+</p>
+            <IconPlus className="h-7 w-7" />
           </UiButton>
           <UiButton className="justify-between">
             <span className="font-family-primary">Доставка та повернення</span>
-            <p className="font-family-primary">+</p>
+            <IconPlus className="h-7 w-7" />
           </UiButton>
         </div>
       </div>
