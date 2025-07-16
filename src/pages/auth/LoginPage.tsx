@@ -2,7 +2,7 @@ import { yupResolver } from '@hookform/resolvers/yup';
 import type { FC } from 'react';
 import { useState } from 'react';
 import { useForm } from 'react-hook-form';
-import { Link, useNavigate } from 'react-router-dom';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
 import type { InferType } from 'yup';
 
 import loginImage from '../../assets/images/auth/login.jpg';
@@ -27,6 +27,7 @@ const LoginPage: FC = () => {
   const dispatch = useTypedDispatch();
 
   const navigate = useNavigate();
+  const location = useLocation();
   const [isShowPassword, setIsShowPassword] = useState(false);
 
   const {
@@ -47,7 +48,7 @@ const LoginPage: FC = () => {
     try {
       const { token, role } = await login(data).unwrap();
       dispatch(setCredentials({ token, role }));
-      navigate(PATH_PAGES.CABINET);
+      navigate(location.state?.from?.pathname || PATH_PAGES.MAIN);
     } catch (error: unknown) {
       handleApiError(error);
     }
