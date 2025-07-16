@@ -7,7 +7,7 @@ type FetchError = { error: string; status: 'FETCH_ERROR' };
 const isObject = (value: unknown): value is Record<string, unknown> =>
   typeof value === 'object' && value !== null;
 
-export const useHandleApiError = () => {
+const useHandleApiError = () => {
   const navigate = useNavigate();
 
   return (error: unknown): { message: string; isRedirected: boolean } => {
@@ -42,3 +42,5 @@ export const useHandleApiError = () => {
     };
   };
 };
+
+export { useHandleApiError };

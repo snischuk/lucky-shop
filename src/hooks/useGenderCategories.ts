@@ -1,7 +1,7 @@
 import { mockProducts } from '../data/mockProducts';
 import { useValidatedGender } from './useValidatedGender';
 
-export const useGenderCategories = (): {
+const useGenderCategories = (): {
   gender: 'man' | 'woman' | null;
   categories: string[];
 } => {
@@ -21,3 +21,5 @@ export const useGenderCategories = (): {
 
   return { gender, categories };
 };
+
+export { useGenderCategories };
