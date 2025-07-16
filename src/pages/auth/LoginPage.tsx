@@ -13,6 +13,7 @@ import { ButtonPreviousPage } from '../../components/ButtonPreviousPage';
 import { UiButton } from '../../components/ui/UiButton';
 import { UiTitle } from '../../components/ui/UiTitle';
 import { PATH_PAGES } from '../../constants/pathPages';
+import { useHandleApiError } from '../../hooks/useHandleApiError';
 import { useTypedDispatch } from '../../hooks/useRedux';
 import { setCredentials } from '../../redux/authSlice';
 import { loginSchema } from '../../schemas/validationSchemas';
@@ -21,10 +22,12 @@ import { useLoginMutation } from '../../services/authApi';
 type LoginFormData = InferType<typeof loginSchema>;
 
 const LoginPage: FC = () => {
-  const [isShowPassword, setIsShowPassword] = useState(false);
-  const navigate = useNavigate();
   const [login] = useLoginMutation();
+  const handleApiError = useHandleApiError();
   const dispatch = useTypedDispatch();
+
+  const navigate = useNavigate();
+  const [isShowPassword, setIsShowPassword] = useState(false);
 
   const {
     register,
@@ -42,11 +45,11 @@ const LoginPage: FC = () => {
 
   const onSubmit = async (data: LoginFormData): Promise<void> => {
     try {
-      const response = await login(data).unwrap();
-      dispatch(setCredentials({ token: response.token, role: response.role }));
+      const { token, role } = await login(data).unwrap();
+      dispatch(setCredentials({ token, role }));
       navigate(PATH_PAGES.CABINET);
-    } catch (error) {
-      console.error('Login failed:', error);
+    } catch (error: unknown) {
+      handleApiError(error);
     }
   };
 
@@ -147,11 +150,13 @@ const LoginPage: FC = () => {
           </UiButton>
 
           <UiButton
+            // TODO: реалізувати авторизацію через Google OAuth
             className="mt-3 w-full gap-5 text-[20px] leading-[1.175]"
             variant="bordered"
             type="button"
             icon={<IconGoogle />}
             iconPosition="before"
+            disabled={true}
           >
             Увійти через Google
           </UiButton>

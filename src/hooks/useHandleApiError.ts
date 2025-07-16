@@ -2,46 +2,20 @@ import { useNavigate } from 'react-router-dom';
 
 import { PATH_PAGES } from '../constants/pathPages';
 
-interface ApiErrorResponse {
-  data: {
-    message: string;
-  };
-}
+type FetchError = { error: string; status: 'FETCH_ERROR' };
 
-interface FetchError {
-  error: string;
-  status: string;
-}
+const isObject = (value: unknown): value is Record<string, unknown> =>
+  typeof value === 'object' && value !== null;
 
-const isObject = (value: unknown): value is Record<string, unknown> => {
-  return typeof value === 'object' && value !== null;
-};
-
-const isFetchError = (error: unknown): error is FetchError => {
-  return (
-    isObject(error) &&
-    'status' in error &&
-    (error as Record<string, unknown>).status === 'FETCH_ERROR'
-  );
-};
-
-const hasDataMessage = (error: unknown): error is ApiErrorResponse => {
-  if (
-    isObject(error) &&
-    'data' in error &&
-    isObject((error as Record<string, unknown>).data)
-  ) {
-    const data = (error as { data: Record<string, unknown> }).data;
-    return typeof data.message === 'string';
-  }
-  return false;
-};
-
-const useHandleApiError = () => {
+export const useHandleApiError = () => {
   const navigate = useNavigate();
 
   return (error: unknown): { message: string; isRedirected: boolean } => {
-    if (isFetchError(error)) {
+    if (
+      isObject(error) &&
+      'status' in error &&
+      (error as FetchError).status === 'FETCH_ERROR'
+    ) {
       navigate(PATH_PAGES.SERVER_ERROR);
       return {
         message: 'Сталася помилка сервера. Спробуйте пізніше.',
@@ -49,7 +23,12 @@ const useHandleApiError = () => {
       };
     }
 
-    if (hasDataMessage(error)) {
+    if (
+      isObject(error) &&
+      'data' in error &&
+      isObject(error.data) &&
+      typeof error.data.message === 'string'
+    ) {
       return { message: error.data.message, isRedirected: false };
     }
 
@@ -63,5 +42,3 @@ const useHandleApiError = () => {
     };
   };
 };
-
-export { useHandleApiError };
