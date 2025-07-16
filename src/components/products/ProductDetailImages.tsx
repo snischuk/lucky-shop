@@ -12,39 +12,60 @@ interface ProductDetailImagesProps {
 }
 
 const ProductDetailImages: FC<ProductDetailImagesProps> = ({ image, name }) => {
-  const swiperRef = useRef<SwiperType | null>(null);
+  const mainSwiperRef = useRef<SwiperType | null>(null);
+  const thumbsSwiperRef = useRef<SwiperType | null>(null);
+
   const [isBeginning, setIsBeginning] = useState(true);
   const [isEnd, setIsEnd] = useState(false);
 
   return (
-    <div className="flex gap-6">
-      <div className="flex w-[212px] flex-col gap-6">
-        {image.slice(1, 4).map((src, index) => (
-          <img
-            key={index}
-            src={src}
-            alt={`${name} ${index + 2}`}
-            className="h-[212px] w-[212px] object-cover object-top"
-          />
-        ))}
+    <div className="z-[0] flex gap-6">
+      <div className="flex h-[684px] w-[212px] flex-col">
+        <Swiper
+          direction="vertical"
+          modules={[Navigation]}
+          slidesPerView={3}
+          spaceBetween={12}
+          watchOverflow={false}
+          className="h-full w-full"
+          onSwiper={(swiper) => {
+            thumbsSwiperRef.current = swiper;
+          }}
+        >
+          {image.map((src, index) => (
+            <SwiperSlide key={index}>
+              <img
+                src={src}
+                alt={`${name} ${index + 1}`}
+                className="h-[212px] w-[212px] object-cover object-top"
+              />
+            </SwiperSlide>
+          ))}
+        </Swiper>
       </div>
-      <div className="relative z-[0] h-[684px] w-[566px] overflow-hidden">
-        <div className="absolute bottom-0 left-4 right-4 top-0 z-[1] my-auto flex justify-between">
-          <ButtonPreviousSlide swiperRef={swiperRef} isDisabled={isBeginning} />
-          <ButtonNextSlide swiperRef={swiperRef} isDisabled={isEnd} />
+      <div className="relative h-[684px] w-[566px]">
+        <div className="absolute bottom-0 left-4 right-4 top-0 z-[2] my-auto flex justify-between">
+          <ButtonPreviousSlide
+            swiperRef={mainSwiperRef}
+            isDisabled={isBeginning}
+          />
+          <ButtonNextSlide swiperRef={mainSwiperRef} isDisabled={isEnd} />
         </div>
         <Swiper
-          direction="horizontal"
           modules={[Navigation]}
           slidesPerView={1}
           className="h-full w-full"
           onSwiper={(swiper) => {
-            swiperRef.current = swiper;
+            mainSwiperRef.current = swiper;
             setIsBeginning(swiper.isBeginning);
             setIsEnd(swiper.isEnd);
             swiper.on('slideChange', () => {
               setIsBeginning(swiper.isBeginning);
               setIsEnd(swiper.isEnd);
+              const active = swiper.activeIndex;
+              if (thumbsSwiperRef.current) {
+                thumbsSwiperRef.current.slideTo(active);
+              }
             });
           }}
         >
