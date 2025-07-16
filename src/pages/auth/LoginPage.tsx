@@ -2,7 +2,7 @@ import { yupResolver } from '@hookform/resolvers/yup';
 import type { FC } from 'react';
 import { useState } from 'react';
 import { useForm } from 'react-hook-form';
-import { Link, useNavigate } from 'react-router-dom';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
 import type { InferType } from 'yup';
 
 import loginImage from '../../assets/images/auth/login.jpg';
@@ -13,6 +13,7 @@ import { ButtonPreviousPage } from '../../components/ButtonPreviousPage';
 import { UiButton } from '../../components/ui/UiButton';
 import { UiTitle } from '../../components/ui/UiTitle';
 import { PATH_PAGES } from '../../constants/pathPages';
+import { useHandleApiError } from '../../hooks/useHandleApiError';
 import { useTypedDispatch } from '../../hooks/useRedux';
 import { setCredentials } from '../../redux/authSlice';
 import { loginSchema } from '../../schemas/validationSchemas';
@@ -21,10 +22,13 @@ import { useLoginMutation } from '../../services/authApi';
 type LoginFormData = InferType<typeof loginSchema>;
 
 const LoginPage: FC = () => {
-  const [isShowPassword, setIsShowPassword] = useState(false);
-  const navigate = useNavigate();
   const [login] = useLoginMutation();
+  const handleApiError = useHandleApiError();
   const dispatch = useTypedDispatch();
+
+  const navigate = useNavigate();
+  const location = useLocation();
+  const [isShowPassword, setIsShowPassword] = useState(false);
 
   const {
     register,
@@ -42,11 +46,11 @@ const LoginPage: FC = () => {
 
   const onSubmit = async (data: LoginFormData): Promise<void> => {
     try {
-      const response = await login(data).unwrap();
-      dispatch(setCredentials({ token: response.token, role: response.role }));
-      navigate(PATH_PAGES.CABINET);
-    } catch (error) {
-      console.error('Login failed:', error);
+      const { token, role } = await login(data).unwrap();
+      dispatch(setCredentials({ token, role }));
+      navigate(location.state?.from?.pathname || PATH_PAGES.MAIN);
+    } catch (error: unknown) {
+      handleApiError(error);
     }
   };
 
@@ -55,7 +59,7 @@ const LoginPage: FC = () => {
       <div className="align-center flex w-7/12 flex-shrink-0 flex-col items-center gap-7 px-7 py-6">
         <ButtonPreviousPage className="self-start" />
 
-        <UiTitle>Вхід</UiTitle>
+        <UiTitle as="h1">Вхід</UiTitle>
 
         <form
           noValidate
@@ -147,11 +151,13 @@ const LoginPage: FC = () => {
           </UiButton>
 
           <UiButton
+            // TODO: реалізувати авторизацію через Google OAuth
             className="mt-3 w-full gap-5 text-[20px] leading-[1.175]"
             variant="bordered"
             type="button"
             icon={<IconGoogle />}
             iconPosition="before"
+            disabled={true}
           >
             Увійти через Google
           </UiButton>

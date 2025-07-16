@@ -29,7 +29,7 @@ const ResendPasswordPage: FC = () => {
   return (
     <div className="flex w-full justify-between">
       <div className="flex w-7/12 flex-shrink-0 flex-col gap-6 px-7 py-16">
-        <UiTitle>Повторне надсилання пароля</UiTitle>
+        <UiTitle as="h1">Повторне надсилання пароля</UiTitle>
 
         <p className="max-w-[609px] font-family-secondary text-[24px] uppercase leading-[1.175] text-black">
           Ми надіслали вам електронного листа з посиланням для скидання пароля.

@@ -6,7 +6,7 @@ interface UseToggleReturnType {
   close: () => void;
 }
 
-export const useToggle = (): UseToggleReturnType => {
+const useToggle = (): UseToggleReturnType => {
   const [isOpen, setIsOpen] = useState(false);
 
   const open = (): void => setIsOpen(true);
@@ -14,3 +14,5 @@ export const useToggle = (): UseToggleReturnType => {
 
   return { isOpen, open, close };
 };
+
+export { useToggle };

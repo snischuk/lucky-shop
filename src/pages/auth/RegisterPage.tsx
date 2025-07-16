@@ -55,7 +55,7 @@ const RegisterPage: FC = () => {
       <div className="flex w-7/12 flex-shrink-0 flex-col items-center gap-5 px-7 py-6">
         <ButtonPreviousPage className="self-start" />
 
-        <UiTitle>Зареєструйтеся</UiTitle>
+        <UiTitle as="h1">Зареєструйтеся</UiTitle>
 
         <form
           noValidate

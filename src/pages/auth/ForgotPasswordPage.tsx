@@ -35,7 +35,9 @@ const ForgotPasswordPage: FC = () => {
       <div className="flex w-7/12 flex-shrink-0 flex-col px-7 py-6">
         <ButtonPreviousPage className="self-start" />
 
-        <UiTitle className="mt-[26px]">Отримати пароль</UiTitle>
+        <UiTitle as="h1" className="mt-[26px]">
+          Отримати пароль
+        </UiTitle>
 
         <p className="mt-6 max-w-[634px] font-family-secondary text-[24px] uppercase leading-[1.175] text-black">
           Ми надішлемо вам електронне повідомлення з інструкціями для його

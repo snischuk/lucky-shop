@@ -2,7 +2,7 @@ import clsx from 'clsx';
 import type { FC, HTMLAttributes } from 'react';
 
 interface UiTitleProps extends HTMLAttributes<HTMLHeadingElement> {
-  as?: 'h1' | 'h2' | 'h3' | 'h4' | 'h5' | 'h6';
+  as: 'h1' | 'h2' | 'h3' | 'h4' | 'h5' | 'h6';
   className?: string;
 }
 

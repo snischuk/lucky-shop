@@ -1,5 +1,5 @@
 import type { FC } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
 
 import choice from '../../assets/images/auth/choice.jpg';
 import { ButtonPreviousPage } from '../../components/ButtonPreviousPage';
@@ -8,12 +8,13 @@ import { UiTitle } from '../../components/ui/UiTitle';
 import { PATH_PAGES } from '../../constants/pathPages';
 
 const AuthChoicePage: FC = () => {
+  const location = useLocation();
   return (
     <div className="flex w-full justify-between">
       <div className="flex w-7/12 flex-shrink-0 flex-col px-7 py-6">
         <ButtonPreviousPage className="self-start" />
 
-        <UiTitle className="mt-6">
+        <UiTitle as="h1" className="mt-6">
           Насолоджуйтесь найкращим шопінгом разом з Lucky
         </UiTitle>
 
@@ -27,6 +28,7 @@ const AuthChoicePage: FC = () => {
           variant="filled"
           as={Link}
           to={PATH_PAGES.LOGIN}
+          state={location.state}
         >
           Увійти
         </UiLink>
@@ -36,6 +38,7 @@ const AuthChoicePage: FC = () => {
           variant="bordered"
           as={Link}
           to={PATH_PAGES.REGISTER}
+          state={location.state}
         >
           Зареєструватися
         </UiLink>
