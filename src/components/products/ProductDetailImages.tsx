@@ -1,3 +1,5 @@
+import 'swiper/css';
+
 import { type FC, useRef, useState } from 'react';
 import { type Swiper as SwiperType } from 'swiper';
 import { Navigation } from 'swiper/modules';
@@ -17,6 +19,7 @@ const ProductDetailImages: FC<ProductDetailImagesProps> = ({ image, name }) => {
 
   const [isBeginning, setIsBeginning] = useState(true);
   const [isEnd, setIsEnd] = useState(false);
+  const [activeIndex, setActiveIndex] = useState(0);
 
   return (
     <div className="z-[0] flex gap-6">
@@ -31,13 +34,29 @@ const ProductDetailImages: FC<ProductDetailImagesProps> = ({ image, name }) => {
           onSwiper={(swiper) => {
             thumbsSwiperRef.current = swiper;
           }}
+          onSlideChange={(swiper) => {
+            setActiveIndex(swiper.activeIndex);
+            if (mainSwiperRef.current) {
+              mainSwiperRef.current.slideTo(swiper.activeIndex);
+            }
+          }}
         >
           {image.map((src, index) => (
-            <SwiperSlide key={index}>
+            <SwiperSlide
+              key={index}
+              onClick={() => {
+                if (mainSwiperRef.current) {
+                  mainSwiperRef.current.slideTo(index);
+                }
+              }}
+              className={
+                index === activeIndex ? 'border-4 border-blue-500' : ''
+              }
+            >
               <img
                 src={src}
                 alt={`${name} ${index + 1}`}
-                className="h-[212px] w-[212px] object-cover object-top"
+                className="h-[212px] w-[212px] cursor-pointer object-cover object-top"
               />
             </SwiperSlide>
           ))}
@@ -63,6 +82,7 @@ const ProductDetailImages: FC<ProductDetailImagesProps> = ({ image, name }) => {
               setIsBeginning(swiper.isBeginning);
               setIsEnd(swiper.isEnd);
               const active = swiper.activeIndex;
+              setActiveIndex(active);
               if (thumbsSwiperRef.current) {
                 thumbsSwiperRef.current.slideTo(active);
               }
