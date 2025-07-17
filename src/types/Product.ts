@@ -1,8 +1,9 @@
 import type { Gender } from './Gender';
 
 export interface Product {
-  id: string;
+  sku: string;
   name: string;
+  brand: string;
   gender: Gender;
   category:
     | 'dresses'
@@ -13,9 +14,11 @@ export interface Product {
     | 'sweatshirts';
   price: number;
   oldPrice: number | null;
-  hasDiscount: boolean;
-  image: string;
-  sizes: string[];
+  hasdiscount: boolean;
+  image: string[];
+  sizes: { XS: number; S: number; M: number; L: number };
   color: string;
   season: 'spring_summer' | 'autumn_winter';
+  description: string;
+  material: string;
 }

@@ -25,6 +25,7 @@ export default {
         lemon: '#F6F3B9',
         orange: '#E4572E',
         red: '#CA2E00',
+        'dark-red': '#B50404',
       },
       fontSize: {
         h1: ['48px', { lineHeight: '1.2' }],

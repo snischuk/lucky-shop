@@ -1,4 +1,3 @@
-import clsx from 'clsx';
 import type { FC } from 'react';
 import { Link, NavLink } from 'react-router-dom';
 
@@ -6,10 +5,12 @@ import IconFacebook from '../assets/images/icons/icon-facebook.svg?react';
 import IconInstagram from '../assets/images/icons/icon-instagram.svg?react';
 import IconYoutube from '../assets/images/icons/icon-youtube.svg?react';
 import Logo from '../assets/images/logo-lucky.svg?react';
-import type { NavigationLink } from '../types/NavigationLink';
+import { PATH_PAGES } from '../constants/pathPages';
+import type { FooterNavigationLink } from '../types/FooterNavigationLink';
+import { UiLink } from './ui/UiLink';
 
 interface FooterProps {
-  navigationLinks: NavigationLink[];
+  navigationLinks: FooterNavigationLink[];
 }
 
 const Footer: FC<FooterProps> = ({ navigationLinks }) => (
@@ -17,40 +18,37 @@ const Footer: FC<FooterProps> = ({ navigationLinks }) => (
     <div className="mx-auto max-w-custom-1440 px-6">
       <div className="flex flex-wrap items-start justify-between gap-7">
         <div className="flex flex-col gap-4">
-          <Link to="/">
-            <Logo width={278} />
-          </Link>
+          <UiLink
+            as={NavLink}
+            to={PATH_PAGES.MAIN}
+            variant="iconOnly"
+            icon={<Logo width={278} />}
+          />
 
           <ul className="mt-4 flex gap-6">
             <li>
-              <a
-                className="text-grey transition-colors duration-default hover:text-light-grey"
-                href="#"
-                target="_blank"
-                rel="noopener noreferrer"
-              >
-                <IconFacebook width={28} />
-              </a>
+              <UiLink
+                as="a"
+                variant="iconOnly"
+                icon={<IconFacebook width={28} />}
+                href="https://www.facebook.com/"
+              />
             </li>
             <li>
-              <a
-                className="text-grey transition-colors duration-default hover:text-light-grey"
-                href="#"
-                target="_blank"
-                rel="noopener noreferrer"
-              >
-                <IconInstagram width={28} />
-              </a>
+              <UiLink
+                as="a"
+                variant="iconOnly"
+                icon={<IconInstagram width={28} />}
+                href="https://www.instagram.com/"
+              />
             </li>
             <li>
-              <a
-                className="text-grey transition-colors duration-default hover:text-light-grey"
-                href="#"
-                target="_blank"
-                rel="noopener noreferrer"
-              >
-                <IconYoutube width={28} />
-              </a>
+              <UiLink
+                as="a"
+                variant="iconOnly"
+                icon={<IconYoutube width={28} />}
+                href="https://www.youtube.com/"
+              />
             </li>
           </ul>
         </div>
@@ -60,10 +58,10 @@ const Footer: FC<FooterProps> = ({ navigationLinks }) => (
         </span>
 
         <a
-          className="border border-grey px-6 py-4 font-family-secondary uppercase text-light-black transition-colors duration-default hover:border-orange hover:text-orange"
-          href="mailto:info@Lucky.ua"
+          className="w-[190px] border border-grey px-6 py-4 text-center font-family-secondary text-light-black transition-colors duration-default hover:border-orange hover:text-orange"
+          href="mailto:info@lucky.ua"
         >
-          info@Lucky.ua
+          info@lucky.ua
         </a>
       </div>
 
@@ -72,19 +70,9 @@ const Footer: FC<FooterProps> = ({ navigationLinks }) => (
           <ul className="flex flex-wrap gap-x-10 gap-y-4 whitespace-nowrap">
             {navigationLinks.map(({ id, to, label }) => (
               <li key={id}>
-                <NavLink
-                  to={to}
-                  className={({ isActive }) =>
-                    clsx(
-                      'transition-colors duration-default hover:text-black',
-                      {
-                        'text-orange': isActive,
-                      },
-                    )
-                  }
-                >
+                <UiLink as={NavLink} to={to} variant="default">
                   {label}
-                </NavLink>
+                </UiLink>
               </li>
             ))}
           </ul>
@@ -100,20 +88,14 @@ const Footer: FC<FooterProps> = ({ navigationLinks }) => (
 
         <ul className="flex justify-end gap-5">
           <li>
-            <Link
-              to="/terms-of-service"
-              className="transition-colors duration-default hover:text-black"
-            >
+            <UiLink as={Link} to={PATH_PAGES.TERMS_OF_SERVICE}>
               Terms of Service
-            </Link>
+            </UiLink>
           </li>
           <li>
-            <Link
-              to="/privacy-policy"
-              className="transition-colors duration-default hover:text-black"
-            >
+            <UiLink as={Link} to={PATH_PAGES.PRIVACY_POLICY}>
               Privacy Policy
-            </Link>
+            </UiLink>
           </li>
         </ul>
       </div>

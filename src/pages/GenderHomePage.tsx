@@ -1,38 +1,30 @@
 import type { FC } from 'react';
 import { Navigate } from 'react-router-dom';
 
+import { GallerySection } from '../components/gender/GallerySection';
+import { NewCollectionSection } from '../components/gender/NewCollectionSection';
+import { SalesSection } from '../components/gender/SalesSection';
+import { TopSalesSection } from '../components/gender/TopSalesSection';
 import { GenderHeroSection } from '../components/GenderHeroSection';
 import { ProductsCategories } from '../components/products/ProductsCategories';
 import { PATH_PAGES } from '../constants/pathPages';
-import { mockProducts } from '../data/mockProducts';
-import { useValidatedGender } from '../hooks/useValidatedGender';
+import { useGenderCategories } from '../hooks/useGenderCategories';
 
 const GenderHomePage: FC = () => {
-  const gender = useValidatedGender();
+  const { gender, categories } = useGenderCategories();
 
   if (!gender) {
     return <Navigate to={PATH_PAGES.NOT_FOUND} replace />;
   }
 
-  const categories = Array.from(
-    new Set(
-      mockProducts
-        .filter((product) => product.gender === gender)
-        .map((product) => product.category),
-    ),
-  );
-
   return (
     <>
       <GenderHeroSection gender={gender} />
       <ProductsCategories gender={gender} categories={categories} />
-      <h1 className="text-2xl font-bold">
-        Gender HomePage <strong>{gender}</strong>
-      </h1>
-      {/* possibly need to .map() this: */}
-      {/* {<NewCollectionSection/>}
-      {<BestSellersSection/>}
-      {<SalesSection/>} */}
+      <NewCollectionSection gender={gender} />
+      <TopSalesSection gender={gender} />
+      <SalesSection gender={gender} />
+      <GallerySection gender={gender} />
     </>
   );
 };
