@@ -52,25 +52,17 @@ const ProductCard: FC<ProductCardProps> = ({ item }) => {
         </UiLink>
       </div>
 
-      <button
+      <UiButton
         onClick={toggleFavorite}
-        aria-label={isFavorite ? 'Видалити з улюблених' : 'Додати в улюблені'}
-        className="text-red-500 hover:text-red-700 absolute right-4 top-4 focus:outline-none"
-        type="button"
-      >
-        <div className="flex h-[33px] w-[33px] items-center justify-center">
-          <UiButton
-            variant="iconOnly"
-            icon={<IconHeart />}
-            className={clsx(
-              'h-6 w-6 transition-colors duration-200',
-              isFavorite
-                ? 'fill-orange stroke-orange'
-                : 'fill-transparent stroke-light-black hover:stroke-orange',
-            )}
-          />
-        </div>
-      </button>
+        variant="iconOnly"
+        icon={<IconHeart />}
+        className={clsx(
+          'absolute right-4 top-4 h-6 w-6 transition-colors duration-200',
+          isFavorite
+            ? 'fill-orange stroke-orange'
+            : 'fill-transparent stroke-light-black hover:stroke-orange',
+        )}
+      />
     </article>
   );
 };

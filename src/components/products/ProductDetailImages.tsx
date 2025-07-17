@@ -1,3 +1,5 @@
+import 'swiper/css';
+
 import { type FC, useRef, useState } from 'react';
 import { type Swiper as SwiperType } from 'swiper';
 import { Navigation } from 'swiper/modules';
@@ -23,7 +25,7 @@ const ProductDetailImages: FC<ProductDetailImagesProps> = ({ image, name }) => {
       <div className="flex h-[684px] w-[212px] flex-col">
         <Swiper
           direction="vertical"
-          modules={[Navigation]}
+          loop={true}
           slidesPerView={3}
           spaceBetween={12}
           watchOverflow={false}
@@ -33,7 +35,13 @@ const ProductDetailImages: FC<ProductDetailImagesProps> = ({ image, name }) => {
           }}
         >
           {image.map((src, index) => (
-            <SwiperSlide key={index}>
+            <SwiperSlide
+              key={index}
+              onClick={() => {
+                mainSwiperRef.current?.slideToLoop(index);
+              }}
+              className="cursor-pointer"
+            >
               <img
                 src={src}
                 alt={`${name} ${index + 1}`}
@@ -54,17 +62,20 @@ const ProductDetailImages: FC<ProductDetailImagesProps> = ({ image, name }) => {
         <Swiper
           modules={[Navigation]}
           slidesPerView={1}
+          loop={true}
           className="h-full w-full"
           onSwiper={(swiper) => {
             mainSwiperRef.current = swiper;
             setIsBeginning(swiper.isBeginning);
             setIsEnd(swiper.isEnd);
+
             swiper.on('slideChange', () => {
+              const active = swiper.realIndex;
               setIsBeginning(swiper.isBeginning);
               setIsEnd(swiper.isEnd);
-              const active = swiper.activeIndex;
+
               if (thumbsSwiperRef.current) {
-                thumbsSwiperRef.current.slideTo(active);
+                thumbsSwiperRef.current?.slideToLoop(active, 0, false);
               }
             });
           }}
