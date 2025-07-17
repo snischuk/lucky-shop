@@ -1,7 +1,10 @@
 export const getFriendlySubscriptionMessage = (
   message: string | null,
 ): string => {
-  if (message === 'Успішно підписано.') {
+  if (
+    message === 'Успішно підписано.' ||
+    message === 'Успішно повторно підписано.'
+  ) {
     return 'Дякуємо!\nВи успішно оформили підписку.';
   }
 
