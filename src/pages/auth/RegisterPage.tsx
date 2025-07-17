@@ -12,13 +12,31 @@ import IconEyeOpened from '../../assets/images/icons/icon-eye-opened.svg?react';
 import IconGoogle from '../../assets/images/icons/icon-google.svg?react';
 import { ButtonPreviousPage } from '../../components/ButtonPreviousPage';
 import { UiButton } from '../../components/ui/UiButton';
+import { UiModal } from '../../components/ui/UiModal';
 import { UiTitle } from '../../components/ui/UiTitle';
 import { PATH_PAGES } from '../../constants/pathPages';
+import { useHandleApiError } from '../../hooks/useHandleApiError';
+import { useModal } from '../../hooks/useModal';
+import { useTypedDispatch } from '../../hooks/useRedux';
+import { setCredentials } from '../../redux/authSlice';
 import { registerSchema } from '../../schemas/validationSchemas';
+import { useSignUpMutation } from '../../services/authApi';
 
 type RegisterFormData = InferType<typeof registerSchema>;
 
 const RegisterPage: FC = () => {
+  const [signUp] = useSignUpMutation();
+  const handleApiError = useHandleApiError();
+  const dispatch = useTypedDispatch();
+
+  const {
+    isModalOpen,
+    modalMessage,
+    isError,
+    openModal,
+    closeModalAndRedirect,
+  } = useModal();
+
   const [isShowPassword, setIsShowPassword] = useState(false);
   const [isShowConfirmPassword, setIsShowConfirmPassword] = useState(false);
 
@@ -32,14 +50,23 @@ const RegisterPage: FC = () => {
     mode: 'onChange',
     reValidateMode: 'onChange',
     defaultValues: {
-      policyConsent: false,
-      marketingConsent: false,
+      isPolicyAccepted: false,
+      isSubscribeToAds: false,
     },
   });
 
-  const onSubmit = (data: RegisterFormData): void => {
-    console.log('Register data:', data);
-    // TODO: Виклик API реєстрації
+  const onSubmit = async (formData: RegisterFormData): Promise<void> => {
+    const cleanDataToSend = { ...formData };
+    delete cleanDataToSend.isPolicyAccepted;
+    delete cleanDataToSend.confirmPassword;
+
+    try {
+      const { token, role } = await signUp(cleanDataToSend).unwrap();
+      dispatch(setCredentials({ token, role }));
+      openModal('Реєстрація успішна', false);
+    } catch (error: unknown) {
+      handleApiError(error);
+    }
   };
 
   const handlePasswordVisibility = (): void => {
@@ -213,7 +240,7 @@ const RegisterPage: FC = () => {
           </div>
 
           <Controller
-            name="marketingConsent"
+            name="isSubscribeToAds"
             control={control}
             render={({ field }) => (
               <div className="mt-[12px] flex items-center gap-2">
@@ -247,7 +274,7 @@ const RegisterPage: FC = () => {
           />
 
           <Controller
-            name="policyConsent"
+            name="isPolicyAccepted"
             control={control}
             render={({ field }) => (
               <div className="mt-[12px] h-[62px]">
@@ -282,9 +309,9 @@ const RegisterPage: FC = () => {
                   </label>
                 </div>
 
-                {errors.policyConsent && (
+                {errors.isPolicyAccepted && (
                   <span className="mt-[2px] font-family-secondary text-[14px] leading-[1.17] text-dark-red">
-                    {errors.policyConsent.message}
+                    {errors.isPolicyAccepted.message}
                   </span>
                 )}
               </div>
@@ -318,6 +345,17 @@ const RegisterPage: FC = () => {
         src={registerImg}
         alt="Auth register"
         width="590"
+      />
+
+      <UiModal
+        title="Реєстрація успішна"
+        open={isModalOpen}
+        onOpenChange={(open) => {
+          if (!open) closeModalAndRedirect();
+        }}
+        isError={isError}
+        message={modalMessage}
+        onConfirm={closeModalAndRedirect}
       />
     </div>
   );

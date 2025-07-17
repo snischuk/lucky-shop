@@ -17,12 +17,12 @@ import { useHandleApiError } from '../../hooks/useHandleApiError';
 import { useTypedDispatch } from '../../hooks/useRedux';
 import { setCredentials } from '../../redux/authSlice';
 import { loginSchema } from '../../schemas/validationSchemas';
-import { useLoginMutation } from '../../services/authApi';
+import { useSignInMutation } from '../../services/authApi';
 
 type LoginFormData = InferType<typeof loginSchema>;
 
 const LoginPage: FC = () => {
-  const [login] = useLoginMutation();
+  const [signIn] = useSignInMutation();
   const handleApiError = useHandleApiError();
   const dispatch = useTypedDispatch();
 
@@ -44,9 +44,9 @@ const LoginPage: FC = () => {
     setIsShowPassword((prev) => !prev);
   };
 
-  const onSubmit = async (data: LoginFormData): Promise<void> => {
+  const onSubmit = async (formData: LoginFormData): Promise<void> => {
     try {
-      const { token, role } = await login(data).unwrap();
+      const { token, role } = await signIn(formData).unwrap();
       dispatch(setCredentials({ token, role }));
       navigate(location.state?.from?.pathname || PATH_PAGES.MAIN);
     } catch (error: unknown) {
