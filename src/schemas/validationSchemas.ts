@@ -40,21 +40,28 @@ const passwordSchema = yup
     `Пароль не повинен перевищувати ${PASSWORD_MAX_LENGTH} символів.`,
   );
 
-const getNameSchema = (fieldLabel: string) =>
-  yup
-    .string()
-    .notRequired()
-    .nullable()
-    .matches(NAME_REGEX, {
-      message: `${fieldLabel} може містити лише літери, пробіли й дефіси.`,
-      excludeEmptyString: true,
-    })
-    .max(
-      NAME_MAX_LENGTH,
-      `${fieldLabel} не повинно перевищувати ${NAME_MAX_LENGTH} символів.`,
-    );
+const firstNameSchema = yup
+  .string()
+  .required('Ім’я є обов’язковим.')
+  .matches(NAME_REGEX, 'Ім’я може містити лише літери, пробіли й дефіси.')
+  .max(
+    NAME_MAX_LENGTH,
+    `Ім’я не повинно перевищувати ${NAME_MAX_LENGTH} символів.`,
+  );
 
-const getConfirmPasswordSchema = (refField: string) =>
+const lastNameSchema = yup
+  .string()
+  .notRequired()
+  .matches(NAME_REGEX, {
+    message: 'Прізвище може містити лише літери, пробіли й дефіси.',
+    excludeEmptyString: true,
+  })
+  .max(
+    NAME_MAX_LENGTH,
+    `Прізвище не повинно перевищувати ${NAME_MAX_LENGTH} символів.`,
+  );
+
+const getConfirmPasswordSchema = (refField: string): yup.StringSchema =>
   yup
     .string()
     .required('Підтвердження пароля обов’язкове.')
@@ -64,7 +71,7 @@ const policyConsentSchema = yup
   .boolean()
   .oneOf([true], 'Політика конфіденційності є обов’язковою.');
 
-const marketingConsentSchema = yup.boolean().nullable().default(false);
+const marketingConsentSchema = yup.boolean().default(false);
 
 export const subscribeSchema = yup.object({
   email: emailSchema,
@@ -74,10 +81,10 @@ export const registerSchema = yup.object({
   email: emailSchema,
   password: passwordSchema,
   confirmPassword: getConfirmPasswordSchema('password'),
-  policyConsent: policyConsentSchema,
-  marketingConsent: marketingConsentSchema,
-  firstName: getNameSchema('Ім’я'),
-  lastName: getNameSchema('Прізвище'),
+  isPolicyAccepted: policyConsentSchema,
+  isSubscribeToAds: marketingConsentSchema,
+  firstName: firstNameSchema,
+  lastName: lastNameSchema,
 });
 
 export const loginSchema = yup.object({

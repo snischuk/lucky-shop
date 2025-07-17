@@ -5,43 +5,38 @@ export interface LoginRequest {
   password: string;
 }
 
-export interface LoginResponse {
+export interface AuthResponse {
   token: string;
   role: string;
-  message?: string;
 }
 
 export interface RegisterRequest {
   email: string;
   password: string;
-  firstName?: string;
-  lastName?: string;
+  firstName: string;
+  isSubscribeToAds: boolean;
+  lastName?: string | null;
 }
 
-export interface RegisterResponse {
-  token: string;
-  role: string;
-  message?: string;
-}
 export const authApi = createApi({
   reducerPath: 'authApi',
   baseQuery: fetchBaseQuery({ baseUrl: 'https://gw-retail.duckdns.org/' }),
   endpoints: (builder) => ({
-    login: builder.mutation<LoginResponse, LoginRequest>({
+    signIn: builder.mutation<AuthResponse, LoginRequest>({
       query: ({ email, password }) => ({
         url: 'auth/login',
         method: 'POST',
         body: { email, password },
       }),
     }),
-    register: builder.mutation<RegisterResponse, RegisterRequest>({
-      query: ({ email, password }) => ({
+    signUp: builder.mutation<AuthResponse, RegisterRequest>({
+      query: ({ firstName, lastName, email, password, isSubscribeToAds }) => ({
         url: 'auth/register',
         method: 'POST',
-        body: { email, password },
+        body: { firstName, lastName, email, password, isSubscribeToAds },
       }),
     }),
   }),
 });
 
-export const { useLoginMutation, useRegisterMutation } = authApi;
+export const { useSignInMutation, useSignUpMutation } = authApi;

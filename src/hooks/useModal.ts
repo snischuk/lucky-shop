@@ -4,7 +4,7 @@ import { useNavigate } from 'react-router-dom';
 
 import { PATH_PAGES } from '../constants/pathPages';
 
-interface UseModalSubscribeReturn {
+interface UseModalReturn {
   isModalOpen: boolean;
   modalMessage: string;
   isError: boolean;
@@ -14,7 +14,7 @@ interface UseModalSubscribeReturn {
   closeModalAndRedirect: () => void;
 }
 
-const useModalSubscribe = (): UseModalSubscribeReturn => {
+const useModal = (): UseModalReturn => {
   const navigate = useNavigate();
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [modalMessage, setModalMessage] = useState('');
@@ -46,4 +46,4 @@ const useModalSubscribe = (): UseModalSubscribeReturn => {
   };
 };
 
-export { useModalSubscribe };
+export { useModal };

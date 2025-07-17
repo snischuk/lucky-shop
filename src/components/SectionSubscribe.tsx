@@ -6,11 +6,11 @@ import { useForm } from 'react-hook-form';
 import IconEmail from '../assets/images/icons/icon-email.svg?react';
 import { getFriendlySubscriptionMessage } from '../helpers/getFriendlySubscriptionMessage';
 import { useHandleApiError } from '../hooks/useHandleApiError';
-import { useModalSubscribe } from '../hooks/useModalSubscribe'; // припустимо, тут хук
+import { useModal } from '../hooks/useModal'; // припустимо, тут хук
 import { subscribeSchema } from '../schemas/validationSchemas';
 import { useSubscribeMutation } from '../services/notificationApi';
-import { ModalSubscribe } from './ModalSubscribe';
 import { UiButton } from './ui/UiButton';
+import { UiModal } from './ui/UiModal';
 import { UiTitle } from './ui/UiTitle';
 
 type FormData = {
@@ -27,7 +27,7 @@ const SectionSubscribe: FC = () => {
     isError,
     openModal,
     closeModalAndRedirect,
-  } = useModalSubscribe();
+  } = useModal();
 
   const {
     register,
@@ -98,7 +98,8 @@ const SectionSubscribe: FC = () => {
         </div>
       </section>
 
-      <ModalSubscribe
+      <UiModal
+        title="Підписка"
         open={isModalOpen}
         onOpenChange={(open) => {
           if (!open) closeModalAndRedirect();

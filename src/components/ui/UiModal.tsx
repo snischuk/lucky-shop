@@ -2,10 +2,11 @@ import * as Dialog from '@radix-ui/react-dialog';
 import { VisuallyHidden } from '@radix-ui/react-visually-hidden';
 import type { FC } from 'react';
 
-import IconClose from '../assets/images/icons/icon-close.svg?react';
-import { UiButton } from './ui/UiButton';
+import IconClose from '../../assets/images/icons/icon-close.svg?react';
+import { UiButton } from './UiButton';
 
-interface ModalSubscribeProps {
+interface ModalProps {
+  title: string;
   open: boolean;
   onOpenChange: (open: boolean) => void;
   isError: boolean;
@@ -13,7 +14,8 @@ interface ModalSubscribeProps {
   onConfirm: () => void;
 }
 
-export const ModalSubscribe: FC<ModalSubscribeProps> = ({
+const UiModal: FC<ModalProps> = ({
+  title,
   open,
   onOpenChange,
   message,
@@ -32,7 +34,7 @@ export const ModalSubscribe: FC<ModalSubscribeProps> = ({
         </Dialog.Close>
 
         <Dialog.Title>
-          <VisuallyHidden>Підписка</VisuallyHidden>
+          <VisuallyHidden>{title}</VisuallyHidden>
         </Dialog.Title>
 
         <Dialog.Description className="mb-2 whitespace-pre-line text-center font-family-primary text-[32px] uppercase leading-loose text-white">
@@ -50,3 +52,5 @@ export const ModalSubscribe: FC<ModalSubscribeProps> = ({
     </Dialog.Portal>
   </Dialog.Root>
 );
+
+export { UiModal };
