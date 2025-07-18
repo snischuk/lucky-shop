@@ -4,13 +4,18 @@ import { PATH_PAGES } from '../constants/pathPages';
 
 type FetchError = { error: string; status: 'FETCH_ERROR' };
 
+type HandleApiErrorFn = (error: unknown) => {
+  message: string;
+  isRedirected: boolean;
+};
+
 const isObject = (value: unknown): value is Record<string, unknown> =>
   typeof value === 'object' && value !== null;
 
-const useHandleApiError = () => {
+const useHandleApiError = (): HandleApiErrorFn => {
   const navigate = useNavigate();
 
-  return (error: unknown): { message: string; isRedirected: boolean } => {
+  return (error: unknown) => {
     if (
       isObject(error) &&
       'status' in error &&

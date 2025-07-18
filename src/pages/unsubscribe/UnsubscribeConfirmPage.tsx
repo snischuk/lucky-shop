@@ -27,7 +27,7 @@ const UnsubscribeConfirmPage: FC = () => {
     try {
       await unsubscribe({ token }).unwrap();
       navigate(PATH_PAGES.UNSUBSCRIPTION_SUCCESS, { state: { token } });
-    } catch (error) {
+    } catch (error: unknown) {
       handleApiError(error);
     }
   };
