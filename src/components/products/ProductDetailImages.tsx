@@ -16,9 +16,7 @@ interface ProductDetailImagesProps {
 const ProductDetailImages: FC<ProductDetailImagesProps> = ({ image, name }) => {
   const mainSwiperRef = useRef<SwiperType | null>(null);
   const thumbsSwiperRef = useRef<SwiperType | null>(null);
-
-  const [isBeginning, setIsBeginning] = useState(true);
-  const [isEnd, setIsEnd] = useState(false);
+  const [activeIndex, setActiveIndex] = useState(0);
 
   return (
     <div className="z-[0] flex gap-6">
@@ -45,7 +43,9 @@ const ProductDetailImages: FC<ProductDetailImagesProps> = ({ image, name }) => {
               <img
                 src={src}
                 alt={`${name} ${index + 1}`}
-                className="h-[212px] w-[212px] object-cover object-top"
+                className={`h-[212px] w-[212px] object-cover object-top transition duration-300 ${
+                  index === activeIndex ? '' : 'drop-shadow-header opacity-50'
+                }`}
               />
             </SwiperSlide>
           ))}
@@ -53,11 +53,8 @@ const ProductDetailImages: FC<ProductDetailImagesProps> = ({ image, name }) => {
       </div>
       <div className="relative h-[684px] w-[566px]">
         <div className="absolute bottom-0 left-4 right-4 top-0 z-[2] my-auto flex justify-between">
-          <ButtonPreviousSlide
-            swiperRef={mainSwiperRef}
-            isDisabled={isBeginning}
-          />
-          <ButtonNextSlide swiperRef={mainSwiperRef} isDisabled={isEnd} />
+          <ButtonPreviousSlide swiperRef={mainSwiperRef} />
+          <ButtonNextSlide swiperRef={mainSwiperRef} />
         </div>
         <Swiper
           modules={[Navigation]}
@@ -66,17 +63,11 @@ const ProductDetailImages: FC<ProductDetailImagesProps> = ({ image, name }) => {
           className="h-full w-full"
           onSwiper={(swiper) => {
             mainSwiperRef.current = swiper;
-            setIsBeginning(swiper.isBeginning);
-            setIsEnd(swiper.isEnd);
+
+            setActiveIndex(swiper.realIndex);
 
             swiper.on('slideChange', () => {
-              const active = swiper.realIndex;
-              setIsBeginning(swiper.isBeginning);
-              setIsEnd(swiper.isEnd);
-
-              if (thumbsSwiperRef.current) {
-                thumbsSwiperRef.current?.slideToLoop(active, 0, false);
-              }
+              setActiveIndex(swiper.realIndex);
             });
           }}
         >

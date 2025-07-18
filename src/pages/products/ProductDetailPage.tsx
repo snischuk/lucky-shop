@@ -22,7 +22,7 @@ const ProductDetailPage: FC = () => {
   if (!product) return null;
 
   return (
-    <div className="mx-auto w-full max-w-custom-1440 px-6 pb-[70px] pt-[140px]">
+    <div className="mx-auto w-full max-w-custom-1440 px-6 pb-[70px] pt-[106px]">
       <ProductDetail product={product} />
       {/* {<ProductsRecommendations/>} */}
     </div>
