@@ -3,27 +3,52 @@ import type { FC } from 'react';
 import { useForm } from 'react-hook-form';
 import type { InferType } from 'yup';
 
-import resendPassword from '../../assets/images/auth/password-resending.jpg';
+import resendPasswordImage from '../../assets/images/auth/password-resending.jpg';
 import { UiButton } from '../../components/ui/UiButton';
+import { UiModal } from '../../components/ui/UiModal';
 import { UiTitle } from '../../components/ui/UiTitle';
-import { resendPasswordSchema } from '../../schemas/validationSchemas';
+import { PATH_PAGES } from '../../constants/pathPages';
+import { useHandleApiError } from '../../hooks/useHandleApiError';
+import { useModal } from '../../hooks/useModal';
+import { forgotPasswordSchema } from '../../schemas/validationSchemas';
+import { useForgotPasswordMutation } from '../../services/authApi';
 
-type ResendFormData = InferType<typeof resendPasswordSchema>;
+type ResendFormData = InferType<typeof forgotPasswordSchema>;
 
 const ResendPasswordPage: FC = () => {
+  const [forgotPassword] = useForgotPasswordMutation();
+  const handleApiError = useHandleApiError();
+
+  const {
+    isModalOpen,
+    modalMessage,
+    isError,
+    openModal,
+    closeModal,
+    confirmModal,
+  } = useModal();
+
   const {
     register,
     handleSubmit,
     formState: { errors, isSubmitting },
   } = useForm({
-    resolver: yupResolver(resendPasswordSchema),
+    resolver: yupResolver(forgotPasswordSchema),
     mode: 'onChange',
     reValidateMode: 'onChange',
   });
 
-  const onSubmit = (data: ResendFormData): void => {
-    console.log('Resend email to:', data.email);
-    // TODO: API виклик для повторного надсилання
+  const onSubmit = async (formData: ResendFormData): Promise<void> => {
+    try {
+      await forgotPassword({
+        email: formData.email,
+      });
+      const message =
+        'Інструкції повторно надіслані. Перевірте електронну пошту';
+      openModal(message, false, PATH_PAGES.MAIN);
+    } catch (error: unknown) {
+      handleApiError(error);
+    }
   };
 
   return (
@@ -85,9 +110,22 @@ const ResendPasswordPage: FC = () => {
 
       <img
         className="w-5/12 max-w-[590px] flex-shrink"
-        src={resendPassword}
+        src={resendPasswordImage}
         alt="Auth resend password"
         width="590"
+      />
+
+      <UiModal
+        title="Повторне надсилання пароля"
+        open={isModalOpen}
+        onOpenChange={(open) => {
+          if (!open) closeModal();
+        }}
+        isError={isError}
+        message={modalMessage}
+        onConfirm={confirmModal}
+        confirmButtonText="На головну"
+        redirectPath={PATH_PAGES.MAIN}
       />
     </div>
   );

@@ -4,9 +4,10 @@ import type { FieldErrors } from 'react-hook-form';
 import { useForm } from 'react-hook-form';
 
 import IconEmail from '../assets/images/icons/icon-email.svg?react';
+import { PATH_PAGES } from '../constants/pathPages';
 import { getFriendlySubscriptionMessage } from '../helpers/getFriendlySubscriptionMessage';
 import { useHandleApiError } from '../hooks/useHandleApiError';
-import { useModal } from '../hooks/useModal'; // припустимо, тут хук
+import { useModal } from '../hooks/useModal';
 import { subscribeSchema } from '../schemas/validationSchemas';
 import { useSubscribeMutation } from '../services/notificationApi';
 import { UiButton } from './ui/UiButton';
@@ -21,13 +22,8 @@ const SectionSubscribe: FC = () => {
   const [subscribe] = useSubscribeMutation();
   const handleApiError = useHandleApiError();
 
-  const {
-    isModalOpen,
-    modalMessage,
-    isError,
-    openModal,
-    closeModalAndRedirect,
-  } = useModal();
+  const { isModalOpen, modalMessage, isError, openModal, closeModal } =
+    useModal();
 
   const {
     register,
@@ -44,7 +40,7 @@ const SectionSubscribe: FC = () => {
       const { message } = await subscribe({ email: data.email }).unwrap();
       reset();
       const friendlyMessage = getFriendlySubscriptionMessage(message);
-      openModal(friendlyMessage, false);
+      openModal(friendlyMessage, false, PATH_PAGES.MAIN);
     } catch (error: unknown) {
       const { message, isRedirected } = handleApiError(error);
       if (isRedirected) return;
@@ -102,11 +98,12 @@ const SectionSubscribe: FC = () => {
         title="Підписка"
         open={isModalOpen}
         onOpenChange={(open) => {
-          if (!open) closeModalAndRedirect();
+          if (!open) closeModal();
         }}
         isError={isError}
         message={modalMessage}
-        onConfirm={closeModalAndRedirect}
+        onConfirm={closeModal}
+        confirmButtonText="OK"
       />
     </>
   );

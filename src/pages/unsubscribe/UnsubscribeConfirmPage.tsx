@@ -11,16 +11,15 @@ import { useUnsubscribeMutation } from '../../services/notificationApi';
 
 const UnsubscribeConfirmPage: FC = () => {
   const [searchParams] = useSearchParams();
-  const token =
-    searchParams.get('token') || '_JNvAhW6QW5c4znKLDKcPPWmUpwRLeYAPqRXqC727qQ';
   const [unsubscribe] = useUnsubscribeMutation();
   const handleApiError = useHandleApiError();
   const navigate = useNavigate();
 
   const handleUnsubscribe = async (): Promise<void> => {
-    console.log('Unsubscribe token:', token);
+    const token = searchParams.get('token');
+
     if (!token) {
-      navigate(PATH_PAGES.NOT_FOUND);
+      navigate(PATH_PAGES.BAD_REQUEST);
       return;
     }
 

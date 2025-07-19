@@ -28,13 +28,23 @@ const useHandleApiError = (): HandleApiErrorFn => {
       };
     }
 
-    if (
-      isObject(error) &&
-      'data' in error &&
-      isObject(error.data) &&
-      typeof error.data.message === 'string'
-    ) {
-      return { message: error.data.message, isRedirected: false };
+    if (isObject(error) && typeof error.status === 'number') {
+      const status = error.status;
+
+      if (status === 400) {
+        navigate(PATH_PAGES.BAD_REQUEST);
+        return {
+          message: 'Некоректний запит.',
+          isRedirected: true,
+        };
+      }
+
+      if (isObject(error.data) && typeof error.data.message === 'string') {
+        return {
+          message: error.data.message,
+          isRedirected: false,
+        };
+      }
     }
 
     if (error instanceof Error) {
