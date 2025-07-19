@@ -23,15 +23,15 @@ const UnsubscribeSuccessPage: FC = () => {
     modalMessage,
     isError,
     openModal,
-    closeModalAndRedirect,
+    closeModal,
+    confirmModal,
   } = useModal();
 
   const token = location.state?.token;
 
   const handleSubscribe = async (): Promise<void> => {
     if (!token) {
-      console.warn('Відсутній токен для повторної підписки');
-      navigate(PATH_PAGES.NOT_FOUND);
+      navigate(PATH_PAGES.BAD_REQUEST);
       return;
     }
 
@@ -40,8 +40,6 @@ const UnsubscribeSuccessPage: FC = () => {
       openModal(message, false);
     } catch (error: unknown) {
       handleApiError(error);
-    } finally {
-      openModal('Підписка успішна', false);
     }
   };
 
@@ -90,11 +88,13 @@ const UnsubscribeSuccessPage: FC = () => {
         title="Підписка"
         open={isModalOpen}
         onOpenChange={(open) => {
-          if (!open) closeModalAndRedirect();
+          if (!open) closeModal();
         }}
         isError={isError}
         message={modalMessage}
-        onConfirm={closeModalAndRedirect}
+        onConfirm={confirmModal}
+        confirmButtonText="На головну"
+        redirectPath={PATH_PAGES.MAIN}
       />
     </div>
   );

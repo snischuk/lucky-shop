@@ -2,18 +2,38 @@ import { yupResolver } from '@hookform/resolvers/yup';
 import type { FC } from 'react';
 import { useState } from 'react';
 import { useForm } from 'react-hook-form';
+import { useNavigate, useSearchParams } from 'react-router-dom';
 import type { InferType } from 'yup';
 
 import createNewPassword from '../../assets/images/auth/create-new-password.jpg';
 import IconEyeClosed from '../../assets/images/icons/icon-eye-closed.svg?react';
 import IconEyeOpened from '../../assets/images/icons/icon-eye-opened.svg?react';
 import { UiButton } from '../../components/ui/UiButton';
+import { UiModal } from '../../components/ui/UiModal';
 import { UiTitle } from '../../components/ui/UiTitle';
+import { PATH_PAGES } from '../../constants/pathPages';
+import { useHandleApiError } from '../../hooks/useHandleApiError';
+import { useModal } from '../../hooks/useModal';
 import { newPasswordSchema } from '../../schemas/validationSchemas';
+import { useResetPasswordMutation } from '../../services/authApi';
 
 type NewPasswordFormData = InferType<typeof newPasswordSchema>;
 
 const CreateNewPasswordPage: FC = () => {
+  const [searchParams] = useSearchParams();
+  const [resetPassword] = useResetPasswordMutation();
+  const handleApiError = useHandleApiError();
+
+  const {
+    isModalOpen,
+    modalMessage,
+    isError,
+    openModal,
+    closeModal,
+    confirmModal,
+  } = useModal();
+
+  const navigate = useNavigate();
   const [isShowNewPassword, setIsShowNewPassword] = useState(false);
   const [isShowConfirmPassword, setIsShowConfirmPassword] = useState(false);
 
@@ -35,9 +55,23 @@ const CreateNewPasswordPage: FC = () => {
     setIsShowConfirmPassword((prev) => !prev);
   };
 
-  const onSubmit = (data: NewPasswordFormData): void => {
-    console.log('New password data:', data);
-    // TODO: логіка оновлення пароля
+  const onSubmit = async (formData: NewPasswordFormData): Promise<void> => {
+    const token = searchParams.get('token');
+
+    if (!token) {
+      navigate(PATH_PAGES.BAD_REQUEST);
+      return;
+    }
+
+    const cleanDataToSend = { ...formData, token };
+    delete cleanDataToSend.confirmPassword;
+
+    try {
+      await resetPassword(cleanDataToSend).unwrap();
+      openModal('Новий пароль збережено', false, PATH_PAGES.LOGIN, 'Вхід');
+    } catch (error: unknown) {
+      handleApiError(error);
+    }
   };
 
   return (
@@ -138,6 +172,19 @@ const CreateNewPasswordPage: FC = () => {
         src={createNewPassword}
         alt="Auth create new password"
         width="590"
+      />
+
+      <UiModal
+        title="Новий пароль успішно створено"
+        open={isModalOpen}
+        onOpenChange={(open) => {
+          if (!open) closeModal();
+        }}
+        isError={isError}
+        message={modalMessage}
+        onConfirm={confirmModal}
+        confirmButtonText="Вхід"
+        redirectPath={PATH_PAGES.LOGIN}
       />
     </div>
   );
