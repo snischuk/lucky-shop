@@ -53,7 +53,7 @@ const UiModal: FC<ModalProps> = ({
               to={redirectPath}
               as={Link}
               variant="filled"
-              className="w-full max-w-[379px] border border-main bg-transparent px-6 py-5 text-[20px] leading-[1.175] enabled:hover:border-orange"
+              className="w-full max-w-[379px] border border-main bg-transparent px-6 py-5 text-[20px] leading-[1.175] hover:border-orange"
             >
               {confirmButtonText}
             </UiLink>
