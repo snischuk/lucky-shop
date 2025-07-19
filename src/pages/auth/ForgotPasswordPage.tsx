@@ -1,20 +1,37 @@
 import { yupResolver } from '@hookform/resolvers/yup';
-import type { FC } from 'react';
+import { type FC, useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { Link } from 'react-router-dom';
 import type { InferType } from 'yup';
 
-import forgotPassword from '../../assets/images/auth/forgot-password.jpg';
+import forgotPasswordImage from '../../assets/images/auth/forgot-password.jpg';
 import { ButtonPreviousPage } from '../../components/ButtonPreviousPage';
 import { UiButton } from '../../components/ui/UiButton';
 import { UiLink } from '../../components/ui/UiLink';
+import { UiModal } from '../../components/ui/UiModal';
 import { UiTitle } from '../../components/ui/UiTitle';
 import { PATH_PAGES } from '../../constants/pathPages';
+import { useHandleApiError } from '../../hooks/useHandleApiError';
+import { useModal } from '../../hooks/useModal';
 import { forgotPasswordSchema } from '../../schemas/validationSchemas';
+import { useForgotPasswordMutation } from '../../services/authApi';
 
 type ForgotPasswordFormData = InferType<typeof forgotPasswordSchema>;
 
 const ForgotPasswordPage: FC = () => {
+  const [forgotPassword] = useForgotPasswordMutation();
+  const handleApiError = useHandleApiError();
+  const [isSubmitted, setIsSubmitted] = useState(false);
+
+  const {
+    isModalOpen,
+    modalMessage,
+    isError,
+    openModal,
+    closeModal,
+    confirmModal,
+  } = useModal();
+
   const {
     register,
     handleSubmit,
@@ -25,9 +42,18 @@ const ForgotPasswordPage: FC = () => {
     reValidateMode: 'onChange',
   });
 
-  const onSubmit = (data: ForgotPasswordFormData): void => {
-    console.log('Recovery email sent to:', data.email);
-    // TODO: логіка відправки листа
+  const onSubmit = async (formData: ForgotPasswordFormData): Promise<void> => {
+    try {
+      await forgotPassword({
+        email: formData.email,
+      });
+      setIsSubmitted(true);
+      const message =
+        'Інструкції успішно надіслані. Перевірте електронну пошту';
+      openModal(message, false, PATH_PAGES.MAIN);
+    } catch (error: unknown) {
+      handleApiError(error);
+    }
   };
 
   return (
@@ -67,6 +93,7 @@ const ForgotPasswordPage: FC = () => {
                   : 'border-medium-grey text-light-black'
               }`}
               aria-invalid={!!errors.email}
+              disabled={isSubmitted}
             />
             {errors.email && (
               <span className="mt-[2px] font-family-secondary text-[14px] leading-[1.17] text-dark-red">
@@ -79,7 +106,7 @@ const ForgotPasswordPage: FC = () => {
             className="mt-3 w-full max-w-[424px] text-[20px] leading-[1.175]"
             variant="filled"
             type="submit"
-            disabled={isSubmitting}
+            disabled={isSubmitting || isSubmitted}
           >
             Надіслати
           </UiButton>
@@ -97,9 +124,22 @@ const ForgotPasswordPage: FC = () => {
 
       <img
         className="w-5/12 max-w-[590px] flex-shrink"
-        src={forgotPassword}
+        src={forgotPasswordImage}
         alt="Auth forgot password"
         width="590"
+      />
+
+      <UiModal
+        title="Отримати пароль"
+        open={isModalOpen}
+        onOpenChange={(open) => {
+          if (!open) closeModal();
+        }}
+        isError={isError}
+        message={modalMessage}
+        onConfirm={confirmModal}
+        confirmButtonText="На головну"
+        redirectPath={PATH_PAGES.MAIN}
       />
     </div>
   );

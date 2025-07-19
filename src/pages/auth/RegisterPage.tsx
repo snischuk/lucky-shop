@@ -34,7 +34,8 @@ const RegisterPage: FC = () => {
     modalMessage,
     isError,
     openModal,
-    closeModalAndRedirect,
+    closeModal,
+    confirmModal,
   } = useModal();
 
   const [isShowPassword, setIsShowPassword] = useState(false);
@@ -351,11 +352,13 @@ const RegisterPage: FC = () => {
         title="Реєстрація успішна"
         open={isModalOpen}
         onOpenChange={(open) => {
-          if (!open) closeModalAndRedirect();
+          if (!open) closeModal();
         }}
         isError={isError}
         message={modalMessage}
-        onConfirm={closeModalAndRedirect}
+        onConfirm={confirmModal}
+        confirmButtonText="На головну"
+        redirectPath={PATH_PAGES.MAIN}
       />
     </div>
   );

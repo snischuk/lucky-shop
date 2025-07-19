@@ -96,10 +96,6 @@ export const forgotPasswordSchema = yup.object({
   email: emailSchema,
 });
 
-export const resendPasswordSchema = yup.object({
-  email: emailSchema,
-});
-
 export const newPasswordSchema = yup.object({
   newPassword: passwordSchema,
   confirmPassword: getConfirmPasswordSchema('newPassword'),

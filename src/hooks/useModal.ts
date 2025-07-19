@@ -1,48 +1,58 @@
-import type { Dispatch, SetStateAction } from 'react';
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-
-import { PATH_PAGES } from '../constants/pathPages';
 
 interface UseModalReturn {
   isModalOpen: boolean;
   modalMessage: string;
   isError: boolean;
-  setIsModalOpen: Dispatch<SetStateAction<boolean>>;
-  openModal: (message: string, isError?: boolean) => void;
+  modalConfirmButtonText: string;
+  openModal: (
+    message: string,
+    isError?: boolean,
+    redirectPath?: string,
+    buttonText?: string,
+  ) => void;
   closeModal: () => void;
-  closeModalAndRedirect: () => void;
+  confirmModal: () => void;
 }
 
 const useModal = (): UseModalReturn => {
   const navigate = useNavigate();
+
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [modalMessage, setModalMessage] = useState('');
   const [isError, setIsError] = useState(false);
+  const [modalRedirectPath, setModalRedirectPath] = useState<string>();
+  const [modalConfirmButtonText, setModalConfirmButtonText] = useState('OK');
 
-  const openModal = (message: string, isError = false): void => {
+  const openModal = (
+    message: string,
+    isError = false,
+    redirectPath?: string,
+    buttonText = 'OK',
+  ): void => {
     setModalMessage(message);
     setIsError(isError);
+    setModalRedirectPath(redirectPath);
+    setModalConfirmButtonText(buttonText);
     setIsModalOpen(true);
   };
 
-  const closeModal = (): void => {
-    setIsModalOpen(false);
-  };
+  const closeModal = (): void => setIsModalOpen(false);
 
-  const closeModalAndRedirect = (): void => {
+  const confirmModal = (): void => {
     closeModal();
-    navigate(PATH_PAGES.MAIN);
+    if (modalRedirectPath) navigate(modalRedirectPath);
   };
 
   return {
     isModalOpen,
     modalMessage,
     isError,
-    setIsModalOpen,
+    modalConfirmButtonText,
     openModal,
     closeModal,
-    closeModalAndRedirect,
+    confirmModal,
   };
 };
 
