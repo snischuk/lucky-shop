@@ -8,6 +8,7 @@ import { UiLink } from '../../components/ui/UiLink';
 import { UiModal } from '../../components/ui/UiModal';
 import { UiTitle } from '../../components/ui/UiTitle';
 import { PATH_PAGES } from '../../constants/pathPages';
+import { getEmailFromJWT } from '../../helpers/getEmailFromJWT';
 import { useHandleApiError } from '../../hooks/useHandleApiError';
 import { useModal } from '../../hooks/useModal';
 import { useSubscribeMutation } from '../../services/notificationApi';
@@ -27,17 +28,22 @@ const UnsubscribeSuccessPage: FC = () => {
     confirmModal,
   } = useModal();
 
-  const token = location.state?.token;
+  const token = location.state?.token as string;
+  if (!token) {
+    navigate(PATH_PAGES.BAD_REQUEST);
+    return null;
+  }
+
+  const email = getEmailFromJWT(token);
+  if (!email) {
+    navigate(PATH_PAGES.BAD_REQUEST);
+    return null;
+  }
 
   const handleSubscribe = async (): Promise<void> => {
-    if (!token) {
-      navigate(PATH_PAGES.BAD_REQUEST);
-      return;
-    }
-
     try {
-      const { message } = await subscribe({ email: token }).unwrap();
-      openModal(message, false);
+      const { message } = await subscribe({ email }).unwrap();
+      openModal(message, false, PATH_PAGES.MAIN, 'На головну');
     } catch (error: unknown) {
       handleApiError(error);
     }
