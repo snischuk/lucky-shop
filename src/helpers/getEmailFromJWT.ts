@@ -4,7 +4,7 @@ type JwtPayload = {
   sub: string;
 };
 
-export const getEmailFromJWT = (token?: string): string | null => {
+export const getEmailFromJWT = (token: string): string | null => {
   if (!token) return null;
 
   try {

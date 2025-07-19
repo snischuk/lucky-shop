@@ -8,7 +8,7 @@ import { UiLink } from '../../components/ui/UiLink';
 import { UiModal } from '../../components/ui/UiModal';
 import { UiTitle } from '../../components/ui/UiTitle';
 import { PATH_PAGES } from '../../constants/pathPages';
-import { getEmailFromJWT } from '../../helpers/getEmailFromJwt';
+import { getEmailFromJWT } from '../../helpers/getEmailFromJWT';
 import { useHandleApiError } from '../../hooks/useHandleApiError';
 import { useModal } from '../../hooks/useModal';
 import { useSubscribeMutation } from '../../services/notificationApi';
