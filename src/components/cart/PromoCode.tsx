@@ -85,14 +85,14 @@ const PromoCode: FC = () => {
   const discount = appliedPromo ? calculateDiscount(appliedPromo, total) : 0;
 
   return (
-    <div className="h-[186px] w-[395px] pl-[43px] pr-[23px] pt-[12px]">
+    <div className="h-[186px] w-[395px] pb-[10px] pl-[43px] pr-[23px] pt-3">
       <div className="w-full max-w-[330px]">
         <h3 className="mb-[10px] h-[60px] font-family-primary text-h4 uppercase text-light-black">
           У вас є промокод для знижки?
         </h3>
 
-        <div className="flex h-[54px] w-full items-center justify-between gap-[60px]">
-          <div className="w-[211px] border border-light-grey text-body-s">
+        <div className="flex h-[54px] w-full items-center justify-between gap-[60px] gap-y-[18px] border border-light-grey">
+          <div className="w-[211px] text-[18px] leading-[1.4]">
             <input
               type="text"
               placeholder="Промокод для знижки"
