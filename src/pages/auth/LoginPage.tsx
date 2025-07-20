@@ -1,9 +1,6 @@
-import { yupResolver } from '@hookform/resolvers/yup';
 import type { FC } from 'react';
 import { useState } from 'react';
-import { useForm } from 'react-hook-form';
-import { Link, useLocation, useNavigate } from 'react-router-dom';
-import type { InferType } from 'yup';
+import { Link } from 'react-router-dom';
 
 import loginImage from '../../assets/images/auth/login.jpg';
 import IconEyeClosed from '../../assets/images/icons/icon-eye-closed.svg?react';
@@ -13,52 +10,32 @@ import { ButtonPreviousPage } from '../../components/ButtonPreviousPage';
 import { UiButton } from '../../components/ui/UiButton';
 import { UiTitle } from '../../components/ui/UiTitle';
 import { PATH_PAGES } from '../../constants/pathPages';
-import { useHandleApiError } from '../../hooks/useHandleApiError';
-import { useTypedDispatch } from '../../hooks/useRedux';
-import { setCredentials } from '../../redux/authSlice';
-import { loginSchema } from '../../schemas/validationSchemas';
-import { useSignInMutation } from '../../services/authApi';
-
-type LoginFormData = InferType<typeof loginSchema>;
+import { useSignInWithEmailPassword } from '../../hooks/useSignInWithEmailPassword';
+import { useSignInWithGoogle } from '../../hooks/useSignInWithGoogle';
 
 const LoginPage: FC = () => {
-  const [signIn] = useSignInMutation();
-  const handleApiError = useHandleApiError();
-  const dispatch = useTypedDispatch();
-
-  const navigate = useNavigate();
-  const location = useLocation();
-  const [isShowPassword, setIsShowPassword] = useState(false);
+  const { loginWithGoogle } = useSignInWithGoogle();
+  const { form, onSubmit } = useSignInWithEmailPassword();
 
   const {
     register,
     handleSubmit,
     formState: { errors, isSubmitting },
-  } = useForm({
-    resolver: yupResolver(loginSchema),
-    mode: 'onChange',
-    reValidateMode: 'onChange',
-  });
+  } = form;
 
+  const [isShowPassword, setIsShowPassword] = useState(false);
   const handlePasswordVisibility = (): void => {
     setIsShowPassword((prev) => !prev);
   };
 
-  const onSubmit = async (formData: LoginFormData): Promise<void> => {
-    try {
-      const { token, role } = await signIn(formData).unwrap();
-      dispatch(setCredentials({ token, role }));
-      navigate(location.state?.from?.pathname || PATH_PAGES.MAIN);
-    } catch (error: unknown) {
-      handleApiError(error);
-    }
+  const handleLoginWithGoogle = () => {
+    loginWithGoogle();
   };
 
   return (
     <div className="flex w-full justify-between">
       <div className="align-center flex w-7/12 flex-shrink-0 flex-col items-center gap-7 px-7 py-6">
         <ButtonPreviousPage className="self-start" />
-
         <UiTitle as="h1">Вхід</UiTitle>
 
         <form
@@ -85,7 +62,6 @@ const LoginPage: FC = () => {
               }`}
               aria-invalid={!!errors.email}
             />
-
             {errors.email && (
               <span className="mt-[2px] font-family-secondary text-[14px] leading-[1.17] text-dark-red">
                 {errors.email.message}
@@ -113,7 +89,6 @@ const LoginPage: FC = () => {
                 }`}
                 aria-invalid={!!errors.password}
               />
-
               <UiButton
                 type="button"
                 onClick={handlePasswordVisibility}
@@ -151,13 +126,12 @@ const LoginPage: FC = () => {
           </UiButton>
 
           <UiButton
-            // TODO: реалізувати авторизацію через Google OAuth
             className="mt-3 w-full gap-5 text-[20px] leading-[1.175]"
             variant="bordered"
             type="button"
             icon={<IconGoogle />}
             iconPosition="before"
-            disabled={true}
+            onClick={handleLoginWithGoogle}
           >
             Увійти через Google
           </UiButton>

@@ -73,6 +73,13 @@ export const authApi = createApi({
         body: { token, newPassword },
       }),
     }),
+    signInWithGoogle: builder.mutation<AuthResponse, { accessToken: string }>({
+      query: ({ accessToken }) => ({
+        url: 'auth/google',
+        method: 'POST',
+        body: { accessToken },
+      }),
+    }),
   }),
 });
 
@@ -81,4 +88,5 @@ export const {
   useSignUpMutation,
   useForgotPasswordMutation,
   useResetPasswordMutation,
+  useSignInWithGoogleMutation,
 } = authApi;
