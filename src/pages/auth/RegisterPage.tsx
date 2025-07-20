@@ -1,8 +1,7 @@
-import { yupResolver } from '@hookform/resolvers/yup';
 import * as Checkbox from '@radix-ui/react-checkbox';
 import type { FC } from 'react';
 import { useState } from 'react';
-import { Controller, useForm } from 'react-hook-form';
+import { Controller } from 'react-hook-form';
 import type { InferType } from 'yup';
 
 import registerImg from '../../assets/images/auth/register.jpg';
@@ -15,19 +14,23 @@ import { UiButton } from '../../components/ui/UiButton';
 import { UiModal } from '../../components/ui/UiModal';
 import { UiTitle } from '../../components/ui/UiTitle';
 import { PATH_PAGES } from '../../constants/pathPages';
-import { useHandleApiError } from '../../hooks/useHandleApiError';
 import { useModal } from '../../hooks/useModal';
-import { useTypedDispatch } from '../../hooks/useRedux';
-import { setCredentials } from '../../redux/authSlice';
+import { useSignInWithGoogle } from '../../hooks/useSignInWithGoogle';
+import { useSignUp } from '../../hooks/useSignUp';
 import { registerSchema } from '../../schemas/validationSchemas';
-import { useSignUpMutation } from '../../services/authApi';
 
 type RegisterFormData = InferType<typeof registerSchema>;
 
 const RegisterPage: FC = () => {
-  const [signUp] = useSignUpMutation();
-  const handleApiError = useHandleApiError();
-  const dispatch = useTypedDispatch();
+  const { loginWithGoogle } = useSignInWithGoogle();
+  const { form, onSubmit } = useSignUp();
+
+  const {
+    register,
+    handleSubmit,
+    formState: { errors, isSubmitting },
+    control,
+  } = form;
 
   const {
     isModalOpen,
@@ -40,33 +43,14 @@ const RegisterPage: FC = () => {
 
   const [isShowPassword, setIsShowPassword] = useState(false);
   const [isShowConfirmPassword, setIsShowConfirmPassword] = useState(false);
+  const handleRegisterWithGoogle = (): void => {
+    loginWithGoogle();
+  };
 
-  const {
-    register,
-    handleSubmit,
-    formState: { errors, isSubmitting },
-    control,
-  } = useForm({
-    resolver: yupResolver(registerSchema),
-    mode: 'onChange',
-    reValidateMode: 'onChange',
-    defaultValues: {
-      isPolicyAccepted: false,
-      isSubscribeToAds: false,
-    },
-  });
-
-  const onSubmit = async (formData: RegisterFormData): Promise<void> => {
-    const cleanDataToSend = { ...formData };
-    delete cleanDataToSend.isPolicyAccepted;
-    delete cleanDataToSend.confirmPassword;
-
-    try {
-      const { token, role } = await signUp(cleanDataToSend).unwrap();
-      dispatch(setCredentials({ token, role }));
+  const submitHandler = async (formData: RegisterFormData): Promise<void> => {
+    const result = await onSubmit(formData);
+    if (result.success) {
       openModal('Реєстрація успішна', false);
-    } catch (error: unknown) {
-      handleApiError(error);
     }
   };
 
@@ -87,7 +71,7 @@ const RegisterPage: FC = () => {
 
         <form
           noValidate
-          onSubmit={handleSubmit(onSubmit)}
+          onSubmit={handleSubmit(submitHandler)}
           className="flex w-full max-w-[424px] flex-col items-center"
         >
           <div className="mt-[12px] flex h-[106px] w-full max-w-[424px] flex-col transition-colors duration-default focus-within:text-grey">
@@ -334,7 +318,7 @@ const RegisterPage: FC = () => {
             type="button"
             icon={<IconGoogle />}
             iconPosition="before"
-            disabled={true}
+            onClick={handleRegisterWithGoogle}
           >
             Зареєструватися через Google
           </UiButton>
