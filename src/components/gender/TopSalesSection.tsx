@@ -41,7 +41,10 @@ const TopSalesSection: FC<TopSalesSectionProps> = ({ gender }) => {
   );
 
   return (
-    <div className="relative z-[0] mx-auto w-full max-w-custom-1440 px-6 py-[70px]">
+    <section
+      id="top"
+      className="relative z-[0] mx-auto w-full max-w-custom-1440 scroll-mt-[140px] px-6 py-[70px]"
+    >
       <UiTitle className="mb-[80px] text-center" as="h2">
         Топ продажів
       </UiTitle>
@@ -90,7 +93,7 @@ const TopSalesSection: FC<TopSalesSectionProps> = ({ gender }) => {
           />
         )}
       </div>
-    </div>
+    </section>
   );
 };
 

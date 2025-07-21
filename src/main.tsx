@@ -8,6 +8,7 @@ import { BrowserRouter } from 'react-router-dom';
 import { PersistGate } from 'redux-persist/integration/react';
 
 import { App } from './App';
+import { ScrollToHash } from './components/ScrollToHash';
 import { UiLoader } from './components/ui/UiLoader';
 import { persistor, store } from './redux/store';
 
@@ -20,6 +21,7 @@ ReactDOM.createRoot(document.getElementById('root')!).render(
       <PersistGate loading={<UiLoader />} persistor={persistor}>
         <GoogleOAuthProvider clientId={googleClientId}>
           <BrowserRouter>
+            <ScrollToHash />
             <App />
           </BrowserRouter>
         </GoogleOAuthProvider>
