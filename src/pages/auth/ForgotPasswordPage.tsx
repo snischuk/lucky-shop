@@ -6,9 +6,9 @@ import type { InferType } from 'yup';
 
 import forgotPasswordImage from '../../assets/images/auth/forgot-password.jpg';
 import { ButtonPreviousPage } from '../../components/ButtonPreviousPage';
+import { ModalApiFeedback } from '../../components/ModalApiFeedback';
 import { UiButton } from '../../components/ui/UiButton';
 import { UiLink } from '../../components/ui/UiLink';
-import { UiModal } from '../../components/ui/UiModal';
 import { UiTitle } from '../../components/ui/UiTitle';
 import { PATH_PAGES } from '../../constants/pathPages';
 import { useHandleApiError } from '../../hooks/useHandleApiError';
@@ -21,15 +21,15 @@ type ForgotPasswordFormData = InferType<typeof forgotPasswordSchema>;
 const ForgotPasswordPage: FC = () => {
   const [forgotPassword] = useForgotPasswordMutation();
   const handleApiError = useHandleApiError();
-  const [isSubmitted, setIsSubmitted] = useState(false);
+  const [isFormSubmitted, setIsFormSubmitted] = useState(false);
 
   const {
     isModalOpen,
+    title,
     modalMessage,
-    isError,
+    modalConfirmButtonText,
     openModal,
     closeModal,
-    confirmModal,
   } = useModal();
 
   const {
@@ -47,10 +47,17 @@ const ForgotPasswordPage: FC = () => {
       await forgotPassword({
         email: formData.email,
       });
-      setIsSubmitted(true);
-      const message =
+
+      setIsFormSubmitted(true);
+
+      const friendlyMessage =
         'Інструкції успішно надіслані. Перевірте електронну пошту';
-      openModal(message, false, PATH_PAGES.MAIN);
+
+      openModal({
+        title: 'Забули пароль',
+        message: friendlyMessage,
+        buttonText: 'OK',
+      });
     } catch (error: unknown) {
       handleApiError(error);
     }
@@ -93,7 +100,7 @@ const ForgotPasswordPage: FC = () => {
                   : 'border-medium-grey text-light-black'
               }`}
               aria-invalid={!!errors.email}
-              disabled={isSubmitted}
+              disabled={isFormSubmitted}
             />
             {errors.email && (
               <span className="mt-[2px] font-family-secondary text-[14px] leading-[1.17] text-dark-red">
@@ -106,7 +113,7 @@ const ForgotPasswordPage: FC = () => {
             className="mt-3 w-full max-w-[424px] text-[20px] leading-[1.175]"
             variant="filled"
             type="submit"
-            disabled={isSubmitting || isSubmitted}
+            disabled={isSubmitting || isFormSubmitted}
           >
             Надіслати
           </UiButton>
@@ -129,17 +136,15 @@ const ForgotPasswordPage: FC = () => {
         width="590"
       />
 
-      <UiModal
-        title="Отримати пароль"
-        open={isModalOpen}
+      <ModalApiFeedback
+        isOpen={isModalOpen}
+        title={title}
+        message={modalMessage}
+        confirmButtonText={modalConfirmButtonText}
+        onConfirmButtonClick={closeModal}
         onOpenChange={(open) => {
           if (!open) closeModal();
         }}
-        isError={isError}
-        message={modalMessage}
-        onConfirm={confirmModal}
-        confirmButtonText="На головну"
-        redirectPath={PATH_PAGES.MAIN}
       />
     </div>
   );

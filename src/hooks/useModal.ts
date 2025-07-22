@@ -1,58 +1,64 @@
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 
+interface OpenModalParams {
+  title: string;
+  message: string;
+  buttonText: string;
+  redirectPath?: string;
+}
+
 interface UseModalReturn {
   isModalOpen: boolean;
+  title: string;
   modalMessage: string;
-  isError: boolean;
   modalConfirmButtonText: string;
-  openModal: (
-    message: string,
-    isError?: boolean,
-    redirectPath?: string,
-    buttonText?: string,
-  ) => void;
+  openModal: (params: OpenModalParams) => void;
   closeModal: () => void;
-  confirmModal: () => void;
+  closeAndRedirectModal: () => void;
+  modalRedirectPath?: string;
 }
 
 const useModal = (): UseModalReturn => {
   const navigate = useNavigate();
 
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const [title, setTitle] = useState('');
   const [modalMessage, setModalMessage] = useState('');
-  const [isError, setIsError] = useState(false);
-  const [modalRedirectPath, setModalRedirectPath] = useState<string>();
   const [modalConfirmButtonText, setModalConfirmButtonText] = useState('OK');
+  const [modalRedirectPath, setModalRedirectPath] = useState<string>();
 
-  const openModal = (
-    message: string,
-    isError = false,
-    redirectPath?: string,
+  const openModal = ({
+    title,
+    message,
+    redirectPath,
     buttonText = 'OK',
-  ): void => {
-    setModalMessage(message);
-    setIsError(isError);
-    setModalRedirectPath(redirectPath);
-    setModalConfirmButtonText(buttonText);
+  }: OpenModalParams): void => {
     setIsModalOpen(true);
+    setTitle(title);
+    setModalMessage(message);
+    setModalConfirmButtonText(buttonText);
+    setModalRedirectPath(redirectPath);
   };
 
   const closeModal = (): void => setIsModalOpen(false);
 
-  const confirmModal = (): void => {
+  const closeAndRedirectModal = (): void => {
     closeModal();
-    if (modalRedirectPath) navigate(modalRedirectPath);
+    if (modalRedirectPath) {
+      navigate(modalRedirectPath);
+    }
   };
 
   return {
     isModalOpen,
+    title,
     modalMessage,
-    isError,
     modalConfirmButtonText,
     openModal,
     closeModal,
-    confirmModal,
+    closeAndRedirectModal,
+    modalRedirectPath,
   };
 };
 

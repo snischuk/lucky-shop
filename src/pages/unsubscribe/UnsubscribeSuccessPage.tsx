@@ -3,9 +3,9 @@ import { Link, useLocation, useNavigate } from 'react-router-dom';
 
 import unsubscribeSuccess from '../../assets/images/unsubscribe/unsubscribe-success.jpg';
 import { ButtonPreviousPage } from '../../components/ButtonPreviousPage';
+import { ModalApiFeedback } from '../../components/ModalApiFeedback';
 import { UiButton } from '../../components/ui/UiButton';
 import { UiLink } from '../../components/ui/UiLink';
-import { UiModal } from '../../components/ui/UiModal';
 import { UiTitle } from '../../components/ui/UiTitle';
 import { PATH_PAGES } from '../../constants/pathPages';
 import { getEmailFromJWT } from '../../helpers/getEmailFromJWT';
@@ -21,11 +21,11 @@ const UnsubscribeSuccessPage: FC = () => {
 
   const {
     isModalOpen,
+    title,
     modalMessage,
-    isError,
+    modalConfirmButtonText,
     openModal,
-    closeModal,
-    confirmModal,
+    closeAndRedirectModal,
   } = useModal();
 
   const token = location.state?.token as string;
@@ -43,7 +43,13 @@ const UnsubscribeSuccessPage: FC = () => {
   const handleSubscribe = async (): Promise<void> => {
     try {
       const { message } = await subscribe({ email }).unwrap();
-      openModal(message, false, PATH_PAGES.MAIN, 'На головну');
+
+      openModal({
+        title: 'Підписка',
+        message,
+        buttonText: 'На головну',
+        redirectPath: PATH_PAGES.MAIN,
+      });
     } catch (error: unknown) {
       handleApiError(error);
     }
@@ -90,17 +96,16 @@ const UnsubscribeSuccessPage: FC = () => {
         width="590"
       />
 
-      <UiModal
-        title="Підписка"
-        open={isModalOpen}
-        onOpenChange={(open) => {
-          if (!open) closeModal();
-        }}
-        isError={isError}
+      <ModalApiFeedback
+        isOpen={isModalOpen}
+        title={title}
         message={modalMessage}
-        onConfirm={confirmModal}
-        confirmButtonText="На головну"
+        confirmButtonText={modalConfirmButtonText}
+        onConfirmButtonClick={closeAndRedirectModal}
         redirectPath={PATH_PAGES.MAIN}
+        onOpenChange={(isOpen) => {
+          if (!isOpen) closeAndRedirectModal();
+        }}
       />
     </div>
   );

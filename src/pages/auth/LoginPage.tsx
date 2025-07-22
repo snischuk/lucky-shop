@@ -28,7 +28,7 @@ const LoginPage: FC = () => {
     setIsShowPassword((prev) => !prev);
   };
 
-  const handleLoginWithGoogle = () => {
+  const handleLoginWithGoogle = (): void => {
     loginWithGoogle();
   };
 

@@ -10,8 +10,8 @@ import { useHandleApiError } from '../hooks/useHandleApiError';
 import { useModal } from '../hooks/useModal';
 import { subscribeSchema } from '../schemas/validationSchemas';
 import { useSubscribeMutation } from '../services/notificationApi';
+import { ModalApiFeedback } from './ModalApiFeedback';
 import { UiButton } from './ui/UiButton';
-import { UiModal } from './ui/UiModal';
 import { UiTitle } from './ui/UiTitle';
 
 type FormData = {
@@ -22,8 +22,14 @@ const SectionSubscribe: FC = () => {
   const [subscribe] = useSubscribeMutation();
   const handleApiError = useHandleApiError();
 
-  const { isModalOpen, modalMessage, isError, openModal, closeModal } =
-    useModal();
+  const {
+    isModalOpen,
+    title,
+    modalMessage,
+    modalConfirmButtonText,
+    openModal,
+    closeModal,
+  } = useModal();
 
   const {
     register,
@@ -31,29 +37,48 @@ const SectionSubscribe: FC = () => {
     reset,
     setError,
     formState: { errors, isSubmitting },
-  } = useForm<FormData>({
+  } = useForm({
     resolver: yupResolver(subscribeSchema),
   });
 
-  const onSubmit = async (data: FormData): Promise<void> => {
+  const onSubmit = async (formData: FormData): Promise<void> => {
     try {
-      const { message } = await subscribe({ email: data.email }).unwrap();
-      reset();
+      const { message } = await subscribe({ email: formData.email }).unwrap();
+
       const friendlyMessage = getFriendlySubscriptionMessage(message);
-      openModal(friendlyMessage, false, PATH_PAGES.MAIN);
+
+      openModal({
+        title: 'Підписка',
+        message: friendlyMessage,
+        buttonText: 'OK',
+        redirectPath: PATH_PAGES.MAIN,
+      });
     } catch (error: unknown) {
       const { message, isRedirected } = handleApiError(error);
       if (isRedirected) return;
+
       const friendlyMessage = getFriendlySubscriptionMessage(message);
+
       setError('email', { type: 'manual', message: friendlyMessage });
-      openModal(friendlyMessage, true);
+
+      openModal({
+        title: 'Помилка підписки',
+        message: friendlyMessage,
+        buttonText: 'OK',
+      });
+    } finally {
+      reset();
     }
   };
-
   const onError = (formErrors: FieldErrors<FormData>): void => {
     const firstErrorMessage =
       Object.values(formErrors)[0]?.message || 'Помилка валідації';
-    openModal(firstErrorMessage as string, true);
+
+    openModal({
+      title: 'Помилка валідації',
+      message: firstErrorMessage,
+      buttonText: 'OK',
+    });
   };
 
   return (
@@ -94,16 +119,15 @@ const SectionSubscribe: FC = () => {
         </div>
       </section>
 
-      <UiModal
-        title="Підписка"
-        open={isModalOpen}
-        onOpenChange={(open) => {
-          if (!open) closeModal();
-        }}
-        isError={isError}
+      <ModalApiFeedback
+        isOpen={isModalOpen}
+        title={title}
         message={modalMessage}
-        onConfirm={closeModal}
-        confirmButtonText="OK"
+        confirmButtonText={modalConfirmButtonText}
+        onConfirmButtonClick={closeModal}
+        onOpenChange={(isOpen) => {
+          if (!isOpen) closeModal();
+        }}
       />
     </>
   );

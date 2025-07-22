@@ -3,32 +3,31 @@ import { VisuallyHidden } from '@radix-ui/react-visually-hidden';
 import type { FC } from 'react';
 import { Link } from 'react-router-dom';
 
-import IconClose from '../../assets/images/icons/icon-close.svg?react';
-import { UiButton } from './UiButton';
-import { UiLink } from './UiLink';
+import IconClose from '../assets/images/icons/icon-close.svg?react';
+import { UiButton } from './ui/UiButton';
+import { UiLink } from './ui/UiLink';
 
-interface ModalProps {
+interface ModalApiFeedbackProps {
+  isOpen: boolean;
   title: string;
-  open: boolean;
-  onOpenChange: (open: boolean) => void;
-  isError: boolean;
   message: string;
-  confirmButtonText?: string;
-  onConfirm?: () => void;
+  confirmButtonText: string;
+  onOpenChange: (isOpen: boolean) => void;
+  onConfirmButtonClick: () => void;
   redirectPath?: string;
 }
 
-const UiModal: FC<ModalProps> = ({
+const ModalApiFeedback: FC<ModalApiFeedbackProps> = ({
+  isOpen,
   title,
-  open,
-  onOpenChange,
   message,
-  onConfirm,
+  onOpenChange,
+  onConfirmButtonClick,
   redirectPath,
   confirmButtonText = 'OK',
 }) => {
   return (
-    <Dialog.Root open={open} onOpenChange={onOpenChange}>
+    <Dialog.Root open={isOpen} onOpenChange={onOpenChange}>
       <Dialog.Portal>
         <Dialog.Overlay className="fixed inset-0 bg-black/50" />
         <Dialog.Content className="fixed left-1/2 top-1/2 z-[1] flex w-full max-w-[944px] -translate-x-1/2 -translate-y-1/2 flex-col items-center gap-[50px] bg-light-black p-10">
@@ -60,7 +59,7 @@ const UiModal: FC<ModalProps> = ({
           ) : (
             <UiButton
               variant="filled"
-              onClick={onConfirm}
+              onClick={onConfirmButtonClick}
               className="w-full max-w-[379px] border border-main bg-transparent px-6 py-5 text-[20px] leading-[1.175] enabled:hover:border-orange"
             >
               {confirmButtonText}
@@ -72,4 +71,4 @@ const UiModal: FC<ModalProps> = ({
   );
 };
 
-export { UiModal };
+export { ModalApiFeedback };
