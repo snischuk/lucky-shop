@@ -4,10 +4,9 @@ import { useForm } from 'react-hook-form';
 import type { InferType } from 'yup';
 
 import resendPasswordImage from '../../assets/images/auth/password-resending.jpg';
+import { ModalApiFeedback } from '../../components/ModalApiFeedback';
 import { UiButton } from '../../components/ui/UiButton';
-import { UiModal } from '../../components/ui/UiModal';
 import { UiTitle } from '../../components/ui/UiTitle';
-import { PATH_PAGES } from '../../constants/pathPages';
 import { useHandleApiError } from '../../hooks/useHandleApiError';
 import { useModal } from '../../hooks/useModal';
 import { forgotPasswordSchema } from '../../schemas/validationSchemas';
@@ -21,11 +20,11 @@ const ResendPasswordPage: FC = () => {
 
   const {
     isModalOpen,
+    title,
     modalMessage,
-    isError,
+    modalConfirmButtonText,
     openModal,
     closeModal,
-    confirmModal,
   } = useModal();
 
   const {
@@ -43,9 +42,15 @@ const ResendPasswordPage: FC = () => {
       await forgotPassword({
         email: formData.email,
       });
-      const message =
+
+      const friendlyMessage =
         'Інструкції повторно надіслані. Перевірте електронну пошту';
-      openModal(message, false, PATH_PAGES.MAIN);
+
+      openModal({
+        title: 'Повторне надсилання пароля',
+        message: friendlyMessage,
+        buttonText: 'OK',
+      });
     } catch (error: unknown) {
       handleApiError(error);
     }
@@ -115,17 +120,15 @@ const ResendPasswordPage: FC = () => {
         width="590"
       />
 
-      <UiModal
-        title="Повторне надсилання пароля"
-        open={isModalOpen}
+      <ModalApiFeedback
+        isOpen={isModalOpen}
+        title={title}
+        message={modalMessage}
+        confirmButtonText={modalConfirmButtonText}
+        onConfirmButtonClick={closeModal}
         onOpenChange={(open) => {
           if (!open) closeModal();
         }}
-        isError={isError}
-        message={modalMessage}
-        onConfirm={confirmModal}
-        confirmButtonText="На головну"
-        redirectPath={PATH_PAGES.MAIN}
       />
     </div>
   );

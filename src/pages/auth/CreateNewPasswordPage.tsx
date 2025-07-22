@@ -8,8 +8,8 @@ import type { InferType } from 'yup';
 import createNewPassword from '../../assets/images/auth/create-new-password.jpg';
 import IconEyeClosed from '../../assets/images/icons/icon-eye-closed.svg?react';
 import IconEyeOpened from '../../assets/images/icons/icon-eye-opened.svg?react';
+import { ModalApiFeedback } from '../../components/ModalApiFeedback';
 import { UiButton } from '../../components/ui/UiButton';
-import { UiModal } from '../../components/ui/UiModal';
 import { UiTitle } from '../../components/ui/UiTitle';
 import { PATH_PAGES } from '../../constants/pathPages';
 import { useHandleApiError } from '../../hooks/useHandleApiError';
@@ -26,11 +26,12 @@ const CreateNewPasswordPage: FC = () => {
 
   const {
     isModalOpen,
+    title,
     modalMessage,
-    isError,
+    modalConfirmButtonText,
+    modalRedirectPath,
     openModal,
-    closeModal,
-    confirmModal,
+    closeAndRedirectModal,
   } = useModal();
 
   const navigate = useNavigate();
@@ -68,7 +69,12 @@ const CreateNewPasswordPage: FC = () => {
 
     try {
       await resetPassword(cleanDataToSend).unwrap();
-      openModal('Новий пароль збережено', false, PATH_PAGES.LOGIN, 'Вхід');
+      openModal({
+        title: 'Новий пароль збережено',
+        message: 'Новий пароль збережено',
+        buttonText: 'Вхід',
+        redirectPath: PATH_PAGES.LOGIN,
+      });
     } catch (error: unknown) {
       handleApiError(error);
     }
@@ -174,17 +180,18 @@ const CreateNewPasswordPage: FC = () => {
         width="590"
       />
 
-      <UiModal
-        title="Новий пароль успішно створено"
-        open={isModalOpen}
-        onOpenChange={(open) => {
-          if (!open) closeModal();
-        }}
-        isError={isError}
+      <ModalApiFeedback
+        isOpen={isModalOpen}
+        title={title}
         message={modalMessage}
-        onConfirm={confirmModal}
-        confirmButtonText="Вхід"
-        redirectPath={PATH_PAGES.LOGIN}
+        confirmButtonText={modalConfirmButtonText}
+        onConfirmButtonClick={closeAndRedirectModal}
+        redirectPath={modalRedirectPath}
+        onOpenChange={(isOpen) => {
+          if (!isOpen) {
+            closeAndRedirectModal();
+          }
+        }}
       />
     </div>
   );
