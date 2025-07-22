@@ -10,8 +10,8 @@ import IconEyeClosed from '../../assets/images/icons/icon-eye-closed.svg?react';
 import IconEyeOpened from '../../assets/images/icons/icon-eye-opened.svg?react';
 import IconGoogle from '../../assets/images/icons/icon-google.svg?react';
 import { ButtonPreviousPage } from '../../components/ButtonPreviousPage';
+import { ModalApiFeedback } from '../../components/ModalApiFeedback';
 import { UiButton } from '../../components/ui/UiButton';
-import { UiModal } from '../../components/ui/UiModal';
 import { UiTitle } from '../../components/ui/UiTitle';
 import { PATH_PAGES } from '../../constants/pathPages';
 import { useModal } from '../../hooks/useModal';
@@ -34,11 +34,12 @@ const RegisterPage: FC = () => {
 
   const {
     isModalOpen,
+    title,
     modalMessage,
-    isError,
+    modalConfirmButtonText,
+    modalRedirectPath,
     openModal,
-    closeModal,
-    confirmModal,
+    closeAndRedirectModal,
   } = useModal();
 
   const [isShowPassword, setIsShowPassword] = useState(false);
@@ -50,7 +51,12 @@ const RegisterPage: FC = () => {
   const submitHandler = async (formData: RegisterFormData): Promise<void> => {
     const result = await onSubmit(formData);
     if (result.success) {
-      openModal('Реєстрація успішна', false);
+      await openModal({
+        title: 'Реєстрація успішна',
+        message: 'Реєстрація успішна!',
+        buttonText: 'Вхід',
+        redirectPath: PATH_PAGES.LOGIN,
+      });
     }
   };
 
@@ -332,17 +338,18 @@ const RegisterPage: FC = () => {
         width="590"
       />
 
-      <UiModal
-        title="Реєстрація успішна"
-        open={isModalOpen}
-        onOpenChange={(open) => {
-          if (!open) closeModal();
-        }}
-        isError={isError}
+      <ModalApiFeedback
+        isOpen={isModalOpen}
+        title={title}
         message={modalMessage}
-        onConfirm={confirmModal}
-        confirmButtonText="На головну"
-        redirectPath={PATH_PAGES.MAIN}
+        confirmButtonText={modalConfirmButtonText}
+        onConfirmButtonClick={closeAndRedirectModal}
+        redirectPath={modalRedirectPath}
+        onOpenChange={(isOpen) => {
+          if (!isOpen) {
+            closeAndRedirectModal();
+          }
+        }}
       />
     </div>
   );
