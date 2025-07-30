@@ -4,7 +4,7 @@ import IconArrowRight from '../../assets/images/icons/icon-arrow-right.svg?react
 import type { PromoCode as PromoCodeType } from '../../data/mockPromoCodes';
 import { mockPromoCodes } from '../../data/mockPromoCodes';
 import { useTypedDispatch, useTypedSelector } from '../../hooks/useRedux';
-import { selectCartItems, selectPromoCode } from '../../redux/cart/selectors';
+import { selectCartTotal, selectPromoCode } from '../../redux/cart/selectors';
 import { applyPromoCode } from '../../redux/cart/slice';
 import { UiButton } from '../ui/UiButton';
 
@@ -13,12 +13,8 @@ const PromoCode: FC = () => {
   const [errorMessage, setErrorMessage] = useState<string | null>(null);
   const dispatch = useTypedDispatch();
   const selectedCode = useTypedSelector(selectPromoCode);
-  const cartItems = useTypedSelector(selectCartItems);
-
-  const total = cartItems.reduce(
-    (sum, item) => sum + item.price * item.quantity,
-    0,
-  );
+  // const cartItems = useTypedSelector(selectCartItems);
+  const total = useTypedSelector(selectCartTotal);
 
   const calculateDiscount = (promo: PromoCodeType, total: number): number => {
     if (promo.discountType === 'percent') {
@@ -85,7 +81,7 @@ const PromoCode: FC = () => {
   const discount = appliedPromo ? calculateDiscount(appliedPromo, total) : 0;
 
   return (
-    <div className="h-[186px] w-[395px] pb-[10px] pl-[43px] pr-[23px] pt-3">
+    <div className="ml-[45px] mt-[-12px] h-[186px] w-[395px] pb-[10px] pl-[43px] pr-[23px] pt-3">
       <div className="w-full max-w-[330px]">
         <h3 className="mb-[10px] h-[60px] font-family-primary text-h4 uppercase text-light-black">
           У вас є промокод для знижки?
