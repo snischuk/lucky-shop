@@ -1,5 +1,6 @@
 import { configureStore } from '@reduxjs/toolkit';
 import { setupListeners } from '@reduxjs/toolkit/query';
+import { combineReducers } from 'redux';
 import {
   FLUSH,
   PAUSE,
@@ -17,21 +18,23 @@ import { authReducer } from './authSlice';
 import { cartReducer } from './cart/slice';
 import { productReducer } from './products/slice';
 
-const authPersistConfig = {
-  key: 'auth',
+const rootReducer = combineReducers({
+  [api.reducerPath]: api.reducer,
+  auth: authReducer,
+  cart: cartReducer,
+  products: productReducer,
+});
+
+const persistConfig = {
+  key: 'root',
   storage,
-  whitelist: ['token', 'role'],
+  blacklist: [api.reducerPath],
 };
 
-const persistedAuthReducer = persistReducer(authPersistConfig, authReducer);
+const persistedReducer = persistReducer(persistConfig, rootReducer);
 
 export const store = configureStore({
-  reducer: {
-    [api.reducerPath]: api.reducer,
-    auth: persistedAuthReducer,
-    cart: cartReducer,
-    products: productReducer,
-  },
+  reducer: persistedReducer,
   middleware: (getDefaultMiddleware) =>
     getDefaultMiddleware({
       serializableCheck: {
@@ -44,5 +47,5 @@ setupListeners(store.dispatch);
 
 export const persistor = persistStore(store);
 
-export type RootState = ReturnType<typeof store.getState>;
+export type RootState = ReturnType<typeof rootReducer>;
 export type AppDispatch = typeof store.dispatch;
