@@ -37,7 +37,17 @@ const useSignUp = () => {
 
       dispatch(setCredentials({ token, role }));
       return { success: true };
-    } catch (error) {
+    } catch (error: unknown) {
+      const err = error as { data?: { message?: string } };
+
+      if (err.data?.message === 'Email вже використовується.') {
+        form.setError('email', {
+          type: 'server',
+          message: 'Цей email вже використовується.',
+        });
+        return { success: false };
+      }
+
       handleApiError(error);
       return { success: false };
     }
