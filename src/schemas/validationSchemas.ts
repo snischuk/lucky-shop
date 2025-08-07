@@ -41,6 +41,19 @@ const passwordSchema = yup
     'Пароль має містити одну велику літеру, цифру і спецсимвол.',
   );
 
+const loginPasswordSchema = yup
+  .string()
+  .trim()
+  .required('Пароль є обов’язковим.')
+  .min(
+    PASSWORD_MIN_LENGTH,
+    `Пароль має бути не менше ${PASSWORD_MIN_LENGTH} символів.`,
+  )
+  .max(
+    PASSWORD_MAX_LENGTH,
+    `Пароль не повинен перевищувати ${PASSWORD_MAX_LENGTH} символів.`,
+  );
+
 const firstNameSchema = yup
   .string()
   .trim()
@@ -92,7 +105,7 @@ export const registerSchema = yup.object({
 
 export const loginSchema = yup.object({
   email: emailSchema,
-  password: passwordSchema,
+  password: loginPasswordSchema,
 });
 
 export const forgotPasswordSchema = yup.object({
