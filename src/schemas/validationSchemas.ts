@@ -66,14 +66,15 @@ const firstNameSchema = yup
 
 const lastNameSchema = yup
   .string()
-  .trim()
   .notRequired()
+  .trim()
   .max(
     NAME_MAX_LENGTH,
     `Прізвище не повинно перевищувати ${NAME_MAX_LENGTH} символів.`,
   )
   .matches(NAME_REGEX, {
     message: 'Прізвище може містити лише літери, пробіли й дефіси.',
+    excludeEmptyString: true,
   });
 
 const getConfirmPasswordSchema = (refField: string): yup.StringSchema =>
