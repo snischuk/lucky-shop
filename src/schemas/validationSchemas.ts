@@ -3,7 +3,6 @@ import * as yup from 'yup';
 import {
   EMAIL_MAX_LENGTH,
   EMAIL_MIN_LENGTH,
-  EMAIL_REGEX,
   NAME_MAX_LENGTH,
   NAME_REGEX,
   PASSWORD_MAX_LENGTH,
@@ -23,10 +22,7 @@ const emailSchema = yup
     EMAIL_MAX_LENGTH,
     `Email не повинен перевищувати ${EMAIL_MAX_LENGTH} символів.`,
   )
-  .matches(
-    EMAIL_REGEX,
-    'Неправильний формат email (Приклад: name@domain.com).',
-  );
+  .email('Неправильний формат email (Приклад: name@domain.com).');
 
 const passwordSchema = yup
   .string()
