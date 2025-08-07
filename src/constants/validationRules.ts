@@ -12,4 +12,4 @@ export const PASSWORD_REGEX =
 // Constants for name validation rules
 export const NAME_MAX_LENGTH = 15;
 // Name can contain Latin and Cyrillic letters, hyphens, and spaces
-export const NAME_REGEX = /^[a-zA-Zа-яА-ЯёЁ\s-]+$/;
+export const NAME_REGEX = /^[a-zA-Zа-яА-ЯіІїЇєЄґҐ'ʼ\s-]+$/;
