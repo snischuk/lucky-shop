@@ -1,4 +1,4 @@
-import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
+import { api } from './api';
 
 export interface LoginRequest {
   email: string;
@@ -35,9 +35,7 @@ export interface ResetPasswordResponse {
   message: string;
 }
 
-export const authApi = createApi({
-  reducerPath: 'authApi',
-  baseQuery: fetchBaseQuery({ baseUrl: 'https://gw-retail.duckdns.org/' }),
+const authApi = api.injectEndpoints({
   endpoints: (builder) => ({
     signIn: builder.mutation<AuthResponse, LoginRequest>({
       query: ({ email, password }) => ({
