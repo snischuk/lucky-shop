@@ -13,8 +13,8 @@ import {
 
 const emailSchema = yup
   .string()
+  .trim()
   .required('Email є обов’язковим.')
-  .matches(EMAIL_REGEX, 'Неправильний формат email (Приклад: name@domain.com).')
   .min(
     EMAIL_MIN_LENGTH,
     `Email повинен містити щонайменше ${EMAIL_MIN_LENGTH} символів.`,
@@ -22,15 +22,16 @@ const emailSchema = yup
   .max(
     EMAIL_MAX_LENGTH,
     `Email не повинен перевищувати ${EMAIL_MAX_LENGTH} символів.`,
+  )
+  .matches(
+    EMAIL_REGEX,
+    'Неправильний формат email (Приклад: name@domain.com).',
   );
 
 const passwordSchema = yup
   .string()
+  .trim()
   .required('Пароль є обов’язковим.')
-  .matches(
-    PASSWORD_REGEX,
-    'Пароль має містити одну велику літеру, цифру і спецсимвол.',
-  )
   .min(
     PASSWORD_MIN_LENGTH,
     `Пароль має бути не менше ${PASSWORD_MIN_LENGTH} символів.`,
@@ -38,32 +39,38 @@ const passwordSchema = yup
   .max(
     PASSWORD_MAX_LENGTH,
     `Пароль не повинен перевищувати ${PASSWORD_MAX_LENGTH} символів.`,
+  )
+  .matches(
+    PASSWORD_REGEX,
+    'Пароль має містити одну велику літеру, цифру і спецсимвол.',
   );
 
 const firstNameSchema = yup
   .string()
+  .trim()
   .required('Ім’я є обов’язковим.')
-  .matches(NAME_REGEX, 'Ім’я може містити лише літери, пробіли й дефіси.')
   .max(
     NAME_MAX_LENGTH,
     `Ім’я не повинно перевищувати ${NAME_MAX_LENGTH} символів.`,
-  );
+  )
+  .matches(NAME_REGEX, 'Ім’я може містити лише літери, пробіли й дефіси.');
 
 const lastNameSchema = yup
   .string()
+  .trim()
   .notRequired()
-  .matches(NAME_REGEX, {
-    message: 'Прізвище може містити лише літери, пробіли й дефіси.',
-    excludeEmptyString: true,
-  })
   .max(
     NAME_MAX_LENGTH,
     `Прізвище не повинно перевищувати ${NAME_MAX_LENGTH} символів.`,
-  );
+  )
+  .matches(NAME_REGEX, {
+    message: 'Прізвище може містити лише літери, пробіли й дефіси.',
+  });
 
 const getConfirmPasswordSchema = (refField: string): yup.StringSchema =>
   yup
     .string()
+    .trim()
     .required('Підтвердження пароля обов’язкове.')
     .oneOf([yup.ref(refField)], 'Паролі мають збігатися.');
 
