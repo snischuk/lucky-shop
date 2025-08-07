@@ -1,5 +1,6 @@
 import { configureStore } from '@reduxjs/toolkit';
 import { setupListeners } from '@reduxjs/toolkit/query';
+import { combineReducers } from 'redux';
 import {
   FLUSH,
   PAUSE,
@@ -12,39 +13,39 @@ import {
 } from 'redux-persist';
 import storage from 'redux-persist/lib/storage';
 
-import { authApi } from '../services/authApi';
-import { notificationApi } from '../services/notificationApi';
+import { api } from '../services/api';
 import { authReducer } from './authSlice';
 import { cartReducer } from './cart/slice';
 import { productReducer } from './products/slice';
 
-const authPersistConfig = {
-  key: 'auth',
+const rootReducer = combineReducers({
+  [api.reducerPath]: api.reducer,
+  auth: authReducer,
+  cart: cartReducer,
+  products: productReducer,
+});
+
+const persistConfig = {
+  key: 'root',
   storage,
-  whitelist: ['token', 'role'],
+  blacklist: [api.reducerPath],
 };
 
-const persistedAuthReducer = persistReducer(authPersistConfig, authReducer);
+const persistedReducer = persistReducer(persistConfig, rootReducer);
 
 export const store = configureStore({
-  reducer: {
-    auth: persistedAuthReducer,
-    [authApi.reducerPath]: authApi.reducer,
-    [notificationApi.reducerPath]: notificationApi.reducer,
-    cart: cartReducer,
-    products: productReducer,
-  },
+  reducer: persistedReducer,
   middleware: (getDefaultMiddleware) =>
     getDefaultMiddleware({
       serializableCheck: {
         ignoredActions: [FLUSH, REHYDRATE, PAUSE, PERSIST, PURGE, REGISTER],
       },
-    }).concat(authApi.middleware, notificationApi.middleware),
+    }).concat(api.middleware),
 });
 
 setupListeners(store.dispatch);
 
 export const persistor = persistStore(store);
 
-export type RootState = ReturnType<typeof store.getState>;
+export type RootState = ReturnType<typeof rootReducer>;
 export type AppDispatch = typeof store.dispatch;
