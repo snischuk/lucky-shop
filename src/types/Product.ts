@@ -15,6 +15,8 @@ export interface Product {
   price: number;
   oldPrice: number | null;
   hasdiscount: boolean;
+  newCollection: boolean;
+  topSales: boolean;
   image: string[];
   sizes: { XS: number; S: number; M: number; L: number };
   color: string;

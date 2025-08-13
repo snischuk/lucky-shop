@@ -4,9 +4,13 @@ import { Navigate, Route, Routes } from 'react-router-dom';
 
 import { UiLoader } from '../components/ui/UiLoader';
 import { PATH_PAGES } from '../constants/pathPages';
+import { GenderHomePageLayout } from '../layouts/GenderHomePageLayout';
 import { MainLayout } from '../layouts/MainLayout';
 import { ProductsLayout } from '../layouts/ProductsLayout';
 import { SecondaryLayout } from '../layouts/SecondaryLayout';
+import { NewCollectionPage } from '../pages/products/NewCollectionPage';
+import { SalesPage } from '../pages/products/SalesPage';
+import { TopSalesPage } from '../pages/products/TopSalesPage';
 import { ProtectedRoute } from './ProtectedRoute';
 
 const UnsubscribeConfirmPage = lazy(() =>
@@ -118,7 +122,22 @@ const AppRouter: FC = () => {
         <Route path={PATH_PAGES.MAIN} element={<MainLayout />}>
           <Route index element={<MainHomePage />} />
 
-          <Route path={PATH_PAGES.GENDER_PARAM} element={<GenderHomePage />} />
+          <Route
+            path={PATH_PAGES.GENDER_PARAM}
+            element={<GenderHomePageLayout />}
+          >
+            <Route
+              path={PATH_PAGES.GENDER_PARAM}
+              element={<GenderHomePage />}
+            />
+            <Route
+              path={PATH_PAGES.GENDER_NEW}
+              element={<NewCollectionPage />}
+            />
+            <Route path={PATH_PAGES.GENDER_TOP} element={<TopSalesPage />} />
+            <Route path={PATH_PAGES.GENDER_SALE} element={<SalesPage />} />
+          </Route>
+
           <Route path={PATH_PAGES.GENDER_PRODUCTS} element={<ProductsLayout />}>
             <Route index element={<ProductsPage />} />
             <Route
