@@ -3,11 +3,12 @@ import { useSelector } from 'react-redux';
 
 import { fetchProduct } from '../redux/products/operations';
 import { selectProducts } from '../redux/products/selectors';
+import type { Gender } from '../types/Gender';
 import { useTypedDispatch } from './useRedux';
 import { useValidatedGender } from './useValidatedGender';
 
 const useGenderCategories = (): {
-  gender: 'man' | 'woman' | null;
+  gender: Gender | null;
   categories: string[];
 } => {
   const gender = useValidatedGender();
