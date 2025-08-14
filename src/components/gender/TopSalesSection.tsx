@@ -37,7 +37,7 @@ const TopSalesSection: FC<TopSalesSectionProps> = ({ gender }) => {
   }, [dispatch]);
 
   const filteredProducts = products.filter(
-    (product) => product.gender === gender,
+    (product) => product.gender === gender && product.topSales,
   );
 
   return (

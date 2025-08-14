@@ -1,18 +1,24 @@
 import { createSlice } from '@reduxjs/toolkit';
 
 import type { Product } from '../../types/Product';
-import { fetchProduct, fetchProductBySku } from './operations';
+import {
+  fetchProduct,
+  fetchProductByCategory,
+  fetchProductBySku,
+} from './operations';
 
 interface ProductsState {
   items: Product[];
   isLoading: boolean;
   error: string | null;
   productBySku: Product | null;
+  productByCategory: Product | null;
 }
 
 const initialState: ProductsState = {
   items: [],
   productBySku: null,
+  productByCategory: null,
   isLoading: false,
   error: null,
 };
@@ -45,6 +51,20 @@ const productsSlice = createSlice({
         state.productBySku = action.payload;
       })
       .addCase(fetchProductBySku.rejected, (state, action) => {
+        state.isLoading = false;
+        state.error =
+          action.error.message || 'Помилка при завантаженні продукту';
+      })
+
+      .addCase(fetchProductByCategory.pending, (state) => {
+        state.isLoading = true;
+        state.error = null;
+      })
+      .addCase(fetchProductByCategory.fulfilled, (state, action) => {
+        state.isLoading = false;
+        state.productByCategory = action.payload;
+      })
+      .addCase(fetchProductByCategory.rejected, (state, action) => {
         state.isLoading = false;
         state.error =
           action.error.message || 'Помилка при завантаженні продукту';

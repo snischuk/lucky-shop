@@ -12,7 +12,10 @@ import { GENDERS } from '../../constants/genders';
 import { PATH_PAGES } from '../../constants/pathPages';
 import { useTypedDispatch } from '../../hooks/useRedux';
 import { fetchProduct } from '../../redux/products/operations';
-import { selectProducts } from '../../redux/products/selectors';
+import {
+  selectNewCollectionByGender,
+  selectProducts,
+} from '../../redux/products/selectors';
 import type { Gender } from '../../types/Gender';
 import { ButtonNextSlide } from '../ButtonNextSlide';
 import { ButtonPreviousSlide } from '../ButtonPreviousSlide';
@@ -30,15 +33,15 @@ const NewCollectionSection: FC<NewCollectionSectionProps> = ({ gender }) => {
   const [isBeginning, setIsBeginning] = useState(true);
   const [isEnd, setIsEnd] = useState(false);
 
-  const products = useSelector(selectProducts);
   const dispatch = useTypedDispatch();
-  useEffect(() => {
-    dispatch(fetchProduct());
-  }, [dispatch]);
+  const products = useSelector(selectProducts);
+  const filteredProducts = useSelector(selectNewCollectionByGender(gender));
 
-  const filteredProducts = products.filter(
-    (product) => product.gender === gender,
-  );
+  useEffect(() => {
+    if (!products.length) {
+      dispatch(fetchProduct());
+    }
+  }, [dispatch, products.length]);
 
   return (
     <section

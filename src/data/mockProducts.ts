@@ -10,6 +10,8 @@ export const mockProducts: Product[] = [
     price: 1200,
     oldPrice: null,
     hasdiscount: false,
+    newCollection: true,
+    topSales: false,
     image: [
       '/images/TSH15551-1.png',
       '/images/TSH15551-2.png',
@@ -37,6 +39,8 @@ export const mockProducts: Product[] = [
     price: 1030,
     oldPrice: null,
     hasdiscount: false,
+    newCollection: false,
+    topSales: false,
     image: [
       '/images/TSH15552-1.png',
       '/images/TSH15552-2.png',
@@ -64,6 +68,8 @@ export const mockProducts: Product[] = [
     price: 1510,
     oldPrice: null,
     hasdiscount: false,
+    newCollection: false,
+    topSales: false,
     image: [
       '/images/TSH15553-1.png',
       '/images/TSH15553-2.png',
@@ -91,6 +97,8 @@ export const mockProducts: Product[] = [
     price: 999,
     oldPrice: null,
     hasdiscount: false,
+    newCollection: false,
+    topSales: false,
     image: [
       '/images/TSH15554-1.png',
       '/images/TSH15554-2.png',
@@ -118,6 +126,8 @@ export const mockProducts: Product[] = [
     price: 1200,
     oldPrice: null,
     hasdiscount: false,
+    newCollection: false,
+    topSales: false,
     image: [
       '/images/TSH15555-1.png',
       '/images/TSH15555-2.png',
@@ -145,6 +155,8 @@ export const mockProducts: Product[] = [
     price: 1150,
     oldPrice: null,
     hasdiscount: false,
+    newCollection: false,
+    topSales: false,
     image: [
       '/images/TSH15556-1.png',
       '/images/TSH15556-2.png',
@@ -172,6 +184,8 @@ export const mockProducts: Product[] = [
     price: 1400,
     oldPrice: null,
     hasdiscount: false,
+    newCollection: false,
+    topSales: false,
     image: [
       '/images/TSH15557-1.png',
       '/images/TSH15557-2.png',
@@ -199,6 +213,8 @@ export const mockProducts: Product[] = [
     price: 1350,
     oldPrice: null,
     hasdiscount: false,
+    newCollection: false,
+    topSales: false,
     image: [
       '/images/TSH15558-1.png',
       '/images/TSH15558-2.png',
@@ -226,6 +242,8 @@ export const mockProducts: Product[] = [
     price: 1199,
     oldPrice: null,
     hasdiscount: false,
+    newCollection: false,
+    topSales: false,
     image: [
       '/images/TSH15559-1.png',
       '/images/TSH15559-2.png',
@@ -253,6 +271,8 @@ export const mockProducts: Product[] = [
     price: 1350,
     oldPrice: null,
     hasdiscount: false,
+    newCollection: false,
+    topSales: false,
     image: [
       '/images/TSH15560-1.png',
       '/images/TSH15560-2.png',
@@ -280,6 +300,8 @@ export const mockProducts: Product[] = [
     price: 1030,
     oldPrice: null,
     hasdiscount: false,
+    newCollection: false,
+    topSales: false,
     image: [
       '/images/TSH15561-1.png',
       '/images/TSH15561-2.png',
@@ -307,6 +329,8 @@ export const mockProducts: Product[] = [
     price: 1030,
     oldPrice: null,
     hasdiscount: false,
+    newCollection: false,
+    topSales: false,
     image: [
       '/images/TSH15562-1.png',
       '/images/TSH15562-2.png',
@@ -334,6 +358,8 @@ export const mockProducts: Product[] = [
     price: 1530,
     oldPrice: null,
     hasdiscount: false,
+    newCollection: false,
+    topSales: false,
     image: [
       '/images/TSH15563-1.png',
       '/images/TSH15563-2.png',
@@ -347,60 +373,6 @@ export const mockProducts: Product[] = [
       M: 2,
     },
     color: 'Візерунки, Білий',
-    season: 'spring_summer',
-    description:
-      'Універсальна жіноча сукня комфортного крою, яка поєднує в собі стиль, зручність та натуральність. Підходить як для повсякденного використання, так і для особливих подій. Продуманий фасон гармонійно підкреслює фігуру, а натуральна тканина забезпечує комфорт у носінні',
-    material: 'Льон',
-  },
-  {
-    sku: 'TSH15564',
-    name: 'Сукня жіноча Garden',
-    brand: 'Lucky',
-    gender: 'woman',
-    category: 'dresses',
-    price: 800,
-    oldPrice: 1200,
-    hasdiscount: true,
-    image: [
-      '/images/TSH15564-1.png',
-      '/images/TSH15564-2.png',
-      '/images/TSH15564-3.png',
-      '/images/TSH15564-4.png',
-    ],
-    sizes: {
-      XS: 6,
-      S: 3,
-      L: 4,
-      M: 8,
-    },
-    color: 'Зелений',
-    season: 'spring_summer',
-    description:
-      'Універсальна жіноча сукня комфортного крою, яка поєднує в собі стиль, зручність та натуральність. Підходить як для повсякденного використання, так і для особливих подій. Продуманий фасон гармонійно підкреслює фігуру, а натуральна тканина забезпечує комфорт у носінні',
-    material: 'Льон',
-  },
-  {
-    sku: 'TSH15565',
-    name: 'Сукня жіноча Yoke',
-    brand: 'Lucky',
-    gender: 'woman',
-    category: 'dresses',
-    price: 890,
-    oldPrice: 1530,
-    hasdiscount: true,
-    image: [
-      '/images/TSH15565-1.png',
-      '/images/TSH15565-2.png',
-      '/images/TSH15565-3.png',
-      '/images/TSH15565-4.png',
-    ],
-    sizes: {
-      XS: 5,
-      S: 7,
-      L: 9,
-      M: 2,
-    },
-    color: 'Білий',
     season: 'spring_summer',
     description:
       'Універсальна жіноча сукня комфортного крою, яка поєднує в собі стиль, зручність та натуральність. Підходить як для повсякденного використання, так і для особливих подій. Продуманий фасон гармонійно підкреслює фігуру, а натуральна тканина забезпечує комфорт у носінні',
