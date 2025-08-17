@@ -1,9 +1,9 @@
 export interface PromoCode {
   code: string;
   discountType: 'percent' | 'fixed';
-  value: number; // відсоток або фіксована сума
+  value: number;
   minOrderTotal?: number;
-  expiresAt?: string; // у форматі 'YYYY-MM-DD'
+  expiresAt?: string; //
   isUsed: boolean;
   isActive: boolean;
 }
@@ -12,7 +12,7 @@ export const mockPromoCodes: PromoCode[] = [
   {
     code: 'SALE10',
     discountType: 'percent',
-    value: 10, // 10% знижка
+    value: 10, //
     isUsed: false,
     isActive: true,
     expiresAt: '2025-12-31',
@@ -20,7 +20,7 @@ export const mockPromoCodes: PromoCode[] = [
   {
     code: 'SAVE50',
     discountType: 'fixed',
-    value: 50, // 50 грн знижка
+    value: 50, //
     minOrderTotal: 300,
     isUsed: false,
     isActive: true,
@@ -31,7 +31,7 @@ export const mockPromoCodes: PromoCode[] = [
     value: 20,
     isUsed: false,
     isActive: true,
-    expiresAt: '2023-12-31',
+    expiresAt: '2026-12-31',
   },
   {
     code: 'USED123',

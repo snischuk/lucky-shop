@@ -4,6 +4,7 @@ import IconArrowRight from '../../assets/images/icons/icon-arrow-right.svg?react
 import type { PromoCode as PromoCodeType } from '../../data/mockPromoCodes';
 import { mockPromoCodes } from '../../data/mockPromoCodes';
 import { useTypedDispatch, useTypedSelector } from '../../hooks/useRedux';
+// ♻️ REFACTOR: читаємо total і активний код для відображення
 import { selectCartTotal, selectPromoCode } from '../../redux/cart/selectors';
 import { applyPromoCode } from '../../redux/cart/slice';
 import { UiButton } from '../ui/UiButton';
@@ -13,15 +14,15 @@ const PromoCode: FC = () => {
   const [errorMessage, setErrorMessage] = useState<string | null>(null);
   const dispatch = useTypedDispatch();
   const selectedCode = useTypedSelector(selectPromoCode);
-  // const cartItems = useTypedSelector(selectCartItems);
   const total = useTypedSelector(selectCartTotal);
 
-  const calculateDiscount = (promo: PromoCodeType, total: number): number => {
+  // 🔧 FIX 1: правильна формула відсоткової знижки + копійки (без floor)
+  const calculateDiscount = (promo: PromoCodeType, sum: number): number => {
     if (promo.discountType === 'percent') {
-      return Math.floor((total * promo.value) / 100);
+      return Math.round(sum * (promo.value / 100) * 100) / 100;
     }
     if (promo.discountType === 'fixed') {
-      return Math.min(promo.value, total);
+      return Math.min(promo.value, sum);
     }
     return 0;
   };
@@ -48,10 +49,13 @@ const PromoCode: FC = () => {
       return;
     }
 
-    const now = new Date();
-    if (promo.expiresAt && new Date(promo.expiresAt) <= now) {
-      setErrorMessage('Термін дії промокоду завершився');
-      return;
+    // 🔧 FIX 2: перевірка дати без таймзон — по 'YYYY-MM-DD'
+    if (promo.expiresAt) {
+      const todayStr = new Date().toISOString().slice(0, 10);
+      if (promo.expiresAt < todayStr) {
+        setErrorMessage('Термін дії промокоду завершився');
+        return;
+      }
     }
 
     if (promo.minOrderTotal && total < promo.minOrderTotal) {
@@ -68,11 +72,11 @@ const PromoCode: FC = () => {
     setErrorMessage(null);
     dispatch(applyPromoCode(trimmedCode));
 
-    // Локальна імітація: позначаємо промокод як використаний (опціонально)
-    promo.isUsed = true;
+    // 🔧 FIX 3: НЕ мутуємо мок-дані в UI (джерело правди — Redux/бекенд)
+    // promo.isUsed = true; // ❌ видалено
   };
 
-  // Знайти застосований промокод для показу знижки
+  // Відображення поточно застосованого коду + локальний розрахунок суми знижки
   const appliedPromo = selectedCode
     ? mockPromoCodes.find(
         (p) => p.code.toUpperCase() === selectedCode.toUpperCase(),
@@ -81,14 +85,14 @@ const PromoCode: FC = () => {
   const discount = appliedPromo ? calculateDiscount(appliedPromo, total) : 0;
 
   return (
-    <div className="ml-[45px] mt-[-12px] h-[186px] w-[395px] pb-[10px] pl-[43px] pr-[23px] pt-3">
-      <div className="w-full max-w-[330px]">
-        <h3 className="mb-[10px] h-[60px] font-family-primary text-h4 uppercase text-light-black">
+    <div className="w-[395px]">
+      <div className="w-full">
+        <h3 className="mb-[12px] h-[60px] font-family-primary text-h4 uppercase text-light-black">
           У вас є промокод для знижки?
         </h3>
 
-        <div className="flex h-[54px] w-full items-center justify-between gap-[60px] gap-y-[18px] border border-light-grey">
-          <div className="w-[211px] text-[18px] leading-[1.4]">
+        <div className="flex h-[54px] w-full items-center justify-between border border-light-grey">
+          <div className="w-[251px] text-[18px] leading-[1.4]">
             <input
               type="text"
               placeholder="Промокод для знижки"
@@ -121,7 +125,7 @@ const PromoCode: FC = () => {
         <p className="mt-1">
           ✅ Промокод застосовано: <strong>{selectedCode}</strong>
           <br />
-          Знижка: {discount} грн
+          Знижка: {discount.toFixed(2)} грн
         </p>
       )}
 

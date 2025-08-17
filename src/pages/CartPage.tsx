@@ -45,7 +45,7 @@ const CartPage = () => {
         <div className="w-[961px]">
           <CartList items={cart} />
         </div>
-        <div className="w-[395px] gap-5">
+        <div className="flex w-[395px] flex-col gap-[60px]">
           <PromoCode />
           <CartSummary />
         </div>
