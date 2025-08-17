@@ -1,5 +1,7 @@
 export const PATH_PAGES = {
   MAIN: '/',
+
+  BAD_REQUEST: '/400',
   // UNAUTHORIZED: '/401',
   // FORBIDDEN: '/403',
   NOT_FOUND: '/404',
@@ -12,7 +14,7 @@ export const PATH_PAGES = {
   GENDER_TOP: '/:gender/top',
   GENDER_SALE: '/:gender/sale',
 
-  // WISH_LIST: '/wishlist',
+  // FAVORITES: '/favorites',
   CART: '/cart',
   CABINET: '/cabinet',
 

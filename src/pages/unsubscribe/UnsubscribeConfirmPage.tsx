@@ -1,24 +1,48 @@
 import type { FC } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate, useSearchParams } from 'react-router-dom';
 
 import unsubscribeConfirm from '../../assets/images/unsubscribe/unsubscribe-confirm.jpg';
+import { UiButton } from '../../components/ui/UiButton';
 import { UiLink } from '../../components/ui/UiLink';
 import { UiTitle } from '../../components/ui/UiTitle';
 import { PATH_PAGES } from '../../constants/pathPages';
+import { useHandleApiError } from '../../hooks/useHandleApiError';
+import { useUnsubscribeMutation } from '../../services/notificationApi';
 
 const UnsubscribeConfirmPage: FC = () => {
+  const [searchParams] = useSearchParams();
+  const [unsubscribe] = useUnsubscribeMutation();
+  const handleApiError = useHandleApiError();
+  const navigate = useNavigate();
+
+  const handleUnsubscribe = async (): Promise<void> => {
+    const token = searchParams.get('token');
+
+    if (!token) {
+      navigate(PATH_PAGES.BAD_REQUEST);
+      return;
+    }
+
+    try {
+      await unsubscribe({ token }).unwrap();
+      navigate(PATH_PAGES.UNSUBSCRIPTION_SUCCESS, { state: { token } });
+    } catch (error: unknown) {
+      handleApiError(error);
+    }
+  };
+
   return (
     <div className="flex w-full justify-between">
-      <div className="flex w-7/12 flex-shrink-0 flex-col gap-6 px-7 py-16">
-        <UiTitle>Ви впевнені, що хочете відписатися?</UiTitle>
+      <div className="flex w-7/12 flex-shrink-0 flex-col px-7 py-16">
+        <UiTitle as="h1">Ви впевнені, що хочете відписатися?</UiTitle>
 
-        <p className="max-w-[609px] font-family-secondary text-[24px] uppercase leading-[1.175] text-black">
+        <p className="mt-6 max-w-[609px] font-family-secondary text-[24px] uppercase leading-[1.175] text-black">
           Ми будемо сумувати! Без наших листів ви можете пропустити нові
           колекції, знижки та ексклюзивні пропозиції від Lucky
         </p>
 
         <UiLink
-          className="max-w-[330px]"
+          className="mt-10 max-w-[330px] text-[20px] leading-[1.175]"
           variant="filled"
           as={Link}
           to={PATH_PAGES.UNSUBSCRIPTION_CANCEL}
@@ -26,16 +50,13 @@ const UnsubscribeConfirmPage: FC = () => {
           Залишитися з нами
         </UiLink>
 
-        <UiLink
-          className="max-w-[330px]"
+        <UiButton
+          className="mt-3 max-w-[330px] text-[20px] leading-[1.175]"
           variant="bordered"
-          // as='button'
-          // onClick={() => console.log('unsubscribe')}
-          as={Link}
-          to={PATH_PAGES.UNSUBSCRIPTION_SUCCESS}
+          onClick={handleUnsubscribe}
         >
           Відписатися
-        </UiLink>
+        </UiButton>
       </div>
 
       <img

@@ -124,7 +124,7 @@ const Header: FC = () => {
       <div className="flex gap-8">
         <IconSearch />
         <NavLink to="/">
-          <IconHeart />
+          <IconHeart className="h-[30px] w-[30px] fill-transparent stroke-light-black" />
         </NavLink>
         <NavLink to={PATH_PAGES.CART}>
           <IconBag />

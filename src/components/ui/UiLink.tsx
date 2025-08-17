@@ -34,8 +34,9 @@ const variantClasses = {
   default:
     'text-light-black border-b border-transparent hover:border-black hover:text-black',
   bordered:
-    'px-6 py-3 text-light-black border border-black text-black hover:border-orange hover:text-orange',
-  filled: 'px-6 py-3 text-light-black bg-black text-white hover:text-orange',
+    'px-6 py-[16px] text-light-black border border-black text-black hover:border-orange hover:text-orange',
+  filled:
+    'px-6 py-[16px] text-light-black bg-black text-white hover:text-orange',
   iconOnly: 'text-grey hover:text-light-black',
 };
 

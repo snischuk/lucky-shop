@@ -1,58 +1,42 @@
-import { yupResolver } from '@hookform/resolvers/yup';
 import type { FC } from 'react';
 import { useState } from 'react';
-import { useForm } from 'react-hook-form';
-import { Link, useNavigate } from 'react-router-dom';
-import type { InferType } from 'yup';
+import { Link } from 'react-router-dom';
 
 import loginImage from '../../assets/images/auth/login.jpg';
 import IconEyeClosed from '../../assets/images/icons/icon-eye-closed.svg?react';
 import IconEyeOpened from '../../assets/images/icons/icon-eye-opened.svg?react';
 import IconGoogle from '../../assets/images/icons/icon-google.svg?react';
+import { ButtonPreviousPage } from '../../components/ButtonPreviousPage';
 import { UiButton } from '../../components/ui/UiButton';
 import { UiTitle } from '../../components/ui/UiTitle';
 import { PATH_PAGES } from '../../constants/pathPages';
-import { useTypedDispatch } from '../../hooks/useRedux';
-import { setCredentials } from '../../redux/authSlice';
-import { loginSchema } from '../../schemas/validationSchemas';
-import { useLoginMutation } from '../../services/authApi';
-
-type LoginFormData = InferType<typeof loginSchema>;
+import { useSignInWithEmailPassword } from '../../hooks/useSignInWithEmailPassword';
+import { useSignInWithGoogle } from '../../hooks/useSignInWithGoogle';
 
 const LoginPage: FC = () => {
-  const [isShowPassword, setIsShowPassword] = useState(false);
-  const navigate = useNavigate();
-  const [login] = useLoginMutation();
-  const dispatch = useTypedDispatch();
+  const { loginWithGoogle } = useSignInWithGoogle();
+  const { form, onSubmit } = useSignInWithEmailPassword();
 
   const {
     register,
     handleSubmit,
     formState: { errors, isSubmitting },
-  } = useForm({
-    resolver: yupResolver(loginSchema),
-    mode: 'onChange',
-    reValidateMode: 'onChange',
-  });
+  } = form;
 
+  const [isShowPassword, setIsShowPassword] = useState(false);
   const handlePasswordVisibility = (): void => {
     setIsShowPassword((prev) => !prev);
   };
 
-  const onSubmit = async (data: LoginFormData): Promise<void> => {
-    try {
-      const response = await login(data).unwrap();
-      dispatch(setCredentials({ token: response.token, role: response.role }));
-      navigate(PATH_PAGES.CABINET);
-    } catch (error) {
-      console.error('Login failed:', error);
-    }
+  const handleLoginWithGoogle = (): void => {
+    loginWithGoogle();
   };
 
   return (
     <div className="flex w-full justify-between">
-      <div className="align-center flex w-7/12 flex-shrink-0 flex-col items-center gap-7 px-7 py-16">
-        <UiTitle>Вхід</UiTitle>
+      <div className="align-center flex w-7/12 flex-shrink-0 flex-col items-center gap-7 px-7 py-6">
+        <ButtonPreviousPage className="self-start" />
+        <UiTitle as="h1">Вхід</UiTitle>
 
         <form
           noValidate
@@ -71,14 +55,13 @@ const LoginPage: FC = () => {
               type="text"
               placeholder="Адреса Ел. пошти"
               {...register('email')}
-              className={`mt-3 w-full border px-6 py-[14px] font-family-secondary leading-normal placeholder:text-grey ${
+              className={`mt-3 w-full border px-6 py-[14px] font-family-secondary text-[18px] leading-[1.17] placeholder:text-grey ${
                 errors.email
                   ? 'border-dark-red text-dark-red placeholder:text-dark-red'
                   : 'border-medium-grey text-light-black'
               }`}
               aria-invalid={!!errors.email}
             />
-
             {errors.email && (
               <span className="mt-[2px] font-family-secondary text-[14px] leading-[1.17] text-dark-red">
                 {errors.email.message}
@@ -99,14 +82,13 @@ const LoginPage: FC = () => {
                 type={isShowPassword ? 'text' : 'password'}
                 placeholder="Уведіть свій пароль"
                 {...register('password')}
-                className={`w-full border py-[14px] pl-6 pr-[72px] font-family-secondary leading-normal placeholder:text-grey ${
+                className={`w-full border py-[14px] pl-6 pr-[72px] font-family-secondary text-[18px] leading-[1.17] placeholder:text-grey ${
                   errors.password
                     ? 'border-dark-red text-dark-red placeholder:text-dark-red'
                     : 'border-medium-grey text-light-black'
                 }`}
                 aria-invalid={!!errors.password}
               />
-
               <UiButton
                 type="button"
                 onClick={handlePasswordVisibility}
@@ -135,7 +117,7 @@ const LoginPage: FC = () => {
           </div>
 
           <UiButton
-            className="mt-6 w-full"
+            className="mt-9 w-full text-[20px] leading-[1.175]"
             variant="filled"
             type="submit"
             disabled={isSubmitting}
@@ -144,11 +126,12 @@ const LoginPage: FC = () => {
           </UiButton>
 
           <UiButton
-            className="mt-3 w-full gap-5"
+            className="mt-3 w-full gap-5 text-[20px] leading-[1.175]"
             variant="bordered"
             type="button"
             icon={<IconGoogle />}
             iconPosition="before"
+            onClick={handleLoginWithGoogle}
           >
             Увійти через Google
           </UiButton>

@@ -41,7 +41,10 @@ const NewCollectionSection: FC<NewCollectionSectionProps> = ({ gender }) => {
   );
 
   return (
-    <div className="relative z-[0] mx-auto w-full max-w-custom-1440 px-6 pb-[70px] pt-[140px]">
+    <section
+      id="new"
+      className="relative z-[0] mx-auto w-full max-w-custom-1440 scroll-mt-[140px] px-6 pb-[70px] pt-[140px]"
+    >
       <UiTitle className="mb-[80px] text-center" as="h2">
         Нова колекція
       </UiTitle>
@@ -90,7 +93,7 @@ const NewCollectionSection: FC<NewCollectionSectionProps> = ({ gender }) => {
           />
         )}
       </div>
-    </div>
+    </section>
   );
 };
 

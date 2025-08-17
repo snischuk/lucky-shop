@@ -2,6 +2,7 @@ import type { FC } from 'react';
 import { Link } from 'react-router-dom';
 
 import unsubscribeCancel from '../../assets/images/unsubscribe/unsubscribe-cancel.jpg';
+import { ButtonPreviousPage } from '../../components/ButtonPreviousPage';
 import { UiLink } from '../../components/ui/UiLink';
 import { UiTitle } from '../../components/ui/UiTitle';
 import { PATH_PAGES } from '../../constants/pathPages';
@@ -9,21 +10,26 @@ import { PATH_PAGES } from '../../constants/pathPages';
 const UnsubscribeCancelPage: FC = () => {
   return (
     <div className="flex w-full justify-between">
-      <div className="flex w-7/12 flex-shrink-0 flex-col gap-6 px-7 py-16">
-        <UiTitle>Дякуємо, що залишаєтесь з Lucky!</UiTitle>
+      <div className="flex w-7/12 flex-shrink-0 flex-col px-7 py-6">
+        <ButtonPreviousPage className="self-start" />
 
-        <p className="max-w-[609px] font-family-secondary text-[24px] uppercase leading-[1.175] text-black">
+        <UiTitle as="h1" className="mt-6">
+          <span className="block w-full">Дякуємо,</span>
+          <span>що залишаєтесь з Lucky!</span>
+        </UiTitle>
+
+        <p className="mt-6 font-family-secondary text-[24px] uppercase leading-[1.175] text-black">
           Дякуємо, що залишаєтесь. Ми й далі надсилатимемо вам стильні новинки,
           сезонні підбірки та вигідні пропозиції - тільки найкраще, без зайвого!
         </p>
 
         <UiLink
-          className="max-w-[330px]"
+          className="mt-10 max-w-[330px] text-[20px] leading-[1.175]"
           variant="filled"
           as={Link}
           to={PATH_PAGES.MAIN}
         >
-          Перейти до каталогу
+          Перейти на головну
         </UiLink>
       </div>
 

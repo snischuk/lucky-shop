@@ -5,7 +5,7 @@ import { Outlet } from 'react-router-dom';
 import { AnnouncementBar } from '../components/AnnouncementBar';
 import { Footer } from '../components/Footer';
 import { Header } from '../components/Header';
-import { SubscribeSection } from '../components/SubscribeSection';
+import { SectionSubscribe } from '../components/SectionSubscribe';
 import { UiLoader } from '../components/ui/UiLoader';
 import { FOOTER_NAVIGATION_LINKS } from '../constants/footerNavigationLinks';
 
@@ -29,7 +29,7 @@ const MainLayout: FC = () => {
             <Outlet />
           </Suspense>
         </main>
-        <SubscribeSection />
+        <SectionSubscribe />
         <Footer navigationLinks={FOOTER_NAVIGATION_LINKS} />
       </div>
     </>

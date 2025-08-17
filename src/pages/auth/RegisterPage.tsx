@@ -1,8 +1,7 @@
-import { yupResolver } from '@hookform/resolvers/yup';
 import * as Checkbox from '@radix-ui/react-checkbox';
 import type { FC } from 'react';
 import { useState } from 'react';
-import { Controller, useForm } from 'react-hook-form';
+import { Controller } from 'react-hook-form';
 import type { InferType } from 'yup';
 
 import registerImg from '../../assets/images/auth/register.jpg';
@@ -10,35 +9,55 @@ import IconCheckbox from '../../assets/images/icons/icon-checkbox.svg?react';
 import IconEyeClosed from '../../assets/images/icons/icon-eye-closed.svg?react';
 import IconEyeOpened from '../../assets/images/icons/icon-eye-opened.svg?react';
 import IconGoogle from '../../assets/images/icons/icon-google.svg?react';
+import { ButtonPreviousPage } from '../../components/ButtonPreviousPage';
+import { ModalApiFeedback } from '../../components/ModalApiFeedback';
 import { UiButton } from '../../components/ui/UiButton';
 import { UiTitle } from '../../components/ui/UiTitle';
 import { PATH_PAGES } from '../../constants/pathPages';
+import { useModal } from '../../hooks/useModal';
+import { useSignInWithGoogle } from '../../hooks/useSignInWithGoogle';
+import { useSignUp } from '../../hooks/useSignUp';
 import { registerSchema } from '../../schemas/validationSchemas';
 
 type RegisterFormData = InferType<typeof registerSchema>;
 
 const RegisterPage: FC = () => {
-  const [isShowPassword, setIsShowPassword] = useState(false);
-  const [isShowConfirmPassword, setIsShowConfirmPassword] = useState(false);
+  const { loginWithGoogle } = useSignInWithGoogle();
+  const { form, onSubmit } = useSignUp();
 
   const {
     register,
     handleSubmit,
     formState: { errors, isSubmitting },
     control,
-  } = useForm({
-    resolver: yupResolver(registerSchema),
-    mode: 'onChange',
-    reValidateMode: 'onChange',
-    defaultValues: {
-      policyConsent: false,
-      marketingConsent: false,
-    },
-  });
+  } = form;
 
-  const onSubmit = (data: RegisterFormData): void => {
-    console.log('Register data:', data);
-    // TODO: Виклик API реєстрації
+  const {
+    isModalOpen,
+    title,
+    modalMessage,
+    modalConfirmButtonText,
+    modalRedirectPath,
+    openModal,
+    closeAndRedirectModal,
+  } = useModal();
+
+  const [isShowPassword, setIsShowPassword] = useState(false);
+  const [isShowConfirmPassword, setIsShowConfirmPassword] = useState(false);
+  const handleRegisterWithGoogle = (): void => {
+    loginWithGoogle();
+  };
+
+  const submitHandler = async (formData: RegisterFormData): Promise<void> => {
+    const result = await onSubmit(formData);
+    if (result.success) {
+      await openModal({
+        title: 'Реєстрація успішна',
+        message: 'Реєстрація успішна!',
+        buttonText: 'Вхід',
+        redirectPath: PATH_PAGES.LOGIN,
+      });
+    }
   };
 
   const handlePasswordVisibility = (): void => {
@@ -51,12 +70,14 @@ const RegisterPage: FC = () => {
 
   return (
     <div className="flex w-full justify-between">
-      <div className="flex w-7/12 flex-shrink-0 flex-col items-center gap-4 px-7 py-16">
-        <UiTitle>Зареєструйтеся</UiTitle>
+      <div className="flex w-7/12 flex-shrink-0 flex-col items-center gap-5 px-7 py-6">
+        <ButtonPreviousPage className="self-start" />
+
+        <UiTitle as="h1">Зареєструйтеся</UiTitle>
 
         <form
           noValidate
-          onSubmit={handleSubmit(onSubmit)}
+          onSubmit={handleSubmit(submitHandler)}
           className="flex w-full max-w-[424px] flex-col items-center"
         >
           <div className="mt-[12px] flex h-[106px] w-full max-w-[424px] flex-col transition-colors duration-default focus-within:text-grey">
@@ -71,7 +92,7 @@ const RegisterPage: FC = () => {
               type="text"
               placeholder="Ваше імʼя"
               {...register('firstName')}
-              className={`mt-3 w-full border px-6 py-[14px] font-family-secondary leading-normal placeholder:text-grey ${
+              className={`mt-3 w-full border px-6 py-[14px] font-family-secondary placeholder:text-grey ${
                 errors.firstName
                   ? 'border-dark-red text-dark-red placeholder:text-dark-red'
                   : 'border-medium-grey text-light-black'
@@ -97,7 +118,7 @@ const RegisterPage: FC = () => {
               type="text"
               placeholder="Ваше прізвище"
               {...register('lastName')}
-              className={`mt-3 w-full border px-6 py-[14px] font-family-secondary leading-normal placeholder:text-grey ${
+              className={`mt-3 w-full border px-6 py-[14px] font-family-secondary placeholder:text-grey ${
                 errors.lastName
                   ? 'border-dark-red text-dark-red placeholder:text-dark-red'
                   : 'border-medium-grey text-light-black'
@@ -123,7 +144,7 @@ const RegisterPage: FC = () => {
               type="text"
               placeholder="Адреса Ел. пошти"
               {...register('email')}
-              className={`mt-3 w-full border px-6 py-[14px] font-family-secondary leading-normal placeholder:text-grey ${
+              className={`mt-3 w-full border px-6 py-[14px] font-family-secondary placeholder:text-grey ${
                 errors.email
                   ? 'border-dark-red text-dark-red placeholder:text-dark-red'
                   : 'border-medium-grey text-light-black'
@@ -150,7 +171,7 @@ const RegisterPage: FC = () => {
                 type={isShowPassword ? 'text' : 'password'}
                 placeholder="Уведіть свій пароль"
                 {...register('password')}
-                className={`w-full border py-[14px] pl-6 pr-[72px] font-family-secondary leading-normal placeholder:text-grey ${
+                className={`w-full border py-[14px] pl-6 pr-[72px] font-family-secondary placeholder:text-grey ${
                   errors.password
                     ? 'border-dark-red text-dark-red placeholder:text-dark-red'
                     : 'border-medium-grey text-light-black'
@@ -185,7 +206,7 @@ const RegisterPage: FC = () => {
                 type={isShowConfirmPassword ? 'text' : 'password'}
                 placeholder="Підтвердіть новий пароль"
                 {...register('confirmPassword')}
-                className={`w-full border py-[14px] pl-6 pr-[72px] font-family-secondary leading-normal placeholder:text-grey ${
+                className={`w-full border py-[14px] pl-6 pr-[72px] font-family-secondary placeholder:text-grey ${
                   errors.confirmPassword
                     ? 'border-dark-red text-dark-red placeholder:text-dark-red'
                     : 'border-medium-grey text-light-black'
@@ -210,7 +231,7 @@ const RegisterPage: FC = () => {
           </div>
 
           <Controller
-            name="marketingConsent"
+            name="isSubscribeToAds"
             control={control}
             render={({ field }) => (
               <div className="mt-[12px] flex items-center gap-2">
@@ -244,7 +265,7 @@ const RegisterPage: FC = () => {
           />
 
           <Controller
-            name="policyConsent"
+            name="isPolicyAccepted"
             control={control}
             render={({ field }) => (
               <div className="mt-[12px] h-[62px]">
@@ -279,9 +300,9 @@ const RegisterPage: FC = () => {
                   </label>
                 </div>
 
-                {errors.policyConsent && (
+                {errors.isPolicyAccepted && (
                   <span className="mt-[2px] font-family-secondary text-[14px] leading-[1.17] text-dark-red">
-                    {errors.policyConsent.message}
+                    {errors.isPolicyAccepted.message}
                   </span>
                 )}
               </div>
@@ -289,7 +310,7 @@ const RegisterPage: FC = () => {
           />
 
           <UiButton
-            className="mt-[10px] w-full"
+            className="mt-[10px] w-full text-[20px] leading-[1.175]"
             variant="filled"
             type="submit"
             disabled={isSubmitting}
@@ -298,12 +319,12 @@ const RegisterPage: FC = () => {
           </UiButton>
 
           <UiButton
-            className="mt-3 w-full gap-5"
+            className="mt-3 w-full gap-5 text-[20px] leading-[1.175]"
             variant="bordered"
             type="button"
             icon={<IconGoogle />}
             iconPosition="before"
-            disabled={true}
+            onClick={handleRegisterWithGoogle}
           >
             Зареєструватися через Google
           </UiButton>
@@ -315,6 +336,20 @@ const RegisterPage: FC = () => {
         src={registerImg}
         alt="Auth register"
         width="590"
+      />
+
+      <ModalApiFeedback
+        isOpen={isModalOpen}
+        title={title}
+        message={modalMessage}
+        confirmButtonText={modalConfirmButtonText}
+        onConfirmButtonClick={closeAndRedirectModal}
+        redirectPath={modalRedirectPath}
+        onOpenChange={(isOpen) => {
+          if (!isOpen) {
+            closeAndRedirectModal();
+          }
+        }}
       />
     </div>
   );
