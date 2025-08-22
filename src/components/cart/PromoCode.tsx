@@ -18,7 +18,7 @@ const PromoCode: FC = () => {
   // 🔧 FIX 1: правильна формула відсоткової знижки
   const calculateDiscount = (promo: PromoCodeType, sum: number): number => {
     if (promo.discountType === 'percent') {
-      return Math.round(sum * (promo.value / 100) * 100) / 100;
+      return Math.round(sum * (promo.value / 100));
     }
     if (promo.discountType === 'fixed') {
       return Math.min(promo.value, sum);
@@ -121,7 +121,7 @@ const PromoCode: FC = () => {
         <p className="mt-1">
           ✅ Промокод застосовано: <strong>{selectedCode}</strong>
           <br />
-          Знижка: {discount.toFixed(2)} грн
+          Знижка: {discount} грн
         </p>
       )}
 
