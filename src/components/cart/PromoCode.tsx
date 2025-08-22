@@ -4,7 +4,6 @@ import IconArrowRight from '../../assets/images/icons/icon-arrow-right.svg?react
 import type { PromoCode as PromoCodeType } from '../../data/mockPromoCodes';
 import { mockPromoCodes } from '../../data/mockPromoCodes';
 import { useTypedDispatch, useTypedSelector } from '../../hooks/useRedux';
-// ♻️ REFACTOR: читаємо total і активний код для відображення
 import { selectCartTotal, selectPromoCode } from '../../redux/cart/selectors';
 import { applyPromoCode } from '../../redux/cart/slice';
 import { UiButton } from '../ui/UiButton';
@@ -16,7 +15,7 @@ const PromoCode: FC = () => {
   const selectedCode = useTypedSelector(selectPromoCode);
   const total = useTypedSelector(selectCartTotal);
 
-  // 🔧 FIX 1: правильна формула відсоткової знижки + копійки (без floor)
+  // 🔧 FIX 1: правильна формула відсоткової знижки
   const calculateDiscount = (promo: PromoCodeType, sum: number): number => {
     if (promo.discountType === 'percent') {
       return Math.round(sum * (promo.value / 100) * 100) / 100;
@@ -71,9 +70,6 @@ const PromoCode: FC = () => {
     // Якщо всі перевірки пройшли — застосовуємо промокод
     setErrorMessage(null);
     dispatch(applyPromoCode(trimmedCode));
-
-    // 🔧 FIX 3: НЕ мутуємо мок-дані в UI (джерело правди — Redux/бекенд)
-    // promo.isUsed = true; // ❌ видалено
   };
 
   // Відображення поточно застосованого коду + локальний розрахунок суми знижки

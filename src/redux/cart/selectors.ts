@@ -1,8 +1,11 @@
+// redux/cart/selectors.ts
 import { createSelector } from '@reduxjs/toolkit';
 
 import { mockPromoCodes } from '../../data/mockPromoCodes';
 import type { CartItem, PromoCode } from '../../types/CartItem';
-import type { RootState } from '../store.ts';
+import type { RootState } from '../store';
+
+// базові селектори
 export const selectCartItems = (state: RootState): CartItem[] =>
   state.cart.cart;
 export const selectIsLoading = (state: RootState) => state.cart.isLoading;
@@ -33,6 +36,7 @@ export const selectDiscountFromOldPrice = createSelector(
   (totalOld, totalCurrent) => Math.max(0, totalOld - totalCurrent),
 );
 
+// 🔧 FIX: коректно закриваємо функцію і нічого зайвого всередину
 const findPromo = (code: string | null): PromoCode | null => {
   if (!code) return null;
   const normalized = code.trim().toUpperCase();
@@ -75,6 +79,7 @@ export const selectDiscountFromPromo = createSelector(
         message: `Мінімальна сума замовлення: ${promo.minOrderTotal}₴`,
       };
     }
+
     const amount =
       promo.discountType === 'percent'
         ? Math.round(total * (promo.value / 100) * 100) / 100
@@ -83,6 +88,7 @@ export const selectDiscountFromPromo = createSelector(
     return { amount, ok: true, message: null as string | null };
   },
 );
+
 export const selectGrandTotal = createSelector(
   [selectCartTotal, selectDiscountFromPromo],
   (total, promo) => Math.max(0, total - (promo.amount || 0)),
@@ -92,6 +98,7 @@ export const selectSavingsVsOld = createSelector(
   [selectCartTotalOld, selectGrandTotal],
   (totalOld, grandTotal) => Math.max(0, totalOld - grandTotal),
 );
+
 export const selectCartSummary = createSelector(
   [
     selectCartTotal,
