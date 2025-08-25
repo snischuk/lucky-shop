@@ -1,7 +1,9 @@
 import { useEffect } from 'react';
 
 import { CartList } from '../components/cart/CartList';
+import { CartSummary } from '../components/cart/CartSummary';
 import { EmptyCart } from '../components/cart/EmptyCart';
+import { PromoCode } from '../components/cart/PromoCode';
 import { UiTitle } from '../components/ui/UiTitle';
 import { mockProducts } from '../data/mockProducts';
 import { useTypedDispatch, useTypedSelector } from '../hooks/useRedux';
@@ -28,7 +30,7 @@ const CartPage = () => {
         }),
       );
     });
-  }, []);
+  }, [dispatch]);
 
   if (cart.length === 0) {
     return <EmptyCart />;
@@ -43,11 +45,9 @@ const CartPage = () => {
         <div className="w-[961px]">
           <CartList items={cart} />
         </div>
-        <div className="w-[395px]">
-          {/* <PromoCode /> */}
-          {/* <CartSummary /> */}
-          <p>Введіть промокод</p>
-          <p>Сума</p>
+        <div className="flex w-[395px] flex-col gap-[60px]">
+          <PromoCode />
+          <CartSummary />
         </div>
       </div>
     </div>

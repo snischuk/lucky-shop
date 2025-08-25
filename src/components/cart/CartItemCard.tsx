@@ -40,6 +40,7 @@ const CartItemCard: FC<CartItemCardProps> = ({ item }) => {
       </div>
     </article>
   );
+  <div className="flex w-[395px] flex-col gap-[60px]"> </div>;
 };
 
 export { CartItemCard };
