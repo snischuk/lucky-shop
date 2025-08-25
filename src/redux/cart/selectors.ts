@@ -1,11 +1,8 @@
-// redux/cart/selectors.ts
 import { createSelector } from '@reduxjs/toolkit';
 
 import { mockPromoCodes } from '../../data/mockPromoCodes';
 import type { CartItem, PromoCode } from '../../types/CartItem';
 import type { RootState } from '../store';
-
-// базові селектори
 export const selectCartItems = (state: RootState): CartItem[] =>
   state.cart.cart;
 export const selectIsLoading = (state: RootState) => state.cart.isLoading;
