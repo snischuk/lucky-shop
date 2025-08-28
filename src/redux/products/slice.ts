@@ -5,6 +5,7 @@ import {
   fetchProduct,
   fetchProductByCategory,
   fetchProductBySku,
+  fetchProducts,
 } from './operations';
 
 interface ProductsState {
@@ -29,6 +30,20 @@ const productsSlice = createSlice({
   reducers: {},
   extraReducers: (builder) => {
     builder
+      .addCase(fetchProducts.pending, (state) => {
+        state.isLoading = true;
+        state.error = null;
+      })
+      .addCase(fetchProducts.fulfilled, (state, action) => {
+        state.isLoading = false;
+        state.items = [...state.items, ...action.payload];
+      })
+      .addCase(fetchProducts.rejected, (state, action) => {
+        state.isLoading = false;
+        state.error =
+          action.error.message || 'Помилка при завантаженні продуктів';
+      })
+
       .addCase(fetchProduct.pending, (state) => {
         state.isLoading = true;
         state.error = null;

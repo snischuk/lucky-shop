@@ -141,6 +141,10 @@ const AppRouter: FC = () => {
           <Route path={PATH_PAGES.GENDER_PRODUCTS} element={<ProductsLayout />}>
             <Route index element={<ProductsPage />} />
             <Route
+              path={PATH_PAGES.GENDER_PRODUCTS_CATEGORY}
+              element={<ProductsPage />}
+            />
+            <Route
               path={PATH_PAGES.GENDER_PRODUCT_ID_PARAM}
               element={<ProductDetailPage />}
             />
