@@ -8,8 +8,8 @@ export const mockProducts: Product[] = [
     gender: 'woman',
     category: 'dresses',
     price: 1200,
-    oldPrice: null,
-    hasdiscount: false,
+    oldPrice: 1500,
+    hasdiscount: true,
     image: [
       '/images/TSH15551-1.png',
       '/images/TSH15551-2.png',
@@ -35,8 +35,8 @@ export const mockProducts: Product[] = [
     gender: 'woman',
     category: 'dresses',
     price: 1030,
-    oldPrice: null,
-    hasdiscount: false,
+    oldPrice: 1850,
+    hasdiscount: true,
     image: [
       '/images/TSH15552-1.png',
       '/images/TSH15552-2.png',

@@ -8,6 +8,10 @@ interface CartItemCardProps {
 }
 
 const CartItemCard: FC<CartItemCardProps> = ({ item }) => {
+  const hasOld =
+    typeof item.oldPrice === 'number' &&
+    Number.isFinite(item.oldPrice) &&
+    item.oldPrice > item.price;
   return (
     <article className="flex gap-5 border p-5">
       <div className="h-[238px] w-[182px] bg-light-grey">
@@ -16,7 +20,20 @@ const CartItemCard: FC<CartItemCardProps> = ({ item }) => {
       <div className="w-full">
         <div className="align-center mb-[10px] flex justify-between font-family-primary uppercase text-black">
           <h3 className="text-[24px] leading-[1.25]">{item.name}</h3>
-          <p className="text-[20px]">{item.price} грн</p>
+          {hasOld ? (
+            // ціни одна під одною, притиснуті до правого краю
+            <div className="flex flex-col items-end leading-none">
+              <span className="text-[20px] font-semibold text-red">
+                {item.price} грн
+              </span>
+              <span className="mt-1 text-[16px] text-grey line-through">
+                {item.oldPrice} грн
+              </span>
+            </div>
+          ) : (
+            // якщо знижки нема — просто поточна ціна праворуч
+            <span className="text-[20px]">{item.price} грн</span>
+          )}
         </div>
         <div className="mb-[10px] flex gap-6 font-family-secondary text-body-s text-light-black">
           <p>Артикул: {item.sku}</p>
