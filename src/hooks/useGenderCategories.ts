@@ -1,7 +1,7 @@
 import { useEffect, useMemo } from 'react';
 import { useSelector } from 'react-redux';
 
-import { fetchProduct } from '../redux/products/operations';
+import { fetchProducts } from '../redux/products/operations';
 import { selectProducts } from '../redux/products/selectors';
 import type { Gender } from '../types/Gender';
 import { useTypedDispatch } from './useRedux';
@@ -17,7 +17,7 @@ const useGenderCategories = (): {
 
   useEffect(() => {
     if (gender) {
-      dispatch(fetchProduct());
+      dispatch(fetchProducts({ filters: { gender } }));
     }
   }, [gender, dispatch]);
 

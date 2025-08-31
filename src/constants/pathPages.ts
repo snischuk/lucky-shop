@@ -9,6 +9,7 @@ export const PATH_PAGES = {
 
   GENDER_PARAM: '/:gender',
   GENDER_PRODUCTS: '/:gender/products',
+  GENDER_PRODUCTS_CATEGORY: '/:gender/products/:category',
   GENDER_PRODUCT_ID_PARAM: '/:gender/products/:productId',
   GENDER_NEW: '/:gender/new',
   GENDER_TOP: '/:gender/top',
